@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Python-set数据类型</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>Python-set数据类型</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h2 id="关于python中的set">关于Python中的set</h2>
+
+<ul>
+<li>set集合中的元素不可重复且元素无序(可变)</li>
+<li>frozenset与set一样(不可变)</li>
+
+<li><p>set与dict实现的机制相似, 它的性能很高, 时间复杂度为<code>O(1)</code></p></li>
+
+<li><p>创建一个set集合:<br />
+<code>myset = set(可迭代对象)</code>
+<code>myfrozenset = frozenset(</code>)  # 不可变类型(可作为dict的key)
+<!-- more --></p></li>
+
+<li><p>对myset进行操作<br />
+<code>myset.add()</code>  # 添加数据</p></li>
+</ul>
+
+<p><code>myset.update()</code>  # 合并数据</p>
+
+<pre><code>`myset.defference(another_set)`  等同于 `myset - another_set` 返回一个新值  
+</code></pre>
+
+<h2 id="set集合运算操作">set集合运算操作</h2>
+
+<pre><code>`a = t | s`           
+t 和 s的并集  
+
+`b = t &amp; s`  
+t 和 s的交集  
+
+`c = t – s`  
+求差集（项在t中，但不在s中）  
+
+`d = t ^ s`   
+对称差集（项在t或s中，但不会同时出现在二者中）  
+</code></pre>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b"> #数据类型 </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Python"> #Python </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sqlalchmey on 一个经常跑偏的人</title>
+    <link>/tags/sqlalchmey/</link>
+    <description>Recent content in Sqlalchmey on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 23 Feb 2019 22:05:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sqlalchmey/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>flask保存字段到数据库(批量保存)</title>
+      <link>/2019/02/23/flask-batch-save-feild-to-database/</link>
+      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
+      
+      <guid>/2019/02/23/flask-batch-save-feild-to-database/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 在我使用flask编写网站后端的时候, 要将前端表单提交的字段进行保存, 字段少的时候还好, 当字段有几十个甚至上百个的时候, 如果手动的一条一条添加, 这将是个噩梦, 如下例代码.
+@web.route(&amp;#39;/register&amp;#39;, methods=[&amp;#39;POST&amp;#39;, &amp;#39;GET&amp;#39;]) def register(): form = RegisterForm(request.form) if request.method == &amp;#34;POST&amp;#34; and form.validate(): user = User() user.nickname = form.nickname.data user.password = form.password.data user.email = form.email.data 这样实在是太繁琐了, 这时应该体现出Python的优雅.
+class User(db.models): id = Column(Integer, primary_key=True) email = Column() _password = Column(&amp;#39;password&amp;#39;) # 至于为什么有(_), 下面会继续说明 nickname = Column() def set_attrs(self, attrs_dict: dict): for key, value in attrs_dict.items(): # 遍历传入的字典类型, 获取属性及其数据 if hasattr(self, key) and key !</description>
+    </item>
+    
+  </channel>
+</rss>

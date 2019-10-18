@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>C语言的指针细学笔记</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>C语言的指针细学笔记</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h2 id="c语言的指针细学笔记">C语言的指针细学笔记</h2>
+
+<p>声明指针:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>pnumber; <span style="color:#6272a4">// 声明一个指向int类型变量的指针
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">*</span> pnumber; <span style="color:#ff79c6">//</span> 一样的效果</code></pre></div>
+<p>pnumber的类型时int*, 而未初始化的指针时非常危险的, 可以将NULL赋值给它<code>int *pnumber = NULL</code>, 这样pnumber便不会乱指内存.</p>
+
+<p>通过指针访问值:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
+{
+    <span style="color:#8be9fd">int</span> number <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">15</span>;
+    <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>pointer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">&amp;</span>number;
+    <span style="color:#8be9fd">int</span> result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">*</span>pointer <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">5</span>;
+    assert(result <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">20</span>); <span style="color:#6272a4">// pass
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<p>指向常量的指针:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
+{
+    <span style="color:#8be9fd">int</span> count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">43</span>;
+    <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span><span style="color:#ff79c6">const</span> pcount <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">&amp;</span>count; <span style="color:#6272a4">// Defines a constant pointer
+</span><span style="color:#6272a4"></span>
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<p>使用const关键字声明常量指针, 它指向的内存是不能被改变的.<br />
+声明指针时, 指针的命名最好以p开头, 这样就可以清晰明了的知道谁是指针..</p>
+
+<p>数组与指针:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
+{
+    <span style="color:#8be9fd">int</span> array[] <span style="color:#ff79c6">=</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">9</span>};
+    <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">=</span> array;
+    assert(<span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>); <span style="color:#6272a4">// pass
+</span><span style="color:#6272a4"></span>
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<p>多维数组:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
+{
+    <span style="color:#8be9fd">char</span> board[<span style="color:#bd93f9">3</span>][<span style="color:#bd93f9">3</span>] <span style="color:#ff79c6">=</span> {
+        {<span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>}
+    };
+    printf(<span style="color:#f1fa8c">&#34;addres of board : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board);
+    printf(<span style="color:#f1fa8c">&#34;addres of board[0][0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">&amp;</span>board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]);
+    printf(<span style="color:#f1fa8c">&#34;value of board[0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>]);
+
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<p>这三个输出的地址是一样的, 三种访问方式是等效的.<br />
+接下来使用指针的方式:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
+{
+    <span style="color:#8be9fd">char</span> board[<span style="color:#bd93f9">3</span>][<span style="color:#bd93f9">3</span>] <span style="color:#ff79c6">=</span> {
+        {<span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>}
+    };
+    printf(<span style="color:#f1fa8c">&#34;value of board[0][0]: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]); <span style="color:#6272a4">// output: 1
+</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c">&#34;value of *board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>board); <span style="color:#6272a4">// output: 1
+</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c">&#34;value of **board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">**</span>board); <span style="color:#6272a4">// output: 1
+</span><span style="color:#6272a4"></span>
+    <span style="color:#6272a4">// 遍历数组
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> ( <span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; i <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">9</span>; <span style="color:#ff79c6">++</span>i )
+    {
+        printf(<span style="color:#f1fa8c">&#34;board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>(<span style="color:#ff79c6">*</span>board <span style="color:#ff79c6">+</span> i)));
+    }
+
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<p>尽管可以把二维数组看作一维数组, 但是这在内存中布置二维数组的方式.<br />
+二维数组的元素存储为一个很大的一维数组, 编译器确保可以像一维数组那样访问它.</p>
+
+<p>未完待续..</p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

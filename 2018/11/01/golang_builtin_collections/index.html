@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>golang的內建容器</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>golang的內建容器</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h3 id="数组"><strong>数组</strong></h3>
+
+<p>首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。
+- 示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">var</span> arr1 [<span style="color:#bd93f9">5</span>]<span style="color:#8be9fd">int</span>
+<span style="color:#8be9fd;font-style:italic">var</span> grid [<span style="color:#bd93f9">4</span>][<span style="color:#bd93f9">5</span>]<span style="color:#8be9fd">int</span></code></pre></div>
+<p>定义一个数组, 长度为5, 如果不为数组赋值的话默认值为0, 这与C, Java是一样的, 亦可以通过以下方式创建数组。
+<!-- more --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">arr2 <span style="color:#ff79c6">:=</span> [<span style="color:#bd93f9">3</span>]<span style="color:#8be9fd">int</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">5</span>}</code></pre></div>
+<p>这种方法与示例1相当, 但是必须为数组赋初值。
+以上两种方法定义数组都是必须明确数组的长度个数, 有些情况是不知道长度的, 那么可以用以下方式让编译器自动计算数组长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">arr3 <span style="color:#ff79c6">:=</span> [<span style="color:#ff79c6">...</span>]<span style="color:#8be9fd">int</span>{<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">99</span>}</code></pre></div>
+<p><strong>遍历数组(传统方法)</strong>
+- 示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#8be9fd;font-style:italic">len</span>(arr3); i<span style="color:#ff79c6">++</span> {
+    fmt.<span style="color:#50fa7b">Println</span>(arr3[i])
+}</code></pre></div>
+<p>在golang中没有++i, ++j之类的操作, 只有i++, j++之类的操作。</p>
+
+<p><strong>遍历数组(go风格)</strong>
+- 示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">for</span> i, v <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> arr3 {
+    fmt.<span style="color:#50fa7b">Println</span>(i, v)
+}
+
+<span style="color:#ff79c6">for</span> _, v <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> arr3 {
+    fmt.<span style="color:#50fa7b">Println</span>(v)
+}</code></pre></div>
+<p>这种方法呢, 更简单, 更优雅, 更明确。其中的i代表数组中的下表索引, v代表数组中的值, 如果不需要i则可以将i替换为&rdquo;_&ldquo;(下划线)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">array <span style="color:#ff79c6">:=</span> [<span style="color:#bd93f9">5</span>]<span style="color:#8be9fd">int</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">printArray</span>(arr [<span style="color:#bd93f9">5</span>]<span style="color:#8be9fd">int</span>) {
+    arr[<span style="color:#bd93f9">0</span>] = <span style="color:#bd93f9">100</span>
+    <span style="color:#ff79c6">for</span> i, v <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> arr {
+        fmt.<span style="color:#50fa7b">Println</span>(i, v)
+    }
+}
+<span style="color:#50fa7b">printArray</span>(array)
+fmt.<span style="color:#50fa7b">Println</span>(array)</code></pre></div>
+<p>你会发现结果外面的array并没有被改变, 所以golang中的数组传值是会对数组进行一次拷贝, 这样呢在某些情况下还是很安全的, 但是有利就有弊, 拷贝一份会有额外的开销。</p>
+
+<p>但是每次写一个函数需要传递数组的时候都要预先知道数组的长度, 但有些情况是不可控的, 这下就会引入一个概念：切片, 在golang中一般是不会直接引用数组的, 我们通常都会使用切片。</p>
+
+<h3 id="切片-slice"><strong>切片(Slice)</strong></h3>
+
+<p>golang中的Slice与其他语言的数组切片相似, 并且Slice本身是没有数据的, 它只是对底层array的一个view(视图)。
+- 示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">array <span style="color:#ff79c6">:=</span> [<span style="color:#ff79c6">...</span>] <span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>}
+<span style="color:#6272a4">// []在golang中是切片
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">updateArray</span>(arr []<span style="color:#8be9fd">int</span>) {
+    arr[<span style="color:#bd93f9">0</span>] = <span style="color:#bd93f9">100</span>
+}
+array <span style="color:#ff79c6">:=</span> [<span style="color:#ff79c6">...</span>] <span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>}
+s <span style="color:#ff79c6">:=</span> array[<span style="color:#bd93f9">2</span>:<span style="color:#bd93f9">6</span>]
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;The variable type is&#34;</span>, reflect.<span style="color:#50fa7b">ValueOf</span>(s).<span style="color:#50fa7b">Kind</span>())
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;原始array:&#34;</span>, array)
+<span style="color:#50fa7b">updateArray</span>(s)
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;s的值:&#34;</span>, s)
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;array:&#34;</span>, array)</code></pre></div>
+<ul>
+<li><p>output:</p>
+
+<pre><code>The variable type is slice
+原始array: [0 1 2 3 4 5 6 7]
+s的值: [100 3 4 5]
+array: [0 1 100 3 4 5 6 7]
+</code></pre></li>
+</ul>
+
+<p>从输出结果上来看, s的值是array的切片2-6个元素值, 且类型为slice, 我将s传入updatArray中改变它的第0个值, 后面再输出s的值发现它的第一个值被成功改变成了100, 再看原始的array, 惊奇的发现他的索引2的位置的元素变成了100(s是切自array的第2-6索引的元素), 发现改变了s的值直接关联到了原始的数组也改变了, 从此印证了前面的话：Slice本身是没有数据的, 它只是对底层array的一个view(视图)。从这里看出来golang的切片操作是非常灵活方便的, 我们需要更改数组的值且需要传递数组就不需要知晓其长度了, 直接使用[:]操作即可。</p>
+
+<p><strong>Reslice</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">array <span style="color:#ff79c6">:=</span> [<span style="color:#ff79c6">...</span>] <span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>}
+s <span style="color:#ff79c6">:=</span> array[<span style="color:#bd93f9">2</span>:]
+s <span style="color:#ff79c6">:=</span> s[:<span style="color:#bd93f9">3</span>]
+s <span style="color:#ff79c6">:=</span> s[:]</code></pre></div>
+<p>所谓的Reslice就是对数组进一步切片, 只要没被切到极致, 就可以一直切下去。</p>
+
+<ul>
+<li><p>Slice扩展</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">array <span style="color:#ff79c6">:=</span> [<span style="color:#ff79c6">...</span>] <span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>}
+s1 <span style="color:#ff79c6">:=</span> array[<span style="color:#bd93f9">2</span>:<span style="color:#bd93f9">6</span>] <span style="color:#6272a4">// 2, 3, 4, 5
+</span><span style="color:#6272a4"></span>s2 <span style="color:#ff79c6">:=</span> s1[<span style="color:#bd93f9">3</span>:<span style="color:#bd93f9">5</span>] <span style="color:#ff79c6">//</span> <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span></code></pre></div>
+<p>我定义了一个数组, 其中有8个元素, 对这个数组进行slice(s1:=array[2:6])之后很自然的是截取到了<2, 3, 4, 5>这4个元素。而我们再次对s1进行Reslice(s2:=s1[3:5]), 这时候的s1只有4个元素, 但是它到底是怎么获取到6的呢, 我接下来对其进行解析。</p></li>
+
+<li><p>示例图
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/Slice/slice1.png" alt="slice1" /></p></li>
+</ul>
+
+<p>如图所示, 我对数组(array)进行slice([array[2:6]])截取到<2, 3, 4, 5>, 这个slice(s1)的下标为<0, 1, 2, 3>这是很显然的, 但我们对它截取超过了它的范围之后, 只要所截取的值索引没有超过数组长度(len(array))它就可以继续向后面进行扩展(但不可以超过底层数组的cap), 它不可向前面扩展。显然, 后面还剩下<6, 7>两个元素, 将这两个元素接在s1后面之后的下标索引也就是如图所示的第二行灰色部分, 它对应下来就取得了<5, 6>两个值。还是记住那句话, slice只是对底层数组的一个view(视图),也可以理解成映射, 你所看到slice只是数组的一部分, 对此并不是对数组进行了实际操作。</p>
+
+<ul>
+<li>Slice的实现
+slice的结构实际上看起来很简单, 如下图所示</li>
+<li>示例图
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/Slice/slice2.png" alt="slice2" /></li>
+</ul>
+
+<p>我将其分为三个板块, ptr是指向slice的第一个元素的指针, len是slice的一个长度, cap是整个slice的长度加上后面还没有被截取到的元素。</p>
+
+<p>总结两点:
+- slice不可以向前面扩展, 但可以向后面扩展
+- 对数组取值的时候不可以超越len(array), 向后面扩展的时候不可以超越cap的长度</p>
+
+<p>我们可以查看cap
+- 示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;The origin array:%v\n&#34;</span>,array)
+fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;The s1&#39;s value=%v\nThe s1 length is %d\ns1&#39;s cap=%d\n&#34;</span>, s1, <span style="color:#8be9fd;font-style:italic">len</span>(s1), <span style="color:#8be9fd;font-style:italic">cap</span>(s1))
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;===================&#34;</span>)
+fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;The s2&#39;s value=%v\nThe s2 length is %d\ns2&#39;s cap=%d\n&#34;</span>, s2, <span style="color:#8be9fd;font-style:italic">len</span>(s2), <span style="color:#8be9fd;font-style:italic">cap</span>(s2))</code></pre></div>
+<ul>
+<li><p>output:</p>
+
+<pre><code>The origin array:[0 1 2 3 4 5 6 7]
+The s1's value=[2 3 4 5]
+The s1 length is 4
+s1's cap=6
+===================
+The s2's value=[5 6]
+The s2 length is 2
+s2's cap=3
+</code></pre>
+
+<h3 id="切片-slice-操作"><strong>切片(Slice)操作</strong></h3></li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">s3 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">append</span>(s2, <span style="color:#bd93f9">10</span>)
+s4 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">append</span>(s3, <span style="color:#bd93f9">11</span>)
+s5 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">append</span>(s4, <span style="color:#bd93f9">12</span>)
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;s3, s4, s5 =&#34;</span>, s3, s4, s5)
+<span style="color:#6272a4">// The s4 and s5 no longer view array.
+</span><span style="color:#6272a4"></span>fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;array =&#34;</span>, array)
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;array&#39;s cap:&#34;</span>, <span style="color:#8be9fd;font-style:italic">cap</span>(array))</code></pre></div>
+<p>我对s2进行追加操作并且将追加后的值赋值给s3</p></li>
+</ul>
+
+<p>s4, s5的操作都是对前一个slice进行追加操作再赋值</p>
+
+<ul>
+<li><p>output:</p>
+
+<pre><code>s3, s4, s5 = [5 6 10] [5 6 10 11] [5 6 10 11 12]
+array = [0 1 2 3 4 5 6 10]
+array's cap: 8
+</code></pre>
+
+<p>我们发现第一次append元素10将原来数组的7给顶替了, 为什么会这样呢。
+因为array这个数组的cap是8, 对它slice追加操作的时候追加的值个数超过了cap, 这时候系统会重新分配更大的底层数组, 如果原来的数组没有被使用了就会被系统自动回收掉。</p></li>
+</ul>
+
+<p>但是由于golang是值传递的关系, 必须接收append的返回值。
+append格式：<code>append(s, elements)</code></p>
+
+<ul>
+<li>复制切片</li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">printSlice</span>(s [] <span style="color:#8be9fd">int</span>) {
+	<span style="color:#6272a4">// Creating Slice
+</span><span style="color:#6272a4"></span>	fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%v, len=%d, cap=%d\n&#34;</span>, s, <span style="color:#8be9fd;font-style:italic">len</span>(s), <span style="color:#8be9fd;font-style:italic">cap</span>(s))
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+s1 <span style="color:#ff79c6">:=</span> [] <span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">8</span>}
+s2 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">int</span>, <span style="color:#bd93f9">16</span>) <span style="color:#6272a4">// 创建一个slice, 长度为16
+</span><span style="color:#6272a4"></span>s3 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">int</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">32</span>) <span style="color:#6272a4">// 创建一个slice, 长度为10, cap为32
+</span><span style="color:#6272a4"></span>
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Copying slice&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">copy</span>(s2, s1) <span style="color:#6272a4">// 把s1的所有元素复制到s2当中
+</span><span style="color:#6272a4"></span><span style="color:#50fa7b">printSlice</span>(s2)
+}</code></pre></div></li>
+
+<li><p>output:</p>
+
+<pre><code>[2 4 6 8 0 0 0 0 0 0 0 0 0 0 0 0], len=16, cap=16
+</code></pre></li>
+
+<li><p>删除切片中的元素</p></li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Deleting elements from slice&#34;</span>)
+s2 = <span style="color:#8be9fd;font-style:italic">append</span>(s2[:<span style="color:#bd93f9">3</span>], s2[<span style="color:#bd93f9">4</span>:]<span style="color:#ff79c6">...</span>) <span style="color:#6272a4">// 变相删除s2中的指定元素
+</span><span style="color:#6272a4"></span><span style="color:#50fa7b">printSlice</span>(s2)</code></pre></div>
+<p>因为golang没有内置删除slice元素的api, 所以我们需要以这种方式进行删除操作, 解析：将下标4之后的所有元素追加到下标3之前的所有元素, 组成一个新的slice</p></li>
+
+<li><p>弹出切片元素
+-示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Poping from front&#34;</span>)
+front <span style="color:#ff79c6">:=</span> s2[<span style="color:#bd93f9">0</span>]
+s2 = s2[<span style="color:#bd93f9">1</span>:]
+fmt.<span style="color:#50fa7b">Println</span>(front)
+fmt.<span style="color:#50fa7b">Println</span>(s2)
+
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Poping from back&#34;</span>)
+tail <span style="color:#ff79c6">:=</span> s2[<span style="color:#8be9fd;font-style:italic">len</span>(s2)<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]
+s2 = s2[:<span style="color:#8be9fd;font-style:italic">len</span>(s2)<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]
+fmt.<span style="color:#50fa7b">Println</span>(tail)
+fmt.<span style="color:#50fa7b">Println</span>(s2)</code></pre></div></li>
+
+<li><p>output:</p>
+
+<pre><code>Poping from front
+2
+[4 6 0 0 0 0 0 0 0 0 0 0 0 0]
+Poping from back
+0
+[4 6 0 0 0 0 0 0 0 0 0 0 0]
+</code></pre>
+
+<h3 id="map">Map</h3>
+
+<p>golang的map数据类型与Python中的字典非常相似</p></li>
+
+<li><p>定义map</p></li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 方法一
+</span><span style="color:#6272a4"></span>m <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd">string</span> {
+<span style="color:#f1fa8c">&#34;course&#34;</span>: <span style="color:#f1fa8c">&#34;learning golang&#34;</span>,
+	<span style="color:#f1fa8c">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;0x1un&#34;</span>,
+	<span style="color:#f1fa8c">&#34;site&#34;</span>: <span style="color:#f1fa8c">&#34;blog.aumujun.com&#34;</span>,
+}
+<span style="color:#6272a4">// 方法二
+</span><span style="color:#6272a4"></span>m2 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd">int</span>) <span style="color:#6272a4">// m2 == empty map
+</span><span style="color:#6272a4">// 方法三
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">var</span> m3 <span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd">string</span> <span style="color:#6272a4">// m3 == nil
+</span><span style="color:#6272a4"></span>fmt.<span style="color:#50fa7b">Println</span>(m, m2, m3)</code></pre></div></li>
+
+<li><p>遍历map</p></li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">for</span> k, v <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> m {
+fmt.<span style="color:#50fa7b">Println</span>(k, v)
+}</code></pre></div>
+<p>使用range遍历key, 或者成对遍历key, value
+遍历map是不会保证原始顺序的, 如果需要顺序, 可以对key进行手动排序</p></li>
+
+<li><p>操作map</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 获取值
+</span><span style="color:#6272a4"></span>courseName <span style="color:#ff79c6">:=</span> m[<span style="color:#f1fa8c">&#34;course&#34;</span>]
+fmt.<span style="color:#50fa7b">Println</span>(courseName)
+neme, ok <span style="color:#ff79c6">:=</span> m[<span style="color:#f1fa8c">&#34;neme&#34;</span>] <span style="color:#6272a4">// 这里故意取一个不存在的值
+</span><span style="color:#6272a4"></span>fmt.<span style="color:#50fa7b">Println</span>(neme, ok) <span style="color:#ff79c6">//</span> zero values, <span style="color:#ff79c6">false</span></code></pre></div>
+<p>上面这段代码呢, 是对map进行取值, 如果要取的这个key不存在呢, 这个时候它会返回一个zero value的值, 打印出来是一段空白, 我再给它赋值一个ok, ok是一个状态码, 如果这个key存在, 它将会返回true, 如果不存在, 它将会返回false, 所以我们可以对它进行一个if语句的判断。</p></li>
+
+<li><p>示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">if</span> neme, ok <span style="color:#ff79c6">:=</span> m[<span style="color:#f1fa8c">&#34;neme&#34;</span>]; ok {
+fmt.<span style="color:#50fa7b">Println</span>(neme)
+} <span style="color:#ff79c6">else</span> {
+fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;The key does not exsits&#34;</span>)
+}</code></pre></div>
+<p>这样值不存在的时候就会提醒我们, 存在就正常打印。</p></li>
+
+<li><p>map删除操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">delete</span>(m, <span style="color:#f1fa8c">&#34;course&#34;</span>) <span style="color:#ff79c6">//</span> 删除m中key为course的键值</code></pre></div></li>
+
+<li><p>map添加操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">m[<span style="color:#f1fa8c">&#34;course&#34;</span>] = <span style="color:#f1fa8c">&#34;learning golang&#34;</span></code></pre></div></li>
+
+<li><p>map的总结</p></li>
+
+<li><p>除了slice, map, function的內建类型几乎都可以作为key</p></li>
+
+<li><p>Struct(自建类型)类型不包含上述字段, 也可以作为key</p></li>
+
+<li><p>map使用哈希表, 必须可以比较相等</p></li>
+</ul>
+
+<p>map的例题
+这道题目是对map做的一个练习</p>
+
+<p>题目：找出一个字符串中最长不重复的子串, 返回它的长度。
+例：给定字符串 <code>s = &quot;wfszbkkw&quot;</code> 返回6</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">lengthOfNonrepeatingSubString</span>(s <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">int</span> {
+    start, maxLength <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>
+    lastOccurred <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">byte</span>]<span style="color:#8be9fd">int</span>)
+    <span style="color:#ff79c6">for</span> i, ch <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(s) { <span style="color:#6272a4">// 遍历字符串
+</span><span style="color:#6272a4"></span>        lastI, ok <span style="color:#ff79c6">:=</span> lastOccurred[ch] <span style="color:#6272a4">// 从map集合中查看字符是否已经存在
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">if</span> ok <span style="color:#ff79c6">&amp;&amp;</span> lastI <span style="color:#ff79c6">&gt;=</span> start { <span style="color:#6272a4">// 字符存在且字符串的位置在start后面的话, 将start改变位置越过这个字符
+</span><span style="color:#6272a4"></span>            start = lastI <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+        }
+        <span style="color:#ff79c6">if</span> i <span style="color:#ff79c6">-</span> start <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> &gt; maxLength { <span style="color:#6272a4">// 
+</span><span style="color:#6272a4"></span>            maxLength = i <span style="color:#ff79c6">-</span> start <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+        }
+        lastOccurred[ch] = i
+    }
+    <span style="color:#ff79c6">return</span> maxLength
+}</code></pre></div>
+<ul>
+<li>首先我们定义一个start和maxLength, 他们分别用来记录字符的重复指针和最大字符的长度</li>
+<li>又定义了一个map方便用来判断字符是否存在重复</li>
+<li>遍历字符串, 从map中取字符串中的单个字符, 如果取到了就代表这个字符已经存在重复, 将start指针移动到重复字符串的后一位</li>
+<li>如果没有取到, 什么事也没有继续往下遍历并且将maxLength自增, 最后将字符存入map</li>
+<li>循环以上的步骤</li>
+</ul>
+
+<h3 id="字符串"><strong>字符串</strong></h3>
+
+<p>字符串是编程当中可以说是用的非常频繁的类型之一, 让我们来了解下golang中是怎么处理的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+    s <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;Yes, 哈哈哈哈!&#34;</span> <span style="color:#6272a4">// UTF-8
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> _, b <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(s) {
+        fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%X &#34;</span>, b)
+    }
+}</code></pre></div>
+<ul>
+<li><p>output:</p>
+
+<pre><code>59 65 73 2C 20 E5 93 88 E5 93 88 E5 93 88 E5 93 88 21
+</code></pre>
+
+<p>我们可以看到输出的结果中前三组数字是代表Yes, 2C代表逗号, 20代表空格, 其中中文字符是每三组数字表示一个中文字符</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">for</span> i, ch <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> s {
+		fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;(%d %X) &#34;</span>, i, ch)
+	}</code></pre></div></li>
+
+<li><p>output:</p>
+
+<pre><code>(0 59) (1 65) (2 73) (3 2C) (4 20) (5 54C8) (8 54C8) (11 54C8) (14 54C8) (17 21) 
+</code></pre>
+
+<p>从这里我们可以看出从0-4都是连续的, 后面5-14都是间断3个数字</p></li>
+</ul>
+
+<p>ch的类型是返回一个int32(4字节整数), 其实就是rune
+回顾上一个例子我们可以看到每三组数字才表示一个中文字符, 而这个例子输出的却是将Ascii编码转换成了4字节整数的utf8编码给了我们。</p>
+
+<p>为了方便我们处理多国语言的字符, golang有个叫utf8的类库, 它可以帮助我们很方便地处理各种字符串。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 计算字符串的长度
+</span><span style="color:#6272a4"></span>fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;The rune count is&#34;</span>, utf8.<span style="color:#50fa7b">RuneCountInString</span>(s))
+bytes <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(s)
+<span style="color:#ff79c6">for</span> <span style="color:#8be9fd;font-style:italic">len</span>(bytes) &gt; <span style="color:#bd93f9">0</span> {
+    <span style="color:#6272a4">// 对bytes进行转码, DecodeRune会返回两个值, 一个是字符本身; 一个是字符的大小, 英文1, 中文为3
+</span><span style="color:#6272a4"></span>    ch, size <span style="color:#ff79c6">:=</span> utf8.<span style="color:#50fa7b">DecodeRune</span>(bytes)
+    <span style="color:#6272a4">// 接着输出后面的内容
+</span><span style="color:#6272a4"></span>    bytes = bytes[size:]
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%c&#34;</span>, ch)
+}</code></pre></div>
+<p>其实我们平常使用是很少对字符进行底层的解析, 我们通常会用到下面这种方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 将字符串s转换成rune并且将它slice
+</span><span style="color:#6272a4">// 直接range s是不行的, 中文字符长度为3
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">for</span> i, char <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s) {
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;(%d,%c)&#34;</span>, i, char)
+}</code></pre></div>
+<ul>
+<li>操作字符串
+&gt; 如果需要对字符串进行某些操作, 可以使用类库strings, 其中包含了非常多的处理函数。</li>
+<li>总结</li>
+<li>可以使用range对字符串进行遍历, 成对遍历rune</li>
+<li>可以使用utf8.RuneCountInString准确获取字符串的长度(使用len(s)获取的不是字符串的长度, 而是它的字节数)</li>
+<li>使用[]byte(s)获取字节</li>
+<li>使用strings库处理字符串</li>
+</ul>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/go"> #go </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Code"> #Code </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

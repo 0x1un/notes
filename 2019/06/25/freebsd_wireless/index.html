@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>FreeBSD无线网络问题</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>FreeBSD无线网络问题</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h3 id="关于freebsd无线网络的问题">关于FreeBSD无线网络的问题</h3>
+
+<p>在折腾了一下FreeBSD, 发现这个系统异常的稳健, 而在网路上的同行大多都是这种感受, 当你将一台FreeBSD服务器架设好了之后, 可能等到你忘记root密码它都还在平稳运行,
+    它的安装非常简单, 懂几个单词就可以顺利安装, 比之Gentoo/Arch这类Linux发行版要友好很多, 这里就不再赘述安装过程了, 来记录下无线网络的连接问题</p>
+
+<p>在安装完成FreeBSD之后, 默认用的是有线连接, 使用的网卡接口为re0(我的设备), 而无线网络的接口是ath0, 但是默认没有使用的, 需要自己手动开启, 这里贴
+一下<a href="https://www.freebsd.org/doc/handbook/network-wireless.html">官方文档</a>, 非常详细, 需要用心看, 我这里就从其中提取必要部分吧</p>
+
+<p>此时使用ifconfig是看不到wlan0这类信息的, 在此之前需要安装wpa_supplicant, 安装问题就不说了, 一条命令的事情</p>
+
+<p>查看无线网络的设备接口</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sysctl net.wlan.devices</code></pre></div>
+<p>创建wlan接口, 接口为上一条的结果</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ifconfig wlan0 create wlandev ath0</code></pre></div>
+<p>配置网络自启, 编辑/etc/rc.conf</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">wlans_ath0</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;wlan0&#34;</span>
+<span style="color:#8be9fd;font-style:italic">ifconfig_wlan0</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;WPA SYNCDHCP&#34;&#34;</span></code></pre></div>
+<p>编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-config" data-lang="config">if_ath_load=&#34;YES&#34;
+if_wi_load=&#34;YES&#34;
+wlan_wep_load=&#34;YES&#34;
+wlan_ccmp_load=&#34;YES&#34;
+wlan_tkip_load=&#34;YES&#34;</code></pre></div>
+<p>配置wpa_supplicant</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wpa_supplicant -B -i interface -c &lt;<span style="color:#ff79c6">(</span>wpa_passphrase MYSSID passphrase<span style="color:#ff79c6">)</span>
+wpa_passphrase MYSSID passphrase &gt; /etc/wpa_supplicant.conf
+wpa_supplicant -B -i interface -c /etc/wpa_supplicant.conf</code></pre></div>
+<ul>
+<li>-B 后台运行, -i 指定无线网络接口, -c指定使用的配置文件
+第一条为直接连接, MYSSID为wifi名, passphrase为wifi密码</li>
+</ul>
+
+<p>第二条为写入配置文件, 方便自动连接, 如果你的wifi是隐藏的, 需要在配置文件中添加一行scan_ssid=1</p>
+
+<p>当配置完wpa_supplicant的wifi配置之后, 执行第三条命令, 就可以连接wifi了,</p>
+
+<p><strong>当完成上述的设置之后, 顺利的话以后就可以直接开机自启了</strong></p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

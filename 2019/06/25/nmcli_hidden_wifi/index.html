@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>关于nmcli连接隐藏wifi的问题</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>关于nmcli连接隐藏wifi的问题</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h3 id="关于nmcli连接隐藏wifi的问题">关于nmcli连接隐藏wifi的问题</h3>
+
+<p>在之前的使用当中, 我的笔记本大部分时间直接连的是网线接口, 在使用wifi的时候也就是使用nmcli简单临时连接一下,
+    而有个让人很无奈的问题困扰了我一些时候, 这个问题虽然可以直接通过看文档就可以得到解决, 但是嘛..拖延症, 觉得问题不大就一直搁那儿了,
+    今天正好给做个记录, 以便之后再用到</p>
+
+<p>Networkmanager这个软件我就不过多介绍了, 官方的文档有很详细的说明, 简单提一下, 它是基于wpa_supplicant的, 但功能非常强大方便</p>
+
+<p>在之前的使用中, 我通常是使用以下的命令用来连接我家的隐藏wifi, 但有个毛病, 那就是连接wifi是要看脸的&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli dev wifi connect &lt;SSID&gt; hidden <span style="color:#8be9fd;font-style:italic">true</span> password &lt;PASSWORD&gt;</code></pre></div>
+<p>有时候被这个bug给气的不轻, 但又懒得管, 毕竟我有网线嘛=_=</p>
+
+<p>看了文档之后, 就知道一种稳定的连接方法 ( 果然人不能懒啊=_=</p>
+
+<p>这个软件的基本操作我就不介绍了, 去看文档吧, 直入主题</p>
+
+<p>打开wifi开关</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli r wifi on</code></pre></div>
+<p>隐藏网络是一种普通的无线网络, 除非你主动去请求连接它, 否则你是找不到的, 需要从其详细参数连接</p>
+
+<p>创建隐藏网络的关联</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli c add <span style="color:#8be9fd;font-style:italic">type</span> wifi con-name &lt;NAME&gt; ifname &lt;INTERFACE&gt; ssid &lt;SSID&gt;
+nmcli c modify &lt;NAME&gt; wifi-sec.key-mgmt wpa-psk wifi-sec.psk &lt;PASSWORD&gt;</code></pre></div>
+<p>在创建了关联之后, 就可以使用以下的命令连接到对应网络</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli c up &lt;NAME&gt;</code></pre></div>
+<p>在之后的使用当中如果碰到连接失败, 找不到wifi的情况下, 可以试试重新开关wifi</p>
+
+<p>本文参考文档:
+    <a href="https://developer.gnome.org/NetworkManager/unstable/nmcli.html">https://developer.gnome.org/NetworkManager/unstable/nmcli.html</a></p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

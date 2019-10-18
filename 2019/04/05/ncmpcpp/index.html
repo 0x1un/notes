@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>在终端中配置使用音乐播放器</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>在终端中配置使用音乐播放器</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<!-- more -->
+
+<h3 id="使用ncmpcpp-mpd-mpc配置音乐播放器-http-blog-aumujun-com"><a href="http://blog.aumujun.com">使用Ncmpcpp+Mpd+Mpc配置音乐播放器</a></h3>
+
+<p>使用Linux也有两年之余了, 在从臃肿的CentOS &amp; Ubuntu到轻量可定制性超高的Arch &amp; Gentoo, 我仿佛在极简的路上越走越远..<br />
+之前一直使用的deepin联合制作的网易云音乐, 我非常喜欢, 但对于追求轻量可定制的我来说, 这完全不够, 我喜欢折腾.</p>
+
+<h4 id="安装">安装</h4>
+
+<p>在标题上已经说明了, 我们需要三个软件进行搭配, 这三个软件总体体积加上所有依赖也不过19MB左右, 非常符合我的期望.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S ncmpcpp mpd mpc
+<span style="color:#6272a4"># ncmpcpp为播放器前端操作界面, mpd为服务端, mpc为控制器</span></code></pre></div>
+<p>待安装完成之后, 你需要对它们进行配置</p>
+
+<p>mpd配置, 在<code>$HOME/.config/mpd/</code>中创建<code>mpd.conf</code>文件并写入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">db_file            <span style="color:#f1fa8c">&#34;~/.config/mpd/database&#34;</span> <span style="color:#6272a4"># 这里是数据库文件的位置</span>
+log_file           <span style="color:#f1fa8c">&#34;~/.config/mpd/log&#34;</span> <span style="color:#6272a4"># 启动的日志文件</span>
+music_directory    <span style="color:#f1fa8c">&#34;/run/media/aumujun/DATA/CloudMusic&#34;</span> <span style="color:#6272a4"># 音乐存储的位置</span>
+playlist_directory <span style="color:#f1fa8c">&#34;~/.config/mpd/playlists&#34;</span> <span style="color:#6272a4"># 播放列表存储的位置</span>
+pid_file           <span style="color:#f1fa8c">&#34;~/.config/mpd/pid&#34;</span>
+state_file         <span style="color:#f1fa8c">&#34;~/.config/mpd/state&#34;</span>
+sticker_file       <span style="color:#f1fa8c">&#34;~/.config/mpd/sticker.sql&#34;</span>
+
+auto_update <span style="color:#f1fa8c">&#34;yes&#34;</span>
+
+bind_to_address <span style="color:#f1fa8c">&#34;127.0.0.1&#34;</span>
+restore_paused <span style="color:#f1fa8c">&#34;yes&#34;</span>
+max_output_buffer_size <span style="color:#f1fa8c">&#34;16384&#34;</span>
+
+audio_output <span style="color:#ff79c6">{</span>
+      <span style="color:#8be9fd;font-style:italic">type</span>  <span style="color:#f1fa8c">&#34;pulse&#34;</span>
+      name  <span style="color:#f1fa8c">&#34;pulse audio&#34;</span>
+<span style="color:#ff79c6">}</span>
+
+audio_output <span style="color:#ff79c6">{</span>
+<span style="color:#8be9fd;font-style:italic">type</span>               <span style="color:#f1fa8c">&#34;fifo&#34;</span>
+name               <span style="color:#f1fa8c">&#34;my_fifo&#34;</span>
+path               <span style="color:#f1fa8c">&#34;/tmp/mpd.fifo&#34;</span>
+format             <span style="color:#f1fa8c">&#34;44100:16:2&#34;</span>
+<span style="color:#ff79c6">}</span></code></pre></div>
+<p><strong>注意:</strong> 当你的声音驱动都配置完备的情况下依旧没有声音, 那么你需要重启以下计算机或重新登录, 你需要填写正确的<code>audio_output</code>, 它是<code>alsa</code>还是<code>pulse</code>, 这点非常重要</p>
+
+<p>启动mpd时如果发生以下的错误</p>
+
+<pre><code>exception: Input plugin 'tidal' is unavailable: No Tidal application token configured                                                
+exception: Input plugin 'qobuz' is unavailable: No Qobuz app_id configured   
+</code></pre>
+
+<p>在<code>mpd.conf</code>中添加此段配置禁用插件加载</p>
+
+<pre><code>input {
+	plugin	&quot;tidal&quot;
+	enabled &quot;no&quot;
+}
+
+input {
+	plugin  &quot;qobuz&quot;
+	enabled &quot;no&quot;
+}
+</code></pre>
+
+<p>ncmpcpp配置, 在<code>$HOME/.config/ncmpcpp/</code>中创建<code>config文件</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># mpd</span>
+<span style="color:#8be9fd;font-style:italic">mpd_host</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;127.0.0.1&#34;</span>
+<span style="color:#8be9fd;font-style:italic">mpd_port</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;6600&#34;</span>
+<span style="color:#8be9fd;font-style:italic">mpd_music_dir</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/run/media/aumujun/DATA/CloudMusic&#34;</span> <span style="color:#6272a4"># 这里是歌曲存放的位置</span>
+
+<span style="color:#6272a4">## Selected tracks ##</span>
+<span style="color:#8be9fd;font-style:italic">selected_item_prefix</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;* &#34;</span>
+<span style="color:#8be9fd;font-style:italic">discard_colors_if_item_is_selected</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span>
+
+<span style="color:#6272a4"># Colors</span>
+<span style="color:#8be9fd;font-style:italic">color1</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;magenta&#34;</span>
+<span style="color:#8be9fd;font-style:italic">color2</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;cyan&#34;</span> 
+<span style="color:#8be9fd;font-style:italic">main_window_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;cyan&#34;</span> 
+<span style="color:#8be9fd;font-style:italic">state_line_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;black&#34;</span>
+<span style="color:#8be9fd;font-style:italic">statusbar_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;black&#34;</span>
+<span style="color:#8be9fd;font-style:italic">progressbar_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;magenta&#34;</span>
+<span style="color:#8be9fd;font-style:italic">progressbar_elapsed_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;cyan&#34;</span>
+<span style="color:#8be9fd;font-style:italic">current_item_prefix</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">$(</span>red<span style="color:#ff79c6">)</span><span style="color:#8be9fd;font-style:italic">$r</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#8be9fd;font-style:italic">current_item_suffix</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span>$<span style="color:#f1fa8c">/r</span><span style="color:#ff79c6">$(</span>end<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#8be9fd;font-style:italic">alternative_ui_separator_color</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;black&#34;</span>
+
+<span style="color:#6272a4"># Settings</span>
+<span style="color:#8be9fd;font-style:italic">autocenter_mode</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;yes&#34;</span>
+<span style="color:#8be9fd;font-style:italic">header_visibility</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span> 
+<span style="color:#8be9fd;font-style:italic">statusbar_visibility</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span>
+<span style="color:#8be9fd;font-style:italic">cyclic_scrolling</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;yes&#34;</span>
+<span style="color:#8be9fd;font-style:italic">titles_visibility</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span>
+<span style="color:#8be9fd;font-style:italic">display_bitrate</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;yes&#34;</span>
+<span style="color:#8be9fd;font-style:italic">playlist_separate_albums</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span>
+<span style="color:#8be9fd;font-style:italic">ask_before_clearing_playlists</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;no&#34;</span>
+<span style="color:#8be9fd;font-style:italic">visualizer_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ellipse&#34;</span>
+<span style="color:#8be9fd;font-style:italic">visualizer_fifo_path</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/tmp/mpd.fifo&#34;</span>
+
+<span style="color:#6272a4"># Playlist</span>
+<span style="color:#6272a4">#user_interface = &#34;alternative&#34;</span>
+<span style="color:#8be9fd;font-style:italic">playlist_display_mode</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;classic&#34;</span>
+<span style="color:#8be9fd;font-style:italic">browser_display_mode</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;classic&#34;</span>
+<span style="color:#8be9fd;font-style:italic">song_list_format</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$7</span><span style="color:#f1fa8c"> {%a}|{%D}</span><span style="color:#8be9fd;font-style:italic">$8</span><span style="color:#f1fa8c"> * </span><span style="color:#8be9fd;font-style:italic">$5</span><span style="color:#f1fa8c">%t </span><span style="color:#8be9fd;font-style:italic">$R</span><span style="color:#f1fa8c"> </span><span style="color:#8be9fd;font-style:italic">$6</span><span style="color:#f1fa8c">%l&#34;</span>
+<span style="color:#8be9fd;font-style:italic">song_status_format</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$6</span><span style="color:#f1fa8c">%t </span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">&gt;&gt; </span><span style="color:#8be9fd;font-style:italic">$8</span><span style="color:#f1fa8c">%a </span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">&gt;&gt; </span><span style="color:#8be9fd;font-style:italic">$2</span><span style="color:#f1fa8c">%b</span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#8be9fd;font-style:italic">song_columns_list_format</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;(5)[]{} (20)[red]{a} (26)[white]{t|f} (44)[blue]{b} (20)[red]{l}&#34;</span>
+<span style="color:#8be9fd;font-style:italic">alternative_header_second_line_format</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$6</span><span style="color:#f1fa8c">{%a} </span><span style="color:#8be9fd;font-style:italic">$b$8</span><span style="color:#f1fa8c">-</span><span style="color:#8be9fd;font-style:italic">$9</span><span style="color:#f1fa8c"> </span><span style="color:#8be9fd;font-style:italic">$4</span><span style="color:#f1fa8c">{%b}</span><span style="color:#8be9fd;font-style:italic">$9</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#8be9fd;font-style:italic">now_playing_prefix</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$b$4</span><span style="color:#f1fa8c">&gt;</span><span style="color:#8be9fd;font-style:italic">$5</span><span style="color:#f1fa8c">&gt; &#34;</span>
+<span style="color:#8be9fd;font-style:italic">now_playing_suffix</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$2</span>$<span style="color:#f1fa8c">/b</span><span style="color:#8be9fd;font-style:italic">$2</span><span style="color:#f1fa8c">&#34;</span>
+
+<span style="color:#6272a4"># Progressbars to use.</span>
+<span style="color:#6272a4"># This section works as</span>
+<span style="color:#6272a4"># a clipboard so no need</span>
+<span style="color:#6272a4"># to hunt these down from</span>
+<span style="color:#6272a4"># the web.</span>
+
+<span style="color:#6272a4">#progressbar_look = &#34;░█ &#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;=&gt;&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;─- &#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;▒▒░&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;┅┅┄&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;─⊙┄&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;─➞─&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;─┅─&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;▪▪▪&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;▪▪▫&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;───&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;▁▁▁&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;‒‒‒&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;■◣ &#34;</span>
+<span style="color:#8be9fd;font-style:italic">progressbar_look</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;◈◆◇&#34;</span>
+<span style="color:#6272a4">#progressbar_look = &#34;→→&#34;</span></code></pre></div>
+<p>到此为止就已经配置完成了, 我们需要对后续的使用进行一些准备</p>
+
+<h4 id="启动mpd问题">启动mpd问题</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo <span style="color:#8be9fd;font-style:italic">kill</span> -9 <span style="color:#ff79c6">$(</span>pgrep mpd<span style="color:#ff79c6">)</span> <span style="color:#6272a4"># 干掉mpd进程</span></code></pre></div>
+<p>再次启动时你可能会遇到无法找到数据库文件, 和<code>playlist</code>目录, 这个时候你需要在mpd配置文件中的<code>db_file</code>的位置手动创建这个数据库和<code>playlist</code>目录</p>
+
+<h4 id="使用mpc">使用mpc</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mpc update <span style="color:#6272a4"># 更新数据库</span>
+mpc listall | mpc add <span style="color:#6272a4"># 添加所有歌曲到播放列表</span>
+mpc save myplaylist <span style="color:#6272a4"># 保存此播放列表</span></code></pre></div>
+<h4 id="使用systemd自启动mpd">使用systemd自启动mpd</h4>
+
+<p>当你配置完成这些必须的操作之后, 如果你希望每次开机自动启动mpd程序需修改文件<br />
+编辑 <code>/usr/lib/systemd/user/mpd.service</code><br />
+找到<code>ExecStart</code>修改为<code>/usr/bin/mpd %h/.config/mpd/mpd.conf --no-daemon</code>
+添加为当前用户自启动程序</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl --user <span style="color:#8be9fd;font-style:italic">enable</span> mpd</code></pre></div>
+<h4 id="如果你使用i3wm">如果你使用i3wm</h4>
+
+<p>我个人非常喜爱i3wm, 在这里对音乐播放器进行配置一些快捷键操作<br />
+编辑i3wm的配置文件, 添加如下代码</p>
+
+<pre><code>bindsym $mod+p exec --no-startup-id mpc toggle # 暂停与取消暂停
+bindsym $mod+comma exec --no-startup-id mpc prev # 使用逗号(,)播放上一首
+bindsym $mod+period exec --no-startup-id mpc next # 使用句号(.)播放下一首
+</code></pre>
+
+<p>对i3blocks状态栏添加当前歌曲名与点击控制效果<br />
+编辑<code>i3blocks/config</code> 添加</p>
+
+<pre><code># Display current song
+[mediaplayer]
+command=~/.config/i3/i3scripts/mediaplayer # 此脚本为github上所找
+# instance=spotify
+interval=5
+signal=10
+color=#E88939
+</code></pre>
+
+<p>控件脚本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#6272a4">#!/usr/bin/env perl</span>
+<span style="color:#ff79c6">use</span> Time::HiRes <span style="color:#f1fa8c">qw(usleep)</span>;
+<span style="color:#ff79c6">use</span> Env <span style="color:#f1fa8c">qw(BLOCK_INSTANCE)</span>;
+
+<span style="color:#ff79c6">use</span> constant DELAY <span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">50</span>; <span style="color:#6272a4"># Delay in ms to let network-based players (spotify) reflect new data.</span>
+<span style="color:#ff79c6">use</span> constant SPOTIFY_STR <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;spotify&#39;</span>;
+
+<span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">@metadata</span> <span style="color:#ff79c6">=</span> ();
+<span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;</span>;
+
+<span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$BLOCK_INSTANCE</span>) {
+    <span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;--player=&#39;$BLOCK_INSTANCE&#39;&#34;</span>;
+}
+
+<span style="color:#ff79c6">sub</span> <span style="color:#50fa7b">buttons</span> {
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$method</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">shift</span>;
+
+    <span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$method</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;mpd&#39;</span>) {
+        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;mpc prev&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">2</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;mpc toggle&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">3</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;mpc next&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">4</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;mpc volume +10&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">5</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;mpc volume -10&#34;</span>);
+        }
+    } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$method</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;cmus&#39;</span>) {
+        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;cmus-remote --prev&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">2</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;cmus-remote --pause&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">3</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;cmus-remote --next&#34;</span>);
+        }
+    } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$method</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;playerctl&#39;</span>) {
+        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;playerctl $player_arg previous&#34;</span>);
+            usleep(DELAY <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1000</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$BLOCK_INSTANCE</span> <span style="color:#ff79c6">eq</span> SPOTIFY_STR;
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">2</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;playerctl $player_arg play-pause&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">3</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;playerctl $player_arg next&#34;</span>);
+            usleep(DELAY <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1000</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$BLOCK_INSTANCE</span> <span style="color:#ff79c6">eq</span> SPOTIFY_STR;
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">4</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;playerctl $player_arg volume 0.01+&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">5</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;playerctl $player_arg volume 0.01-&#34;</span>);
+        }
+    } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$method</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;rhythmbox&#39;</span>) {
+        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;rhythmbox-client --previous&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">2</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;rhythmbox-client --play-pause&#34;</span>);
+        } <span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$ENV</span>{<span style="color:#f1fa8c">&#39;BLOCK_BUTTON&#39;</span>} <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">3</span>) {
+            <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;rhythmbox-client --next&#34;</span>);
+        }
+    }
+}
+
+<span style="color:#ff79c6">sub</span> <span style="color:#50fa7b">cmus</span> {
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">@cmus</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">split</span> <span style="color:#f1fa8c">/^/</span>, <span style="color:#f1fa8c">qx(cmus-remote -Q)</span>;
+    <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$?</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>) {
+        <span style="color:#ff79c6">foreach</span> <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$line</span> (<span style="color:#8be9fd;font-style:italic">@cmus</span>) {
+            <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">@data</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">split</span> <span style="color:#f1fa8c">/\s/</span>, <span style="color:#8be9fd;font-style:italic">$line</span>;
+            <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">shift</span> <span style="color:#8be9fd;font-style:italic">@data</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;tag&#39;</span>) {
+                <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$key</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">shift</span> <span style="color:#8be9fd;font-style:italic">@data</span>;
+                <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$value</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">join</span> <span style="color:#f1fa8c">&#39; &#39;</span>, <span style="color:#8be9fd;font-style:italic">@data</span>;
+
+                <span style="color:#8be9fd;font-style:italic">@metadata</span>[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$value</span> <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$key</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;artist&#39;</span>;
+                <span style="color:#8be9fd;font-style:italic">@metadata</span>[<span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$value</span> <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$key</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;title&#39;</span>;
+            }
+        }
+
+        <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">@metadata</span>) {
+            buttons(<span style="color:#f1fa8c">&#39;cmus&#39;</span>);
+
+            <span style="color:#6272a4"># metadata found so we are done</span>
+            <span style="color:#ff79c6">print</span> <span style="color:#f1fa8c">&#34;\x{266A} &#34;</span>;
+            <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">join</span> <span style="color:#f1fa8c">&#39; - &#39;</span>, <span style="color:#8be9fd;font-style:italic">@metadata</span>);
+            <span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#bd93f9">0</span>;
+        }
+    }
+}
+
+<span style="color:#ff79c6">sub</span> <span style="color:#50fa7b">mpd</span> {
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$data</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">qx(mpc current)</span>;
+    <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">not</span> <span style="color:#8be9fd;font-style:italic">$data</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;&#39;</span>) {
+        buttons(<span style="color:#f1fa8c">&#34;mpd&#34;</span>);
+        <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">$data</span>);
+        <span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#bd93f9">0</span>;
+    }
+}
+
+<span style="color:#ff79c6">sub</span> <span style="color:#50fa7b">playerctl</span> {
+    buttons(<span style="color:#f1fa8c">&#39;playerctl&#39;</span>);
+
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$artist</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">qx(playerctl $player_arg metadata artist)</span>;
+    <span style="color:#6272a4"># exit status will be nonzero when playerctl cannot find your player</span>
+    <span style="color:#8be9fd;font-style:italic">exit</span>(<span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$?</span> <span style="color:#ff79c6">||</span> <span style="color:#8be9fd;font-style:italic">$artist</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;(null)&#39;</span>;
+
+    <span style="color:#8be9fd;font-style:italic">push</span>(<span style="color:#8be9fd;font-style:italic">@metadata</span>, <span style="color:#8be9fd;font-style:italic">$artist</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$artist</span>;
+
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$title</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">qx(playerctl $player_arg metadata title)</span>;
+    <span style="color:#8be9fd;font-style:italic">exit</span>(<span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$?</span> <span style="color:#ff79c6">||</span> <span style="color:#8be9fd;font-style:italic">$title</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;(null)&#39;</span>;
+
+    <span style="color:#8be9fd;font-style:italic">push</span>(<span style="color:#8be9fd;font-style:italic">@metadata</span>, <span style="color:#8be9fd;font-style:italic">$title</span>) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">$title</span>;
+
+    <span style="color:#ff79c6">print</span> <span style="color:#f1fa8c">&#34;\x{266A} &#34;</span>;
+    <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">join</span>(<span style="color:#f1fa8c">&#34; - &#34;</span>, <span style="color:#8be9fd;font-style:italic">@metadata</span>)) <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">@metadata</span>;
+}
+
+<span style="color:#ff79c6">sub</span> <span style="color:#50fa7b">rhythmbox</span> {
+    buttons(<span style="color:#f1fa8c">&#39;rhythmbox&#39;</span>);
+
+    <span style="color:#ff79c6">my</span> <span style="color:#8be9fd;font-style:italic">$data</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">qx(rhythmbox-client --print-playing --no-start)</span>;
+    <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">$data</span>);
+}
+
+<span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">eq</span> <span style="color:#f1fa8c">&#39;&#39;</span> <span style="color:#ff79c6">or</span> <span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">=~</span><span style="color:#f1fa8c"> /mpd/</span>) {
+    mpd;
+}
+<span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">=~</span><span style="color:#f1fa8c"> /cmus/</span>) {
+    cmus;
+}
+<span style="color:#ff79c6">elsif</span> (<span style="color:#8be9fd;font-style:italic">$player_arg</span> <span style="color:#ff79c6">=~</span><span style="color:#f1fa8c"> /rhythmbox/</span>) {
+    rhythmbox;
+}
+<span style="color:#ff79c6">else</span> {
+    playerctl;
+}</code></pre></div>
+<h4 id="解决问题">解决问题</h4>
+
+<p>当你打开ncmpcpp时有些歌曲的名字无法显示, 这时因为歌曲的名字编码问题导致的, 直接上<code>easytag</code>解决此问题..</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S easytag</code></pre></div>
+<p>在<code>easytag</code>中选中所有歌曲, 进入<code>Edit-&gt;Preferences-&gt;ID3Tags</code>中选中<code>Non-standard encoding for reading ID3 tags</code>为<code>utf-8</code><br />
+待编码完成之后保存并退出, 重新添加歌曲到播放列表并更新数据库..</p>
+
+<p>enjoy~~~~</p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/Linux"> #Linux </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/i3WM"> #i3WM </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

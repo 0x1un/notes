@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Trait on 一个经常跑偏的人</title>
+    <link>/tags/trait/</link>
+    <description>Recent content in Trait on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 04 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/trait/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust之Trait-Object笔记</title>
+      <link>/2019/05/04/rust_trait-object/</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/04/rust_trait-object/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 在学习Rust的历程中, 其中的灵魂便是trait这个玩意儿, 它的功能非常强大, Rust中所有的抽象几乎都是使用trait来完成的, 同时trait也保证这些抽象都是运行时零开销的. 它与我已知语言中的Python的Duck-Typing(鸭子类型), Golang的接口非常相似但功能据说更加强大, 先在这里记录一篇学习的笔记.
+trait的限定与trait对象的用法:
+struct Foo; trait Bar { fn baz(&amp;amp;self); } impl Bar for Foo { fn baz(&amp;amp;self) { println!(&amp;#34;{:?}&amp;#34;, self); } } fn static_dispatch&amp;lt;T&amp;gt; (t: &amp;amp;T) where T: Bar { t.baz(); } fn dynamic_dispatch(t: &amp;amp;Bar) { t.baz(); } fn main() { let foo = Foo; static_dispatch(&amp;amp;foo); // Foo 	dynamic_dispatch(&amp;amp;foo); // Foo }  可以看出static_dispatch与dynamic_dispatch行为目的是相同的, static_dispatch是泛型限定为静态分发, 而dynamic_dispatch时动态分发. (从方法命名就可以看出来, 这不是废话么(逃..
+static_dispatch是为泛型T做了类型的限定, 只有实现了Bar这个trait的类型才能够使用, 因为上面已经为Foo这个结构体实现了Bar, 理所应当的t是可以调用baz()方法的.</description>
+    </item>
+    
+  </channel>
+</rss>

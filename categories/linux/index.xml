@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 一个经常跑偏的人</title>
+    <link>/categories/linux/</link>
+    <description>Recent content in Linux on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 13 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>iptables基础-常用的扩展模块</title>
+      <link>/2019/06/13/iptables_02/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/13/iptables_02/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ iprange扩展模块 根据上一章的记录, 知晓了可以指定端口的范围, 而iprange可以指定ip的范围(非网段)
+iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
+--src-range是源地址的范围, --dst-range是目标地址的范围
+同样, --src-range和--dst-range可以使用取反(!)操作
+string扩展模块 如果报文信息中包含了字符&amp;rdquo;hello&amp;rdquo;, 就对此报文进行进一步的操作
+iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;rdquo;hello, world&amp;rdquo;这个字符串, 就将其拒绝
+--algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
+time扩展模块 time模块可以对特定时间段的报文进行处理
+iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 07:00:00 --timestop 18:00:00 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --monthdays 22,23 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --datestart 2019-06-15 --datestop 2019-06-23 -j REJECT 上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</description>
+    </item>
+    
+    <item>
+      <title>iptables基础</title>
+      <link>/2019/06/12/iptables_01/</link>
+      <pubDate>Wed, 12 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/12/iptables_01/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ iptables查看规则 iptables -t tablename -L 查看tablename表中的所有规则, 如果省略-t选项, 则默认为filter表, -L选项为查看规则
+iptables -t filter -v -L INPUT 查看filter表中链路为INPUT的所有规则, -v 为详细信息
+iptables -t filter -v -n -L INPUT -n选项表示为不解析IP地址
+iptables -t filter -v -x -n -L INPUT -x选项表示显示计数器的精确值
+iptables -t filter -vxnL INPUT 在日常使用中会使用组合选项(方便), 效果等同于上一条
+清空/删除规则 iptables -F INPUT -F flush 清空filter表中INPUT链路中的所有规则(因为没有-t选项, 根据前文所述默认为filter表)
+删除规则有两种办法: 根据编号删除, 根据动作与条件删除
+iptables -t filter -D INPUT 2 删除filter表中INPUT链路中编号为2的规则, 如需知晓编号你需要加&amp;ndash;line选项在查看规则的时候
+iptables -t filter -D INPUT -s 192.</description>
+    </item>
+    
+    <item>
+      <title>suckless-st中文输入法问题</title>
+      <link>/2019/02/23/st_terminal/</link>
+      <pubDate>Sat, 23 Feb 2019 20:40:00 +0000</pubDate>
+      
+      <guid>/2019/02/23/st_terminal/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ st terminal输入法问题  原本使用的termite终端, 因为它很简洁轻便, 但对于ranger显示图片会有重叠的效果, 这点令我非常不爽, 后来发现suckless中有个叫st的终端, 并且完美支持ranger. 而且它比termite更加轻便, 启动更加快速, 但有个瑕疵就是无法使用中文输入法, 其中间折腾了很久, 什么环境变量之类的, 但最终在官网找到了一份关于修复IME的补丁.
+  fix-ime补丁  因为它是.diff格式的补丁(类Unix通用补丁), 可以使用git命令来使其进行合并
+git apply --reject --whitespace=fix st-ime-20190202-3be4cf1.diff 它会对st.c进行对比并更新操作, 之后再次编译st, sudo make install, 就可以进行中文输入法切换了.</description>
+    </item>
+    
+    <item>
+      <title>折腾i3</title>
+      <link>/2018/11/11/i3_installation/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/11/11/i3_installation/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 准备工作  安装
+i3blocks
+i3blocks-contrib(i3blocks 的一些组件)
+i3-gaps(i3 的增强版, 可以调整间隙)
+i3lock-fancy(锁屏工具)
+sysstat
+acpi(为了显示电池, 使用系统包管理工具安装)
+rofi
+nerd-fonts-source-code-pro(字体/图标)
+feh(为了设置壁纸)
+compton(为桌面透明化)
+dunst(系统通知)
+ranger(终端访问文件)
+termite(简洁终端模拟器)
+mpd(音乐播放) 上述工具都可以通过 pacman 或者 aur 安装  配置上述安装的工具的配置文件都在我的仓库当中，自己看着折腾吧
+https://github.com/0x1un/dotFiles</description>
+    </item>
+    
+    <item>
+      <title>Linux-grep使用笔记</title>
+      <link>/2018/07/22/grep_mono/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/22/grep_mono/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 参数  * : 表示当前目录所有文件，也可以是某个文件名
+-r 是递归查找
+-n 是显示行号
+-R 查找所有文件包含子目录
+-i 忽略大小写 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
+ grep -l pattern files ：只列出匹配的文件名，
+ grep -L pattern files ：列出不匹配的文件名，
+ grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
+ grep -C number pattern files ：匹配的上下文分别显示[number]行，
+ grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，
+ grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>刷机 on 一个经常跑偏的人</title>
+    <link>/categories/%E5%88%B7%E6%9C%BA/</link>
+    <description>Recent content in 刷机 on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 02 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E5%88%B7%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用adb工具对安卓进行刷机</title>
+      <link>/2018/07/02/adb_usb/</link>
+      <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/02/adb_usb/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 使用adb进行安卓刷机  安装adb
+平台ubuntu16.04(其他的系统自行搜索):
+sudo apt-get update &amp;amp;&amp;amp; sudo apt install android-tools-adb android-tools-fastboot   手机重启到fastboot状态
+接入usb调试, 并输入
+adb devices 开启root, 并解锁system分区
+adb root adb disable-verity  重启到bl
+adb reboot bootloader 解锁设备, 开始刷机
+fastboot flashing unlock 刷入recovery
+fastboot flash recovery Recovery.img 或利用Recovery.img启动到Recovery(并不会将rec刷入手机, 只是暂时使用)
+fastboot boot Recovery.img // 自动启动到recovery 进入刷好的rec下面，选择高级，adb线刷(sideload模式)
+并使用adb devices查看设备当前是否在sideload模式下
+如果出现：
+List of devices attached ??????????? no permissions 尝试重新启动adb服务(如果是windows系统, 不用加sudo)
+sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果有就执行</description>
+    </item>
+    
+  </channel>
+</rss>

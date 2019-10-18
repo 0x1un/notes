@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on 一个经常跑偏的人</title>
+    <link>/categories/database/</link>
+    <description>Recent content in Database on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 04 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySql踩坑集</title>
+      <link>/2019/04/04/mysql-questions/</link>
+      <pubDate>Thu, 04 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/04/mysql-questions/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ MySql踩坑集 MySql无法启动 自从Gentoo换回Arch Linux之后, 数据库这些都需要重新安装.
+当然我肯定是备份过的, 但重装系统总要有重装的效果吧(干净)..
+在Arch Linux上安装MySql(MariaDb)后无法启动MySql
+pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后什么都没做, 你应该试试这个方法 # 错误日志无法重现了, 一般就是这个问题 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置数据库存储位置 mysqladmin -u root password [new password] # 设置数据库密码 mysql_secure_installation # 初始化数据库设置, 如果要进行一些进一步设置 后续如果还遇到mysql问题会再次进行追加.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Python基本数据类型效率</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>Python基本数据类型效率</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h2 id="list">list</h2>
+
+<ul>
+<li>python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&rsquo;n&rsquo;是容器中当前的元素数， &lsquo;k&rsquo;需要操作的元素个数</li>
+</ul>
+
+<!-- more -->
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average Case</th>
+<th>Amortized Worst Case</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Copy</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Append[1]</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+
+<tr>
+<td>Insert</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Get Item</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+
+<tr>
+<td>Set Item</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+
+<tr>
+<td>Delete Item</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Iteration</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Get Slice</td>
+<td>O(k)</td>
+<td>O(k)</td>
+</tr>
+
+<tr>
+<td>Del Slice</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Set Slice</td>
+<td>O(k+n)</td>
+<td>O(k+n)</td>
+</tr>
+
+<tr>
+<td>Extend[1]</td>
+<td>O(k)</td>
+<td>O(k)</td>
+</tr>
+
+<tr>
+<td>Sort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+</tr>
+
+<tr>
+<td>Multiply</td>
+<td>O(nk)</td>
+<td>O(nk)</td>
+</tr>
+
+<tr>
+<td>x in s</td>
+<td>O(n)</td>
+<td></td>
+</tr>
+
+<tr>
+<td>min(s), max(s)</td>
+<td>O(n)</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Get Length</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="dict">dict</h2>
+
+<ul>
+<li>关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average Case</th>
+<th>Amortized Worst Case</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Copy[2]</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Get Item</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Set Item[1]</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Delete Item</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>x in s</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Iteration[2]</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="set">set</h2>
+
+<ul>
+<li>内部实现是dict的。在in操作上是O(1), 这一点比list要强。</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Average case</th>
+<th>Worst Case</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>x in s</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+
+<tr>
+<td>Union s</td>
+<td>t</td>
+<td>O(len(s)+len(t))</td>
+</tr>
+
+<tr>
+<td>Intersection s&amp;t</td>
+<td>O(min(len(s), len(t))</td>
+<td>O(len(s) * len(t))</td>
+</tr>
+
+<tr>
+<td>Multiple intersection s1&amp;s2&amp;..&amp;sn</td>
+<td></td>
+<td>(n-1)*O(l) where l is max(len(s1),..,len(sn))</td>
+</tr>
+
+<tr>
+<td>Difference s-t</td>
+<td>O(len(s))</td>
+<td></td>
+</tr>
+
+<tr>
+<td>s.difference_update(t)</td>
+<td>O(len(t))</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Symmetric Difference s^t</td>
+<td>O(len(s))</td>
+<td>O(len(s) * len(t))</td>
+</tr>
+
+<tr>
+<td>s.symmetric_difference_update(t)</td>
+<td>O(len(t))</td>
+<td>O(len(t) * len(s))</td>
+</tr>
+</tbody>
+</table>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b"> #数据类型 </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Python"> #Python </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

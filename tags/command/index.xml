@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>command on 一个经常跑偏的人</title>
+    <link>/tags/command/</link>
+    <description>Recent content in command on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/command/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux-grep使用笔记</title>
+      <link>/2018/07/22/grep_mono/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/22/grep_mono/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 参数  * : 表示当前目录所有文件，也可以是某个文件名
+-r 是递归查找
+-n 是显示行号
+-R 查找所有文件包含子目录
+-i 忽略大小写 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
+ grep -l pattern files ：只列出匹配的文件名，
+ grep -L pattern files ：列出不匹配的文件名，
+ grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
+ grep -C number pattern files ：匹配的上下文分别显示[number]行，
+ grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，
+ grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</description>
+    </item>
+    
+  </channel>
+</rss>

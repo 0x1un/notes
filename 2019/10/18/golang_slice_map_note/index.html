@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>golang意事项注之Slice^Map</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>golang意事项注之Slice^Map</h2>
+        
+
+<h4 id="关于这篇记录">关于这篇记录</h4>
+
+<p>最近几天 Uber 公司将他们内部的 go 语言编程规范给开源出来了，在研读他们的编程规范手册之后发现 slice 与 map 的操作是我经常忽略的。</p>
+
+<p>并且我觉得手册里说的确实非常有道理，那就在这里记录一笔吧。之后也要将其用到实际之处！</p>
+
+<h4 id="拷贝-slice-与-map">拷贝 Slice 与 Map</h4>
+
+<p>实际上，Slice 与 Map 都包含了对底层存储数据的指针，一定要注意在修改 Slice 与 Map 的时候是否在使用引用。(划重点！这句话很重要，我曾经被坑过不少次)</p>
+
+<p>一般的，在实际使用需求当中，Slice 和 Map 会作为函数的参数和函数的返回值。如果此时你使用了引用传递或返回，那么在某些你不经意的情况下就会将原本的值修改掉，这是一种很糟糕的体验，不要忘记了这一点！(指针修改值这应该是基础，大家都懂哈)</p>
+
+<p>如果你的实际需求并不是要修改它原来的值，那就使用值传递或值返回(值拷贝)，如下的错误示范与正确示范：</p>
+
+<ul>
+<li><p>错误示范</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (d <span style="color:#ff79c6">*</span>Driver) <span style="color:#50fa7b">SetTrips</span>(trips []Trip) {
+d.trips = trips
+}
+
+trips <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">...</span>
+d1.<span style="color:#50fa7b">SetTrips</span>(trips)
+trips[<span style="color:#bd93f9">0</span>] = <span style="color:#ff79c6">...</span></code></pre></div></li>
+
+<li><p>正确示范</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (d <span style="color:#ff79c6">*</span>Driver) <span style="color:#50fa7b">SetTrips</span>(trips []Trip) {
+d.trips = <span style="color:#8be9fd;font-style:italic">make</span>([]Trip, <span style="color:#8be9fd;font-style:italic">len</span>(trips))
+<span style="color:#8be9fd;font-style:italic">copy</span>(d.trips, trips)
+}
+
+trips <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">...</span>
+d1.<span style="color:#50fa7b">SetTrips</span>(trips)
+trips[<span style="color:#bd93f9">0</span>] = <span style="color:#ff79c6">...</span></code></pre></div></li>
+</ul>
+
+<p>上面的代码是从手册中的例子搬过来的，这里正好也用的上，我也懒得再写。</p>
+
+<p>第一个错误例子，我想肯定有很大一部分人在开发中是这样干的，因为我也是这么干的。这种写法虽然简洁明了，但细看之下好像第二个正确例子更加具有鲁棒性，想来也更加有道理。一个跨国大公司都这么干的，我为何不学习呢，况且这也是人家内部好多年积攒下来的经验，你说是不是？我没有那么多的功夫深究是第一个性能好还是第二个，这没有意义，也不差这点性能。</p>
+
+<p>第一个例子的坏处就在于最后一句赋值操作，它会将 d1.trips 给覆盖掉，原因如上所述。</p>
+
+<p>我来还原一下上面的伪代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+
+<span style="color:#8be9fd;font-style:italic">type</span> Trip <span style="color:#8be9fd;font-style:italic">struct</span> {
+	name <span style="color:#8be9fd">string</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">type</span> Driver <span style="color:#8be9fd;font-style:italic">struct</span> {
+	trips []Trip
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> (d <span style="color:#ff79c6">*</span>Driver) <span style="color:#50fa7b">SetTrips</span>(trips []Trip) {
+	d.trips = trips
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> (d <span style="color:#ff79c6">*</span>Driver) <span style="color:#50fa7b">SetTrips2</span>(trips []Trip) {
+	d.trips = <span style="color:#8be9fd;font-style:italic">make</span>([]Trip, <span style="color:#8be9fd;font-style:italic">len</span>(trips))
+	<span style="color:#8be9fd;font-style:italic">copy</span>(d.trips, trips)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+	trips <span style="color:#ff79c6">:=</span> []Trip{
+		{<span style="color:#f1fa8c">&#34;Jerry&#34;</span>},
+		{<span style="color:#f1fa8c">&#34;Tom&#34;</span>},
+	}
+
+	d <span style="color:#ff79c6">:=</span> Driver{}
+	d.<span style="color:#50fa7b">SetTrips</span>(trips)
+	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;befor: &#34;</span>, d.trips)
+	trips[<span style="color:#bd93f9">0</span>] = Trip{<span style="color:#f1fa8c">&#34;Fuck you&#34;</span>}
+	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;after: &#34;</span>, d.trips)
+}</code></pre></div>
+<p>执行上面的还原代码，想必就非常清晰了吧。</p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/go"> #go </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Code"> #Code </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

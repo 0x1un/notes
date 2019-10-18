@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>i3WM on 一个经常跑偏的人</title>
+    <link>/categories/i3wm/</link>
+    <description>Recent content in i3WM on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/i3wm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在终端中配置使用音乐播放器</title>
+      <link>/2019/04/05/ncmpcpp/</link>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/05/ncmpcpp/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 使用Ncmpcpp+Mpd+Mpc配置音乐播放器 使用Linux也有两年之余了, 在从臃肿的CentOS &amp;amp; Ubuntu到轻量可定制性超高的Arch &amp;amp; Gentoo, 我仿佛在极简的路上越走越远..
+之前一直使用的deepin联合制作的网易云音乐, 我非常喜欢, 但对于追求轻量可定制的我来说, 这完全不够, 我喜欢折腾.
+安装 在标题上已经说明了, 我们需要三个软件进行搭配, 这三个软件总体体积加上所有依赖也不过19MB左右, 非常符合我的期望.
+sudo pacman -S ncmpcpp mpd mpc # ncmpcpp为播放器前端操作界面, mpd为服务端, mpc为控制器 待安装完成之后, 你需要对它们进行配置
+mpd配置, 在$HOME/.config/mpd/中创建mpd.conf文件并写入
+db_file &amp;#34;~/.config/mpd/database&amp;#34; # 这里是数据库文件的位置 log_file &amp;#34;~/.config/mpd/log&amp;#34; # 启动的日志文件 music_directory &amp;#34;/run/media/aumujun/DATA/CloudMusic&amp;#34; # 音乐存储的位置 playlist_directory &amp;#34;~/.config/mpd/playlists&amp;#34; # 播放列表存储的位置 pid_file &amp;#34;~/.config/mpd/pid&amp;#34; state_file &amp;#34;~/.config/mpd/state&amp;#34; sticker_file &amp;#34;~/.config/mpd/sticker.sql&amp;#34; auto_update &amp;#34;yes&amp;#34; bind_to_address &amp;#34;127.0.0.1&amp;#34; restore_paused &amp;#34;yes&amp;#34; max_output_buffer_size &amp;#34;16384&amp;#34; audio_output { type &amp;#34;pulse&amp;#34; name &amp;#34;pulse audio&amp;#34; } audio_output { type &amp;#34;fifo&amp;#34; name &amp;#34;my_fifo&amp;#34; path &amp;#34;/tmp/mpd.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 一个经常跑偏的人</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>踩坑之Esxi虚拟服务器无法联网</title>
+      <link>/2019/08/13/esxi_network_not_working/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/13/esxi_network_not_working/</guid>
+      <description>在这个分类中主要记载在运维时所遇到的坑
+惯例:
+ 这是一篇没有技术含量的文章&amp;hellip;
+ 虚拟机无法联网? 这个倒也不算一个坑, 只能归结于我自己不熟悉esxi平台吧, 但它浪费了我将近40分钟的时间, 特在此记录一下
+首先在CentOS中查看到它的网卡没有获取到ip地址, 这时我以迅雷不及掩耳之势 熟练地敲下了
+ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network  然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
+ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
+解决办法:
+在esxi控制台中的networking栏为虚拟网卡链接到物理网卡, 问题解决&amp;hellip;
+总结 这个问题说难那是一点都不难, 但往往很容易忽略, 这时候便需要你停下来静心思考, 这个坑的主要原因还是因为对该控制台不熟悉造成的, 这也是一个小经验吧, 以后不会再犯了&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>iptables基础-常用的扩展模块</title>
+      <link>/2019/06/13/iptables_02/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/13/iptables_02/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ iprange扩展模块 根据上一章的记录, 知晓了可以指定端口的范围, 而iprange可以指定ip的范围(非网段)
+iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
+--src-range是源地址的范围, --dst-range是目标地址的范围
+同样, --src-range和--dst-range可以使用取反(!)操作
+string扩展模块 如果报文信息中包含了字符&amp;rdquo;hello&amp;rdquo;, 就对此报文进行进一步的操作
+iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;rdquo;hello, world&amp;rdquo;这个字符串, 就将其拒绝
+--algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
+time扩展模块 time模块可以对特定时间段的报文进行处理
+iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 07:00:00 --timestop 18:00:00 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --monthdays 22,23 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --datestart 2019-06-15 --datestop 2019-06-23 -j REJECT 上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</description>
+    </item>
+    
+    <item>
+      <title>iptables基础</title>
+      <link>/2019/06/12/iptables_01/</link>
+      <pubDate>Wed, 12 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/12/iptables_01/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ iptables查看规则 iptables -t tablename -L 查看tablename表中的所有规则, 如果省略-t选项, 则默认为filter表, -L选项为查看规则
+iptables -t filter -v -L INPUT 查看filter表中链路为INPUT的所有规则, -v 为详细信息
+iptables -t filter -v -n -L INPUT -n选项表示为不解析IP地址
+iptables -t filter -v -x -n -L INPUT -x选项表示显示计数器的精确值
+iptables -t filter -vxnL INPUT 在日常使用中会使用组合选项(方便), 效果等同于上一条
+清空/删除规则 iptables -F INPUT -F flush 清空filter表中INPUT链路中的所有规则(因为没有-t选项, 根据前文所述默认为filter表)
+删除规则有两种办法: 根据编号删除, 根据动作与条件删除
+iptables -t filter -D INPUT 2 删除filter表中INPUT链路中编号为2的规则, 如需知晓编号你需要加&amp;ndash;line选项在查看规则的时候
+iptables -t filter -D INPUT -s 192.</description>
+    </item>
+    
+    <item>
+      <title>在终端中配置使用音乐播放器</title>
+      <link>/2019/04/05/ncmpcpp/</link>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/05/ncmpcpp/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 使用Ncmpcpp+Mpd+Mpc配置音乐播放器 使用Linux也有两年之余了, 在从臃肿的CentOS &amp;amp; Ubuntu到轻量可定制性超高的Arch &amp;amp; Gentoo, 我仿佛在极简的路上越走越远..
+之前一直使用的deepin联合制作的网易云音乐, 我非常喜欢, 但对于追求轻量可定制的我来说, 这完全不够, 我喜欢折腾.
+安装 在标题上已经说明了, 我们需要三个软件进行搭配, 这三个软件总体体积加上所有依赖也不过19MB左右, 非常符合我的期望.
+sudo pacman -S ncmpcpp mpd mpc # ncmpcpp为播放器前端操作界面, mpd为服务端, mpc为控制器 待安装完成之后, 你需要对它们进行配置
+mpd配置, 在$HOME/.config/mpd/中创建mpd.conf文件并写入
+db_file &amp;#34;~/.config/mpd/database&amp;#34; # 这里是数据库文件的位置 log_file &amp;#34;~/.config/mpd/log&amp;#34; # 启动的日志文件 music_directory &amp;#34;/run/media/aumujun/DATA/CloudMusic&amp;#34; # 音乐存储的位置 playlist_directory &amp;#34;~/.config/mpd/playlists&amp;#34; # 播放列表存储的位置 pid_file &amp;#34;~/.config/mpd/pid&amp;#34; state_file &amp;#34;~/.config/mpd/state&amp;#34; sticker_file &amp;#34;~/.config/mpd/sticker.sql&amp;#34; auto_update &amp;#34;yes&amp;#34; bind_to_address &amp;#34;127.0.0.1&amp;#34; restore_paused &amp;#34;yes&amp;#34; max_output_buffer_size &amp;#34;16384&amp;#34; audio_output { type &amp;#34;pulse&amp;#34; name &amp;#34;pulse audio&amp;#34; } audio_output { type &amp;#34;fifo&amp;#34; name &amp;#34;my_fifo&amp;#34; path &amp;#34;/tmp/mpd.</description>
+    </item>
+    
+    <item>
+      <title>MySql踩坑集</title>
+      <link>/2019/04/04/mysql-questions/</link>
+      <pubDate>Thu, 04 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/04/04/mysql-questions/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ MySql踩坑集 MySql无法启动 自从Gentoo换回Arch Linux之后, 数据库这些都需要重新安装.
+当然我肯定是备份过的, 但重装系统总要有重装的效果吧(干净)..
+在Arch Linux上安装MySql(MariaDb)后无法启动MySql
+pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后什么都没做, 你应该试试这个方法 # 错误日志无法重现了, 一般就是这个问题 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置数据库存储位置 mysqladmin -u root password [new password] # 设置数据库密码 mysql_secure_installation # 初始化数据库设置, 如果要进行一些进一步设置 后续如果还遇到mysql问题会再次进行追加.</description>
+    </item>
+    
+    <item>
+      <title>Gentoo安装历程</title>
+      <link>/2019/03/11/gentoo-installation-tutoria/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/03/11/gentoo-installation-tutoria/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ Gentoo安装历程 准备开始 第一步当然是下载所需的chroot环境与Gentoo的stage3包
+当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的
+那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧 开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
+# 查看硬盘 fdisk -l # 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份) mkfs.ext4 /dev/nvme0n1 # 这里我使用的是cfdisk分区(简单明了) cfdisk /dev/nvme0n1 # 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区 # 对它们进行格式化操作 mkfs.vfat -F 32 /dev/nvme0n1p1 mkfs.swap /dev/nvme0n1p2 mkfs.ext4 /dev/nvme0n1p3 # 待格式话操作完成之后, 讲它们挂载到对应分区 mount /dev/nvme0n1p3 /mnt/gentoo # 此分区为最大的( / )分区 mkdir -p /mnt/gentoo/boot mount /dev/nvme0n1p1 /mnt/gentoo/boot # 下载系统文件并解压(官方的stage3, 这里使用网易的源) wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo # 解压(先切换到/mnt/gentoo目录之下) tar xvpf stage3-amd64-* --xattrs-include=&amp;#34;*.</description>
+    </item>
+    
+    <item>
+      <title>Arch-Linux安装笔记(只作为参考)</title>
+      <link>/2018/07/11/arch_linux_installation/</link>
+      <pubDate>Wed, 11 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/11/arch_linux_installation/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 准备 安装Arch-linux非常简单, 首先需要做以下的准备
+前往Arch Linux的官网下载最新chroot
+刻录系统到U盘与设置BIOS开机以U盘启动
+这里就不赘述了, 自行百度
+开始安装 当完成了上述的准备之后, 就可以开始安装系统了
+# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap # 并对其进行格式化操作: mkfs.vfat -F32 /dev/nvme0n1p1 # boot mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap mkfs.ext4 /dev/nvme0n1p3 # / # 创建目录并挂载分区: mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源: vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行 # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
+    </item>
+    
+    <item>
+      <title>Hexo踩坑</title>
+      <link>/2018/07/01/hexo_pit/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/01/hexo_pit/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 踩坑记录 无法部署,长期卡在这个地方  On branch master
+nothing to commit, working tree clean
+  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好
+ 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署 部署时提示输入github账户密码，但一直报错误密码的错误：   原因： - 如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值
+解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
+ 使用git push上传  使用git初始化public目录，然后按照正常push流程上传部署，因为需要上传的文件都是这里的
+ 为hexo+github pages绑定域名：  注册域名并添加CNAME值为自己github-pages地址
+在repo中设置绑定的域名
+在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
+ 基础指令：   hexo n hexo g hexo s hexo d hexo init hexo s -p [port]    安装hexo:
+    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
+    </item>
+    
+  </channel>
+</rss>

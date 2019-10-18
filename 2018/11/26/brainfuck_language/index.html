@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>BrainFuck</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>BrainFuck</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h3 id="起因">起因</h3>
+
+<p>很无聊, 一时兴起到网上搜索了<code>最难编程语言</code>, 其中的<code>brainfuck</code>语言惊艳到了我, 我觉得它非常有趣.
+实际上还有很多奇葩好玩的东西, 今天就折腾一下<code>brainfuck</code>吧.
+<!-- more --></p>
+
+<h3 id="开始懵逼">开始懵逼</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-brainfuck" data-lang="brainfuck"><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">+++++++</span><span style="color:#ff79c6">..</span><span style="color:#8be9fd;font-style:italic">+++</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">+++</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">------</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">--------</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#ff79c6">.</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">++++++++++</span><span style="color:#ff79c6">.</span></code></pre></div>
+<p>这段玩意儿会输出<code>Hello World!</code>, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~
+<code>brainfuck</code>它只有八个指令, 除去这八个之外的所有字符都将忽略.</p>
+
+<h3 id="brainfuck的指令定义">Brainfuck的指令定义</h3>
+
+<ul>
+<li>+ : 指针指向的单元的值加1</li>
+<li>- : 指针指向的单元的值减1</li>
+<li>&gt; : 将指针移动到下一个单元(右边的元素)</li>
+<li>&lt; : 将指针移动到上一个单元(左边的元素)</li>
+<li>. : 打印当前单元的内容的ASCII值 (比如 65 = &lsquo;A&rsquo;).</li>
+<li>, : 读取一个字符到当前的单元(英文逗号)</li>
+<li>[ : 如果当前单元的值是0，则向后调转到对应的]处</li>
+<li>] : 如果当前单元的值不是0，则向前跳转到对应的[处</li>
+</ul>
+
+<p>它会定义一个30000长度的数组, 每次的指令操作都是对数组中的数字进行加减, 根据<code>Ascii</code>编码来进行输出字符, 例如当数字加到65就输出字母A, 它的实现其实并不难, 但非常的巧妙.</p>
+
+<p>根据上面的定义我们来用此实现一个复读机</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-brainfuck" data-lang="brainfuck"><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#ff79c6">[</span><span style="color:#ff79c6">,</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span></code></pre></div>
+<p>运行它, 它将会把你输入的字符再打印一份出来, 实际作用就等同于python版本的复读机</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">while</span> True:
+    <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">input</span>())</code></pre></div>
+<p>下面是使用的C实现的<code>Brainfuck</code>的解释器, 说实在的以后无聊了可以使用<code>Brainfuck</code>自举自己的解释器:)&gt;</p>
+
+<p>之后使用<code>Python</code>或<code>Golang</code>来实现一个, 实现它很简单</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdlib.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6"></span>
+<span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;unistd.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;sys/types.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;sys/stat.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;fcntl.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6"></span>
+<span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">int</span> argc, <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>argv[])
+{
+    <span style="color:#8be9fd">char</span> program[<span style="color:#bd93f9">50000</span>],
+         memory[<span style="color:#bd93f9">30000</span>];
+    <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">=</span> program,
+         <span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span> memory,
+         <span style="color:#ff79c6">*</span>aux_ptr <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
+    <span style="color:#8be9fd">int</span> fd <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+    ssize_t prg_size <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+            aux_size <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+            ret <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+    <span style="color:#8be9fd">int</span> count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+
+    <span style="color:#ff79c6">if</span> (argc <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">2</span>) {
+        fd <span style="color:#ff79c6">=</span> STDIN_FILENO;
+    } <span style="color:#ff79c6">else</span> {
+        fd <span style="color:#ff79c6">=</span> open(argv[<span style="color:#bd93f9">1</span>], O_RDONLY);
+
+        <span style="color:#ff79c6">if</span>(fd <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>){
+            fprintf(stderr, <span style="color:#f1fa8c">&#34;Error opening %s!</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, argv[<span style="color:#bd93f9">1</span>]);
+            perror(<span style="color:#f1fa8c">&#34;open&#34;</span>);
+            exit(<span style="color:#bd93f9">1</span>);
+        }
+    }
+
+    aux_size <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">sizeof</span>(program);
+    aux_ptr <span style="color:#ff79c6">=</span> program;
+    ret <span style="color:#ff79c6">=</span> read(fd, aux_ptr, aux_size);
+
+    <span style="color:#ff79c6">while</span> (ret <span style="color:#ff79c6">&amp;&amp;</span> (prg_size <span style="color:#ff79c6">&lt;</span> <span style="color:#ff79c6">sizeof</span>(program))) {
+        aux_size <span style="color:#ff79c6">-=</span> ret;
+        prg_size <span style="color:#ff79c6">+=</span> ret;
+        aux_ptr <span style="color:#ff79c6">+=</span> ret;
+        ret <span style="color:#ff79c6">=</span> read(fd, aux_ptr, aux_size);
+    }
+
+    <span style="color:#ff79c6">while</span> (ip <span style="color:#ff79c6">&lt;</span> (program <span style="color:#ff79c6">+</span> prg_size)) {
+        <span style="color:#ff79c6">switch</span>(<span style="color:#ff79c6">*</span>ip) {
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;&gt;&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">++</span>ptr; <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;&lt;&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">--</span>ptr; <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;+&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">++</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;-&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">--</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;.&#39;</span><span style="color:#ff79c6">:</span> putchar(<span style="color:#ff79c6">*</span>ptr); 
+                      fflush(stdout); 
+                      <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;,&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span> getchar(); 
+                      <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">==</span> EOF) exit(<span style="color:#bd93f9">0</span>);
+                      <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;[&#39;</span><span style="color:#ff79c6">:</span>
+                <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!*</span>ptr) {
+                    count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+                    <span style="color:#ff79c6">while</span> (count) {
+                        <span style="color:#ff79c6">++</span>ip;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span>) <span style="color:#ff79c6">++</span>count;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;]&#39;</span>) <span style="color:#ff79c6">--</span>count;
+                    }
+                }
+                <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;]&#39;</span><span style="color:#ff79c6">:</span>
+                <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ptr) {
+                    count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+                    <span style="color:#ff79c6">while</span> (count) {
+                        <span style="color:#ff79c6">--</span>ip;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;]&#39;</span>) <span style="color:#ff79c6">++</span>count;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span>) <span style="color:#ff79c6">--</span>count;
+                    }
+                }
+                <span style="color:#ff79c6">break</span>;
+        }
+        <span style="color:#ff79c6">++</span>ip;
+    }
+
+    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+}</code></pre></div>
+<h3 id="最后总结">最后总结</h3>
+
+<p>对这个语言, 说是语言实际上我将它当做玩具, 无聊的时候用来活动脑筋, 我想应该地球上不会有人用它来做项目吧, 根据上面的C语言实现的解释器起初我也是没有想到的, 最后看了github上的大神实现的代码, 无聊的我也开始折腾, 当然折腾之后还有些别的收获, 但是我又无法用言语表达出来我的这份收获, 我记得这种感觉.</p>
+
+<h3 id="本文参考文献">本文参考文献</h3>
+
+<p><a href="https://segmentfault.com/a/1190000000395225?utm_source=tuicool&amp;utm_medium=referral">Y分钟学Brainfuck</a></p>
+
+<p><a href="http://ascii.911cha.com/">Ascii对照表</a></p>
+
+<h3 id="在线演示过程-工具">在线演示过程(工具)</h3>
+
+<p><a href="https://fatiherikli.github.io/brainfuck-visualizer/#K1ssWz4rPC1dPi48LV0=">brainfuck-visualizer</a></p>
+
+<p>未完待续&hellip;</p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/brainfuck"> #brainfuck </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7"> #奇技淫巧 </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

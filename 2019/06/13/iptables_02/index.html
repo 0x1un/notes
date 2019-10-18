@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iptables基础-常用的扩展模块</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>iptables基础-常用的扩展模块</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h4 id="iprange扩展模块">iprange扩展模块</h4>
+
+<p>根据上一章的记录, 知晓了可以指定端口的范围, 而iprange可以指定ip的范围(非网段)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -m iprange --src-range <span style="color:#bd93f9">192</span>.168.0.1-192.168.0.212 -j DROP
+iptables -t filter -I INPUT -m iprange --src-range <span style="color:#bd93f9">192</span>.168.0.1-192.168.0.3 --dst-range <span style="color:#bd93f9">192</span>.168.0.4-192.168.0.6 -j DROP</code></pre></div>
+<p>上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange</p>
+
+<p>--src-range是源地址的范围, --dst-range是目标地址的范围</p>
+
+<p>同样, --src-range和--dst-range可以使用取反(!)操作</p>
+
+<h4 id="string扩展模块">string扩展模块</h4>
+
+<p>如果报文信息中包含了字符&rdquo;hello&rdquo;, 就对此报文进行进一步的操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -m string --algo bm --string <span style="color:#f1fa8c">&#34;hello, world&#34;</span> -j REJECT</code></pre></div>
+<p>上面的意思很明显, 只要接收到的报文中有&rdquo;hello, world&rdquo;这个字符串, 就将其拒绝</p>
+
+<p>--algo bm的意思的是指定要使用的算法, 这里指定<a href="https://baike.baidu.com/item/BM/2979187">bm</a>算法来匹配指定的字符串</p>
+
+<h4 id="time扩展模块">time扩展模块</h4>
+
+<p>time模块可以对特定时间段的报文进行处理</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I OUTPUT -p tcp --dport <span style="color:#bd93f9">80</span> -m <span style="color:#8be9fd;font-style:italic">time</span> --timestart <span style="color:#bd93f9">07</span>:00:00 --timestop <span style="color:#bd93f9">18</span>:00:00 -j REJECT
+iptables -t filter -I OUTPUT -p tcp --dport <span style="color:#bd93f9">80</span> -m <span style="color:#8be9fd;font-style:italic">time</span> --weekdays <span style="color:#bd93f9">6</span>,7 -j REJECT
+iptables -t filter -I OUTPUT -p tcp --dport <span style="color:#bd93f9">80</span> -m <span style="color:#8be9fd;font-style:italic">time</span> --monthdays <span style="color:#bd93f9">22</span>,23 -j REJECT
+iptables -t filter -I OUTPUT -p tcp --dport <span style="color:#bd93f9">80</span> -m <span style="color:#8be9fd;font-style:italic">time</span> --datestart <span style="color:#bd93f9">2019</span>-06-15 --datestop <span style="color:#bd93f9">2019</span>-06-23 -j REJECT</code></pre></div>
+<p>上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</p>
+
+<p>--weekdays可以限制一周当中的某一天, 第二条的意思为, 拒绝所有来自自周六,周天的80端口报文</p>
+
+<p>--monthdays与其相似, 只不过是指定每个月的具体哪一天</p>
+
+<p>--datestart与--datestop指定一个月份的范围</p>
+
+<p>当然, --weekdays与--monthdays还可以和--timestart与--timestop结合使用, 指定某天的某个时段进行操作</p>
+
+<p>除了--monthdays和--weekdays可以用(!)条件取反之外, 其他选项不能够取反</p>
+
+<h4 id="connlimit扩展模块">connlimit扩展模块</h4>
+
+<p>使用connlimit扩展模块可以限制连接数量</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p tcp --dport <span style="color:#bd93f9">22</span> -m connlimit --connlimit-above <span style="color:#bd93f9">2</span> -j REJECT
+iptables -t filter -I INPUT -p tcp -m --dport <span style="color:#bd93f9">22</span> connlimit --connlimit-mask <span style="color:#bd93f9">27</span> --connlimit-above <span style="color:#bd93f9">10</span> -j REJECT</code></pre></div>
+<p>--connlimit-above 限制连接数量上限为2, 可以使用取反(!)操作</p>
+
+<p>--connlimit-mask 子网掩码 可以对某类ip段中一定数量的ip进行操作, 不可使用取反操作</p>
+
+<p>第二条表示, 在子网掩码27的网段中只有10台主机可以连接到此服务器</p>
+
+<h4 id="limit扩展模块">limit扩展模块</h4>
+
+<p>上面使用connlimit, 它可以用来控制连接数量, 而limit则可以用来控制报文到达速率</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp -m limit --limit <span style="color:#bd93f9">10</span>/minute -j ACCEPT
+iptables -t filter -A INPUT -p icmp -j REJECT</code></pre></div>
+<p>上面列出了两条规则, 第一条是对ping这个操作的报文到达速率进行控制, 每分钟只能放行10次, 也就是说每6秒允许ping通一次</p>
+
+<p>第二条规则是为了给icmp协议的报文请求设定一个默认动作, 因为INPUT链的默认动作的ACCEPT, 也就是说, 当匹配到第一条规则的时候, 规则被正常执行了, 但是当在6秒内的那段时间,
+该规则按理应该时不被匹配, 应我的本意是必须每隔6秒才允许ping通一次, 而在6秒内没被匹配的到就会被INPUT的默认ACCEPT动作给放行了, 所以如果你只编写了第一条规则, 那么你的
+目的是没有达到的(不信么, 你可以动手试一下), 必须给ping这个操作建立一条默认的动作.</p>
+
+<p>简言之, 我们将拒绝所有的icmp协议操作(禁ping), 但是又给此操作留了一道后门, 想要ping通它, 你必须等待6秒钟, 否则就拒绝你</p>
+
+<p>这个时候再去ping的时候会发现它确实生效了, 但是前五条为什么还是不符合预期呢
+<img src="https://github.com/0x1un/SavaImg/raw/master/iptables/ping.png" alt="--limit-burst" />
+这是因为其limit使用了<a href="https://baike.baidu.com/item/%E4%BB%A4%E7%89%8C%E6%A1%B6%E7%AE%97%E6%B3%95">令牌桶算法</a>(如果你想要了解其原理, 点开这个链接就行了), 在没有显式使用--limit-burst选项时, 它默认会将其设置成5</p>
+
+<p>--limit的时间单位有多个选项:</p>
+
+<ul>
+<li>/second</li>
+<li>/minue</li>
+<li>/hour</li>
+<li>/day</li>
+</ul>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/Linux"> #Linux </a></li><li><a class="link" href="/tags/Network"> #Network </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Linux"> #Linux </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

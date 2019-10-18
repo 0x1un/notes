@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ArchLinux on 一个经常跑偏的人</title>
+    <link>/categories/archlinux/</link>
+    <description>Recent content in ArchLinux on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 11 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Arch-Linux安装笔记(只作为参考)</title>
+      <link>/2018/07/11/arch_linux_installation/</link>
+      <pubDate>Wed, 11 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/11/arch_linux_installation/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 准备 安装Arch-linux非常简单, 首先需要做以下的准备
+前往Arch Linux的官网下载最新chroot
+刻录系统到U盘与设置BIOS开机以U盘启动
+这里就不赘述了, 自行百度
+开始安装 当完成了上述的准备之后, 就可以开始安装系统了
+# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap # 并对其进行格式化操作: mkfs.vfat -F32 /dev/nvme0n1p1 # boot mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap mkfs.ext4 /dev/nvme0n1p3 # / # 创建目录并挂载分区: mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源: vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行 # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
+    </item>
+    
+  </channel>
+</rss>

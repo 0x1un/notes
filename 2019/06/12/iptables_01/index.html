@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>iptables基础</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>iptables基础</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h2 id="iptables查看规则">iptables查看规则</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t tablename -L</code></pre></div>
+<p>查看tablename表中的所有规则, 如果省略-t选项, 则默认为filter表, -L选项为查看规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -v -L INPUT</code></pre></div>
+<p>查看filter表中链路为INPUT的所有规则, -v 为详细信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -v -n -L INPUT</code></pre></div>
+<p>-n选项表示为不解析IP地址</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -v -x -n -L INPUT</code></pre></div>
+<p>-x选项表示显示计数器的精确值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -vxnL INPUT</code></pre></div>
+<p>在日常使用中会使用组合选项(方便), 效果等同于上一条</p>
+
+<h5 id="清空-删除规则">清空/删除规则</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -F INPUT</code></pre></div>
+<p>-F flush 清空filter表中INPUT链路中的所有规则(因为没有-t选项, 根据前文所述默认为filter表)</p>
+
+<p>删除规则有两种办法: 根据编号删除, 根据动作与条件删除</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -D INPUT <span style="color:#bd93f9">2</span></code></pre></div>
+<p>删除filter表中INPUT链路中编号为2的规则, 如需知晓编号你需要加&ndash;line选项在查看规则的时候</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -D INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 -j DROP</code></pre></div>
+<p>删除filter表中INPUT链路中源地址为192.168.0.111且行为为DROP的规则</p>
+
+<h2 id="iptables的规则管理">iptables的规则管理</h2>
+
+<p>添加一条丢弃规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.7 -j DROP</code></pre></div>
+<p>添加多条ip的规则, 使用(,)号隔开, 注意(,)两侧不能有空格</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.7,192.168.0.8 -j DROP</code></pre></div>
+<p>这段命令的意思是: 将源地址192.168.0.7插入到filter表中INPUT链路中, 并且将其丢弃(DROP)<br />
+-I insert(插入)<br />
+-A append(追加)<br />
+-s source(源)<br />
+-j 表示当条件满足后做什么动作<br />
+此时, 如果你使用192.168.0.7这个主机去ping它, 将会被丢弃报文
+&gt;
+规则的次序是很重要的, 例如为同一条ip写两条不同动作的规则, 将会默认先匹配最上面那一条</p>
+
+<p>修改规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -R INPUT <span style="color:#bd93f9">1</span> -s <span style="color:#bd93f9">192</span>.168.0.111 -j REJECT</code></pre></div>
+<p>使用-R选项为修改规则, 这里应该注意, 即使指定了编号修改也必须要用-s指定具体的源地址, 否则将会拒绝所有链接..<br />
+这句话的意思是修改filter表中的INPUT链路中编号为1的源地址规则, 且动作修改为REJECT</p>
+
+<p>有了上面的经历, 很疑惑REJECT和DROP的区别, REJECT表现的比DROP更加的坚决, 在你的ip被DROP后, 你ping该主机会卡在那里. 而ip被REJECT后则会立马回复于你<strong>不可达</strong>.</p>
+
+<p>先前的一切规则都没有保存, 也就是说, 在主机重启后, 这些规则记录将不复存在.</p>
+
+<p>保存规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables-save &gt; /etc/sysconfig/iptables
+<span style="color:#6272a4">########## or ########</span>
+service iptables save</code></pre></div>
+<p>iptables-save命令会将你的所有规则输出到屏幕, 需要将其重定向保存到一个文件当中去, 使用如下方式恢复</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables-restore &lt; /etc/sysconfig/iptables</code></pre></div>
+<p><strong>规则在被恢复的时候, 现有的所有规则将会被覆盖</strong></p>
+
+<p>取反规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT ! -s <span style="color:#bd93f9">192</span>.168.0.112 -j DROP</code></pre></div>
+<p>上面这条规则的意思为, 只要不是192.168.0.112, 就全部DROP</p>
+
+<p>匹配条件: 目标ip</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.112 -d <span style="color:#bd93f9">192</span>.168.0.121 -j DROP</code></pre></div>
+<p>-d 目标地址</p>
+
+<p>上列的命令目的为: 只要匹配到191.168.0.112向192.168.0.121发送报文, 就将他们DROP掉<br />
+注意, (!)可以和上列的命令进行组合, 也可以同时指定多个地址(使用[,]号隔开)</p>
+
+<p><strong>值得一提的是, -s和-d取反操作与指定多个ip不能同时使用</strong></p>
+
+<p><strong>当一条规则有多条匹配规则的时候, 需要同时满足这些条件该规则才会生效</strong>(它们之间就是一个*[与]*的关系)</p>
+
+<p>匹配条件: 协议类型</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 -d <span style="color:#bd93f9">192</span>.168.0.119 -p tcp -j REJECT</code></pre></div>
+<p>当192.168.0.111主机向192.168.0.119主机发起tcp协议的请求时, 会被直接拒绝掉, 不信你可以用ssh试一下.<br />
+<strong>ping的协议是icmp, 依然可以通过</strong></p>
+
+<p>-p选项支持[tcp, udp, udplite, icmp, esp, ah, sctp, mh], mh在centOS-6中是不支持的<br />
+如果省略-p选项, 将会匹配所有协议类型, 与-p all等效</p>
+
+<p>匹配条件: 网卡接口</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 -i wlp3s0 -j DROP</code></pre></div>
+<p>上面的功能是, 将wlp3s0这个网卡中流入的192.168.0.111数据报文给丢弃掉</p>
+
+<p>-i选项用于PREROUTING, INPUT, FORWARD链</p>
+
+<p>下面将使用-o选项, 把匹配的报文从指定的网卡流出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -A OUTPUT -o wlp3s0 -j ACCEPT</code></pre></div>
+<p>允许wlp3s0接口送出报文</p>
+
+<p>-o正好与-i相对立, 它只能在FORWARD, OUTPUT, POSTROUTING链中使用, 从这里能看出, FORWARD它时一颗墙头草, 两边都能够使用</p>
+
+<p>扩展条件匹配:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> -j REJECT</code></pre></div>
+<p>上列命令的规则是, 在INPUT链中插入一条拒绝来自192.168.0.111主机的22端口报文</p>
+
+<p>-m 指定扩展的模块, 如果省略该选项, 则根据-p指定的协议来默认设定<br />
+--dport destination-port 目标端口, 指定目标主机的端口号</p>
+
+<p>有了目标端口选项(--dport)那就自然有源端口的选项(--sport), 用法与上述相似, 这里就不再赘述了</p>
+
+<p>指定目标/源端口的范围</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 --dport <span style="color:#bd93f9">20</span>: -j DROP
+iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 --dport :20 -j DROP
+iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 --dport <span style="color:#bd93f9">80</span>:888 -j DROP</code></pre></div>
+<p>[20:] 表示从20端口到65535端口, 因为65535为最大端口号<br />
+[:20] 表示从0端口到20端口<br />
+[80:888] 自然就是从80端口到888端口范围了</p>
+
+<p>上面的指定端口号都是连续性的, 如果没有这个需求就很蛋疼了, 于是有multiport这个扩展模块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s <span style="color:#bd93f9">192</span>.168.0.111 -p tcp -m multiport --dport <span style="color:#bd93f9">20</span>,55,12,22 -j DROP</code></pre></div>
+<p>使用multiport这个扩展可以达到指定离散的端口, 上列命令会将来自111主机tcp协议20,55,12,22端口报文给丢弃掉<br />
+<strong>同理, 条件扩展也是可以用取反(!)操作的</strong></p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/Linux"> #Linux </a></li><li><a class="link" href="/tags/Network"> #Network </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/Linux"> #Linux </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

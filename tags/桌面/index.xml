@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>桌面 on 一个经常跑偏的人</title>
+    <link>/tags/%E6%A1%8C%E9%9D%A2/</link>
+    <description>Recent content in 桌面 on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 11 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%A1%8C%E9%9D%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>折腾i3</title>
+      <link>/2018/11/11/i3_installation/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/11/11/i3_installation/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 准备工作  安装
+i3blocks
+i3blocks-contrib(i3blocks 的一些组件)
+i3-gaps(i3 的增强版, 可以调整间隙)
+i3lock-fancy(锁屏工具)
+sysstat
+acpi(为了显示电池, 使用系统包管理工具安装)
+rofi
+nerd-fonts-source-code-pro(字体/图标)
+feh(为了设置壁纸)
+compton(为桌面透明化)
+dunst(系统通知)
+ranger(终端访问文件)
+termite(简洁终端模拟器)
+mpd(音乐播放) 上述工具都可以通过 pacman 或者 aur 安装  配置上述安装的工具的配置文件都在我的仓库当中，自己看着折腾吧
+https://github.com/0x1un/dotFiles</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机结构 on 一个经常跑偏的人</title>
+    <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/</link>
+    <description>Recent content in 计算机结构 on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 18 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>哈夫曼树与编码的一些笔记</title>
+      <link>/2018/10/18/huffman/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/10/18/huffman/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 数据压缩 &amp;ndash; 哈夫曼（Huffman） 关于哈夫曼编码与哈夫曼树的一点简述 哈弗曼树也叫作赫夫曼树，也叫作霍夫曼树，都指的是同一个玩意儿. 首先说哈夫曼树吧，哈夫曼树是一种特殊的二叉树，它设计的二进制前缀的编码在通信领域有着广泛的应用。 哈夫曼编码可以极大的节省数据占用的空间，且压缩的效果是无损压缩，根据数据类型的不同，压缩率也将不同。 哈夫曼树(Huffman Tree)的构建步骤  将给定的n个权值看做n棵只有根节点（无左右孩子）的二叉树，组成一个集合HT，每棵树的权值为该节点的权值。
+ 从集合HT中选出2棵权值最小的二叉树，组成一棵新的二叉树，其权值为这2棵二叉树的权值之和。
+ 将步骤2中选出的2棵二叉树从集合HT中删去，同时将步骤2中新得到的二叉树加入到集合HT中。
+ 重复步骤2和步骤3，直到集合HT中只含一棵树，这棵树便是赫夫曼树。
+  哈夫曼树有以下几种特性  根据节点的个数以及权值的不同，赫夫曼树的形状也各不相同，赫夫曼树具有如下特性：
+ 对于同一组权值，所能得到的赫夫曼树不一定是唯一的。
+ 哈夫曼树的左右子树可以互换，因为这并不影响树的带权路径长度。
+ 带权值的节点都是叶子节点，不带权值的节点都是某棵子二叉树的根节点。
+ 权值越大的节点越靠近赫夫曼树的根节点，权值越小的节点越远离赫夫曼树的根节点。
+ 哈夫曼树中只有叶子节点和度为2的节点，没有度为1的节点。
+ 一棵有n个叶子节点的赫夫曼树共有2n-1个节点。
+  哈夫曼编码 哈夫曼编码是在哈夫曼树的基础上进行的二进制编码，首先将频率高的放在右边标号为1，频率低的放在左边标号为0，编码原理是根据根节点到子节点经过的距离编码而成，我也不知道该如何表述其原理，具体看下图吧。
+首先给定五个字符，而字符旁边的数字代表该字母出现的次数，依据上述的规定条件，我将其集合中最小的两个值放在一起组合成一个二叉树，计算其两个值的和，往复循环。
+根据图中所得：
+ X=0 E=10 V=111 A=1100 B=1101  哈夫曼编码的效率计算是通过每个权值到根节点经过了多少条线相乘，再加上其他权值与根节点的距离相乘，以此反复直到结束计算出压缩后的大小。
+在通常情况下，霍夫曼编码并不是最高效的压缩方法，但它压缩和解压缩的速度非常快。一般来说，造成霍夫曼编码比较耗时的原因是它需要扫描两次数据：一次用来计算频率，另一次才是用来压缩数据。而解压缩数据非常高效，因为解码每个符号的位序列只需要扫描一次霍夫曼树。
+Python代码实现Huffman编码(网摘) import queue class HuffmanNode(object): def __init__(self, left=None, right=None, root=None): self.left = left self.right = right def children(self): return((self.</description>
+    </item>
+    
+  </channel>
+</rss>

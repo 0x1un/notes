@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>使用adb工具对安卓进行刷机</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>使用adb工具对安卓进行刷机</h2>
+        
+
+<blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+
+<h5 id="使用adb进行安卓刷机">使用adb进行安卓刷机</h5>
+
+<ul>
+<li>安装adb<br />
+平台ubuntu16.04(其他的系统自行搜索):<br />
+<code>sudo apt-get update &amp;&amp; sudo apt install android-tools-adb android-tools-fastboot</code>
+<!-- more --></li>
+</ul>
+
+<p>手机重启到fastboot状态</p>
+
+<p>接入usb调试, 并输入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">adb devices</code></pre></div>
+<p>开启root, 并解锁system分区</p>
+
+<pre><code>adb root
+adb disable-verity
+</code></pre>
+
+<p>重启到bl</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">adb reboot bootloader</code></pre></div>
+<p>解锁设备, 开始刷机</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fastboot flashing unlock</code></pre></div>
+<p>刷入recovery</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fastboot flash recovery Recovery.img</code></pre></div>
+<p>或利用Recovery.img启动到Recovery(并不会将rec刷入手机, 只是暂时使用)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fastboot boot Recovery.img // 自动启动到recovery</code></pre></div>
+<p>进入刷好的rec下面，选择高级，adb线刷(sideload模式)<br />
+并使用adb devices查看设备当前是否在sideload模式下</p>
+
+<p>如果出现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">List of devices attached  ??????????? no permissions</code></pre></div>
+<p>尝试重新启动adb服务(如果是windows系统, 不用加sudo)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo adb kill-server
+sudo adb start-server</code></pre></div>
+<p>再次查看是否有权限，如果有就执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">adb sideload ROM.zip</code></pre></div>
+<p>所遇问题解决办法<br />
+使用<code>adb sideload ROM.zip</code>刷入时报7错误, 试着关闭root或者四清之后再次刷机</p>
+
+<p>进行手动逐步刷机(此方法不适用新手)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fastboot flashing unlock // 解锁设备, 下面所有命令都在fastboot模式下执行
+fastboot flash boot boot.img // 刷入boot分区
+fastboot flash recovery recovery.img // 刷入reovery分区, 刷入recovery管理器
+fastboot flash country country.img // 刷入country分区, 个别设备没有, 为自己划分的区域进行设备调试所用
+fastboot flash system system.img // 刷入system分区
+fastboot flash bootloader bootloader // 刷入bootloader
+fastboot erase frp // 擦除Factory Reset Protection, 防止信息外泄
+fastboot format data // 格式化data分区, <span style="color:#ff79c6">(</span>cache, system等等<span style="color:#ff79c6">)</span>
+fastboot flashing lock // 上锁设备
+fastboot <span style="color:#ff79c6">continue</span> // 自动重启设备</code></pre></div>
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2019 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+        <span>标签:</span>
+        <li><a class="link" href="/tags/Android"> #Android </a></li><li><a class="link" href="/tags/%e5%88%b7%e6%9c%ba"> #刷机 </a></li>
+      
+      <span>  </span>
+        
+        <span>分类:</span>
+        <li><a class="link" href="/categories/%e5%88%b7%e6%9c%ba"> #刷机 </a></li>
+      
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

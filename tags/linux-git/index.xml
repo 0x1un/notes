@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux, Git on 一个经常跑偏的人</title>
+    <link>/tags/linux-git/</link>
+    <description>Recent content in Linux, Git on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 21 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/linux-git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>搭建简易Git服务器</title>
+      <link>/2018/11/21/setup_git_server/</link>
+      <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/11/21/setup_git_server/</guid>
+      <description>这是一篇没有技术含量的文章&amp;hellip;
+ 起因 并非github, coding不好用, 而是我正好有一台吃灰的小鸡, 与其让它继续吃灰不如弄点有意义的, 我有些比较重要的文件需要使用git管理, 而github没有免费的私有仓库, coding容量不够大. 在网络上搜罗了搭建教程, 为了避免以后再去翻找, 所以为此做一篇笔记用来记录搭建的过程与踩坑的地方. 所属环境  Ubuntu16.04 lts server git version 2.7.4  开始安装 安装git
+sudo apt-get install git 创建git用户
+sudo adduser git 生成ssh公钥
+ssh-keygen -t rsa 创建证书登录
+将客户端(自己电脑)的公钥写入/home/git/.ssh/authorized_keys中(此目录文件默认是没有的, 需要自己创建)
+公钥一般在用户目录下的.ssh目录下名为id_rsa.pub文件中(如果没有, 执行上一步)
+初始化git仓库
+sudo git init --bare example.git 更改仓库所属权
+sudo chown -R git:git example.git _禁用shell登录 这里有个坑, 不同的系统的git-shell的位置或许不一样.
+#查看git-shell的位置 which git-shell 使用root权限编辑/etc/passwd, 找到git
+git:x:1001:1001:,,,:/home/git:/bin/bash  改为
+git:x:1001:1001:,,,:/home/git:填入刚刚which git-shell得到的结果 踩坑开始 Git默认情况下是使用ssh的22端口进行数据传输, 但有些时候我们也许会将22改为其他, 那么在clone的时候就需要加上端口clone</description>
+    </item>
+    
+  </channel>
+</rss>
