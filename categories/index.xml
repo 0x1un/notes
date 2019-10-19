@@ -6,10 +6,19 @@
     <description>Recent content in Categories on 一个经常跑偏的人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unix-like</title>
+      <link>/categories/unix-like/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/unix-like/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Code</title>

@@ -6,10 +6,24 @@
     <description>Recent content in Posts on 一个经常跑偏的人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>zabbix&amp;docker问题与注意事项</title>
+      <link>/2019/10/19/zbx_server_docker_mem_err_and_golang_program_question/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/19/zbx_server_docker_mem_err_and_golang_program_question/</guid>
+      <description>这几天在折腾 zabbix, 因为工作上的需求，使用 docker 是最好的方式。
+Q1: alphine 镜像无法使用 go 编译的程序 ps: 虽然使用 Python 非常便利快捷，但它依赖环境，我都使用 alphine 镜像了那必然不想再增个依赖。自然而然地，我选择了 go。
+然而在我写好了程序编译之后，将其挂载到 docker 中，却发现无法使用。当你用./run的时候，它会报 bash 未找到的错误。在翻阅相关文档后，发现编译时增添-tags netgo会起到作用。
+zabbix server 缓存不足 log 如下：
+zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): out of memory (requested 14216 bytes) zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): please increase CacheSize configuration parameter  这段日志说的很明白了，就是让你提升 CacheSize。再次打开此镜像的文档，找到了ZBX_CACHESIZE这个环境变量，并设置为 50M(默认 8M)，ok,结束。
+总结 当你遇到与相关程序的坑时，一定要看 log 排查。像 zabbix 这种存在多年的程序，他的社区是无比强大，你的坑人家也许早就趟过了。</description>
+    </item>
     
     <item>
       <title>golang意事项注之Slice^Map</title>
