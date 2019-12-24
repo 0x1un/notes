@@ -144,17 +144,17 @@ ENTRYPOINT 执行容器启动时执行的命令</p>
 <p>而这三个关键字有两种写法, 一种是shell, 一种是exec</p>
 
 <p>shell方式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;hello, docker&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> echo &#34;hello, docker&#34;</span></code></pre></div>
 <p>就如像使用shell命令一般, 当使用shell方式, 命令行程序作为sh程序的子程序运行, docker使用的/bin/sh -c的语法调用, 使用docker ps就可以查看到</p>
 
 <p>如果使用了shell方式, 那么这个Image必将会拥有一个shell, 没有shell它就无法运行了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;/usr/bin/echo&#34;</span>, <span style="color:#f1fa8c">&#34;hello, docker&#34;</span>]</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;/usr/bin/echo&#34;, &#34;hello, docker&#34;]</span></code></pre></div>
 <p>而更好的方式就是使用exec方式, 这样, docker就不需要调用/bin/sh执行命令</p>
 
 <p>根据上述的说明, CMD和ENTRYPOINT是用来指定Image默认运行的程序, 而ENTRYPOINT和CMD组合起来或许能够发挥更大的作用</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> archlinux/base</span>
-<span style="color:#ff79c6">ENTRYPOINT</span> [<span style="color:#f1fa8c">&#34;/usr/bin/curl&#34;</span>, <span style="color:#f1fa8c">&#34;-i&#34;</span>]
-<span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;http://baidu.com&#34;</span>]</code></pre></div>
+<span style="color:#ff79c6">ENTRYPOINT</span><span style="color:#f1fa8c"> [&#34;/usr/bin/curl&#34;, &#34;-i&#34;]</span>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;http://baidu.com&#34;]</span></code></pre></div>
 <p>倘若你构建了这个Dockerfile, 并且启动了它, 如果没有指定其他第三方参数, 那么默认执行的便是</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -i http://baidu.com</code></pre></div>
 <p>而两个关键字组合的使用, 好处就是如果你在运行这个Image的时候, 想要curl -i其他的地址, 那么这个组合就会发挥它的作用了, CMD会被docker run指定的运行命令所替换.</p>
@@ -180,9 +180,9 @@ ENTRYPOINT 执行容器启动时执行的命令</p>
 <p>对于一个Dockerfile构建的过程</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> ubuntu:14.04</span>
 <span style="color:#ff79c6">RUN</span> apt-get update
-<span style="color:#ff79c6">ADD</span> run.sh /
+<span style="color:#ff79c6">ADD</span><span style="color:#f1fa8c"> run.sh /</span>
 <span style="color:#ff79c6">VOLUME</span><span style="color:#f1fa8c"> /data</span>
-<span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;./run.sh&#34;</span>]</code></pre></div>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;./run.sh&#34;]</span></code></pre></div>
 <p>根据上面的Dockerfile, 其中的过程原理如下解释</p>
 
 <p><a href="http://guide.daocloud.io/dcs/docker-commit-9153991.html">图片来源</a>
@@ -197,10 +197,10 @@ ENTRYPOINT 执行容器启动时执行的命令</p>
 <p>想要构建自己的Image, 那么就需要编写Dockerfile</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> python:3.6-slim</span>
 <span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /app</span>
-<span style="color:#ff79c6">ADD</span> . /app
+<span style="color:#ff79c6">ADD</span><span style="color:#f1fa8c"> . /app</span>
 <span style="color:#ff79c6">RUN</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;pip&#34;</span>, <span style="color:#f1fa8c">&#34;install&#34;</span>, <span style="color:#f1fa8c">&#34;--trusted-host&#34;</span>, <span style="color:#f1fa8c">&#34;pypi.python.org&#34;</span>, <span style="color:#f1fa8c">&#34;-r&#34;</span>, <span style="color:#f1fa8c">&#34;requirements.txt&#34;</span><span style="color:#ff79c6">]</span>
 <span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 80</span>
-<span style="color:#ff79c6">CMD</span>[<span style="color:#f1fa8c">&#34;python&#34;</span>, <span style="color:#f1fa8c">&#34;app.py&#34;</span>]</code></pre></div>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c">[&#34;python&#34;, &#34;app.py&#34;]</span></code></pre></div>
 <p>上面的Dockerfile会构建一个python运行环境, 并且安装requirements.txt中的所有指定库, 并对外暴露80端口</p>
 
 <p>Dockerfile中的每一条指令都会创建一层, 在执行完成之后将会commit并构成新的Image.</p>

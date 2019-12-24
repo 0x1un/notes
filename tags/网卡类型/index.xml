@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网卡类型 on 一个经常跑偏的人</title>
+    <link>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</link>
+    <description>Recent content in 网卡类型 on 一个经常跑偏的人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>判断网卡的类型</title>
+      <link>/2019/11/07/linux_sys_file/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/11/07/linux_sys_file/</guid>
+      <description>判断 Linux 下网卡为虚拟或物理 /proc/net/dev /sys/devices/virtual/net/
+查看 Bios,主板信息 dmidecode
+查看虚拟化 virt-what =&amp;gt; this is a shell script
+文件系统详解: https://blog.csdn.net/yuexiaxiaoxi27172319/article/details/45241923
+https://juejin.im/post/5b8ba9e26fb9a019c372e100</description>
+    </item>
+    
+  </channel>
+</rss>

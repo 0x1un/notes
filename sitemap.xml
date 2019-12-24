@@ -1,10 +1,70 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tags/btrfs/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/12/20/btrfs_usb_mount_failed/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/filesystem/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/11/07/chromedp_screenshot_overlapping/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/golang/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/golang/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/network/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/11/07/linux_sys_file/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,22 +73,7 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/om/</loc>
-    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -178,12 +223,12 @@
   </url>
   
   <url>
-    <loc>/tags/rust/</loc>
+    <loc>/categories/rust/</loc>
     <lastmod>2019-05-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/rust/</loc>
+    <loc>/tags/rust/</loc>
     <lastmod>2019-05-04T00:00:00+00:00</lastmod>
   </url>
   
@@ -458,12 +503,12 @@
   </url>
   
   <url>
-    <loc>/tags/proxy/</loc>
+    <loc>/categories/proxy/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/proxy/</loc>
+    <loc>/tags/proxy/</loc>
     <lastmod>2018-08-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -573,12 +618,12 @@
   </url>
   
   <url>
-    <loc>/categories/hexo/</loc>
+    <loc>/tags/hexo/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/hexo/</loc>
+    <loc>/categories/hexo/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
   
