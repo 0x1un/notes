@@ -99,59 +99,33 @@
   
 <div class="blog-post">
   <h2>FreeBSD livecd挂载boot(zfs)</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="在livecd中挂载boot">在livecd中挂载boot</h3>
-
+<h3 id="livecdboot">在livecd中挂载boot</h3>
 <p>因为网络上的一篇不可靠的博客, 使得我被坑了, 发现FreeBSD无法开机, 然后我就纳闷儿了, 我好像没有做过什么整系统更新啊</p>
-
 <p>具体panic理由如下:</p>
-
 <pre><code>panic: running without device atpic reuqires a local APIC
-</code></pre>
-
-<p>这个panic来的突然, 使得我楞了一下, 有点质疑这个FreeBSD的稳定性, 但仔细想了几分钟后找到了原因,
-    因为那篇垃圾博客让我在device.hints中禁用了acpi导致的</p>
-
+</code></pre><p>这个panic来的突然, 使得我楞了一下, 有点质疑这个FreeBSD的稳定性, 但仔细想了几分钟后找到了原因,
+因为那篇垃圾博客让我在device.hints中禁用了acpi导致的</p>
 <p>后来找了相关的资料, 找到了<a href="https://serverfault.com/questions/848114/mount-freebsd-encrypted-zfs-from-live-cd-and-find-the-root-partition">这篇文章</a>
 我将其挂载之后, 就把device.hints中错误的设置给修正了, 最后完美开机</p>
-
 <p>关于ZFS文件系统还需要深度学习, 非常必要</p>
-
-<!-- ### FreeBSD关机问题 -->
-
-<!-- 使用了shutdown -p now无法在关机后自动断电, 需要一点操作 -->
-
-<!-- 编辑/boot/loader.conf -->
-
-<!-- ```shell -->
-
-<!-- apm_load="YES" -->
-
-<!-- ``` -->
-
-<!-- 编辑/etc/rc.conf -->
-
-<!-- ```shell -->
-
-<!-- apm_enable="YES" -->
-
-<!-- apmd_enable="YES" -->
-
-<!-- ``` -->
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>具体参考资料:</p>
-
 <p><a href="https://forums.freebsd.org/threads/mounting-and-editing-hard-disk-from-livecd.61726/">https://forums.freebsd.org/threads/mounting-and-editing-hard-disk-from-livecd.61726/</a></p>
-
 <p><a href="https://serverfault.com/questions/848114/mount-freebsd-encrypted-zfs-from-live-cd-and-find-the-root-partition">https://serverfault.com/questions/848114/mount-freebsd-encrypted-zfs-from-live-cd-and-find-the-root-partition</a></p>
-
 <p><a href="https://docs.oracle.com/cd/E19253-01/819-5461/gamnr/index.html">https://docs.oracle.com/cd/E19253-01/819-5461/gamnr/index.html</a></p>
-
 <p><a href="http://flummox-engineering.blogspot.com/2014/01/freebsd-running-without-device-atpic.html">http://flummox-engineering.blogspot.com/2014/01/freebsd-running-without-device-atpic.html</a></p>
 
   </div>
@@ -171,7 +145,7 @@
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>btrfs on 一个经常跑偏的人</title>
+    <title>btrfs on 正经人</title>
     <link>/tags/btrfs/</link>
-    <description>Recent content in btrfs on 一个经常跑偏的人</description>
+    <description>Recent content in btrfs on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 20 Dec 2019 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,10 @@
       <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/12/20/btrfs_usb_mount_failed/</guid>
-      <description>平台: - ArchLinux - 5.1.15-arch1-1-ARCH
-具体报错:
-mount: /mnt: mount(2) system call failed: File exists.  解决:
-sudo btrfstune -m /dev/sdc sudo mount /dev/sdc /mnt  参考: Error for mount: system call failed: File exists.</description>
+      <description>平台:
+ ArchLinux - 5.1.15-arch1-1-ARCH  具体报错:
+mount: /mnt: mount(2) system call failed: File exists. 解决:
+sudo btrfstune -m /dev/sdc sudo mount /dev/sdc /mnt 参考: Error for mount: system call failed: File exists.</description>
     </item>
     
   </channel>

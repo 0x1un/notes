@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on 一个经常跑偏的人</title>
+    <title>Android on 正经人</title>
     <link>/tags/android/</link>
-    <description>Recent content in Android on 一个经常跑偏的人</description>
+    <description>Recent content in Android on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 02 Jul 2018 00:00:00 +0000</lastBuildDate>
@@ -20,10 +20,10 @@
       <description>这是一篇没有技术含量的文章&amp;hellip;
  使用adb进行安卓刷机  安装adb
 平台ubuntu16.04(其他的系统自行搜索):
-sudo apt-get update &amp;amp;&amp;amp; sudo apt install android-tools-adb android-tools-fastboot   手机重启到fastboot状态
+sudo apt-get update &amp;amp;&amp;amp; sudo apt install android-tools-adb android-tools-fastboot  手机重启到fastboot状态
 接入usb调试, 并输入
 adb devices 开启root, 并解锁system分区
-adb root adb disable-verity  重启到bl
+adb root adb disable-verity 重启到bl
 adb reboot bootloader 解锁设备, 开始刷机
 fastboot flashing unlock 刷入recovery
 fastboot flash recovery Recovery.img 或利用Recovery.img启动到Recovery(并不会将rec刷入手机, 只是暂时使用)
@@ -31,7 +31,8 @@ fastboot boot Recovery.img // 自动启动到recovery 进入刷好的rec下面�
 并使用adb devices查看设备当前是否在sideload模式下
 如果出现：
 List of devices attached ??????????? no permissions 尝试重新启动adb服务(如果是windows系统, 不用加sudo)
-sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果有就执行</description>
+sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果有就执行
+adb sideload ROM.</description>
     </item>
     
   </channel>

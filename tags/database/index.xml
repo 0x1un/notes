@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Database on 一个经常跑偏的人</title>
+    <title>Database on 正经人</title>
     <link>/tags/database/</link>
-    <description>Recent content in Database on 一个经常跑偏的人</description>
+    <description>Recent content in Database on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 06 Feb 2019 15:45:00 +0000</lastBuildDate>
@@ -18,9 +18,9 @@
       
       <guid>/2019/02/06/disable_sqlalchmey_basic_class_table/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
-在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
- class Base(db.Model): &amp;#34;&amp;#34;&amp;#34; file: base.py &amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34; file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
-__abstract__ = True</description>
+  在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
+ class Base(db.Model): &amp;#34;&amp;#34;&amp;#34;file: base.py&amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34;file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
+__abstract__ = True </description>
     </item>
     
   </channel>

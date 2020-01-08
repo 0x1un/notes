@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hexo on 一个经常跑偏的人</title>
+    <title>Hexo on 正经人</title>
     <link>/tags/hexo/</link>
-    <description>Recent content in Hexo on 一个经常跑偏的人</description>
+    <description>Recent content in Hexo on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
@@ -20,15 +20,13 @@
       <description>这是一篇没有技术含量的文章&amp;hellip;
  踩坑记录 无法部署,长期卡在这个地方  On branch master
 nothing to commit, working tree clean
-  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好
- 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署 部署时提示输入github账户密码，但一直报错误密码的错误：   原因： - 如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值
-解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
+  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署  部署时提示输入github账户密码，但一直报错误密码的错误：  原因：
+  如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值   解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
  使用git push上传  使用git初始化public目录，然后按照正常push流程上传部署，因为需要上传的文件都是这里的
  为hexo+github pages绑定域名：  注册域名并添加CNAME值为自己github-pages地址
 在repo中设置绑定的域名
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
- 基础指令：   hexo n hexo g hexo s hexo d hexo init hexo s -p [port]    安装hexo:
-    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
+ 基础指令：    hexo n hexo g hexo s hexo d hexo init hexo s -p [port]   安装hexo:    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
     </item>
     
   </channel>

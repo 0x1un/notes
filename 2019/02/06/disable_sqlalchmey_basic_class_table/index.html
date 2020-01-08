@@ -101,22 +101,24 @@
   <h2>Sqlalchemy禁止创建基类表</h2>
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
-
+</blockquote>
+<blockquote>
 <p>在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Base</span>(db<span style="color:#ff79c6">.</span>Model):
-    <span style="color:#f1fa8c">&#34;&#34;&#34;
-</span><span style="color:#f1fa8c">        file: base.py
-</span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;&#34;&#34;</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">        file: base.py</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#34;&#34;&#34;</span>
     status <span style="color:#ff79c6">=</span> Column(Integer, default<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>)
 
 <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Gift</span>(Base):
-    <span style="color:#f1fa8c">&#34;&#34;&#34;
-</span><span style="color:#f1fa8c">        file: gift.py   
-</span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
-    nickname <span style="color:#ff79c6">=</span> Column(String, nullable<span style="color:#ff79c6">=</span>False)</code></pre></div>
-<p>这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">__abstract__ <span style="color:#ff79c6">=</span> True</code></pre></div>
+    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;&#34;&#34;</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">        file: gift.py   </span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">    </span><span style="color:#f1fa8c">&#34;&#34;&#34;</span>
+    nickname <span style="color:#ff79c6">=</span> Column(String, nullable<span style="color:#ff79c6">=</span>False)
+</code></pre></div><p>这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">__abstract__ <span style="color:#ff79c6">=</span> True
+</code></pre></div>
   </div>
 
 <br>
@@ -134,7 +136,7 @@
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

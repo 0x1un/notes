@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on 一个经常跑偏的人</title>
+    <title>Linux on 正经人</title>
     <link>/tags/linux/</link>
-    <description>Recent content in Linux on 一个经常跑偏的人</description>
+    <description>Recent content in Linux on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux各种疑难问题</title>
+      <link>/2020/01/08/linux_problem/</link>
+      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/01/08/linux_problem/</guid>
+      <description>0x001 fcitx5输入法无法启东 其报错如下:
+I instance.cpp:903] Override Enabled Addons: {} I instance.cpp:904] Override Disabled Addons: {} I addonmanager.cpp:177] Loaded addon xcb I addonmanager.cpp:177] Loaded addon quickphrase I isocodes.cpp:42] 639-3 I isocodes.cpp:42] 3166-1 I addonmanager.cpp:177] Loaded addon keyboard I addonmanager.cpp:177] Loaded addon clipboard I addonmanager.cpp:177] Loaded addon wayland I addonmanager.cpp:177] Loaded addon punctuation I addonmanager.cpp:177] Loaded addon unicode ========================= Fcitx 4.99.0 -- Get Signal No.: 11 Date: try &amp;quot;date -d @1578397576&amp;quot; if you are using GNU date *** ProcessID: 4298 fcitx5(+0xb265)[0x5605579bf265] /lib64/libc.</description>
+    </item>
     
     <item>
       <title>踩坑之Esxi虚拟服务器无法联网</title>
@@ -22,8 +32,8 @@
  这是一篇没有技术含量的文章&amp;hellip;
  虚拟机无法联网? 这个倒也不算一个坑, 只能归结于我自己不熟悉esxi平台吧, 但它浪费了我将近40分钟的时间, 特在此记录一下
 首先在CentOS中查看到它的网卡没有获取到ip地址, 这时我以迅雷不及掩耳之势 熟练地敲下了
-ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network  然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
-ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
+ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network 然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
+ifdown ens192 ifup ens192 嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
 解决办法:
 在esxi控制台中的networking栏为虚拟网卡链接到物理网卡, 问题解决&amp;hellip;
 总结 这个问题说难那是一点都不难, 但往往很容易忽略, 这时候便需要你停下来静心思考, 这个坑的主要原因还是因为对该控制台不熟悉造成的, 这也是一个小经验吧, 以后不会再犯了&amp;hellip;</description>
@@ -40,8 +50,8 @@ ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip add
 iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
 --src-range是源地址的范围, --dst-range是目标地址的范围
 同样, --src-range和--dst-range可以使用取反(!)操作
-string扩展模块 如果报文信息中包含了字符&amp;rdquo;hello&amp;rdquo;, 就对此报文进行进一步的操作
-iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;rdquo;hello, world&amp;rdquo;这个字符串, 就将其拒绝
+string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;rdquo;, 就对此报文进行进一步的操作
+iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;quot;hello, world&amp;quot;这个字符串, 就将其拒绝
 --algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
 time扩展模块 time模块可以对特定时间段的报文进行处理
 iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 07:00:00 --timestop 18:00:00 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --monthdays 22,23 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --datestart 2019-06-15 --datestop 2019-06-23 -j REJECT 上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</description>
@@ -102,7 +112,8 @@ pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后�
       <description>这是一篇没有技术含量的文章&amp;hellip;
  Gentoo安装历程 准备开始 第一步当然是下载所需的chroot环境与Gentoo的stage3包
 当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的
-那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧 开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
+那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧
+开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
 # 查看硬盘 fdisk -l # 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份) mkfs.ext4 /dev/nvme0n1 # 这里我使用的是cfdisk分区(简单明了) cfdisk /dev/nvme0n1 # 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区 # 对它们进行格式化操作 mkfs.vfat -F 32 /dev/nvme0n1p1 mkfs.swap /dev/nvme0n1p2 mkfs.ext4 /dev/nvme0n1p3 # 待格式话操作完成之后, 讲它们挂载到对应分区 mount /dev/nvme0n1p3 /mnt/gentoo # 此分区为最大的( / )分区 mkdir -p /mnt/gentoo/boot mount /dev/nvme0n1p1 /mnt/gentoo/boot # 下载系统文件并解压(官方的stage3, 这里使用网易的源) wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo # 解压(先切换到/mnt/gentoo目录之下) tar xvpf stage3-amd64-* --xattrs-include=&amp;#34;*.</description>
     </item>
     
@@ -130,15 +141,13 @@ pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后�
       <description>这是一篇没有技术含量的文章&amp;hellip;
  踩坑记录 无法部署,长期卡在这个地方  On branch master
 nothing to commit, working tree clean
-  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好
- 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署 部署时提示输入github账户密码，但一直报错误密码的错误：   原因： - 如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值
-解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
+  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署  部署时提示输入github账户密码，但一直报错误密码的错误：  原因：
+  如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值   解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
  使用git push上传  使用git初始化public目录，然后按照正常push流程上传部署，因为需要上传的文件都是这里的
  为hexo+github pages绑定域名：  注册域名并添加CNAME值为自己github-pages地址
 在repo中设置绑定的域名
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
- 基础指令：   hexo n hexo g hexo s hexo d hexo init hexo s -p [port]    安装hexo:
-    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
+ 基础指令：    hexo n hexo g hexo s hexo d hexo init hexo s -p [port]   安装hexo:    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
     </item>
     
   </channel>

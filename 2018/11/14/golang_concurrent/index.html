@@ -99,30 +99,26 @@
   
 <div class="blog-post">
   <h2>golang并发编程学习</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
 <h3 id="goroutine">Goroutine</h3>
-
 <p>本节中需要了解并发的概念, 如果还不了解并发的原理, 可以移步到我<a href="http://blog.aumujun.com/posts/b3c2e96d/">另一篇笔记</a>.
 Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, 这在通用的编程语言当中, 自带这种特性的还是比较少见的.</p>
-
-<p>在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下
-- 它是非抢占式多任务处理, 由协程调度器主动交出控制权
-- 它是编译器/解释器/虚拟机层面的多任务
-- 多个协程可能会在一个或多个线程上运行</p>
-
-<!-- more --> 
-
-<p>Goroutine的定义
-- 任何函数只要加上<code>go</code>关键字就能给调度器运行
-- 不需要在定义的时候区分是否为异步函数
-- 调度器会在合适的点进行切换任务
-- 可以使用<code>go run -race raceFile.go</code>检测数据访问的冲突</p>
-
+<p>在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下</p>
+<ul>
+<li>它是非抢占式多任务处理, 由协程调度器主动交出控制权</li>
+<li>它是编译器/解释器/虚拟机层面的多任务</li>
+<li>多个协程可能会在一个或多个线程上运行</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>Goroutine的定义</p>
+<ul>
+<li>任何函数只要加上<code>go</code>关键字就能给调度器运行</li>
+<li>不需要在定义的时候区分是否为异步函数</li>
+<li>调度器会在合适的点进行切换任务</li>
+<li>可以使用<code>go run -race raceFile.go</code>检测数据访问的冲突</li>
+</ul>
 <p>如下例, 在这里创建了10个协程</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
     <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">10</span>; i<span style="color:#ff79c6">++</span> {
@@ -133,8 +129,8 @@ Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, �
         }(i)
     }
     time.<span style="color:#50fa7b">Sleep</span>(time.Millisecond) <span style="color:#6272a4">// 设置休眠, 防止协程被直接干掉
-</span><span style="color:#6272a4"></span>}</code></pre></div>
-<p>golang中开启协程是非常方便的, 使用<code>go</code>关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号<code>()</code>代表直接执行. 在这个例子当中, 开了十个协程, 看到第九行的代码, 这是因为这段代码是并发执行的, 当最外层的循环语句结束之后还没有来得及进行<code>fmt.Printf</code>操作<code>main</code>就被退掉了, 当<code>main</code>被退掉了, 其中的协程也就理所应当地被干掉, 为了防止这样的情况, 我们在第九行进行了毫秒级休眠, 让它有足够的时间来打印出结果, 在上面的协程定义中, 协程是非抢占式多任务处理, 那么为什么上面这段代码被顺利的打印出来了呢(而不是死循环), 代码中并没有声明什么时候交出控制权, 因为在第五行使用了<code>fmt.Printf</code>的io操作, io会使得它切换, 下一个例子将会演示如何主动交出控制权.</p>
+</span><span style="color:#6272a4"></span>}
+</code></pre></div><p>golang中开启协程是非常方便的, 使用<code>go</code>关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号<code>()</code>代表直接执行. 在这个例子当中, 开了十个协程, 看到第九行的代码, 这是因为这段代码是并发执行的, 当最外层的循环语句结束之后还没有来得及进行<code>fmt.Printf</code>操作<code>main</code>就被退掉了, 当<code>main</code>被退掉了, 其中的协程也就理所应当地被干掉, 为了防止这样的情况, 我们在第九行进行了毫秒级休眠, 让它有足够的时间来打印出结果, 在上面的协程定义中, 协程是非抢占式多任务处理, 那么为什么上面这段代码被顺利的打印出来了呢(而不是死循环), 代码中并没有声明什么时候交出控制权, 因为在第五行使用了<code>fmt.Printf</code>的io操作, io会使得它切换, 下一个例子将会演示如何主动交出控制权.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
     <span style="color:#8be9fd;font-style:italic">var</span> array [<span style="color:#bd93f9">10</span>]<span style="color:#8be9fd">int</span>
     <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">10</span>; i<span style="color:#ff79c6">++</span> {
@@ -147,20 +143,18 @@ Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, �
     }
 	time.<span style="color:#50fa7b">Sleep</span>(time.Millisecond)
 	fmt.<span style="color:#50fa7b">Println</span>(array)
-}</code></pre></div>
-<p>上面这段代码第七行为主动交出控制权, 如果它不加这行指令他的结果中数组是不会被填满的, 或者陷入死循环. <code>main</code>函数本身也是一个协程, 当没有交出控制权的时候它就一直在go程中卡住一直循环, 就无法执行到休眠这个地方.</p>
-
-<h3 id="关于golang的调度器">关于golang的调度器</h3>
-
+}
+</code></pre></div><p>上面这段代码第七行为主动交出控制权, 如果它不加这行指令他的结果中数组是不会被填满的, 或者陷入死循环. <code>main</code>函数本身也是一个协程, 当没有交出控制权的时候它就一直在go程中卡住一直循环, 就无法执行到休眠这个地方.</p>
+<h3 id="golang">关于golang的调度器</h3>
 <p>协程与普 通函数的区别在于, 普通函数是在子程序运行完之后才将控制权交由<code>main</code>来运行下一个子程序, 而协程则是可以中途与<code>main</code>进行双向的交互, 控制权也可以进行中途交互.</p>
-
-<p>goroutine <strong>可能</strong> 切换的点
-- I/O, select
-- channel
-- 等待锁
-- 函数调用
-- runtime.Gosched()</p>
-
+<p>goroutine <strong>可能</strong> 切换的点</p>
+<ul>
+<li>I/O, select</li>
+<li>channel</li>
+<li>等待锁</li>
+<li>函数调用</li>
+<li>runtime.Gosched()</li>
+</ul>
 <p>golang在调度线程的时候会根据计算机的核心数合理调节.</p>
 
   </div>
@@ -180,7 +174,7 @@ Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, �
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

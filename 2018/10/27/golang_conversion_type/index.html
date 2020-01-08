@@ -99,40 +99,32 @@
   
 <div class="blog-post">
   <h2>golang初窥</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="golang中的一些常用的內建变量类型">golang中的一些常用的內建变量类型</h3>
-
+<h3 id="golang">golang中的一些常用的內建变量类型</h3>
 <ul>
 <li>bool, string</li>
 <li>(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr</li>
 <li>byte, rune</li>
-
-<li><p>float32, float64, complex64, complex128
-golang中没有char类型，只有rune类型
-<!-- more -->
-首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">triangle</span>(){
-<span style="color:#8be9fd;font-style:italic">var</span> a, b <span style="color:#8be9fd">int</span> = <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>
-<span style="color:#8be9fd;font-style:italic">var</span> c <span style="color:#8be9fd">int</span>
-c = <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Sqrt</span>(<span style="color:#8be9fd;font-style:italic">float64</span>(a <span style="color:#ff79c6">*</span> a <span style="color:#ff79c6">+</span> b <span style="color:#ff79c6">*</span> b))
-fmt.<span style="color:#50fa7b">Println</span>(c)
-}</code></pre></div></li>
+<li>float32, float64, complex64, complex128
+golang中没有char类型，只有rune类型</li>
 </ul>
-
-<p>因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。</p>
-
-<h3 id="常量">常量</h3>
+<!-- raw HTML omitted -->
+<p>首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">triangle</span>(){
+    <span style="color:#8be9fd;font-style:italic">var</span> a, b <span style="color:#8be9fd">int</span> = <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>
+    <span style="color:#8be9fd;font-style:italic">var</span> c <span style="color:#8be9fd">int</span>
+    c = <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Sqrt</span>(<span style="color:#8be9fd;font-style:italic">float64</span>(a <span style="color:#ff79c6">*</span> a <span style="color:#ff79c6">+</span> b <span style="color:#ff79c6">*</span> b))
+    fmt.<span style="color:#50fa7b">Println</span>(c)
+}
+</code></pre></div><p>因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。</p>
+<h3 id="heading">常量</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">const</span> filename = <span style="color:#f1fa8c">&#34;abc.txt&#34;</span>
 <span style="color:#8be9fd;font-style:italic">const</span> a, b = <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>
-<span style="color:#8be9fd;font-style:italic">var</span> c <span style="color:#8be9fd">int</span> = <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Sqrt</span>(a<span style="color:#ff79c6">*</span>a <span style="color:#ff79c6">+</span> b<span style="color:#ff79c6">*</span>b))</code></pre></div>
-<p>const数值可以作为各种类型使用</p>
-
-<h3 id="枚举">枚举</h3>
+<span style="color:#8be9fd;font-style:italic">var</span> c <span style="color:#8be9fd">int</span> = <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Sqrt</span>(a<span style="color:#ff79c6">*</span>a <span style="color:#ff79c6">+</span> b<span style="color:#ff79c6">*</span>b))
+</code></pre></div><p>const数值可以作为各种类型使用</p>
+<h3 id="heading-1">枚举</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">enmus</span>() {
     <span style="color:#8be9fd;font-style:italic">const</span> (cpp = <span style="color:#ff79c6">iota</span>
     java
@@ -148,27 +140,24 @@ fmt.<span style="color:#50fa7b">Println</span>(c)
         pb
     )
     
-}</code></pre></div>
-<p>iota会从0开始一直递增(每次递增为1)为下面的的常量进行赋值，如果中间用下划线_隔开则会跳过这一项。</p>
-
-<h3 id="条件判断">条件判断</h3>
-
-<ul>
-<li><p>IF语句</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">condition_judgment</span>(){
-<span style="color:#8be9fd;font-style:italic">const</span> filename = <span style="color:#f1fa8c">&#34;abc&#34;</span>
-<span style="color:#ff79c6">if</span> contents, err = ioutils.<span style="color:#50fa7b">ReadFile</span>(filename); err <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span>{
-    fmt.<span style="color:#50fa7b">Println</span>(contents)
-}<span style="color:#ff79c6">else</span> {
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;canot open file: &#34;</span>, err)
 }
-}</code></pre></div></li>
-</ul>
-
-<p>首先在golang的if语句中，是可以进行赋值操作的，但赋值的作用于仅限于if作用域。</p>
-
+</code></pre></div><p>iota会从0开始一直递增(每次递增为1)为下面的的常量进行赋值，如果中间用下划线_隔开则会跳过这一项。</p>
+<h3 id="heading-2">条件判断</h3>
 <ul>
-<li><p>Switch语句</p>
+<li>IF语句</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">condition_judgment</span>(){
+    <span style="color:#8be9fd;font-style:italic">const</span> filename = <span style="color:#f1fa8c">&#34;abc&#34;</span>
+    <span style="color:#ff79c6">if</span> contents, err = ioutils.<span style="color:#50fa7b">ReadFile</span>(filename); err <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span>{
+        fmt.<span style="color:#50fa7b">Println</span>(contents)
+    }<span style="color:#ff79c6">else</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;canot open file: &#34;</span>, err)
+    }
+}
+</code></pre></div><p>首先在golang的if语句中，是可以进行赋值操作的，但赋值的作用于仅限于if作用域。</p>
+<ul>
+<li>Switch语句</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">grade</span>(score <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">string</span> {
 	g <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
 	<span style="color:#ff79c6">switch</span>  {
@@ -184,15 +173,12 @@ fmt.<span style="color:#50fa7b">Println</span>(c)
 		g = <span style="color:#f1fa8c">&#34;A&#34;</span>
 	}
 	<span style="color:#ff79c6">return</span> g
-}</code></pre></div></li>
-</ul>
-
-<p>在golang中的switch和其他语言(Java, C)的switch作用差不多，但是golang中的switch没有break语句，break会自动执行，如果需要去除break，则需要使用fallthrough。</p>
-
-<h3 id="循环-loop">循环(loop)</h3>
-
+}
+</code></pre></div><p>在golang中的switch和其他语言(Java, C)的switch作用差不多，但是golang中的switch没有break语句，break会自动执行，如果需要去除break，则需要使用fallthrough。</p>
+<h3 id="loop">循环(loop)</h3>
 <ul>
-<li><p>for语句</p>
+<li>for语句</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 手动读取文件
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">printFileContent</span>(filename <span style="color:#8be9fd">string</span>) {
 	file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(filename)
@@ -203,28 +189,27 @@ fmt.<span style="color:#50fa7b">Println</span>(c)
 	<span style="color:#ff79c6">for</span> scanner.<span style="color:#50fa7b">Scan</span>(){
 		fmt.<span style="color:#50fa7b">Println</span>(scanner.<span style="color:#50fa7b">Text</span>())
 	}
-}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 计算整数的二进制码
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 计算整数的二进制码
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">convertToBin</span>(n <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">string</span> {
-result <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
-<span style="color:#ff79c6">for</span> ; n &gt; <span style="color:#bd93f9">0</span>; n <span style="color:#ff79c6">/=</span> <span style="color:#bd93f9">2</span>{
-    lsb <span style="color:#ff79c6">:=</span> n <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">2</span>
-    result = strconv.<span style="color:#50fa7b">Itoa</span>(lsb) <span style="color:#ff79c6">+</span> result <span style="color:#6272a4">//将lsb转换成字符串
-</span><span style="color:#6272a4"></span>}
-<span style="color:#ff79c6">return</span> result
-}</code></pre></div></li>
-</ul>
-
-<p>在golang中是没有while语句的，因为while语句和for极其相似，所以被golang的设计者给合并了，看起来也很有道理。如果要使用while语句的功能，可以使用如下写法，将条件语句和结束语句省略。</p>
+    result <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
+    <span style="color:#ff79c6">for</span> ; n &gt; <span style="color:#bd93f9">0</span>; n <span style="color:#ff79c6">/=</span> <span style="color:#bd93f9">2</span>{
+        lsb <span style="color:#ff79c6">:=</span> n <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">2</span>
+        result = strconv.<span style="color:#50fa7b">Itoa</span>(lsb) <span style="color:#ff79c6">+</span> result <span style="color:#6272a4">//将lsb转换成字符串
+</span><span style="color:#6272a4"></span>    }
+    <span style="color:#ff79c6">return</span> result
+}
+</code></pre></div><p>在golang中是没有while语句的，因为while语句和for极其相似，所以被golang的设计者给合并了，看起来也很有道理。如果要使用while语句的功能，可以使用如下写法，将条件语句和结束语句省略。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 永真循环， 可当while使用
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">forever</span>() {
     <span style="color:#ff79c6">for</span> {
         fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;abcd&#34;</span>)
     }
-}</code></pre></div>
-<h3 id="函数">函数</h3>
-
+}
+</code></pre></div><h3 id="heading-3">函数</h3>
 <ul>
-<li><p>示例1</p>
+<li>示例1</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">eval</span>(a, b <span style="color:#8be9fd">int</span>, op <span style="color:#8be9fd">string</span>) (<span style="color:#8be9fd">int</span>, <span style="color:#8be9fd">error</span>){
 	<span style="color:#ff79c6">switch</span> op {
 	<span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#34;+&#34;</span>:
@@ -242,13 +227,11 @@ result <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#
 }
 
 <span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">div</span>(a, b <span style="color:#8be9fd">int</span>) (<span style="color:#8be9fd">int</span>, <span style="color:#8be9fd">int</span>){
-	<span style="color:#ff79c6">return</span> a <span style="color:#ff79c6">/</span> b, a <span style="color:#ff79c6">%</span> b</code></pre></div></li>
-</ul>
-
-<p>函数中可以传入一个error类型用于错误处理</p>
-
+	<span style="color:#ff79c6">return</span> a <span style="color:#ff79c6">/</span> b, a <span style="color:#ff79c6">%</span> b
+</code></pre></div><p>函数中可以传入一个error类型用于错误处理</p>
 <ul>
-<li><p>示例2</p>
+<li>示例2</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">pow</span>(a, b <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
 	<span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Pow</span>(<span style="color:#8be9fd;font-style:italic">float64</span>(a), <span style="color:#8be9fd;font-style:italic">float64</span>(b)))
 }
@@ -258,19 +241,16 @@ result <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#
 	opName <span style="color:#ff79c6">:=</span> runtime.<span style="color:#50fa7b">FuncForPC</span>(p).<span style="color:#50fa7b">Name</span>()
 	fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Calling function %s with args &#34;</span><span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#34;(%d, %d)\n&#34;</span>, opName, a, b)
 	<span style="color:#ff79c6">return</span> <span style="color:#50fa7b">op</span>(a, b)
-}</code></pre></div></li>
-</ul>
-
-<p>首先我重写了示例1的代码，将它变得看起来更优雅(唬人)，因为golang是一门函数式编程语言，所以我们可以在函数里面传入函数，函数名字写在前面<code>op func(int, int) int</code>这样，最后返回这个传入的函数结果，类型为int。</p>
-
+}
+</code></pre></div><p>首先我重写了示例1的代码，将它变得看起来更优雅(唬人)，因为golang是一门函数式编程语言，所以我们可以在函数里面传入函数，函数名字写在前面<code>op func(int, int) int</code>这样，最后返回这个传入的函数结果，类型为int。</p>
 <p>调用该函数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#50fa7b">apply</span>(pow, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>))</code></pre></div>
-<p>另一种写法，可以在调用的时候直接写入一个匿名函数(golang中没有函数重载，lambda之类的操作)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#50fa7b">apply</span>(pow, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>))
+</code></pre></div><p>另一种写法，可以在调用的时候直接写入一个匿名函数(golang中没有函数重载，lambda之类的操作)。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">fmt.<span style="color:#50fa7b">Println</span>(
     <span style="color:#50fa7b">apply</span>(<span style="color:#8be9fd;font-style:italic">func</span>(a <span style="color:#8be9fd">int</span>, b <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span>{
         <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">int</span>(math.<span style="color:#50fa7b">Pow</span>(<span style="color:#8be9fd;font-style:italic">float64</span>(a), <span style="color:#8be9fd;font-style:italic">float64</span>(b)))
-    }, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>))</code></pre></div>
-<p>传入多个参数</p>
+    }, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>))
+</code></pre></div><p>传入多个参数</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">sum</span>(numbers <span style="color:#ff79c6">...</span> <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
 	s <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>
 	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> numbers {
@@ -282,28 +262,28 @@ result <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;&#
 fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#50fa7b">sum</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>))
 
 output:
-    <span style="color:#bd93f9">15</span></code></pre></div>
-<p>在golang创建函数的时候参数的建立有一点我觉得是非常不好的，如下</p>
+    <span style="color:#bd93f9">15</span>
+</code></pre></div><p>在golang创建函数的时候参数的建立有一点我觉得是非常不好的，如下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">demoCode</span>(str <span style="color:#8be9fd">string</span>, x y z <span style="color:#8be9fd">int</span>, c <span style="color:#8be9fd">bool</span>){
     <span style="color:#ff79c6">...</span>
-}</code></pre></div>
-<p>一旦参数多了就非常扰乱视线！<br />
+}
+</code></pre></div><p>一旦参数多了就非常扰乱视线！<br>
 如果不嫌麻烦可以一个参数后面跟着一个类型。</p>
-
-<h3 id="指针">指针</h3>
-
-<p>在golang中的指针使用是非常简单的，并且不能对它做运算操作。
-- 经典示例</p>
+<h3 id="heading-4">指针</h3>
+<p>在golang中的指针使用是非常简单的，并且不能对它做运算操作。</p>
+<ul>
+<li>经典示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">swap</span>(a, b <span style="color:#8be9fd">int</span>) {
     <span style="color:#ff79c6">*</span>a, <span style="color:#ff79c6">*</span>b = <span style="color:#ff79c6">*</span>b, <span style="color:#ff79c6">*</span>a
 }
 a, b = <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>
-<span style="color:#50fa7b">swap</span>(<span style="color:#ff79c6">&amp;</span>a, <span style="color:#ff79c6">&amp;</span>b)</code></pre></div>
-<p>当然，不推荐这种写法，只是做一个示例。</p>
+<span style="color:#50fa7b">swap</span>(<span style="color:#ff79c6">&amp;</span>a, <span style="color:#ff79c6">&amp;</span>b)
+</code></pre></div><p>当然，不推荐这种写法，只是做一个示例。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">swap</span>(a, b <span style="color:#8be9fd">int</span>) (<span style="color:#8be9fd">int</span>, <span style="color:#8be9fd">int</span>) {
     <span style="color:#ff79c6">return</span> b, a
-}</code></pre></div>
-<p>写成这样或许更加优美一些</p>
+}
+</code></pre></div><p>写成这样或许更加优美一些</p>
 
   </div>
 
@@ -322,7 +302,7 @@ a, b = <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

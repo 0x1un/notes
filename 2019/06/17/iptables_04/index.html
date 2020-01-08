@@ -102,42 +102,30 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
 <p>在前面的学习当中, 我的一贯思路是所有的报文都会经过iptables的规则匹配, 如果匹配到了就执行对应的规则, 如若没有, 那就执行默认的动作(ACCEPT, DROP)</p>
-
 <p>当默认动作为ACCEPT时, 想要做到访问控制的效果, 那么规则执行的动作势必只能是DROP, REJECT, 这样在编写规则的时候只需要对不想放行的规则进行丢弃或拒绝就行了,
-    而没有被规则匹配到的报文默认将以ACCEPT动作放行, 这样就达到了黑名单的意义</p>
-
+而没有被规则匹配到的报文默认将以ACCEPT动作放行, 这样就达到了黑名单的意义</p>
 <p>而白名单正好与之相反, 默认动作为DROP, 只需要对想要放行的报文放行, 而没有被匹配到的所有请求将被无情拒绝在外</p>
-
 <p>这两种名单的区别在于一个宽容, 一个自私罢了</p>
-
 <p>设定一个白名单</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -F <span style="color:#6272a4"># 清空旧有所有规则</span>
 iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">22</span> -j ACCEPT
 iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">80</span> -j ACCEPT
-iptables -P INPUT DROP <span style="color:#6272a4"># 将INPUT链的默认动作设置为DROP</span></code></pre></div>
-<p>上列的一串规则当中, 只对22, 80端口的tcp协议进行放行, 最后将默认规则设定为DROP</p>
-
+iptables -P INPUT DROP <span style="color:#6272a4"># 将INPUT链的默认动作设置为DROP</span>
+</code></pre></div><p>上列的一串规则当中, 只对22, 80端口的tcp协议进行放行, 最后将默认规则设定为DROP</p>
 <p>-P 选项为设定policy(策略), 随时可以用man查看一下, 很方便</p>
-
 <p>白名单的建立就是这么轻松</p>
-
 <p>生效的结果如下图
-<img src="https://github.com/0x1un/SavaImg/raw/master/iptables/whitelist.png" alt="" />
+<img src="https://github.com/0x1un/SavaImg/raw/master/iptables/whitelist.png" alt="">
 如图所见, 80端口与22端口的请求都被放行, 而对于ping的icmp请求却被拒之门外, 它的报文被DROP掉而导致久久没有得到回应, 看右侧时间就知道了</p>
-
 <p>在我们编写规则的时候一定, 一定, 一定要注意不要把自己给拒之门外了, 当你给远程服务器建立规则时务必小心, 否则会很糟糕</p>
-
 <p>而可以避免在iptables -F时清除所有规则时, 被默认的DROP动作给拒之门外, 我们可以将默认的动作依然设定成ACCEPT, 然后在所有规则的最末端append一条REJECT所有INPUT链的请求, 因为规则会从头至尾的进行匹配,
-    这样一来, 既可以实现白名单的效果, 又避免了在不小心iptables -F时给默认规则阻挡在外了, 具体如下</p>
+这样一来, 既可以实现白名单的效果, 又避免了在不小心iptables -F时给默认规则阻挡在外了, 具体如下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">22</span> -j ACCEPT
 iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">80</span> -j ACCEPT
-iptables -A INPUT -j REJECT</code></pre></div>
-<p>如上规则所写, 匹配的顺序会从上至下, 对于被匹配到的报文(来自22, 80)放行, 最后再拒绝所有的报文</p>
-
+iptables -A INPUT -j REJECT
+</code></pre></div><p>如上规则所写, 匹配的顺序会从上至下, 对于被匹配到的报文(来自22, 80)放行, 最后再拒绝所有的报文</p>
 <p>而从一开始(第一条, 第二条)没被匹配到的报文, 将会在第三条规则被匹配, 因为第三条不管你是啥都给你拒绝了</p>
-
 <p>上述的黑白名单在我的理解当中就是这么个回事</p>
 
   </div>
@@ -157,7 +145,7 @@ iptables -A INPUT -j REJECT</code></pre></div>
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

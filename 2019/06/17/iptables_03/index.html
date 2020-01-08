@@ -99,82 +99,56 @@
   
 <div class="blog-post">
   <h2>iptables之--tcp-flags, udp, icmp扩展</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h4 id="tcp-flags">--tcp-flags</h4>
-
+<h4 id="--tcp-flags">--tcp-flags</h4>
 <p>这个选项依旧是tcp模块中的, 需要使用-m tcp来使用它</p>
-
 <p>从名字上就能看出来这个选项是用来做tcp头部标志位的, 如果你不了解tcp头部结构, 那么请移步到<a href="http://www.google.com">Google</a>或者<a href="http://www.baidu.com">Baidu</a></p>
-
 <p>这需要对tcp的三次握手有一定的理解, 如若不懂, 请移步到<a href="https://github.com/jawil/blog/issues/14">通俗大白话来理解TCP协议的三次握手和四次分手</a>, 这里就不再过多重复赘述了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags ACK,SYN,FIN,RST,URG,PSH SYN -j REJECT
 <span style="color:#6272a4">###### OR ######</span>
-iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags --syn -j REJECT</code></pre></div>
-<p>其上列的规则作用是对ssh连接的第一次握手进行匹配处理, 第一部分ACK,SYN,FIN,RST,URG,PSH是需要匹配的标志位列表, 第二部分SYN则是对第一部分这个列表中的一些标志进行确认, 表示在第一部分这个列表当中SYN必须为1, 而其他的标志位必须为0, 这样就达到了对三次握手中的某次应答过程进行匹配处理</p>
-
+iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags --syn -j REJECT
+</code></pre></div><p>其上列的规则作用是对ssh连接的第一次握手进行匹配处理, 第一部分ACK,SYN,FIN,RST,URG,PSH是需要匹配的标志位列表, 第二部分SYN则是对第一部分这个列表中的一些标志进行确认, 表示在第一部分这个列表当中SYN必须为1, 而其他的标志位必须为0, 这样就达到了对三次握手中的某次应答过程进行匹配处理</p>
 <p>简言之, 上列规则将匹配ssh连接过程中第一次握手, 并将其拒绝</p>
-
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/TCPIP/three_handshake.png" alt="" /></p>
-
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/TCPIP/three_handshake.png" alt=""></p>
 <p>如若需要匹配第二次握手, 根据上图</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags ALL SYN,ACK -j REJECT</code></pre></div>
-<p>其中的ALL就是第一个例子当中的那一串标志列表的简写, 你大可不必那么费劲将他们都写出来</p>
-
-<h4 id="udp-扩展">udp 扩展</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags ALL SYN,ACK -j REJECT
+</code></pre></div><p>其中的ALL就是第一个例子当中的那一串标志列表的简写, 你大可不必那么费劲将他们都写出来</p>
+<h4 id="udp-">udp 扩展</h4>
 <p>udp模块与tcp模块相似, 它也有--dport与--sport, 但它也只有这两个选项</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p udp -m udp --dport <span style="color:#bd93f9">138</span> -j ACCEPT
 <span style="color:#6272a4">###### OR ######</span>
-iptables -t filter -I INPUT -p udp --dport <span style="color:#bd93f9">137</span>:139 -j ACCEPT</code></pre></div>
-<p>tcp与udp模块中的dport与sport同样可以指定一定范围的端口, 但并不能指定离散的端口, 根据前文, 可以使用--multiport模块来使用</p>
-
-<h4 id="icmp-扩展">icmp 扩展</h4>
-
+iptables -t filter -I INPUT -p udp --dport 137:139 -j ACCEPT
+</code></pre></div><p>tcp与udp模块中的dport与sport同样可以指定一定范围的端口, 但并不能指定离散的端口, 根据前文, 可以使用--multiport模块来使用</p>
+<h4 id="icmp-">icmp 扩展</h4>
 <p>ping这个命令使用的icmp协议, <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">icmp</a>全称为(Internet Control Message Protocol), 互联网控制报文协议, 主要用于探测网络上的主机是否可用, 目标是否可达</p>
-
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/ICMP/icmp-types-codes.gif" alt="" /></p>
-
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/ICMP/icmp-types-codes.gif" alt=""></p>
 <p>根据上图, type 3代表着目标不可达, 其中细分了多种不可达的原因, 比如可用 3/1表示为主机不可达</p>
-
 <p>上图的第一行就表示了ping的回应报文, 其type与code都为0. 而发出ping请求报文时对应的type为8, code为0, 并且它属于查询类(query)的ICMP报文, 而目标不可达的报文则属于错误报文类(error)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp -j REJECT</code></pre></div>
-<p>上列的规则禁止了所有icmp类型的报文请求, 别人无法ping通你, 但是你也无法ping通别人</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp -j REJECT
+</code></pre></div><p>上列的规则禁止了所有icmp类型的报文请求, 别人无法ping通你, 但是你也无法ping通别人</p>
 <p>根据上列的规则与图片作出修改, 让我可以ping通他人, 而他人无法ping通我</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp -m icmp --icmp-type <span style="color:#bd93f9">8</span>/0 -j REJECT</code></pre></div>
-<p>上面说了, 3/1对应上面的图片为主机不可达错误, 而8/0则表示ping请求报文.<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp -m icmp --icmp-type 8/0 -j REJECT
+</code></pre></div><p>上面说了, 3/1对应上面的图片为主机不可达错误, 而8/0则表示ping请求报文.<br>
 总结一下上面的规则, 就是针对于icmp类型的ping报文请求执行拒绝操作</p>
-
 <p>上面的8/0, 3/1之类的也许有些难以让人清楚它的具体含义, 可以使用与其对应的描述进行匹配</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp --icmp-type <span style="color:#f1fa8c">&#34;echo-request&#34;</span> -j REJECT</code></pre></div>
-<p>只要根据上面的对照图把其描述中的空格替换成(-)就可以了</p>
-
-<h4 id="state-扩展">state 扩展</h4>
-
-<p>state, 英文直译为&rdquo;状态&rdquo;, 实际上它可以让iptables实现&rdquo;连接追踪&rdquo;, 对于state扩展模块来说, 只要两台主机在相互通信, 就算建立起了连接</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp --icmp-type <span style="color:#f1fa8c">&#34;echo-request&#34;</span> -j REJECT
+</code></pre></div><p>只要根据上面的对照图把其描述中的空格替换成(-)就可以了</p>
+<h4 id="state-">state 扩展</h4>
+<p>state, 英文直译为&quot;状态&rdquo;, 实际上它可以让iptables实现&quot;连接追踪&rdquo;, 对于state扩展模块来说, 只要两台主机在相互通信, 就算建立起了连接</p>
 <p>通常用于判断报文是否是为了回应之前发出的报文</p>
-
 <p>其中对于state, 其中的报文可以分为5钟状态, 分别为[NEW, ESTABLISHED, RELATED, INVALID, UNTRACKED]</p>
-
 <ul>
 <li>NEW: 连接中的第一个包, 状态为NEW</li>
 <li>ESTABLISHED: 在连接建立后的状态</li>
 <li>RELATED: 与之一个状态有关联的状态, 它的状态就为RELATED</li>
 <li>INVALID: 无法识别或没有任何状态的包的状态</li>
-
-<li><p>UNTRACKED: 状态为untracked表示报文未被追踪, 为Untracked表示无法找到相关连接</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -m state --state ESTABLISHED -j ACCEPT</code></pre></div></li>
+<li>UNTRACKED: 状态为untracked表示报文未被追踪, 为Untracked表示无法找到相关连接</li>
 </ul>
-
-<p>上面规则的意义为, 对状态为ESTABLISHED的报文进行放行, 而ESTABLISHED状态在上面已经描述清楚了,
-    它是连接被建立之后才会存在的, 所以这条规则的目的为: 只对之前发出的报文的回应报文进行放行, 也就是说只接收被动回应的报文, 而不是主动向我发起请求的报文</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -m state --state ESTABLISHED -j ACCEPT
+</code></pre></div><p>上面规则的意义为, 对状态为ESTABLISHED的报文进行放行, 而ESTABLISHED状态在上面已经描述清楚了,
+它是连接被建立之后才会存在的, 所以这条规则的目的为: 只对之前发出的报文的回应报文进行放行, 也就是说只接收被动回应的报文, 而不是主动向我发起请求的报文</p>
 <p>在应用了这条规则, 并不影响你主动连接其他主机, 而其他主机却不能主动向你发出连接请求, 因为只对响应作出放行, 包含NEW状态的主动请求是不会被放行的</p>
 
   </div>
@@ -194,7 +168,7 @@ iptables -t filter -I INPUT -p udp --dport <span style="color:#bd93f9">137</span
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

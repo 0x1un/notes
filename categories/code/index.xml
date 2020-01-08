@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Code on 一个经常跑偏的人</title>
+    <title>Code on 正经人</title>
     <link>/categories/code/</link>
-    <description>Recent content in Code on 一个经常跑偏的人</description>
+    <description>Recent content in Code on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
@@ -22,9 +22,7 @@
 拷贝 Slice 与 Map 实际上，Slice 与 Map 都包含了对底层存储数据的指针，一定要注意在修改 Slice 与 Map 的时候是否在使用引用。(划重点！这句话很重要，我曾经被坑过不少次)
 一般的，在实际使用需求当中，Slice 和 Map 会作为函数的参数和函数的返回值。如果此时你使用了引用传递或返回，那么在某些你不经意的情况下就会将原本的值修改掉，这是一种很糟糕的体验，不要忘记了这一点！(指针修改值这应该是基础，大家都懂哈)
 如果你的实际需求并不是要修改它原来的值，那就使用值传递或值返回(值拷贝)，如下的错误示范与正确示范：
- 错误示范
-func (d *Driver) SetTrips(trips []Trip) { d.trips = trips } trips := ... d1.SetTrips(trips) trips[0] = ... 正确示范
-func (d *Driver) SetTrips(trips []Trip) { d.trips = make([]Trip, len(trips)) copy(d.trips, trips) } trips := ... d1.SetTrips(trips) trips[0] = ...  上面的代码是从手册中的例子搬过来的，这里正好也用的上，我也懒得再写。</description>
+ 错误示范  func (d *Driver) SetTrips(trips []Trip) { d.trips = trips } trips := ... d1.SetTrips(trips) trips[0] = ...  正确示范  func (d *Driver) SetTrips(trips []Trip) { d.trips = make([]Trip, len(trips)) copy(d.trips, trips) } trips := ... d1.SetTrips(trips) trips[0] = .</description>
     </item>
     
     <item>
@@ -35,10 +33,10 @@ func (d *Driver) SetTrips(trips []Trip) { d.trips = make([]Trip, len(trips)) cop
       <guid>/2018/11/14/golang_concurrent/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  Goroutine 本节中需要了解并发的概念, 如果还不了解并发的原理, 可以移步到我另一篇笔记. Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, 这在通用的编程语言当中, 自带这种特性的还是比较少见的.
-在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下 - 它是非抢占式多任务处理, 由协程调度器主动交出控制权 - 它是编译器/解释器/虚拟机层面的多任务 - 多个协程可能会在一个或多个线程上运行
-Goroutine的定义 - 任何函数只要加上go关键字就能给调度器运行 - 不需要在定义的时候区分是否为异步函数 - 调度器会在合适的点进行切换任务 - 可以使用go run -race raceFile.go检测数据访问的冲突
-如下例, 在这里创建了10个协程
-func main() { for i := 0; i &amp;lt; 10; i++ { go func(x int) { for ; ; { fmt.Printf(&amp;#34;Gorouting from %d&amp;#34;, x) } }(i) } time.Sleep(time.Millisecond) // 设置休眠, 防止协程被直接干掉 } golang中开启协程是非常方便的, 使用go关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号()代表直接执行.</description>
+在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下
+ 它是非抢占式多任务处理, 由协程调度器主动交出控制权 它是编译器/解释器/虚拟机层面的多任务 多个协程可能会在一个或多个线程上运行  Goroutine的定义
+ 任何函数只要加上go关键字就能给调度器运行 不需要在定义的时候区分是否为异步函数 调度器会在合适的点进行切换任务 可以使用go run -race raceFile.go检测数据访问的冲突  如下例, 在这里创建了10个协程
+func main() { for i := 0; i &amp;lt; 10; i++ { go func(x int) { for ; ; { fmt.Printf(&amp;#34;Gorouting from %d&amp;#34;, x) } }(i) } time.Sleep(time.Millisecond) // 设置休眠, 防止协程被直接干掉 } golang中开启协程是非常方便的, 使用go关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号()代表直接执行. 在这个例子当中, 开了十个协程, 看到第九行的代码, 这是因为这段代码是并发执行的, 当最外层的循环语句结束之后还没有来得及进行fmt.</description>
     </item>
     
     <item>
@@ -62,9 +60,11 @@ func tryDefer() { defer fmt.Println(&amp;#34;1&amp;#34;) defer fmt.Println(&amp;
       
       <guid>/2018/11/08/golang_functional/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 什么是函数式编程  在正统的函数编程里面是不可变, 没有变量, 只能有常量和函数, 每个函数只能有一个参数 在函数式编程里面, 函数是一等公民, 所谓的一等公民就是它们的参数, 变量, 返回值都可以是函数
- 高阶函数(可以返回其它函数的函数和接受其它函数作为参数的函数均被称之为高阶函数)
- 函数闭包(说人话就是, 函数里面再包含了函数, 最终return了子函数), 可以直接看最后面的函数闭包总结 // 实现一个累加器 方法一 // 返回结果为函数 func adder() func(int) int { sum := 0 return func(v int) int { sum += v return sum } } // 实现一个累加器 方法二 // 创建类型iAdder 类型为函数 返回两个值, 一个为累加的值, 一个为下一个函数 type iAdder func(int) (int, iAdder) func adder2(base int) iAdder { return func(v int) (int, iAdder) { return base + v, adder2(base + v) } } func main() { a := adder2(0) for i := 0; i &amp;lt; 101; i++ { var s int s, a = a(i) fmt.</description>
+ 什么是函数式编程   在正统的函数编程里面是不可变, 没有变量, 只能有常量和函数, 每个函数只能有一个参数
+  在函数式编程里面, 函数是一等公民, 所谓的一等公民就是它们的参数, 变量, 返回值都可以是函数
+  高阶函数(可以返回其它函数的函数和接受其它函数作为参数的函数均被称之为高阶函数)
+  函数闭包(说人话就是, 函数里面再包含了函数, 最终return了子函数), 可以直接看最后面的函数闭包总结
+  // 实现一个累加器 方法一 // 返回结果为函数 func adder() func(int) int { sum := 0 return func(v int) int { sum += v return sum } } // 实现一个累加器 方法二 // 创建类型iAdder 类型为函数 返回两个值, 一个为累加的值, 一个为下一个函数 type iAdder func(int) (int, iAdder) func adder2(base int) iAdder { return func(v int) (int, iAdder) { return base + v, adder2(base + v) } } func main() { a := adder2(0) for i := 0; i &amp;lt; 101; i++ { var s int s, a = a(i) fmt.</description>
     </item>
     
     <item>
@@ -74,9 +74,11 @@ func tryDefer() { defer fmt.Println(&amp;#34;1&amp;#34;) defer fmt.Println(&amp;
       
       <guid>/2018/11/08/golang_interface_oriented/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- Duck-typing(鸭子类型) 什么是鸭子类型呢, 引用一段原话 &amp;gt; when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.
-当我看到一只鸟走起来像鸭子, 游起泳来像鸭子, 叫起来也像鸭子, 那么我就称这只鸟叫鸭子.
-什么意思呢, 就是描述事物的外部而飞内部结构, 不管它内在如何, 咱们只看脸. 回到golang的鸭子类型, 严格来说golang是属于结构化的类型系统, 它类似duck-typing, 从某种意义上严格来说duck-typing是需要动态绑定的, 而golang是在编译的时候就被绑定了, 这样来说golang便不是duck-typing.
+ Duck-typing(鸭子类型) 什么是鸭子类型呢, 引用一段原话
+ when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.
+ 当我看到一只鸟走起来像鸭子, 游起泳来像鸭子, 叫起来也像鸭子, 那么我就称这只鸟叫鸭子.
+什么意思呢, 就是描述事物的外部而飞内部结构, 不管它内在如何, 咱们只看脸.
+回到golang的鸭子类型, 严格来说golang是属于结构化的类型系统, 它类似duck-typing, 从某种意义上严格来说duck-typing是需要动态绑定的, 而golang是在编译的时候就被绑定了, 这样来说golang便不是duck-typing.
 关于duck-typing的详细解释, 这里推荐一篇文章, 我就不再进行解释了. https://studygolang.com/articles/214
 接口的定义与实现 当你对duck-typing有一定的理解之后, 我们可以进行接口编程了
 下面的示例实现了一个简单请求网页源码的需求
@@ -91,13 +93,13 @@ func tryDefer() { defer fmt.Println(&amp;#34;1&amp;#34;) defer fmt.Println(&amp;
       <guid>/2018/11/04/golang_object_oriented/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  面向对象 面向对象语言诸如Java, Python, C++之类的语言都是可以支持继承, 封装, 多态的, 但golang不一样, 它仅支持封装, 但如果要用到继承与多态呢, 在golang中是以面向接口编程来解决的, 而面向对象只要封装就够了。
-golang没有其他语言中class这种东西, 它只有struct - 示例
-type treeNode struct { value int left, right *treeNode } 在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。
+golang没有其他语言中class这种东西, 它只有struct
+ 示例  type treeNode struct { value int left, right *treeNode } 在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。
 我要创建如下图一样的二叉树
-创建节点 - 示例
-var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;rdquo;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
-golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。 - 示例
-func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } root.</description>
+创建节点
+ 示例  var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;rdquo;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
+golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。
+ 示例  func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } root.</description>
     </item>
     
     <item>
@@ -107,12 +109,13 @@ func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } 
       
       <guid>/2018/11/01/golang_builtin_collections/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 数组 首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。 - 示例
-var arr1 [5]int var grid [4][5]int 定义一个数组, 长度为5, 如果不为数组赋值的话默认值为0, 这与C, Java是一样的, 亦可以通过以下方式创建数组。 arr2 := [3]int{1, 3, 5} 这种方法与示例1相当, 但是必须为数组赋初值。 以上两种方法定义数组都是必须明确数组的长度个数, 有些情况是不知道长度的, 那么可以用以下方式让编译器自动计算数组长度。
-arr3 := [...]int{2, 4, 5, 6, 1, 10, 99} 遍历数组(传统方法) - 示例
-for i := 0; i &amp;lt; len(arr3); i++ { fmt.Println(arr3[i]) } 在golang中没有++i, ++j之类的操作, 只有i++, j++之类的操作。
-遍历数组(go风格) - 示例
-for i, v := range arr3 { fmt.Println(i, v) } for _, v := range arr3 { fmt.</description>
+ 数组 首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。
+ 示例  var arr1 [5]int var grid [4][5]int 定义一个数组, 长度为5, 如果不为数组赋值的话默认值为0, 这与C, Java是一样的, 亦可以通过以下方式创建数组。
+arr2 := [3]int{1, 3, 5} 这种方法与示例1相当, 但是必须为数组赋初值。 以上两种方法定义数组都是必须明确数组的长度个数, 有些情况是不知道长度的, 那么可以用以下方式让编译器自动计算数组长度。
+arr3 := [...]int{2, 4, 5, 6, 1, 10, 99} 遍历数组(传统方法)
+ 示例  for i := 0; i &amp;lt; len(arr3); i++ { fmt.Println(arr3[i]) } 在golang中没有++i, ++j之类的操作, 只有i++, j++之类的操作。
+遍历数组(go风格)
+ 示例  for i, v := range arr3 { fmt.</description>
     </item>
     
     <item>
@@ -122,8 +125,8 @@ for i, v := range arr3 { fmt.Println(i, v) } for _, v := range arr3 { fmt.</desc
       
       <guid>/2018/10/27/golang_conversion_type/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- golang中的一些常用的內建变量类型  bool, string (u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr byte, rune float32, float64, complex64, complex128 golang中没有char类型，只有rune类型 首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。
-func triangle(){ var a, b int = 3, 4 var c int c = int(math.Sqrt(float64(a * a + b * b)) fmt.Println(c) }  因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。
+ golang中的一些常用的內建变量类型  bool, string (u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr byte, rune float32, float64, complex64, complex128 golang中没有char类型，只有rune类型  首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。
+func triangle(){ var a, b int = 3, 4 var c int c = int(math.Sqrt(float64(a * a + b * b)) fmt.Println(c) } 因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。
 常量 const filename = &amp;#34;abc.txt&amp;#34; const a, b = 3, 4 var c int = int(math.Sqrt(a*a + b*b)) const数值可以作为各种类型使用
 枚举 func enmus() { const (cpp = iota java python golang ) const ( b = 1 &amp;lt;&amp;lt;(10 * iota) kb mb gb tb pb ) } iota会从0开始一直递增(每次递增为1)为下面的的常量进行赋值，如果中间用下划线_隔开则会跳过这一项。</description>
     </item>

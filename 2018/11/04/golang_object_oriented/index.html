@@ -99,78 +99,74 @@
   
 <div class="blog-post">
   <h2>golang面向对象</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="面向对象">面向对象</h3>
-
+<h3 id="heading">面向对象</h3>
 <p>面向对象语言诸如Java, Python, C++之类的语言都是可以支持继承, 封装, 多态的, 但golang不一样, 它仅支持封装, 但如果要用到继承与多态呢, 在golang中是以面向接口编程来解决的, 而面向对象只要封装就够了。</p>
-
-<p>golang没有其他语言中class这种东西, 它只有struct
-<!-- more -->
-- 示例</p>
+<p>golang没有其他语言中class这种东西, 它只有struct</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">type</span> treeNode <span style="color:#8be9fd;font-style:italic">struct</span> {
     value <span style="color:#8be9fd">int</span>
     left,  right <span style="color:#ff79c6">*</span>treeNode
-}</code></pre></div>
-<p>在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。</p>
-
+}
+</code></pre></div><p>在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。</p>
 <p>我要创建如下图一样的二叉树</p>
-
-<p>创建节点
-- 示例</p>
+<p>创建节点</p>
+<ul>
+<li>示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">var</span> root treeNode <span style="color:#6272a4">//定义root是一个名为treeNode的type结构体
 </span><span style="color:#6272a4"></span>root = treeNode{value:<span style="color:#bd93f9">3</span>}
 root.left = <span style="color:#ff79c6">&amp;</span>treeNode{}
 root.right = <span style="color:#ff79c6">&amp;</span>treeNode{<span style="color:#bd93f9">5</span>,  <span style="color:#ff79c6">nil</span>,  <span style="color:#ff79c6">nil</span>}
-root.right.left = <span style="color:#8be9fd;font-style:italic">new</span>(treeNode)</code></pre></div>
-<p>以上我们可以看到访问成员都是可以用点&rdquo;.&ldquo;来访问的, 它不局限于它们之间的差异。</p>
-
-<p>golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。
-- 示例</p>
+root.right.left = <span style="color:#8be9fd;font-style:italic">new</span>(treeNode)
+</code></pre></div><p>以上我们可以看到访问成员都是可以用点&rdquo;.&ldquo;来访问的, 它不局限于它们之间的差异。</p>
+<p>golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。</p>
+<ul>
+<li>示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">createNode</span>(value <span style="color:#8be9fd">int</span>) <span style="color:#ff79c6">*</span>treeNode {
     <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>treeNode{value: value}
 }
-root.left.right = <span style="color:#50fa7b">createNode</span>(<span style="color:#bd93f9">2</span>)</code></pre></div>
-<p>改变结构体中的值
-- 示例</p>
+root.left.right = <span style="color:#50fa7b">createNode</span>(<span style="color:#bd93f9">2</span>)
+</code></pre></div><p>改变结构体中的值</p>
+<ul>
+<li>示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (node <span style="color:#ff79c6">*</span>treeNode) <span style="color:#50fa7b">setValue</span>(value <span style="color:#8be9fd">int</span>) {
     node.value = value
 }
-root.right.left.<span style="color:#50fa7b">setValue</span>(<span style="color:#bd93f9">4</span>)</code></pre></div>
-<ul>
+root.right.left.<span style="color:#50fa7b">setValue</span>(<span style="color:#bd93f9">4</span>)
+</code></pre></div><ul>
 <li>遍历节点</li>
-
-<li><p>示例</p>
+<li>示例</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 由treeNode接收的函数
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (node treeNode) <span style="color:#50fa7b">printNodeValue</span>() {
-fmt.<span style="color:#50fa7b">Print</span>(node.value)
+    fmt.<span style="color:#50fa7b">Print</span>(node.value)
 }
 
 <span style="color:#6272a4">// 中序遍历(左中右)
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (node <span style="color:#ff79c6">*</span>treeNode) <span style="color:#50fa7b">traverse</span>() {
-<span style="color:#ff79c6">if</span> node <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
-    <span style="color:#ff79c6">return</span>
+    <span style="color:#ff79c6">if</span> node <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span>
+    }
+    node.left.<span style="color:#50fa7b">traverse</span>()
+    node.<span style="color:#50fa7b">printNodeValue</span>()
+    node.right.<span style="color:#50fa7b">traverse</span>()
 }
-node.left.<span style="color:#50fa7b">traverse</span>()
-node.<span style="color:#50fa7b">printNodeValue</span>()
-node.right.<span style="color:#50fa7b">traverse</span>()
-}
-root.<span style="color:#50fa7b">traverse</span>()</code></pre></div></li>
-</ul>
-
-<p>可以从代码观察到, 创建的print这个函数的方式不同于之前定义函数的方式, 它是将要接收的参数放在了前面, 这样的目的是为了能够使用&rdquo;.&ldquo;来 访问这个函数.</p>
+root.<span style="color:#50fa7b">traverse</span>()
+</code></pre></div><p>可以从代码观察到, 创建的print这个函数的方式不同于之前定义函数的方式, 它是将要接收的参数放在了前面, 这样的目的是为了能够使用&rdquo;.&ldquo;来 访问这个函数.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 实质上它就是一个普通的函数, 亦可以写成 
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">printNodeValue</span>(node treeNode){}
 <span style="color:#6272a4">// 不过要访问它的值就需要以普通函数的执行方式来写 
-</span><span style="color:#6272a4"></span><span style="color:#50fa7b">printNodeValue</span>(root)</code></pre></div>
-<p>中序遍历之后的结果是0, 2, 3, 4, 5</p>
-
-<h3 id="面向对象总结">面向对象总结</h3>
-
+</span><span style="color:#6272a4"></span><span style="color:#50fa7b">printNodeValue</span>(root)
+</code></pre></div><p>中序遍历之后的结果是0, 2, 3, 4, 5</p>
+<h3 id="heading-1">面向对象总结</h3>
 <ul>
 <li>改变结构中的内容必须使用指针</li>
 <li>如结构过大也可以使用指针(因为golang是值传递要对对象进行一份拷贝)</li>
@@ -178,35 +174,32 @@ root.<span style="color:#50fa7b">traverse</span>()</code></pre></div></li>
 <li>没有指定成员变量的大小, go语言会默认初始化成员变量为0, bool类型的为false</li>
 <li>接收者写在前面可以使用&rdquo;.&ldquo;来访问这个函数,  不管是指针类型还是值类型一律都使用&rdquo;.&ldquo;来访问</li>
 </ul>
-
-<h3 id="包与封装"><strong>包与封装</strong></h3>
-
+<h3 id="----"><strong>包与封装</strong></h3>
 <p>在编程语言当中都会有公有, 私有的概念, 所谓公有函数就是大家约定俗成之后可以直接显式调用的, 而私有的就是隐式调用执行。</p>
-
-<p>golang中没有Java那种public, private之类的关键字, 它是通过名字CamelCase(驼峰命名法)来分别的。
-- 首字母大写(公有变量/函数public)
-- 首字母小写(私有变量/函数private)</p>
-
-<p>包<br />
-- 每个目录只能有一个包, 包名可以不和目录名一样
-- main包包含了可执行入口(每个目录只能有一个main入口)
-- 为结构定义的方法必须放在同一个包内(但可以是不同的文件)</p>
-
+<p>golang中没有Java那种public, private之类的关键字, 它是通过名字CamelCase(驼峰命名法)来分别的。</p>
+<ul>
+<li>首字母大写(公有变量/函数public)</li>
+<li>首字母小写(私有变量/函数private)</li>
+</ul>
+<p>包</p>
+<ul>
+<li>每个目录只能有一个包, 包名可以不和目录名一样</li>
+<li>main包包含了可执行入口(每个目录只能有一个main入口)</li>
+<li>为结构定义的方法必须放在同一个包内(但可以是不同的文件)</li>
+</ul>
 <p>从上面我们已经知道了包管理的规则,  下面进行实操,  如图目录结构我们需要对TreeNode这个目录进行优化.
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package1.png" alt="示图" /><br />
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package1.png" alt="示图"><br>
 在TreeNode中创建一个entry目录,  entry目录中创建一个入口文件entry.go,  目的是只通过entry.go运行TreeNode这个程序,  entry.go的包名为main,  包名的命名方法为<code>package main</code>,  从上述的规则来看,  包名可以不和目录名一样,  如此在entry中访问node.go文件只需要导入TreeNode包
- <img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package3.png" alt="示图" /></p>
-
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package3.png" alt="示图"></p>
 <p><strong>如果需要使用一个函数,  那么这个函数的首字母必须大写,  小写是访问不了的</strong>
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package4.png" alt="示图" /></p>
-
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package4.png" alt="示图"></p>
 <p><strong>同时也可以将方法函数单独拿出来写在单独的一个文件之中,  只要包的名字一致,  编译器就可以根据包的名字来导入使用该函数.</strong>
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package2.png" alt="示图" /></p>
-
-<h3 id="对已有的对象进行扩展"><strong>对已有的对象进行扩展</strong></h3>
-
-<p>在上面我们已经了解到了golang只有封装, 没有继承与多态的特性, 但是现在我需要对原本的树添加一个后序遍历的功能。
-- 示例(使用组合)</p>
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/packages/package2.png" alt="示图"></p>
+<h3 id="-----1"><strong>对已有的对象进行扩展</strong></h3>
+<p>在上面我们已经了解到了golang只有封装, 没有继承与多态的特性, 但是现在我需要对原本的树添加一个后序遍历的功能。</p>
+<ul>
+<li>示例(使用组合)</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 创建一个结构体并且指向Node结构体,  可以达到和继承一样的效果
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> MyTreeNode <span style="color:#8be9fd;font-style:italic">struct</span> {
     node <span style="color:#ff79c6">*</span>TreeNode.Node
@@ -226,11 +219,12 @@ root.<span style="color:#50fa7b">traverse</span>()</code></pre></div></li>
 }
 <span style="color:#6272a4">// 将名为root的树取值到此进行后序遍历
 </span><span style="color:#6272a4"></span>myRoot <span style="color:#ff79c6">:=</span> MyTreeNode{<span style="color:#ff79c6">&amp;</span>root}
-myRoot.<span style="color:#50fa7b">postOrder</span>()</code></pre></div>
-<p>以上的代码对原本Node的功能进行了扩展,  添加了后序遍历二叉树的方法.</p>
-
-<p>再来一个示例,  用来实现一个队列的append和pop.
-- 示例(使用别名)</p>
+myRoot.<span style="color:#50fa7b">postOrder</span>()
+</code></pre></div><p>以上的代码对原本Node的功能进行了扩展,  添加了后序遍历二叉树的方法.</p>
+<p>再来一个示例,  用来实现一个队列的append和pop.</p>
+<ul>
+<li>示例(使用别名)</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">type</span> Queue []<span style="color:#8be9fd">int</span>
 
 <span style="color:#8be9fd;font-style:italic">func</span> (q <span style="color:#ff79c6">*</span>Queue) <span style="color:#50fa7b">Push</span>(v <span style="color:#8be9fd">int</span>) {
@@ -255,17 +249,14 @@ fmt.<span style="color:#50fa7b">Println</span>()
 fmt.<span style="color:#50fa7b">Println</span>(q.<span style="color:#50fa7b">Pop</span>())
 fmt.<span style="color:#50fa7b">Println</span>(q.<span style="color:#50fa7b">Pop</span>())
 fmt.<span style="color:#50fa7b">Println</span>(q.<span style="color:#50fa7b">IsEmpty</span>())
-fmt.<span style="color:#50fa7b">Println</span>(q.<span style="color:#50fa7b">Pop</span>())</code></pre></div>
-<p>output:</p>
-
+fmt.<span style="color:#50fa7b">Println</span>(q.<span style="color:#50fa7b">Pop</span>())
+</code></pre></div><p>output:</p>
 <pre><code>[1 2 3]
 1
 2
 false
 3
-</code></pre>
-
-<p>以上的例子用了别名的方式实现了一个先进先出的队列</p>
+</code></pre><p>以上的例子用了别名的方式实现了一个先进先出的队列</p>
 
   </div>
 
@@ -284,7 +275,7 @@ false
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

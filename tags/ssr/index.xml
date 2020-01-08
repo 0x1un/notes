@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SSR on 一个经常跑偏的人</title>
+    <title>SSR on 正经人</title>
     <link>/tags/ssr/</link>
-    <description>Recent content in SSR on 一个经常跑偏的人</description>
+    <description>Recent content in SSR on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 11 Aug 2018 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,8 @@
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/08/11/setting-switchyomega-auto-proxy/</guid>
-      <description>  这是一篇没有技术含量的文章&amp;hellip;
- 开始设置  步骤一 &amp;gt; 设置ssr本地监听端口  步骤二 设置黑名单
-https://github.com/gfwlist/gfwlist/blob/master/gfwlist.txt https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt  随便选择一条粘贴在新建规则 Switch proxy 中，设置如图所示:  步骤三 设置白名单并自动切换
-https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac    </description>
+      <description> 这是一篇没有技术含量的文章&amp;hellip;
+ 开始设置  步骤一  设置ssr本地监听端口     步骤二 设置黑名单  https://github.com/gfwlist/gfwlist/blob/master/gfwlist.txt https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt 随便选择一条粘贴在新建规则 Switch proxy 中，设置如图所示:  步骤三 设置白名单并自动切换  https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac </description>
     </item>
     
   </channel>

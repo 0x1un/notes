@@ -1,6 +1,41 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/linux/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/01/08/linux_problem/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-08T00:00:00+00:00</lastmod>
+  </url>
   
   <url>
     <loc>/2019/12/24/2019_end/</loc>
@@ -8,27 +43,7 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/resume/</loc>
-    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -128,11 +143,6 @@
   </url>
   
   <url>
-    <loc>/tags/linux/</loc>
-    <lastmod>2019-08-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2019/08/13/esxi_network_not_working/</loc>
     <lastmod>2019-08-13T00:00:00+00:00</lastmod>
   </url>
@@ -219,11 +229,6 @@
   
   <url>
     <loc>/2019/06/13/iptables_02/</loc>
-    <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/linux/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -623,12 +628,12 @@
   </url>
   
   <url>
-    <loc>/tags/%E5%88%B7%E6%9C%BA/</loc>
+    <loc>/categories/%E5%88%B7%E6%9C%BA/</loc>
     <lastmod>2018-07-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/%E5%88%B7%E6%9C%BA/</loc>
+    <loc>/tags/%E5%88%B7%E6%9C%BA/</loc>
     <lastmod>2018-07-02T00:00:00+00:00</lastmod>
   </url>
   

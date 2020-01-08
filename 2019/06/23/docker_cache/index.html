@@ -99,32 +99,20 @@
   
 <div class="blog-post">
   <h2>docker cache机制记录</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="docker的cache机制">docker的cache机制</h3>
-
+<h3 id="dockercache">docker的cache机制</h3>
 <p>在使用docker的时候, 构建Image通常都是编译一个Dockerfile, 然后用docker build自动构建</p>
-
 <p>那么在平常构建的时候, Dockerfile中少不了FROM这一条指令, 它会拉取一个base image来为后面的构建作基础</p>
-
 <p>而其中的RUN, ADD, VOLUME, CMD指令都会在构建时创建一层新的Image, 这些好像都是些废话..=_=</p>
-
 <p>根据上面所述, 随着Dockerfile中的指令越来越多, 构建的Image层是否会不断增多?
 Image层增多是肯定的, 但是并非每次构建都会创建一个全新的Image层, docker会在本地检测是否有与之相同的镜像, 有的话就会直接拉过来用</p>
-
 <p>docker build的cache机制, 当docker通过Dockerfile构建Image时, 发现将要构建的新Image与本地的某些Image产生了重复, 就可以放弃构建, 直接选择已有的Image作为构建的结果, 也就是选取本地已经cache的Image</p>
-
 <p>cache的机制很大程度上做到了Image的复用, 降低存储空间的同时, 还缩短了构建的时间</p>
-
 <p>如果在Dockerfile中使用了ADD, COPY之类的指令, 它会将docker文件系统(可读写层)作出改变, 而此时是不能使用cache的, 道理也显而易见, 既然发生了改变, 那么这个Image与之本地已有的Image必定会有所不同, 而判断这一切的策略是:
 获得文件inode信息, 计算出一唯一的hash值, 若没有产生变化, 就可以使用cache机制</p>
-
 <p>一次新的Image成功构建将导致后续的cache机制全部失效, 在编写Dockerfile时应当将更多静态安装, 配置命令竟可能放在Dockerfile靠前的位置, docker的Image就像洋葱一样, 有很多层, 想要就该内层那么你就必须将外层都剥离掉</p>
-
 <p>衡量一个Dockerfile的质量重要标准之一, 便是看cache机制被命中的次数, 命中的多, 那么这个Dockerfile就越合理</p>
 
   </div>
@@ -144,7 +132,7 @@ Image层增多是肯定的, 但是并非每次构建都会创建一个全新的I
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 一个经常跑偏的人</title>
+    <title>Posts on 正经人</title>
     <link>/post/</link>
-    <description>Recent content in Posts on 一个经常跑偏的人</description>
+    <description>Recent content in Posts on 正经人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux各种疑难问题</title>
+      <link>/2020/01/08/linux_problem/</link>
+      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/01/08/linux_problem/</guid>
+      <description>0x001 fcitx5输入法无法启东 其报错如下:
+I instance.cpp:903] Override Enabled Addons: {} I instance.cpp:904] Override Disabled Addons: {} I addonmanager.cpp:177] Loaded addon xcb I addonmanager.cpp:177] Loaded addon quickphrase I isocodes.cpp:42] 639-3 I isocodes.cpp:42] 3166-1 I addonmanager.cpp:177] Loaded addon keyboard I addonmanager.cpp:177] Loaded addon clipboard I addonmanager.cpp:177] Loaded addon wayland I addonmanager.cpp:177] Loaded addon punctuation I addonmanager.cpp:177] Loaded addon unicode ========================= Fcitx 4.99.0 -- Get Signal No.: 11 Date: try &amp;quot;date -d @1578397576&amp;quot; if you are using GNU date *** ProcessID: 4298 fcitx5(+0xb265)[0x5605579bf265] /lib64/libc.</description>
+    </item>
     
     <item>
       <title>2019年年终总结</title>
@@ -38,10 +48,10 @@
       <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/12/20/btrfs_usb_mount_failed/</guid>
-      <description>平台: - ArchLinux - 5.1.15-arch1-1-ARCH
-具体报错:
-mount: /mnt: mount(2) system call failed: File exists.  解决:
-sudo btrfstune -m /dev/sdc sudo mount /dev/sdc /mnt  参考: Error for mount: system call failed: File exists.</description>
+      <description>平台:
+ ArchLinux - 5.1.15-arch1-1-ARCH  具体报错:
+mount: /mnt: mount(2) system call failed: File exists. 解决:
+sudo btrfstune -m /dev/sdc sudo mount /dev/sdc /mnt 参考: Error for mount: system call failed: File exists.</description>
     </item>
     
     <item>
@@ -81,10 +91,10 @@ https://juejin.im/post/5b8ba9e26fb9a019c372e100</description>
       <guid>/2019/11/03/zabbix_profile_error/</guid>
       <description>zabbix 奇葩问题 其实这也不算一个奇葩的问题，就是掉进坑里长达一下午。
 在进入 zabbix 首页时，点击右上角的人像标志（也就是个人设置中心这种类似的标志），会出现一个错误：
-Fatal error: Uncaught Error: Call to undefined function mime_content_type() in /usr/share/zabbix/include/sounds.inc.php:27 Stack trace: #0 /usr/share/zabbix/include/views/administration.users.edit.php(345): getSounds() #1 /usr/share/zabbix/include/classes/mvc/CView.php(199): include(&#39;/usr/share/zabb...&#39;) #2 /usr/share/zabbix/profile.php(189): CView-&amp;gt;render() #3 {main} thrown in /usr/share/zabbix/include/sounds.inc.php on line 27  这个错误是突然冒出来的，出现的原因我至今都不知道，因为已经解决了。
+Fatal error: Uncaught Error: Call to undefined function mime_content_type() in /usr/share/zabbix/include/sounds.inc.php:27 Stack trace: #0 /usr/share/zabbix/include/views/administration.users.edit.php(345): getSounds() #1 /usr/share/zabbix/include/classes/mvc/CView.php(199): include(&#39;/usr/share/zabb...&#39;) #2 /usr/share/zabbix/profile.php(189): CView-&amp;gt;render() #3 {main} thrown in /usr/share/zabbix/include/sounds.inc.php on line 27 这个错误是突然冒出来的，出现的原因我至今都不知道，因为已经解决了。
 解决办法 因为 zabbix 安装在 docker 当中，使用的镜像为 alphine 基础系统。
- docker 19.03.4
- zabbix-web-server 4.2.6
+  docker 19.03.4
+  zabbix-web-server 4.2.6
   这是因为该容器中缺少php7-fileinfo, alphine 镜像使用apk add php7-fileinfo.
 其他 ubuntu, centos 之类的基系统都使用其发行版自带的包管理安装这个东西。</description>
     </item>
@@ -99,7 +109,7 @@ Fatal error: Uncaught Error: Call to undefined function mime_content_type() in /
 Q1: alphine 镜像无法使用 go 编译的程序 ps: 虽然使用 Python 非常便利快捷，但它依赖环境，我都使用 alphine 镜像了那必然不想再增个依赖。自然而然地，我选择了 go。
 然而在我写好了程序编译之后，将其挂载到 docker 中，却发现无法使用。当你用./run的时候，它会报 bash 未找到的错误。在翻阅相关文档后，发现编译时增添-tags netgo会起到作用。
 zabbix server 缓存不足 log 如下：
-zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): out of memory (requested 14216 bytes) zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): please increase CacheSize configuration parameter  这段日志说的很明白了，就是让你提升 CacheSize。再次打开此镜像的文档，找到了ZBX_CACHESIZE这个环境变量，并设置为 50M(默认 8M)，ok,结束。
+zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): out of memory (requested 14216 bytes) zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): please increase CacheSize configuration parameter 这段日志说的很明白了，就是让你提升 CacheSize。再次打开此镜像的文档，找到了ZBX_CACHESIZE这个环境变量，并设置为 50M(默认 8M)，ok,结束。
 总结 当你遇到与相关程序的坑时，一定要看 log 排查。像 zabbix 这种存在多年的程序，他的社区是无比强大，你的坑人家也许早就趟过了。</description>
     </item>
     
@@ -114,9 +124,7 @@ zabbix-server_1 | 7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_real
 拷贝 Slice 与 Map 实际上，Slice 与 Map 都包含了对底层存储数据的指针，一定要注意在修改 Slice 与 Map 的时候是否在使用引用。(划重点！这句话很重要，我曾经被坑过不少次)
 一般的，在实际使用需求当中，Slice 和 Map 会作为函数的参数和函数的返回值。如果此时你使用了引用传递或返回，那么在某些你不经意的情况下就会将原本的值修改掉，这是一种很糟糕的体验，不要忘记了这一点！(指针修改值这应该是基础，大家都懂哈)
 如果你的实际需求并不是要修改它原来的值，那就使用值传递或值返回(值拷贝)，如下的错误示范与正确示范：
- 错误示范
-func (d *Driver) SetTrips(trips []Trip) { d.trips = trips } trips := ... d1.SetTrips(trips) trips[0] = ... 正确示范
-func (d *Driver) SetTrips(trips []Trip) { d.trips = make([]Trip, len(trips)) copy(d.trips, trips) } trips := ... d1.SetTrips(trips) trips[0] = ...  上面的代码是从手册中的例子搬过来的，这里正好也用的上，我也懒得再写。</description>
+ 错误示范  func (d *Driver) SetTrips(trips []Trip) { d.trips = trips } trips := ... d1.SetTrips(trips) trips[0] = ...  正确示范  func (d *Driver) SetTrips(trips []Trip) { d.trips = make([]Trip, len(trips)) copy(d.trips, trips) } trips := ... d1.SetTrips(trips) trips[0] = .</description>
     </item>
     
     <item>
@@ -144,8 +152,8 @@ agent 中需填写第 3 条的地址(172.</description>
  这是一篇没有技术含量的文章&amp;hellip;
  虚拟机无法联网? 这个倒也不算一个坑, 只能归结于我自己不熟悉esxi平台吧, 但它浪费了我将近40分钟的时间, 特在此记录一下
 首先在CentOS中查看到它的网卡没有获取到ip地址, 这时我以迅雷不及掩耳之势 熟练地敲下了
-ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network  然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
-ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
+ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network 然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
+ifdown ens192 ifup ens192 嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
 解决办法:
 在esxi控制台中的networking栏为虚拟网卡链接到物理网卡, 问题解决&amp;hellip;
 总结 这个问题说难那是一点都不难, 但往往很容易忽略, 这时候便需要你停下来静心思考, 这个坑的主要原因还是因为对该控制台不熟悉造成的, 这也是一个小经验吧, 以后不会再犯了&amp;hellip;</description>
@@ -164,8 +172,8 @@ ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip add
 channel可以赋予一个状态, temp, ok := &amp;lt;-channel该表达式的ok会返回一个bool类型的值, 当为false时channel被关闭或者为空, 反之亦然
 channel可以使用make关键字来构造, make(chan int, 100) 后面的100为这个channel的缓存容量, 如若有设置缓存容量, 并且未满才能往里面发送数据.
  使用缓存会大幅避免阻塞, 提高程序的性能  如果没有设置容量, 那么只有等sender和receiver都准备好了后它们的通讯才会被阻塞
- 在一个已被close的channel中发送数据会导致run-time panic
- 往nil channel中发送数据会一直被阻塞着
+  在一个已被close的channel中发送数据会导致run-time panic
+  往nil channel中发送数据会一直被阻塞着
   使用for&amp;hellip;range处理channel xy := make(xy int, 10) go func() { for i := 0; i = i + 1 { xy &amp;lt;- i } defer close() }() go func() { for i := range xy { fmt.</description>
     </item>
     
@@ -180,7 +188,7 @@ channel可以使用make关键字来构造, make(chan int, 100) 后面的100为�
 这道题我有两种解法, 第一是用删除法, 当最后字符串中还有字符代表着里面的括号不配对
 第二是用栈的方法, 两者都比较优雅, 使用rust实现
 方式一:
-struct Solution; impl Solution { pub fn is_valid(s: String) -&amp;gt; bool { let mut s: String = s; while s.contains(&amp;#34;{}&amp;#34;) | s.contains(&amp;#34;[]&amp;#34;) | s.contains(&amp;#34;()&amp;#34;) { s = s.replace(&amp;#34;{}&amp;#34;, &amp;#34;&amp;#34;); s = s.replace(&amp;#34;[]&amp;#34;, &amp;#34;&amp;#34;); s = s.replace(&amp;#34;()&amp;#34;, &amp;#34;&amp;#34;); } return s == &amp;#34;&amp;#34;; }  方式二:
+struct Solution; impl Solution { pub fn is_valid(s: String) -&amp;gt; bool { let mut s: String = s; while s.contains(&amp;#34;{}&amp;#34;) | s.contains(&amp;#34;[]&amp;#34;) | s.contains(&amp;#34;()&amp;#34;) { s = s.replace(&amp;#34;{}&amp;#34;, &amp;#34;&amp;#34;); s = s.replace(&amp;#34;[]&amp;#34;, &amp;#34;&amp;#34;); s = s.replace(&amp;#34;()&amp;#34;, &amp;#34;&amp;#34;); } return s == &amp;#34;&amp;#34;; } 方式二:
 struct Solution; impl Solution { pub fn is_valid(s: String) -&amp;gt; bool { if s == &amp;#34;&amp;#34; { return true; } // 当输入的字符长度不足两位 或 长度为奇数 直接返回false  if s.</description>
     </item>
     
@@ -195,8 +203,9 @@ struct Solution; impl Solution { pub fn is_valid(s: String) -&amp;gt; bool { if 
 在这里我使用的二进制包安装, 省的编译了, 如有特殊要求, 请自行编译
 开始安装 使用的环境为CentOS7.6, 说实话我对于这个版本不熟, 但殊途同归, 发行版之间也就包管理的区别最大吧, 如果能TMD不用CentOS, 我碰都不会碰它一下, 打心底讨厌这个版本, 但为了工作, 只有这样吧..
 在这里安装的zabbix版本为zabbix4.0.1, 也就是4.x系列, 从头到位也就几条命令, 但其中的yum包管理踩坑是将我困住了2小时, (Fuck you yum
-首先自然是添加国内源, 原因总所周知, 我这里使用阿里的 &amp;gt; https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/
-echo -e &amp;#34;[zabbix]\nname=Zabbix Repository\nbaseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/\ngpgcheck=0\nenabled=1&amp;#34; &amp;gt;&amp;gt;/etc/yum.repos.d/zabbix.repo 为了粘贴方便, 我将其合成了一条命令写入, 执行完成就可以了, 如果你现在的时间和这篇记录发生的时间有较大的差异, 请前往网络上寻找最新的源, 该地址有可能会变动
+首先自然是添加国内源, 原因总所周知, 我这里使用阿里的
+ https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/
+ echo -e &amp;#34;[zabbix]\nname=Zabbix Repository\nbaseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/\ngpgcheck=0\nenabled=1&amp;#34; &amp;gt;&amp;gt;/etc/yum.repos.d/zabbix.repo 为了粘贴方便, 我将其合成了一条命令写入, 执行完成就可以了, 如果你现在的时间和这篇记录发生的时间有较大的差异, 请前往网络上寻找最新的源, 该地址有可能会变动
 清理缓存
 yum clean all yum makecache -y 接下来就可以继续安装了, 直接一把梭
 yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-get zabbix-agent php-fpm 缺少依赖解决(2019-08-13更新) 一般使用yum一把梭装的不会出现这样的问题, 而使用rpm直接安装它不会自动补全这些依赖
@@ -213,7 +222,7 @@ yum install -y epel-release yum install -y iksemel fping libiksemel ########### 
       <description>这是一篇没有技术含量的文章&amp;hellip;
  在livecd中挂载boot 因为网络上的一篇不可靠的博客, 使得我被坑了, 发现FreeBSD无法开机, 然后我就纳闷儿了, 我好像没有做过什么整系统更新啊
 具体panic理由如下:
-panic: running without device atpic reuqires a local APIC  这个panic来的突然, 使得我楞了一下, 有点质疑这个FreeBSD的稳定性, 但仔细想了几分钟后找到了原因, 因为那篇垃圾博客让我在device.hints中禁用了acpi导致的
+panic: running without device atpic reuqires a local APIC 这个panic来的突然, 使得我楞了一下, 有点质疑这个FreeBSD的稳定性, 但仔细想了几分钟后找到了原因, 因为那篇垃圾博客让我在device.hints中禁用了acpi导致的
 后来找了相关的资料, 找到了这篇文章 我将其挂载之后, 就把device.hints中错误的设置给修正了, 最后完美开机
 关于ZFS文件系统还需要深度学习, 非常必要
 具体参考资料:
@@ -240,7 +249,8 @@ pkg update -f 接下来为本章主题, 更换ports源, 因为ports自带的下�
 自然先安装axel
 pkg install axel 编辑/新建/etc/make.conf
 FETCH_CMD=axel -n 10 -a DISABLE_SIZE=yes MASTER_SITE_OVERRIDE?=\ http://mirrors.ustc.edu.cn/freebsd-ports/distfiles/${DIST_SUBDIR}/ \ http://mirrors.163.com/freebsd-ports/distfiles/${DIST_SUBDIR}/ 这里添加了两个源, 一个中科大的, 一个163网易的
-更换portsnap源, 编辑/etc/portsnap.conf</description>
+更换portsnap源, 编辑/etc/portsnap.conf
+SERVERNAME=portsnap3.hshh.org  电信 portsnap.</description>
     </item>
     
     <item>
@@ -256,9 +266,9 @@ FETCH_CMD=axel -n 10 -a DISABLE_SIZE=yes MASTER_SITE_OVERRIDE?=\ http://mirrors.
 查看无线网络的设备接口
 sysctl net.wlan.devices 创建wlan接口, 接口为上一条的结果
 ifconfig wlan0 create wlandev ath0 配置网络自启, 编辑/etc/rc.conf
-wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34; 编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
-if_ath_load=&amp;#34;YES&amp;#34; if_wi_load=&amp;#34;YES&amp;#34; wlan_wep_load=&amp;#34;YES&amp;#34; wlan_ccmp_load=&amp;#34;YES&amp;#34; wlan_tkip_load=&amp;#34;YES&amp;#34; 配置wpa_supplicant
-wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.</description>
+wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34;编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
+if_ath_load=&amp;quot;YES&amp;quot; if_wi_load=&amp;quot;YES&amp;quot; wlan_wep_load=&amp;quot;YES&amp;quot; wlan_ccmp_load=&amp;quot;YES&amp;quot; wlan_tkip_load=&amp;quot;YES&amp;quot; 配置wpa_supplicant
+wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.conf  -B 后台运行, -i 指定无线网络接口, -c指定使用的配置文件 第一条为直接连接, MYSSID为wifi名, passphrase为wifi密码  第二条为写入配置文件, 方便自动连接, 如果你的wifi是隐藏的, 需要在配置文件中添加一行scan_ssid=1</description>
     </item>
     
     <item>
@@ -308,13 +318,10 @@ cache的机制很大程度上做到了Image的复用, 降低存储空间的同�
  docker的清理 docker带来的好处无疑的巨大的, 但是有个令人无奈的缺点就是占用很大的空间, 本来本子就一块128G的固态作为系统盘, 被一些杂七杂八的Image占用了一大部分, 肯定是要清理的, 例如一些不再使用的Image, 数据卷(volume), 容器(container) 清理的方式docker已经贴心的为我们准备好了
 注意
  我本人使用的shell是fish, 所以有些shell命令的括号, 变量的使用或许和bash, zsh之类的不大一样, 但很简单, 大同小异罢了
-一定, 务必小心使用删除之类的一些操作, 在执行前先思量好
+  一定, 务必小心使用删除之类的一些操作, 在执行前先思量好
  查看docker占用的空间, 此命令类似于Linux的df命令
 docker system df 通过docker ps可以查看当前运行的容器信息, 加上参数-a则是表示所有的容器, 包括已经停止的容器
-docker container prune ###### or ###### docker rm (docker ps -aq)  -a =&amp;gt; all 表示所有 -q =&amp;gt; 只输出容器的ID 这里利用了shell的特性, 组合删除容器 清理单个停止的容器
-docker rm -lv CONTAINER/ID -l =&amp;gt; link
- -v =&amp;gt; volume
- -f =&amp;gt; force</description>
+docker container prune ###### or ###### docker rm (docker ps -aq)  -a =&amp;gt; all 表示所有 -q =&amp;gt; 只输出容器的ID 这里利用了shell的特性, 组合删除容器 清理单个停止的容器  docker rm -lv CONTAINER/ID  -l =&amp;gt; link -v =&amp;gt; volume -f =&amp;gt; force  清理标示为的Image</description>
     </item>
     
     <item>
@@ -338,7 +345,8 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=qwer123 -d -i -p 3306:3306 --rest
 -i, --interactive 即使没有连接, 也要保持STDIN打开, 也就是说需要打开shell
 -t, --tty 分配伪tty
 Dockerfile的RUN, CMD, ENTRYPOINT RUN 执行命令并创建新的Image Layer
-CMD 设置容器启动后默认执行的命令与参数</description>
+CMD 设置容器启动后默认执行的命令与参数
+ENTRYPOINT 执行容器启动时执行的命令</description>
     </item>
     
     <item>
@@ -349,10 +357,13 @@ CMD 设置容器启动后默认执行的命令与参数</description>
       <guid>/2019/06/20/singnal_nginx/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  nginx 信号 nginx -s [reopen, reload, stop, quit]与之对应的信号如下
-reopen =&amp;gt; USR1 重新打开日志文件 reload =&amp;gt; HUP 重载配置文件 stop =&amp;gt; TERM / INT 立即停止nginx quit =&amp;gt; QUIT 温柔优雅地停止nginx WINCH 优雅地关闭相应的worker进程 USR2 热升级nginx程序  所谓的热升级, 便是在不影响程序运行的状态下对其进行升级
+reopen =&amp;gt; USR1 重新打开日志文件 reload =&amp;gt; HUP 重载配置文件 stop =&amp;gt; TERM / INT 立即停止nginx quit =&amp;gt; QUIT 温柔优雅地停止nginx WINCH 优雅地关闭相应的worker进程 USR2 热升级nginx程序 所谓的热升级, 便是在不影响程序运行的状态下对其进行升级
 使用kill命令发送信号到特定pid
-kill -INT 12345  这段命令目的为终止12345这个进程
-热升级  再做热升级的时候, 最重要的一步自然是备份 编译nginx得到其二进制文件 替换旧的nginx为新编译的nginx二进制文件 替换内存当中运行的nginx程序 在上面已经说了USR2是热升级nginx的信号, 自然是要使用该信号
+kill -INT 12345 这段命令目的为终止12345这个进程
+热升级   再做热升级的时候, 最重要的一步自然是备份
+  编译nginx得到其二进制文件
+  替换旧的nginx为新编译的nginx二进制文件
+  替换内存当中运行的nginx程序 在上面已经说了USR2是热升级nginx的信号, 自然是要使用该信号
 对正在运行的nginxMasterPid发送USR2, 在旧版本的master进程收到后, 会通过前面已经替换的新nginx二进制文件进行启动
 而此时新旧两版本却同时存在于内存当中, 需要使用WINCH信号停止旧版worker进程, 而旧master却还存在着
 这是为了防止在热升级的时候出现问题, 以便随时回滚到原来, 使用HUP信号即可重新生成worker进程
@@ -402,8 +413,8 @@ iptables -t filter -I INPUT -p tcp -m tcp --dport 22 --tcp-flags ALL SYN,ACK -j 
       <guid>/2019/06/17/iptables_06/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  iptables之扩展动作 在之前的学习当中, 一直在使用ACCEPT, DROP, REJECT这些常用的动作, 当然, 说是常用, 肯定也有些其他不常用的动作
-其实-j REJECT还有一个选项, 它可以设定REJECT之后的返回消息, 可选的原因如下: - icmp-net-unreachable - icmp-host-unreachable - icmp-port-unreachable - icmp-proto-unreachable - icmp-net-prohibited - icmp-host-pro-hibited - icmp-admin-prohibited
-iptables -I INPUT -p icmp -s 192.168.0.111 -j REJECT --reject-with icmp-host-unreachable 上列规则设定了拒绝来自192.168.0.111主机的ping请求, 并且设定返回的消息为icmp-host-unreachable, 默认的消息是icmp-port-unreachable
+其实-j REJECT还有一个选项, 它可以设定REJECT之后的返回消息, 可选的原因如下:
+ icmp-net-unreachable icmp-host-unreachable icmp-port-unreachable icmp-proto-unreachable icmp-net-prohibited icmp-host-pro-hibited icmp-admin-prohibited  iptables -I INPUT -p icmp -s 192.168.0.111 -j REJECT --reject-with icmp-host-unreachable 上列规则设定了拒绝来自192.168.0.111主机的ping请求, 并且设定返回的消息为icmp-host-unreachable, 默认的消息是icmp-port-unreachable
 LOG日志动作 iptables -I INPUT -p tcp --dport 80 -j LOG 上列规则的目的为将来自80端口的所有tcp请求都记录在日志当中, 日志的位置处于/var/log/messages当中
 编辑/etc/rsyslog.conf, 添加 kern.warning /var/log/iptables.log, 将LOG的日志文件指定于此, 之后重启rsyslog服务便可生效
 -j LOG动作也有它的扩展动作
@@ -436,25 +447,22 @@ iptables -F # 清空旧有所有规则 iptables -I INPUT -p tcp --dport 22 -j AC
       
       <guid>/2019/06/17/tcp_three_four/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
-本文截取自通俗大白话来理解TCP协议的三次握手和四次分手, 以作为备忘记录
+  本文截取自通俗大白话来理解TCP协议的三次握手和四次分手, 以作为备忘记录
  TCP头部 其中 ACK SYN 序号 这三个部分在以下会用到，它们的介绍也在下面。
- Source Port和Destination Port:分别占用16位，表示源端口号和目的端口号；用于区别主机中的不同进程，而IP地址是用来区分不同的主机的，源端口号和目的端口号配合上IP首部中的源IP地址和目的IP地址就能唯一的确定一个TCP连接；
- Sequence Number:用来标识从TCP发端向TCP收端发送的数据字节流，它表示在这个报文段中的的第一个数据字节在数据流中的序号；主要用来解决网络报乱序的问题；
- Acknowledgment Number:32位确认序列号包含发送确认的一端所期望收到的下一个序号，因此，确认序号应当是上次已成功收到数据字节序号加1。不过，只有当标志位中的ACK标志（下面介绍）为1时该确认序列号的字段才有效。主要用来解决不丢包的问题；
- Offset:给出首部中32 bit字的数目，需要这个值是因为任选字段的长度是可变的。这个字段占4bit（最多能表示15个32bit的的字，即4*15=60个字节的首部长度），因此TCP最多有60字节的首部。然而，没有任选字段，正常的长度是20字节；
- TCP Flags:TCP首部中有6个标志比特，它们中的多个可同时被设置为1，主要是用于操控TCP的状态机的，依次为URG，ACK，PSH，RST，SYN，FIN。每个标志位的意思如下：
- URG：此标志表示TCP包的紧急指针域（后面马上就要说到）有效，用来保证TCP连接不被中断，并且督促中间层设备要尽快处理这些数据；
- ACK：此标志表示应答域有效，就是说前面所说的TCP应答号将会包含在TCP数据包中；有两个取值：0和1，为1的时候表示应答域有效，反之为0；
- PSH：这个标志位表示Push操作。所谓Push操作就是指在数据包到达接收端以后，立即传送给应用程序，而不是在缓冲区中排队；
- RST：这个标志表示连接复位请求。用来复位那些产生错误的连接，也被用来拒绝错误和非法的数据包；
- SYN：表示同步序号，用来建立连接。SYN标志位和ACK标志位搭配使用，当连接请求的时候，SYN=1，ACK=0；连接被响应的时候，SYN=1，ACK=1；这个标志的数据包经常被用来进行端口扫描。扫描者发送一个只有SYN的数据包，如果对方主机响应了一个数据包回来 ，就表明这台主机存在这个端口；但是由于这种扫描方式只是进行TCP三次握手的第一次握手，因此这种扫描的成功表示被扫描的机器不很安全，一台安全的主机将会强制要求一个连接严格的进行TCP的三次握手；
- FIN： 表示发送端已经达到数据末尾，也就是说双方的数据传送完成，没有数据可以传送了，发送FIN标志位的TCP数据包后，连接将被断开。这个标志的数据包也经常被用于进行端口扫描。
+  Source Port和Destination Port:分别占用16位，表示源端口号和目的端口号；用于区别主机中的不同进程，而IP地址是用来区分不同的主机的，源端口号和目的端口号配合上IP首部中的源IP地址和目的IP地址就能唯一的确定一个TCP连接；
+  Sequence Number:用来标识从TCP发端向TCP收端发送的数据字节流，它表示在这个报文段中的的第一个数据字节在数据流中的序号；主要用来解决网络报乱序的问题；
+  Acknowledgment Number:32位确认序列号包含发送确认的一端所期望收到的下一个序号，因此，确认序号应当是上次已成功收到数据字节序号加1。不过，只有当标志位中的ACK标志（下面介绍）为1时该确认序列号的字段才有效。主要用来解决不丢包的问题；
+  Offset:给出首部中32 bit字的数目，需要这个值是因为任选字段的长度是可变的。这个字段占4bit（最多能表示15个32bit的的字，即4*15=60个字节的首部长度），因此TCP最多有60字节的首部。然而，没有任选字段，正常的长度是20字节；
+  TCP Flags:TCP首部中有6个标志比特，它们中的多个可同时被设置为1，主要是用于操控TCP的状态机的，依次为URG，ACK，PSH，RST，SYN，FIN。每个标志位的意思如下：
+  URG：此标志表示TCP包的紧急指针域（后面马上就要说到）有效，用来保证TCP连接不被中断，并且督促中间层设备要尽快处理这些数据；
+  ACK：此标志表示应答域有效，就是说前面所说的TCP应答号将会包含在TCP数据包中；有两个取值：0和1，为1的时候表示应答域有效，反之为0；
+  PSH：这个标志位表示Push操作。所谓Push操作就是指在数据包到达接收端以后，立即传送给应用程序，而不是在缓冲区中排队；
+  RST：这个标志表示连接复位请求。用来复位那些产生错误的连接，也被用来拒绝错误和非法的数据包；
+  SYN：表示同步序号，用来建立连接。SYN标志位和ACK标志位搭配使用，当连接请求的时候，SYN=1，ACK=0；连接被响应的时候，SYN=1，ACK=1；这个标志的数据包经常被用来进行端口扫描。扫描者发送一个只有SYN的数据包，如果对方主机响应了一个数据包回来 ，就表明这台主机存在这个端口；但是由于这种扫描方式只是进行TCP三次握手的第一次握手，因此这种扫描的成功表示被扫描的机器不很安全，一台安全的主机将会强制要求一个连接严格的进行TCP的三次握手；
+  FIN： 表示发送端已经达到数据末尾，也就是说双方的数据传送完成，没有数据可以传送了，发送FIN标志位的TCP数据包后，连接将被断开。这个标志的数据包也经常被用于进行端口扫描。
    Window:窗口大小，也就是有名的滑动窗口，用来进行流量控制；这是一个复杂的问题，这篇博文中并不会进行总结的； 暂时需要的信息有：
-  ACK ： TCP协议规定，只有ACK=1时有效，也规定连接建立后所有发送的报文的ACK必须为1
- SYN(SYNchronization) ： 在连接建立时用来同步序号。当SYN=1而ACK=0时，表明这是一个连接请求报文。对方若同意建立连接，则应在响应报文中使SYN=1和ACK=1. 因此, SYN置1就表示这是一个连接请求或连接接受报文。
- FIN （finis）即完，终结的意思， 用来释放一个连接。当 FIN = 1 时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接。
-  三次握手的过程：
- 第一次握手：建立连接。客户端发送连接请求报文段，将SYN位置为1，Sequence Number为x；然后，客户端进入SYN_SEND状态，等待服务器的确认； 第二次握手：服务器收到SYN报文段。服务器收到客户端的SYN报文段，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1(Sequence Number+1)；同时，自己自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为y；服务器端将上述所有信息放到一个报文段（即SYN+ACK报文段）中，一并发送给客户端，此时服务器进入SYN_RECV状态； 第三次握手：客户端收到服务器的SYN+ACK报文段。然后将Acknowledgment Number设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕以后，客户端和服务器端都进入ESTABLISHED状态，完成TCP三次握手。  完成了三次握手，客户端和服务器端就可以开始传送数据。以上就是TCP三次握手的总体介绍。 那四次分手呢？ 当客户端和服务器通过三次握手建立了TCP连接以后，当数据传送完毕，肯定是要断开TCP连接的啊。那对于TCP的断开连接，这里就有了神秘的“四次分手”。</description>
+   ACK ： TCP协议规定，只有ACK=1时有效，也规定连接建立后所有发送的报文的ACK必须为1
+  SYN(SYNchronization) ： 在连接建立时用来同步序号。当SYN=1而ACK=0时，表明这是一个连接请求报文。对方若同意建立连接，则应在响应报文中使SYN=1和ACK=1. 因此, SYN置1就表示这是一个连接请求或连接接受报文。</description>
     </item>
     
     <item>
@@ -468,8 +476,8 @@ iptables -F # 清空旧有所有规则 iptables -I INPUT -p tcp --dport 22 -j AC
 iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
 --src-range是源地址的范围, --dst-range是目标地址的范围
 同样, --src-range和--dst-range可以使用取反(!)操作
-string扩展模块 如果报文信息中包含了字符&amp;rdquo;hello&amp;rdquo;, 就对此报文进行进一步的操作
-iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;rdquo;hello, world&amp;rdquo;这个字符串, 就将其拒绝
+string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;rdquo;, 就对此报文进行进一步的操作
+iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;quot;hello, world&amp;quot;这个字符串, 就将其拒绝
 --algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
 time扩展模块 time模块可以对特定时间段的报文进行处理
 iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 07:00:00 --timestop 18:00:00 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --monthdays 22,23 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --datestart 2019-06-15 --datestop 2019-06-23 -j REJECT 上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</description>
@@ -502,7 +510,7 @@ iptables -t filter -D INPUT -s 192.</description>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  在学习Rust的历程中, 其中的灵魂便是trait这个玩意儿, 它的功能非常强大, Rust中所有的抽象几乎都是使用trait来完成的, 同时trait也保证这些抽象都是运行时零开销的. 它与我已知语言中的Python的Duck-Typing(鸭子类型), Golang的接口非常相似但功能据说更加强大, 先在这里记录一篇学习的笔记.
 trait的限定与trait对象的用法:
-struct Foo; trait Bar { fn baz(&amp;amp;self); } impl Bar for Foo { fn baz(&amp;amp;self) { println!(&amp;#34;{:?}&amp;#34;, self); } } fn static_dispatch&amp;lt;T&amp;gt; (t: &amp;amp;T) where T: Bar { t.baz(); } fn dynamic_dispatch(t: &amp;amp;Bar) { t.baz(); } fn main() { let foo = Foo; static_dispatch(&amp;amp;foo); // Foo 	dynamic_dispatch(&amp;amp;foo); // Foo }  可以看出static_dispatch与dynamic_dispatch行为目的是相同的, static_dispatch是泛型限定为静态分发, 而dynamic_dispatch时动态分发. (从方法命名就可以看出来, 这不是废话么(逃..
+struct Foo; trait Bar { fn baz(&amp;amp;self); } impl Bar for Foo { fn baz(&amp;amp;self) { println!(&amp;#34;{:?}&amp;#34;, self); } } fn static_dispatch&amp;lt;T&amp;gt; (t: &amp;amp;T) where T: Bar { t.baz(); } fn dynamic_dispatch(t: &amp;amp;Bar) { t.baz(); } fn main() { let foo = Foo; static_dispatch(&amp;amp;foo); // Foo 	dynamic_dispatch(&amp;amp;foo); // Foo } 可以看出static_dispatch与dynamic_dispatch行为目的是相同的, static_dispatch是泛型限定为静态分发, 而dynamic_dispatch时动态分发. (从方法命名就可以看出来, 这不是废话么(逃..
 static_dispatch是为泛型T做了类型的限定, 只有实现了Bar这个trait的类型才能够使用, 因为上面已经为Foo这个结构体实现了Bar, 理所应当的t是可以调用baz()方法的.</description>
     </item>
     
@@ -543,7 +551,8 @@ pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后�
       <description>这是一篇没有技术含量的文章&amp;hellip;
  Gentoo安装历程 准备开始 第一步当然是下载所需的chroot环境与Gentoo的stage3包
 当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的
-那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧 开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
+那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧
+开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
 # 查看硬盘 fdisk -l # 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份) mkfs.ext4 /dev/nvme0n1 # 这里我使用的是cfdisk分区(简单明了) cfdisk /dev/nvme0n1 # 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区 # 对它们进行格式化操作 mkfs.vfat -F 32 /dev/nvme0n1p1 mkfs.swap /dev/nvme0n1p2 mkfs.ext4 /dev/nvme0n1p3 # 待格式话操作完成之后, 讲它们挂载到对应分区 mount /dev/nvme0n1p3 /mnt/gentoo # 此分区为最大的( / )分区 mkdir -p /mnt/gentoo/boot mount /dev/nvme0n1p1 /mnt/gentoo/boot # 下载系统文件并解压(官方的stage3, 这里使用网易的源) wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo # 解压(先切换到/mnt/gentoo目录之下) tar xvpf stage3-amd64-* --xattrs-include=&amp;#34;*.</description>
     </item>
     
@@ -578,9 +587,9 @@ git apply --reject --whitespace=fix st-ime-20190202-3be4cf1.diff 它会对st.c�
       
       <guid>/2019/02/06/disable_sqlalchmey_basic_class_table/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
-在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
- class Base(db.Model): &amp;#34;&amp;#34;&amp;#34; file: base.py &amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34; file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
-__abstract__ = True</description>
+  在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
+ class Base(db.Model): &amp;#34;&amp;#34;&amp;#34;file: base.py&amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34;file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
+__abstract__ = True </description>
     </item>
     
     <item>
@@ -591,9 +600,9 @@ __abstract__ = True</description>
       <guid>/2019/01/13/rust_basic/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  原始标识符 有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：
-let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦  变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
+let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦 变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 例如
-fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; // 创建变量x为一个可变变量并初始化值为5 x = 6; // 这才是正确的创建可变变量方法 */  常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
+fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; //创建变量x为一个可变变量并初始化值为5 x = 6; //这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
     </item>
     
     <item>
@@ -603,7 +612,7 @@ fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x =
       
       <guid>/2019/01/11/abstract/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 我一直对&amp;rdquo;抽象&amp;rdquo;这个词有着不解的迷惑, 一直以来都是似懂非懂, 说不出它的具体含义, 但却一直没有真正取试图了解它的含义, 直到现在我在维基百科, 各种知识问答中吸取他们的理解, 直到碰到下面这段话, 我觉得它非常贴合我目前的理解, 从网络上将其截取并保存在博客上用作加深印象.
+ 我一直对&amp;quot;抽象&amp;quot;这个词有着不解的迷惑, 一直以来都是似懂非懂, 说不出它的具体含义, 但却一直没有真正取试图了解它的含义, 直到现在我在维基百科, 各种知识问答中吸取他们的理解, 直到碰到下面这段话, 我觉得它非常贴合我目前的理解, 从网络上将其截取并保存在博客上用作加深印象.
 面向对象软件开发的一个基本方法就是抽象，到底什么是抽象呢? 抽象是从众多的事物中抽取出共同的、本质性的特征，而舍弃其非本质的特征。 例如苹果、香蕉、生梨、葡萄、桃子等，它们共同的特性就是水果。 得出水果概念的过程，就是一个抽象的过程。 要抽象，就必须进行比较，没有比较就无法找到共同的部分。 共同特征是指那些能把一类事物与他类事物区分开来的特征， 这些具有区分作用的特征又称本质特征。 因此抽取事物的共同特征就是抽取事物的本质特征，舍弃不同特征。 所以抽象的过程也是一个裁剪的过程，不同的、非本质性的特征全部裁剪掉了。 所谓的共同特征，是相对的，是指从某一个刻面看是共同的。 比如，对于汽车和大米，从买卖的角度看都是商品，都有价格， 这是他们的共同的特征，而从其他方面来比较是，他们则是不同的。 所以在抽象时，同与不同，决定于从什么角度上来抽象。 抽象的角度取决于分析问题的目的。 在软件开发过程中， 识别稳定的需求、识别核心的需求、识别概念性的需求、 设计系统的架构、定义系统中构件之间的接口关系等等都是抽象的过程， 都是反应系统的本质特征的过程。 抽象的，才是稳定的，才是永恒的。 抽象的反义词是具体。 人员往往会说：“你讲的太抽象了，能不能讲的具体一点?”在开发语言中， 有抽象类，有具体类，具体类可以继承自抽象类，可以实例化。 抽象类可以派生出众多的不同的具体类。所谓：“一生二，二生三，三生万物”。 系统的稳定体现在抽象类，系统的变化体现在具体类。抽象类的层次要高于具体类。 系统因抽象而稳定，因抽象而生动。
 我想, 那些艺术家所画的抽象画大概也就是剥离事物的本质与艺术家对其的观点与角度而描绘出来的令普通人无法理解的画面.</description>
     </item>
@@ -615,13 +624,14 @@ fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x =
       
       <guid>/2018/11/26/brainfuck_language/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 起因 很无聊, 一时兴起到网上搜索了最难编程语言, 其中的brainfuck语言惊艳到了我, 我觉得它非常有趣. 实际上还有很多奇葩好玩的东西, 今天就折腾一下brainfuck吧. 开始懵逼 &amp;gt;+++++++++[&amp;lt;++++++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.+++++++..+++.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++++++[&amp;lt;+++++&amp;gt;-]&amp;lt;.&amp;gt;++++++++[&amp;lt;+++&amp;gt;-]&amp;lt;.+++.------.--------.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.[-]++++++++++. 这段玩意儿会输出Hello World!, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~ brainfuck它只有八个指令, 除去这八个之外的所有字符都将忽略.
+ 起因 很无聊, 一时兴起到网上搜索了最难编程语言, 其中的brainfuck语言惊艳到了我, 我觉得它非常有趣. 实际上还有很多奇葩好玩的东西, 今天就折腾一下brainfuck吧.
+开始懵逼 &amp;gt;+++++++++[&amp;lt;++++++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.+++++++..+++.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++++++[&amp;lt;+++++&amp;gt;-]&amp;lt;.&amp;gt;++++++++[&amp;lt;+++&amp;gt;-]&amp;lt;.+++.------.--------.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.[-]++++++++++.这段玩意儿会输出Hello World!, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~ brainfuck它只有八个指令, 除去这八个之外的所有字符都将忽略.
 Brainfuck的指令定义  + : 指针指向的单元的值加1 - : 指针指向的单元的值减1 &amp;gt; : 将指针移动到下一个单元(右边的元素) &amp;lt; : 将指针移动到上一个单元(左边的元素) . : 打印当前单元的内容的ASCII值 (比如 65 = &amp;lsquo;A&amp;rsquo;). , : 读取一个字符到当前的单元(英文逗号) [ : 如果当前单元的值是0，则向后调转到对应的]处 ] : 如果当前单元的值不是0，则向前跳转到对应的[处  它会定义一个30000长度的数组, 每次的指令操作都是对数组中的数字进行加减, 根据Ascii编码来进行输出字符, 例如当数字加到65就输出字母A, 它的实现其实并不难, 但非常的巧妙.
 根据上面的定义我们来用此实现一个复读机
-+[,[&amp;gt;+&amp;lt;-]&amp;gt;.&amp;lt;-] 运行它, 它将会把你输入的字符再打印一份出来, 实际作用就等同于python版本的复读机
++[,[&amp;gt;+&amp;lt;-]&amp;gt;.&amp;lt;-]运行它, 它将会把你输入的字符再打印一份出来, 实际作用就等同于python版本的复读机
 while True: print(input()) 下面是使用的C实现的Brainfuck的解释器, 说实在的以后无聊了可以使用Brainfuck自举自己的解释器:)&amp;gt;
 之后使用Python或Golang来实现一个, 实现它很简单
-#include &amp;lt;stdio.</description>
+#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;unistd.</description>
     </item>
     
     <item>
@@ -631,10 +641,12 @@ while True: print(input()) 下面是使用的C实现的Brainfuck的解释器, �
       
       <guid>/2018/11/24/django_pit/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 起因 因为宅在家无聊, 想起了Python技术栈里还有个很重要的框架没有学习, 那就是Django, 我发现它并不是那么的简单, 其中的过程非常难受, 在我学习开始使用它的时候就趟过以下的坑(其中的有些坑真的让我很迷), 寥寥数语, 记录我逝去的8个小时. 将app注册到了settings, 但是生成数据表仍然提示无法找到app No module nomed &#39;***&#39;  在Pycharm当中因为设置过Source root, 所以Idea运行是没有问题的, 当使用命令行运行时就会报此错误. 这是因为python的搜索路径中没有它, 需要将这个地址加入到python搜索路径 在settings文件中添加
-import os, sys curPath = os.path.abspath(os.path.dirname(__file__)) rootPath = os.path.split(curPath)[0] sys.path.append(rootPath) 运行报错 django.core.exceptions.AppRegistryNotReady: Apps aren&#39;t loaded yet.  原因是根目录下manage.py中包含没有使用的包(这又不是go, 为什么会这样, 反正去掉就没事了, 很玄学)
-导包的坑 RuntimeError: Model class apps.message.models.UserMessage doesn&#39;t declare an explicit app_label and isn&#39;t in an application in INSTALLED_APPS.  原因有可能是使用以下相对路劲导入包时发生
-from .models import * 需要指定明确的app中的models</description>
+ 起因 因为宅在家无聊, 想起了Python技术栈里还有个很重要的框架没有学习, 那就是Django, 我发现它并不是那么的简单, 其中的过程非常难受, 在我学习开始使用它的时候就趟过以下的坑(其中的有些坑真的让我很迷), 寥寥数语, 记录我逝去的8个小时.
+将app注册到了settings, 但是生成数据表仍然提示无法找到app No module nomed &#39;***&#39; 在Pycharm当中因为设置过Source root, 所以Idea运行是没有问题的, 当使用命令行运行时就会报此错误. 这是因为python的搜索路径中没有它, 需要将这个地址加入到python搜索路径 在settings文件中添加
+import os, sys curPath = os.path.abspath(os.path.dirname(__file__)) rootPath = os.path.split(curPath)[0] sys.path.append(rootPath) 运行报错 django.core.exceptions.AppRegistryNotReady: Apps aren&#39;t loaded yet. 原因是根目录下manage.py中包含没有使用的包(这又不是go, 为什么会这样, 反正去掉就没事了, 很玄学)
+导包的坑 RuntimeError: Model class apps.message.models.UserMessage doesn&#39;t declare an explicit app_label and isn&#39;t in an application in INSTALLED_APPS. 原因有可能是使用以下相对路劲导入包时发生
+from .models import * 需要指定明确的app中的models
+from appname.models import * 检查setting中app注册的方式, 需要使用如下方式</description>
     </item>
     
     <item>
@@ -644,7 +656,8 @@ from .models import * 需要指定明确的app中的models</description>
       
       <guid>/2018/11/21/setup_git_server/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 起因 并非github, coding不好用, 而是我正好有一台吃灰的小鸡, 与其让它继续吃灰不如弄点有意义的, 我有些比较重要的文件需要使用git管理, 而github没有免费的私有仓库, coding容量不够大. 在网络上搜罗了搭建教程, 为了避免以后再去翻找, 所以为此做一篇笔记用来记录搭建的过程与踩坑的地方. 所属环境  Ubuntu16.04 lts server git version 2.7.4  开始安装 安装git
+ 起因 并非github, coding不好用, 而是我正好有一台吃灰的小鸡, 与其让它继续吃灰不如弄点有意义的, 我有些比较重要的文件需要使用git管理, 而github没有免费的私有仓库, coding容量不够大. 在网络上搜罗了搭建教程, 为了避免以后再去翻找, 所以为此做一篇笔记用来记录搭建的过程与踩坑的地方.
+所属环境  Ubuntu16.04 lts server git version 2.7.4  开始安装 安装git
 sudo apt-get install git 创建git用户
 sudo adduser git 生成ssh公钥
 ssh-keygen -t rsa 创建证书登录
@@ -654,7 +667,7 @@ ssh-keygen -t rsa 创建证书登录
 sudo git init --bare example.git 更改仓库所属权
 sudo chown -R git:git example.git _禁用shell登录 这里有个坑, 不同的系统的git-shell的位置或许不一样.
 #查看git-shell的位置 which git-shell 使用root权限编辑/etc/passwd, 找到git
-git:x:1001:1001:,,,:/home/git:/bin/bash  改为
+git:x:1001:1001:,,,:/home/git:/bin/bash 改为
 git:x:1001:1001:,,,:/home/git:填入刚刚which git-shell得到的结果 踩坑开始 Git默认情况下是使用ssh的22端口进行数据传输, 但有些时候我们也许会将22改为其他, 那么在clone的时候就需要加上端口clone</description>
     </item>
     
@@ -666,10 +679,10 @@ git:x:1001:1001:,,,:/home/git:填入刚刚which git-shell得到的结果 踩坑�
       <guid>/2018/11/14/golang_concurrent/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  Goroutine 本节中需要了解并发的概念, 如果还不了解并发的原理, 可以移步到我另一篇笔记. Goroutine在golang中一个非常重要的概念, 是它赖以成名的招式, 这在通用的编程语言当中, 自带这种特性的还是比较少见的.
-在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下 - 它是非抢占式多任务处理, 由协程调度器主动交出控制权 - 它是编译器/解释器/虚拟机层面的多任务 - 多个协程可能会在一个或多个线程上运行
-Goroutine的定义 - 任何函数只要加上go关键字就能给调度器运行 - 不需要在定义的时候区分是否为异步函数 - 调度器会在合适的点进行切换任务 - 可以使用go run -race raceFile.go检测数据访问的冲突
-如下例, 在这里创建了10个协程
-func main() { for i := 0; i &amp;lt; 10; i++ { go func(x int) { for ; ; { fmt.Printf(&amp;#34;Gorouting from %d&amp;#34;, x) } }(i) } time.Sleep(time.Millisecond) // 设置休眠, 防止协程被直接干掉 } golang中开启协程是非常方便的, 使用go关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号()代表直接执行.</description>
+在此之前, 我们需要了解以下什么是协程(Coroutine), 所谓的协程它和线程是非常像的, 但它并不是线程, 区别它不是线程的关键点如下
+ 它是非抢占式多任务处理, 由协程调度器主动交出控制权 它是编译器/解释器/虚拟机层面的多任务 多个协程可能会在一个或多个线程上运行  Goroutine的定义
+ 任何函数只要加上go关键字就能给调度器运行 不需要在定义的时候区分是否为异步函数 调度器会在合适的点进行切换任务 可以使用go run -race raceFile.go检测数据访问的冲突  如下例, 在这里创建了10个协程
+func main() { for i := 0; i &amp;lt; 10; i++ { go func(x int) { for ; ; { fmt.Printf(&amp;#34;Gorouting from %d&amp;#34;, x) } }(i) } time.Sleep(time.Millisecond) // 设置休眠, 防止协程被直接干掉 } golang中开启协程是非常方便的, 使用go关键字就可以使用协程, 一般定义协程函数使用匿名函数, 后面接一个括号()代表直接执行. 在这个例子当中, 开了十个协程, 看到第九行的代码, 这是因为这段代码是并发执行的, 当最外层的循环语句结束之后还没有来得及进行fmt.</description>
     </item>
     
     <item>
@@ -728,9 +741,11 @@ https://github.com/0x1un/dotFiles</description>
       
       <guid>/2018/11/08/golang_functional/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 什么是函数式编程  在正统的函数编程里面是不可变, 没有变量, 只能有常量和函数, 每个函数只能有一个参数 在函数式编程里面, 函数是一等公民, 所谓的一等公民就是它们的参数, 变量, 返回值都可以是函数
- 高阶函数(可以返回其它函数的函数和接受其它函数作为参数的函数均被称之为高阶函数)
- 函数闭包(说人话就是, 函数里面再包含了函数, 最终return了子函数), 可以直接看最后面的函数闭包总结 // 实现一个累加器 方法一 // 返回结果为函数 func adder() func(int) int { sum := 0 return func(v int) int { sum += v return sum } } // 实现一个累加器 方法二 // 创建类型iAdder 类型为函数 返回两个值, 一个为累加的值, 一个为下一个函数 type iAdder func(int) (int, iAdder) func adder2(base int) iAdder { return func(v int) (int, iAdder) { return base + v, adder2(base + v) } } func main() { a := adder2(0) for i := 0; i &amp;lt; 101; i++ { var s int s, a = a(i) fmt.</description>
+ 什么是函数式编程   在正统的函数编程里面是不可变, 没有变量, 只能有常量和函数, 每个函数只能有一个参数
+  在函数式编程里面, 函数是一等公民, 所谓的一等公民就是它们的参数, 变量, 返回值都可以是函数
+  高阶函数(可以返回其它函数的函数和接受其它函数作为参数的函数均被称之为高阶函数)
+  函数闭包(说人话就是, 函数里面再包含了函数, 最终return了子函数), 可以直接看最后面的函数闭包总结
+  // 实现一个累加器 方法一 // 返回结果为函数 func adder() func(int) int { sum := 0 return func(v int) int { sum += v return sum } } // 实现一个累加器 方法二 // 创建类型iAdder 类型为函数 返回两个值, 一个为累加的值, 一个为下一个函数 type iAdder func(int) (int, iAdder) func adder2(base int) iAdder { return func(v int) (int, iAdder) { return base + v, adder2(base + v) } } func main() { a := adder2(0) for i := 0; i &amp;lt; 101; i++ { var s int s, a = a(i) fmt.</description>
     </item>
     
     <item>
@@ -740,9 +755,11 @@ https://github.com/0x1un/dotFiles</description>
       
       <guid>/2018/11/08/golang_interface_oriented/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- Duck-typing(鸭子类型) 什么是鸭子类型呢, 引用一段原话 &amp;gt; when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.
-当我看到一只鸟走起来像鸭子, 游起泳来像鸭子, 叫起来也像鸭子, 那么我就称这只鸟叫鸭子.
-什么意思呢, 就是描述事物的外部而飞内部结构, 不管它内在如何, 咱们只看脸. 回到golang的鸭子类型, 严格来说golang是属于结构化的类型系统, 它类似duck-typing, 从某种意义上严格来说duck-typing是需要动态绑定的, 而golang是在编译的时候就被绑定了, 这样来说golang便不是duck-typing.
+ Duck-typing(鸭子类型) 什么是鸭子类型呢, 引用一段原话
+ when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.
+ 当我看到一只鸟走起来像鸭子, 游起泳来像鸭子, 叫起来也像鸭子, 那么我就称这只鸟叫鸭子.
+什么意思呢, 就是描述事物的外部而飞内部结构, 不管它内在如何, 咱们只看脸.
+回到golang的鸭子类型, 严格来说golang是属于结构化的类型系统, 它类似duck-typing, 从某种意义上严格来说duck-typing是需要动态绑定的, 而golang是在编译的时候就被绑定了, 这样来说golang便不是duck-typing.
 关于duck-typing的详细解释, 这里推荐一篇文章, 我就不再进行解释了. https://studygolang.com/articles/214
 接口的定义与实现 当你对duck-typing有一定的理解之后, 我们可以进行接口编程了
 下面的示例实现了一个简单请求网页源码的需求
@@ -757,13 +774,13 @@ https://github.com/0x1un/dotFiles</description>
       <guid>/2018/11/04/golang_object_oriented/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  面向对象 面向对象语言诸如Java, Python, C++之类的语言都是可以支持继承, 封装, 多态的, 但golang不一样, 它仅支持封装, 但如果要用到继承与多态呢, 在golang中是以面向接口编程来解决的, 而面向对象只要封装就够了。
-golang没有其他语言中class这种东西, 它只有struct - 示例
-type treeNode struct { value int left, right *treeNode } 在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。
+golang没有其他语言中class这种东西, 它只有struct
+ 示例  type treeNode struct { value int left, right *treeNode } 在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。
 我要创建如下图一样的二叉树
-创建节点 - 示例
-var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;rdquo;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
-golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。 - 示例
-func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } root.</description>
+创建节点
+ 示例  var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;rdquo;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
+golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。
+ 示例  func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } root.</description>
     </item>
     
     <item>
@@ -773,12 +790,13 @@ func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } 
       
       <guid>/2018/11/01/golang_builtin_collections/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 数组 首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。 - 示例
-var arr1 [5]int var grid [4][5]int 定义一个数组, 长度为5, 如果不为数组赋值的话默认值为0, 这与C, Java是一样的, 亦可以通过以下方式创建数组。 arr2 := [3]int{1, 3, 5} 这种方法与示例1相当, 但是必须为数组赋初值。 以上两种方法定义数组都是必须明确数组的长度个数, 有些情况是不知道长度的, 那么可以用以下方式让编译器自动计算数组长度。
-arr3 := [...]int{2, 4, 5, 6, 1, 10, 99} 遍历数组(传统方法) - 示例
-for i := 0; i &amp;lt; len(arr3); i++ { fmt.Println(arr3[i]) } 在golang中没有++i, ++j之类的操作, 只有i++, j++之类的操作。
-遍历数组(go风格) - 示例
-for i, v := range arr3 { fmt.Println(i, v) } for _, v := range arr3 { fmt.</description>
+ 数组 首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。
+ 示例  var arr1 [5]int var grid [4][5]int 定义一个数组, 长度为5, 如果不为数组赋值的话默认值为0, 这与C, Java是一样的, 亦可以通过以下方式创建数组。
+arr2 := [3]int{1, 3, 5} 这种方法与示例1相当, 但是必须为数组赋初值。 以上两种方法定义数组都是必须明确数组的长度个数, 有些情况是不知道长度的, 那么可以用以下方式让编译器自动计算数组长度。
+arr3 := [...]int{2, 4, 5, 6, 1, 10, 99} 遍历数组(传统方法)
+ 示例  for i := 0; i &amp;lt; len(arr3); i++ { fmt.Println(arr3[i]) } 在golang中没有++i, ++j之类的操作, 只有i++, j++之类的操作。
+遍历数组(go风格)
+ 示例  for i, v := range arr3 { fmt.</description>
     </item>
     
     <item>
@@ -788,8 +806,8 @@ for i, v := range arr3 { fmt.Println(i, v) } for _, v := range arr3 { fmt.</desc
       
       <guid>/2018/10/27/golang_conversion_type/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- golang中的一些常用的內建变量类型  bool, string (u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr byte, rune float32, float64, complex64, complex128 golang中没有char类型，只有rune类型 首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。
-func triangle(){ var a, b int = 3, 4 var c int c = int(math.Sqrt(float64(a * a + b * b)) fmt.Println(c) }  因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。
+ golang中的一些常用的內建变量类型  bool, string (u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr byte, rune float32, float64, complex64, complex128 golang中没有char类型，只有rune类型  首先在golang中是没有隐式类型转换的，在Python之类的语言当中解释器会将类型自动转换，而golang中是需要手动强制进行转换的。
+func triangle(){ var a, b int = 3, 4 var c int c = int(math.Sqrt(float64(a * a + b * b)) fmt.Println(c) } 因为变量c的类型是int，所以在计算其结果(float64)之后要将它放入c，就需要将结果强行转换成int，golang编译器是不会自动将它转换成int的。
 常量 const filename = &amp;#34;abc.txt&amp;#34; const a, b = 3, 4 var c int = int(math.Sqrt(a*a + b*b)) const数值可以作为各种类型使用
 枚举 func enmus() { const (cpp = iota java python golang ) const ( b = 1 &amp;lt;&amp;lt;(10 * iota) kb mb gb tb pb ) } iota会从0开始一直递增(每次递增为1)为下面的的常量进行赋值，如果中间用下划线_隔开则会跳过这一项。</description>
     </item>
@@ -801,21 +819,18 @@ func triangle(){ var a, b int = 3, 4 var c int c = int(math.Sqrt(float64(a * a +
       
       <guid>/2018/10/18/huffman/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 数据压缩 &amp;ndash; 哈夫曼（Huffman） 关于哈夫曼编码与哈夫曼树的一点简述 哈弗曼树也叫作赫夫曼树，也叫作霍夫曼树，都指的是同一个玩意儿. 首先说哈夫曼树吧，哈夫曼树是一种特殊的二叉树，它设计的二进制前缀的编码在通信领域有着广泛的应用。 哈夫曼编码可以极大的节省数据占用的空间，且压缩的效果是无损压缩，根据数据类型的不同，压缩率也将不同。 哈夫曼树(Huffman Tree)的构建步骤  将给定的n个权值看做n棵只有根节点（无左右孩子）的二叉树，组成一个集合HT，每棵树的权值为该节点的权值。
- 从集合HT中选出2棵权值最小的二叉树，组成一棵新的二叉树，其权值为这2棵二叉树的权值之和。
- 将步骤2中选出的2棵二叉树从集合HT中删去，同时将步骤2中新得到的二叉树加入到集合HT中。
- 重复步骤2和步骤3，直到集合HT中只含一棵树，这棵树便是赫夫曼树。
-  哈夫曼树有以下几种特性  根据节点的个数以及权值的不同，赫夫曼树的形状也各不相同，赫夫曼树具有如下特性：
- 对于同一组权值，所能得到的赫夫曼树不一定是唯一的。
- 哈夫曼树的左右子树可以互换，因为这并不影响树的带权路径长度。
- 带权值的节点都是叶子节点，不带权值的节点都是某棵子二叉树的根节点。
- 权值越大的节点越靠近赫夫曼树的根节点，权值越小的节点越远离赫夫曼树的根节点。
- 哈夫曼树中只有叶子节点和度为2的节点，没有度为1的节点。
- 一棵有n个叶子节点的赫夫曼树共有2n-1个节点。
+ 数据压缩 &amp;ndash; 哈夫曼（Huffman） 关于哈夫曼编码与哈夫曼树的一点简述 哈弗曼树也叫作赫夫曼树，也叫作霍夫曼树，都指的是同一个玩意儿. 首先说哈夫曼树吧，哈夫曼树是一种特殊的二叉树，它设计的二进制前缀的编码在通信领域有着广泛的应用。 哈夫曼编码可以极大的节省数据占用的空间，且压缩的效果是无损压缩，根据数据类型的不同，压缩率也将不同。
+哈夫曼树(Huffman Tree)的构建步骤  将给定的n个权值看做n棵只有根节点（无左右孩子）的二叉树，组成一个集合HT，每棵树的权值为该节点的权值。 从集合HT中选出2棵权值最小的二叉树，组成一棵新的二叉树，其权值为这2棵二叉树的权值之和。 将步骤2中选出的2棵二叉树从集合HT中删去，同时将步骤2中新得到的二叉树加入到集合HT中。 重复步骤2和步骤3，直到集合HT中只含一棵树，这棵树便是赫夫曼树。  哈夫曼树有以下几种特性   根据节点的个数以及权值的不同，赫夫曼树的形状也各不相同，赫夫曼树具有如下特性：
+  对于同一组权值，所能得到的赫夫曼树不一定是唯一的。
+  哈夫曼树的左右子树可以互换，因为这并不影响树的带权路径长度。
+  带权值的节点都是叶子节点，不带权值的节点都是某棵子二叉树的根节点。
+  权值越大的节点越靠近赫夫曼树的根节点，权值越小的节点越远离赫夫曼树的根节点。
+  哈夫曼树中只有叶子节点和度为2的节点，没有度为1的节点。
+  一棵有n个叶子节点的赫夫曼树共有2n-1个节点。
   哈夫曼编码 哈夫曼编码是在哈夫曼树的基础上进行的二进制编码，首先将频率高的放在右边标号为1，频率低的放在左边标号为0，编码原理是根据根节点到子节点经过的距离编码而成，我也不知道该如何表述其原理，具体看下图吧。
 首先给定五个字符，而字符旁边的数字代表该字母出现的次数，依据上述的规定条件，我将其集合中最小的两个值放在一起组合成一个二叉树，计算其两个值的和，往复循环。
 根据图中所得：
- X=0 E=10 V=111 A=1100 B=1101  哈夫曼编码的效率计算是通过每个权值到根节点经过了多少条线相乘，再加上其他权值与根节点的距离相乘，以此反复直到结束计算出压缩后的大小。
+ X=0 E=10 V=111 A=1100 B=1101 哈夫曼编码的效率计算是通过每个权值到根节点经过了多少条线相乘，再加上其他权值与根节点的距离相乘，以此反复直到结束计算出压缩后的大小。
 在通常情况下，霍夫曼编码并不是最高效的压缩方法，但它压缩和解压缩的速度非常快。一般来说，造成霍夫曼编码比较耗时的原因是它需要扫描两次数据：一次用来计算频率，另一次才是用来压缩数据。而解压缩数据非常高效，因为解码每个符号的位序列只需要扫描一次霍夫曼树。
 Python代码实现Huffman编码(网摘) import queue class HuffmanNode(object): def __init__(self, left=None, right=None, root=None): self.left = left self.right = right def children(self): return((self.</description>
     </item>
@@ -848,13 +863,13 @@ Python代码实现Huffman编码(网摘) import queue class HuffmanNode(object): 
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/10/set_collection/</guid>
-      <description>  这是一篇没有技术含量的文章&amp;hellip;
- 关于Python中的set  set集合中的元素不可重复且元素无序(可变) frozenset与set一样(不可变) set与dict实现的机制相似, 它的性能很高, 时间复杂度为O(1)
- 创建一个set集合:
-myset = set(可迭代对象) myfrozenset = frozenset() # 不可变类型(可作为dict的key)  对myset进行操作
+      <description> 这是一篇没有技术含量的文章&amp;hellip;
+ 关于Python中的set  set集合中的元素不可重复且元素无序(可变) frozenset与set一样(不可变) set与dict实现的机制相似, 它的性能很高, 时间复杂度为O(1)   创建一个set集合:
+myset = set(可迭代对象) myfrozenset = frozenset() # 不可变类型(可作为dict的key)    对myset进行操作
 myset.add() # 添加数据
-  myset.update() # 合并数据
-`myset.defference(another_set)` 等同于 `myset - another_set` 返回一个新值  set集合运算操作 `a = t | s` t 和 s的并集 `b = t &amp;amp; s` t 和 s的交集 `c = t – s` 求差集（项在t中，但不在s中） `d = t ^ s` 对称差集（项在t或s中，但不会同时出现在二者中）  </description>
+myset.update() # 合并数据
+myset.defference(another_set) 等同于 myset - another_set 返回一个新值
+  set集合运算操作 `a = t | s` t 和 s的并集 `b = t &amp;amp; s` t 和 s的交集 `c = t – s` 求差集（项在t中，但不在s中） `d = t ^ s` 对称差集（项在t或s中，但不会同时出现在二者中）  </description>
     </item>
     
     <item>
@@ -864,7 +879,7 @@ myset.add() # 添加数据
       
       <guid>/2018/08/26/basic_datatype_time_complex/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;rsquo;n&amp;rsquo;是容器中当前的元素数， &amp;lsquo;k&amp;rsquo;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
+ list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;lsquo;n&#39;是容器中当前的元素数， &amp;lsquo;k&#39;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
     </item>
     
     <item>
@@ -873,10 +888,8 @@ myset.add() # 添加数据
       <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/08/11/setting-switchyomega-auto-proxy/</guid>
-      <description>  这是一篇没有技术含量的文章&amp;hellip;
- 开始设置  步骤一 &amp;gt; 设置ssr本地监听端口  步骤二 设置黑名单
-https://github.com/gfwlist/gfwlist/blob/master/gfwlist.txt https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt  随便选择一条粘贴在新建规则 Switch proxy 中，设置如图所示:  步骤三 设置白名单并自动切换
-https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac    </description>
+      <description> 这是一篇没有技术含量的文章&amp;hellip;
+ 开始设置  步骤一  设置ssr本地监听端口     步骤二 设置黑名单  https://github.com/gfwlist/gfwlist/blob/master/gfwlist.txt https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt 随便选择一条粘贴在新建规则 Switch proxy 中，设置如图所示:  步骤三 设置白名单并自动切换  https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac </description>
     </item>
     
     <item>
@@ -886,12 +899,13 @@ https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac
       
       <guid>/2018/07/26/scrapy_order/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
-  Scrapy Engine(引擎): 负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。
- Scheduler(调度器): 它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。  Downloader（下载器）：负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理
- Spider（爬虫）：它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器)
- Item Pipeline(管道)：它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方.
- Downloader Middlewares（下载中间件）：你可以当作是一个可以自定义扩展下载功能的组件。
- Spider Middlewares（Spider中间件）：你可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）
+   Scrapy Engine(引擎): 负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。
+  Scheduler(调度器): 它负责接受引擎发送过来的Request请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。
+    Downloader（下载器）：负责下载Scrapy Engine(引擎)发送的所有Requests请求，并将其获取到的Responses交还给Scrapy Engine(引擎)，由引擎交给Spider来处理
+  Spider（爬虫）：它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给引擎，再次进入Scheduler(调度器)
+  Item Pipeline(管道)：它负责处理Spider中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方.
+  Downloader Middlewares（下载中间件）：你可以当作是一个可以自定义扩展下载功能的组件。
+  Spider Middlewares（Spider中间件）：你可以理解为是一个可以自定扩展和操作引擎和Spider中间通信的功能组件（比如进入Spider的Responses;和从Spider出去的Requests）
   </description>
     </item>
     
@@ -904,7 +918,8 @@ https://raw.githubusercontent.com/breakwa11/gfw_whitelist/master/whiteiplist.pac
       <description>这是一篇没有技术含量的文章&amp;hellip;
  11.1. 简介 本指南归纳于我的几个月的博客，主题是 魔法方法 。
 什么是魔法方法呢？它们在面向对象的Python的处处皆是。它们是一些可以让你对类添加“魔法”的特殊方法。 它们经常是两个下划线包围来命名的（比如 __init__ ， __lt__ ）。但是现在没有很好的文档来解释它们。 所有的魔法方法都会在Python的官方文档中找到，但是它们组织松散。而且很少会有示例（有的是无聊的语法描述， 语言参考）。
-所以，为了修复我感知的Python文档的缺陷，我开始提供更为通俗的，有示例支持的Python魔法方法指南。我一开始 写了一些博文，现在我把这些博文总起来成为一篇指南。 希望你喜欢这篇指南，一篇友好，通俗易懂的Python魔法方法指南！
+所以，为了修复我感知的Python文档的缺陷，我开始提供更为通俗的，有示例支持的Python魔法方法指南。我一开始 写了一些博文，现在我把这些博文总起来成为一篇指南。
+希望你喜欢这篇指南，一篇友好，通俗易懂的Python魔法方法指南！
 11.2. 构造方法 我们最为熟知的基本的魔法方法就是 __init__ ，我们可以用它来指明一个对象初始化的行为。然而，当我们调用 x = SomeClass() 的时候， __init__ 并不是第一个被调用的方法。事实上，第一个被调用的是 __new__ ，这个 方法才真正地创建了实例。当这个对象的生命周期结束的时候， __del__ 会被调用。让我们近一步理解这三个方法：
 __new__(cls,[&amp;hellip;) __new__ 是对象实例化时第一个调用的方法，它只取下 cls 参数，并把其他参数传给 __init__ 。 __new__ 很少使用，但是也有它适合的场景，尤其是当类继承自一个像元组或者字符串这样不经常改变的类型的时候。我不打算深入讨论 __new__ ，因为它并不是很有用， Python文档 中 有详细的说明。
 __init__(self,[&amp;hellip;]) 类的初始化方法。它获取任何传给构造器的参数（比如我们调用 x = SomeClass(10, ‘foo’) ， __init__ 就会接到参数 10 和 ‘foo’ 。 __init__ 在Python的类定义中用的最多。
@@ -919,16 +934,16 @@ __del__(self) __new__ 和 __init__ 是对象的构造器， __del__ 是对象的
       <guid>/2018/07/22/grep_mono/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  参数  * : 表示当前目录所有文件，也可以是某个文件名
--r 是递归查找
--n 是显示行号
--R 查找所有文件包含子目录
--i 忽略大小写 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
- grep -l pattern files ：只列出匹配的文件名，
- grep -L pattern files ：列出不匹配的文件名，
- grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
- grep -C number pattern files ：匹配的上下文分别显示[number]行，
- grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，
- grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</description>
+  -r 是递归查找
+  -n 是显示行号
+  -R 查找所有文件包含子目录
+  -i 忽略大小写
+ 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
+  grep -l pattern files ：只列出匹配的文件名，
+  grep -L pattern files ：列出不匹配的文件名，
+  grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
+  grep -C number pattern files ：匹配的上下文分别显示[number]行，
+  grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，</description>
     </item>
     
     <item>
@@ -968,13 +983,14 @@ int main(void) { int count = 43; int *const pcount = &amp;amp;count; // Defines 
       <guid>/2018/07/10/pymysql_exception/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  pymysql.Warning 当有严重警告时触发，例如插入数据是被截断等等。
-pymysql.Error 警告以外所有其他错误类。
-pymysql.InterfaceError 当有数据库接口模块本身的错误（而不是数据库的错误）发生时触发。 pymysql.DatabaseError 和数据库有关的错误发生时触发。
-pymysql.DataError 当有数据处理时的错误发生时触发，例如：除零错误，数据超范围等等。
+pymysql.Error	警告以外所有其他错误类。
+pymysql.InterfaceError 当有数据库接口模块本身的错误（而不是数据库的错误）发生时触发。
+pymysql.DatabaseError	和数据库有关的错误发生时触发。
+pymysql.DataError	当有数据处理时的错误发生时触发，例如：除零错误，数据超范围等等。
 pymysql.OperationalError 指非用户控制的，而是操作数据库时发生的错误。
 例如：连接意外断开、 数据库名未找到、事务处理失败、内存分配错误等等操作数据库是发生的错误。
 pymysql.IntegrityError 完整性相关的错误，例如外键检查失败等。
-pymysql.InternalError 数据库的内部错误，例如游标（cursor）失效了、事务同步失败等等。
+pymysql.InternalError	数据库的内部错误，例如游标（cursor）失效了、事务同步失败等等。
 pymysql.ProgrammingError 程序错误，例如数据表（table）没找到或已存在、SQL语句语法错误、 参数数量错误等等。
 pymysql.NotSupportedError 不支持错误，指使用了数据库不支持的函数或API等。例如在连接对象上 使用.rollback()函数，然而数据库并不支持事务或者事务已关闭</description>
     </item>
@@ -985,16 +1001,16 @@ pymysql.NotSupportedError 不支持错误，指使用了数据库不支持的函
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/07/07/serial_parallel_concurrent/</guid>
-      <description>  这是一篇没有技术含量的文章&amp;hellip;
- 1.进程  计算机中每个程序都可以叫做进程，一个QQ，一个Chrome浏览器，他们会在内存中划分一块属于自己的空间，一个进程中可以包含多个线程。所谓进程，它是动态的，是一个在运行当中的程序，而程序只是保存在硬盘当中一段可执行的代码。如果细说其进程的构造，可分为如下：
- Linux进程结构：可由三部分组成：代码段、数据段、堆栈段。也就是程序、数据、进程控制块PCB（Process Control Block）组成。进程控制块是进程存在的惟一标识，系统通过PCB的存在而感知进程的存在。
- 代码段存放程序的可执行代码。数据段存放程序的全局变量、常量、静态变量。堆栈段中的堆用于存放动态分配的内存变量，堆栈段中的栈用于函数调用，它存放着函数的参数、函数内部定义的局部变量。  系统通过PCB对进程进行管理和调度。PCB包括创建进程、执行程序、退出进程以及改变进程的优先级等。而进程中的PCB用一个名为task_struct的结构体来表示，定义在include/linux/sched.h中，每当创建一新进程时，便在内存中申请一个空的task_struct结构，填入所需信息，同时，指向该结构的指针也被加入到task数组中，所有进程控制块都存储在task[]数组中。
-  2.并发编程又叫多线程编程  在程序中，往往有很多很耗时的工作，比如上传文件、下载文件、跟客户聊天需要长时间建立连接(socket)。这种时候，一个线程是服务不了多个用户的，会产生因为资源独占产生的等待问题。并发的实质是一个物理CPU(也可以多个物理CPU) 在若干道程序之间多路复用，并发性是对有限物理资源强制行使多用户共享以提高效率。（买票问题并发进行）
- 并发当有多个线程在操作时,如果系统只有一个CPU,则它根本不可能真正同时进行一个以上的线程，它只能把CPU运行时间划分成若干个时间段,再将时间 段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状。.这种方式我们称之为并发(Concurrent)。
-  3.并行  指两个或两个以上事件或活动在同一时刻发生。在多道程序环境下，并行性使多个程序同一时刻可在不同CPU上同时执行。（hadoop集群就是并行计算的） 当系统有一个以上CPU时,则线程的操作有可能非并发。当一个CPU执行一个线程时，另一个CPU可以执行另一个线程，两个线程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。 &amp;gt; 并发和并行
- 并发和并行是即相似又有区别的两个概念，并行是指两个或者多个事件在同一时刻发生；而并发是指两个或多个事件在同一时间间隔内发生。在多道程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，但在单处理机系统中，每一时刻却仅能有一道程序执行，故微观上这些程序只能是分时地交替执行。倘若在计算机系统中有多个处理机，则这些可以并发执行的程序便可被分配到多个处理机上，实现并行执行，即利用每个处理机来处理一个可并发执行的程序，这样，多个程序便可以同时执行。
-  4.串行、并行  并行和串行指的是任务的执行方式。串行是指多个任务时，各个任务按顺序执行，完成一个之后才能进行下一个。并行指的是多个任务可以同时执行，异步是多个任务并行的前提条件。  5.同步、异步  指的是能否开启新的线程。同步不能开启新的线程，异步可以。 异步：异步和同步是相对的，同步就是顺序执行，执行完一个再执行下一个，需要等待、协调运行。异步就是彼此独立,在等待某事件的过程中继续做自己的事，不需要等待这一事件完成后再工作。线程就是实现异步的一个方式。异步是让调用方法的主线程不需要同步等待另一线程的完成，从而可以让主线程干其它的事情。
- 异步和多线程并不是一个同等关系,异步是最终目的,多线程只是我们实现异步的一种手段。异步是当一个调用请求发送给被调用者,而调用者不用等待其结果的返回而可以做其它的事情。实现异步可以采用多线程技术或则交给另外的进程来处理。
+      <description> 这是一篇没有技术含量的文章&amp;hellip;
+ 1.进程   计算机中每个程序都可以叫做进程，一个QQ，一个Chrome浏览器，他们会在内存中划分一块属于自己的空间，一个进程中可以包含多个线程。所谓进程，它是动态的，是一个在运行当中的程序，而程序只是保存在硬盘当中一段可执行的代码。如果细说其进程的构造，可分为如下：
+  Linux进程结构：可由三部分组成：代码段、数据段、堆栈段。也就是程序、数据、进程控制块PCB（Process Control Block）组成。进程控制块是进程存在的惟一标识，系统通过PCB的存在而感知进程的存在。
+  代码段存放程序的可执行代码。数据段存放程序的全局变量、常量、静态变量。堆栈段中的堆用于存放动态分配的内存变量，堆栈段中的栈用于函数调用，它存放着函数的参数、函数内部定义的局部变量。
+   系统通过PCB对进程进行管理和调度。PCB包括创建进程、执行程序、退出进程以及改变进程的优先级等。而进程中的PCB用一个名为task_struct的结构体来表示，定义在include/linux/sched.h中，每当创建一新进程时，便在内存中申请一个空的task_struct结构，填入所需信息，同时，指向该结构的指针也被加入到task数组中，所有进程控制块都存储在task[]数组中。  2.并发编程又叫多线程编程   在程序中，往往有很多很耗时的工作，比如上传文件、下载文件、跟客户聊天需要长时间建立连接(socket)。这种时候，一个线程是服务不了多个用户的，会产生因为资源独占产生的等待问题。并发的实质是一个物理CPU(也可以多个物理CPU) 在若干道程序之间多路复用，并发性是对有限物理资源强制行使多用户共享以提高效率。（买票问题并发进行）
+  并发当有多个线程在操作时,如果系统只有一个CPU,则它根本不可能真正同时进行一个以上的线程，它只能把CPU运行时间划分成若干个时间段,再将时间 段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状。.这种方式我们称之为并发(Concurrent)。
+  3.并行  指两个或两个以上事件或活动在同一时刻发生。在多道程序环境下，并行性使多个程序同一时刻可在不同CPU上同时执行。（hadoop集群就是并行计算的） 当系统有一个以上CPU时,则线程的操作有可能非并发。当一个CPU执行一个线程时，另一个CPU可以执行另一个线程，两个线程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。   并发和并行
+  并发和并行是即相似又有区别的两个概念，并行是指两个或者多个事件在同一时刻发生；而并发是指两个或多个事件在同一时间间隔内发生。在多道程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，但在单处理机系统中，每一时刻却仅能有一道程序执行，故微观上这些程序只能是分时地交替执行。倘若在计算机系统中有多个处理机，则这些可以并发执行的程序便可被分配到多个处理机上，实现并行执行，即利用每个处理机来处理一个可并发执行的程序，这样，多个程序便可以同时执行。  4.串行、并行  并行和串行指的是任务的执行方式。串行是指多个任务时，各个任务按顺序执行，完成一个之后才能进行下一个。并行指的是多个任务可以同时执行，异步是多个任务并行的前提条件。  5.同步、异步   指的是能否开启新的线程。同步不能开启新的线程，异步可以。
+  异步：异步和同步是相对的，同步就是顺序执行，执行完一个再执行下一个，需要等待、协调运行。异步就是彼此独立,在等待某事件的过程中继续做自己的事，不需要等待这一事件完成后再工作。线程就是实现异步的一个方式。异步是让调用方法的主线程不需要同步等待另一线程的完成，从而可以让主线程干其它的事情。
+  异步和多线程并不是一个同等关系,异步是最终目的,多线程只是我们实现异步的一种手段。异步是当一个调用请求发送给被调用者,而调用者不用等待其结果的返回而可以做其它的事情。实现异步可以采用多线程技术或则交给另外的进程来处理。
   6.多线程  多线程是程序设计的逻辑层概念，它是进程中并发运行的一段代码。多线程可以实现线程间的切换执行。  </description>
     </item>
     
@@ -1007,10 +1023,10 @@ pymysql.NotSupportedError 不支持错误，指使用了数据库不支持的函
       <description>这是一篇没有技术含量的文章&amp;hellip;
  使用adb进行安卓刷机  安装adb
 平台ubuntu16.04(其他的系统自行搜索):
-sudo apt-get update &amp;amp;&amp;amp; sudo apt install android-tools-adb android-tools-fastboot   手机重启到fastboot状态
+sudo apt-get update &amp;amp;&amp;amp; sudo apt install android-tools-adb android-tools-fastboot  手机重启到fastboot状态
 接入usb调试, 并输入
 adb devices 开启root, 并解锁system分区
-adb root adb disable-verity  重启到bl
+adb root adb disable-verity 重启到bl
 adb reboot bootloader 解锁设备, 开始刷机
 fastboot flashing unlock 刷入recovery
 fastboot flash recovery Recovery.img 或利用Recovery.img启动到Recovery(并不会将rec刷入手机, 只是暂时使用)
@@ -1018,7 +1034,8 @@ fastboot boot Recovery.img // 自动启动到recovery 进入刷好的rec下面�
 并使用adb devices查看设备当前是否在sideload模式下
 如果出现：
 List of devices attached ??????????? no permissions 尝试重新启动adb服务(如果是windows系统, 不用加sudo)
-sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果有就执行</description>
+sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果有就执行
+adb sideload ROM.</description>
     </item>
     
     <item>
@@ -1030,15 +1047,13 @@ sudo adb kill-server sudo adb start-server 再次查看是否有权限，如果�
       <description>这是一篇没有技术含量的文章&amp;hellip;
  踩坑记录 无法部署,长期卡在这个地方  On branch master
 nothing to commit, working tree clean
-  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好
- 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署 部署时提示输入github账户密码，但一直报错误密码的错误：   原因： - 如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值
-解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
+  原因1： _config.yml文件中冒号后面必须要有个空格 原因2： 网络不好 原因3： 排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署  部署时提示输入github账户密码，但一直报错误密码的错误：  原因：
+  如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值   解决办法: 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署
  使用git push上传  使用git初始化public目录，然后按照正常push流程上传部署，因为需要上传的文件都是这里的
  为hexo+github pages绑定域名：  注册域名并添加CNAME值为自己github-pages地址
 在repo中设置绑定的域名
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
- 基础指令：   hexo n hexo g hexo s hexo d hexo init hexo s -p [port]    安装hexo:
-    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
+ 基础指令：    hexo n hexo g hexo s hexo d hexo init hexo s -p [port]   安装hexo:    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
     </item>
     
   </channel>

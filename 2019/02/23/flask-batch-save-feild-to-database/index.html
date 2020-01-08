@@ -102,26 +102,25 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
 <p>在我使用flask编写网站后端的时候, 要将前端表单提交的字段进行保存, 字段少的时候还好, 当字段有几十个甚至上百个的时候, 如果手动的一条一条添加, 这将是个噩梦, 如下例代码.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">@web.route(<span style="color:#f1fa8c">&#39;/register&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#39;POST&#39;</span>, <span style="color:#f1fa8c">&#39;GET&#39;</span>])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">@web.route(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">/register</span><span style="color:#f1fa8c">&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">GET</span><span style="color:#f1fa8c">&#39;</span>])
 <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">register</span>():
     form <span style="color:#ff79c6">=</span> RegisterForm(request<span style="color:#ff79c6">.</span>form)
-    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
+    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
         user <span style="color:#ff79c6">=</span> User()
         user<span style="color:#ff79c6">.</span>nickname <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>nickname<span style="color:#ff79c6">.</span>data
         user<span style="color:#ff79c6">.</span>password <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>password<span style="color:#ff79c6">.</span>data
-        user<span style="color:#ff79c6">.</span>email <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>email<span style="color:#ff79c6">.</span>data</code></pre></div>
-<p>这样实在是太繁琐了, 这时应该体现出Python的优雅.</p>
+        user<span style="color:#ff79c6">.</span>email <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>email<span style="color:#ff79c6">.</span>data
+</code></pre></div><p>这样实在是太繁琐了, 这时应该体现出Python的优雅.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span>(db<span style="color:#ff79c6">.</span>models):
     <span style="color:#8be9fd;font-style:italic">id</span> <span style="color:#ff79c6">=</span> Column(Integer, primary_key<span style="color:#ff79c6">=</span>True)
     email <span style="color:#ff79c6">=</span> Column()
-    _password <span style="color:#ff79c6">=</span> Column(<span style="color:#f1fa8c">&#39;password&#39;</span>) <span style="color:#6272a4"># 至于为什么有(_), 下面会继续说明</span>
+    _password <span style="color:#ff79c6">=</span> Column(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">password</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#6272a4"># 至于为什么有(_), 下面会继续说明</span>
     nickname <span style="color:#ff79c6">=</span> Column()
     
     <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">set_attrs</span>(self, attrs_dict: <span style="color:#8be9fd;font-style:italic">dict</span>):
         <span style="color:#ff79c6">for</span> key, value <span style="color:#ff79c6">in</span> attrs_dict<span style="color:#ff79c6">.</span>items(): <span style="color:#6272a4"># 遍历传入的字典类型, 获取属性及其数据</span>
-            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">hasattr</span>(self, key) <span style="color:#ff79c6">and</span> key <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#39;id&#39;</span>: <span style="color:#6272a4"># 判断本类中是否有k这个属性, 并且讲id排除掉, 不对它进行赋值, 因为id是主键</span>
+            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">hasattr</span>(self, key) <span style="color:#ff79c6">and</span> key <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">id</span><span style="color:#f1fa8c">&#39;</span>: <span style="color:#6272a4"># 判断本类中是否有k这个属性, 并且讲id排除掉, 不对它进行赋值, 因为id是主键</span>
                 <span style="color:#8be9fd;font-style:italic">setattr</span>(self, key, value) <span style="color:#6272a4"># 存入字段中</span>
 
     @property
@@ -133,21 +132,20 @@
         self<span style="color:#ff79c6">.</span>_password <span style="color:#ff79c6">=</span> generate_password_hash(value)
 
                                              
-@web.route(<span style="color:#f1fa8c">&#39;/register&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#39;POST&#39;</span>, <span style="color:#f1fa8c">&#39;GET&#39;</span>])
+@web.route(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">/register</span><span style="color:#f1fa8c">&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">GET</span><span style="color:#f1fa8c">&#39;</span>])
 <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">register</span>():
     form <span style="color:#ff79c6">=</span> RegisterForm(request<span style="color:#ff79c6">.</span>form)
-    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
+    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
         user <span style="color:#ff79c6">=</span> User()
-        user<span style="color:#ff79c6">.</span>set_attrs(form<span style="color:#ff79c6">.</span>data) <span style="color:#6272a4"># form.data会返回一个dict类型, 其中的key为字段名, value为表单获取的数据</span></code></pre></div>
-<blockquote>
+        user<span style="color:#ff79c6">.</span>set_attrs(form<span style="color:#ff79c6">.</span>data) <span style="color:#6272a4"># form.data会返回一个dict类型, 其中的key为字段名, value为表单获取的数据</span>
+</code></pre></div><blockquote>
 <p>为上面的这段代码做进一步的说明总结.</p>
 </blockquote>
-
 <ul>
-<li>首先我们会在register视图函数中调用db的保存函数对form表单字段进行保存, 但一个一个手动保存实在是太麻烦了.<br /></li>
-<li>我们可以在User模型中创建一个赋值函数(set_attrs), 它会接收一个dict, 至于这个dict是如何得来的, 我们会在register中调用form.data, 这个属性会返回一个字典, 在上列代码中已经说明了.<br /></li>
-<li>在set_attrs中会遍历这个字典, 会判断这个key是否与本模型当中的字段是相同的, 如果是相同的, 就会调用setattr对本模型对象进行赋值, 将传入进来的value赋值到本模型中的所属字段.<br /></li>
-<li>而存储password的时候我们这样做是为了安全, 不将password字段暴露出去, 创建_password字段的时候, 在Column中传入命名, 该命名会存储在数据库中.<br /></li>
+<li>首先我们会在register视图函数中调用db的保存函数对form表单字段进行保存, 但一个一个手动保存实在是太麻烦了.</li>
+<li>我们可以在User模型中创建一个赋值函数(set_attrs), 它会接收一个dict, 至于这个dict是如何得来的, 我们会在register中调用form.data, 这个属性会返回一个字典, 在上列代码中已经说明了.</li>
+<li>在set_attrs中会遍历这个字典, 会判断这个key是否与本模型当中的字段是相同的, 如果是相同的, 就会调用setattr对本模型对象进行赋值, 将传入进来的value赋值到本模型中的所属字段.</li>
+<li>而存储password的时候我们这样做是为了安全, 不将password字段暴露出去, 创建_password字段的时候, 在Column中传入命名, 该命名会存储在数据库中.</li>
 <li>后面创建了一个属性, 使用了getter与setter的方法, 当前端的字段传入了进来, set_attrs会对其作出判断, 判断前端确实有一个password字段与User模型中的字段相匹配, 就会将其值传入定义的password属性中, 而password属性设置了setter, 又对其值进行了hash加密, 并传入_password字段中, 完美保存.</li>
 </ul>
 
@@ -168,7 +166,7 @@
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

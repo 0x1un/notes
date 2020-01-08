@@ -99,46 +99,34 @@
   
 <div class="blog-post">
   <h2>iptables 自定义链</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h4 id="iptables-自定义链">iptables 自定义链</h4>
-
+<h4 id="iptables-">iptables 自定义链</h4>
 <p>在之前的学习当中, 我们都是在默认的filter表中的默认链INPUT中操作, 接下来学习一下怎么自定义链, 来了解下这个又是个什么玩意儿</p>
-
 <p>说实话, 对于我个人来讲, 其中默认的一些链就够我使用了,
-    但是如果进行大规模的规则限定, 那么INPUT这个链中存在了几百条规则,
-    在肉眼parse的时候无疑是个噩梦,
-    因为其中有包含一些针对特定程序的报文进出口限定,
-    你可能无法直观的一眼看出这条规则到底是干嘛的</p>
-
+但是如果进行大规模的规则限定, 那么INPUT这个链中存在了几百条规则,
+在肉眼parse的时候无疑是个噩梦,
+因为其中有包含一些针对特定程序的报文进出口限定,
+你可能无法直观的一眼看出这条规则到底是干嘛的</p>
 <p>如果自定义一些链, 比如LINK_DOCKER, LINK_HTTPD, LINK_SSHD这类的名字, 从名字上就能知道这个链中的规则是干嘛的, 清晰明了是不是?</p>
-
 <p>建立一个新链</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -N LINK_WEB</code></pre></div>
-<p>很简单, 在filter表中用-N(new)选项新建一个名为LINK_WEB的链</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -X LINK_WEB</code></pre></div>
-<p>删除自定义链也很容易, 使用-X选项就行了, 如果对LINK_WEB链进行了引用, 就需要在引用的地方删除这个引用规则后, 再对自定义链LINK_WEB进行删除</p>
-
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/iptables/custom_link.png" alt="" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -N LINK_WEB
+</code></pre></div><p>很简单, 在filter表中用-N(new)选项新建一个名为LINK_WEB的链</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -X LINK_WEB
+</code></pre></div><p>删除自定义链也很容易, 使用-X选项就行了, 如果对LINK_WEB链进行了引用, 就需要在引用的地方删除这个引用规则后, 再对自定义链LINK_WEB进行删除</p>
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/iptables/custom_link.png" alt=""></p>
 <p>根据上图所示, 最后一个Chain LINK_WEB便是刚新建的链, 它括号里的(0 references)代表着个它还没有被任何默认的链引用, 所以即便其中配置了规则它也不会生效的, 不用在意, 后面会有提到</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I IN_WEB -s <span style="color:#bd93f9">192</span>.168.1.139 -j REJECT</code></pre></div>
-<p>在新建的链中插入一条新的规则, 这看起来与之前的一系列操作没有什么不同</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I IN_WEB -s 192.168.1.139 -j REJECT
+</code></pre></div><p>在新建的链中插入一条新的规则, 这看起来与之前的一系列操作没有什么不同</p>
 <p>LINK_WEB这个链在我的期望中是在入站的时候进行匹配的, 所以想要让LINK_WEB生效, 就得去INPUT链中去引用它</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">80</span> -j LINK_WEB</code></pre></div>
-<p>这种写法看起来很符合我们的直觉, 是不是?(反正我是这么认为的:-)</p>
-
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/iptables/custom_link_references.png" alt="" />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">80</span> -j LINK_WEB
+</code></pre></div><p>这种写法看起来很符合我们的直觉, 是不是?(反正我是这么认为的:-)</p>
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/iptables/custom_link_references.png" alt="">
 如图, 在引用了该自定义链, 先前的(0 references)变成了(1 references), 这说明它被一个默认的链引用了, 意味着它里面的规则生效了</p>
-
 <p>修改自定义链的名称</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -E LINK_WEB WEB</code></pre></div>
-<p>将自定义链LINK_WEB名称修改为WEB, 其中在INPUT中的引用也会被自动修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -E LINK_WEB WEB
+</code></pre></div><p>将自定义链LINK_WEB名称修改为WEB, 其中在INPUT中的引用也会被自动修改</p>
 
   </div>
 
@@ -157,7 +145,7 @@
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

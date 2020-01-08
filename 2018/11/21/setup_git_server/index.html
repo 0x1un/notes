@@ -99,58 +99,46 @@
   
 <div class="blog-post">
   <h2>搭建简易Git服务器</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="起因"><strong>起因</strong></h3>
-
-<p>并非<code>github</code>, <code>coding</code>不好用, 而是我正好有一台吃灰的小鸡, 与其让它继续吃灰不如弄点有意义的, 我有些比较重要的文件需要使用<code>git</code>管理, 而<code>github</code>没有免费的私有仓库, <code>coding</code>容量不够大. 在网络上搜罗了搭建教程, 为了避免以后再去翻找, 所以为此做一篇笔记用来记录搭建的过程与踩坑的地方.
-<!-- more --></p>
-
-<h3 id="所属环境"><strong>所属环境</strong></h3>
-
+<h3 id="----"><strong>起因</strong></h3>
+<p>并非<code>github</code>, <code>coding</code>不好用, 而是我正好有一台吃灰的小鸡, 与其让它继续吃灰不如弄点有意义的, 我有些比较重要的文件需要使用<code>git</code>管理, 而<code>github</code>没有免费的私有仓库, <code>coding</code>容量不够大. 在网络上搜罗了搭建教程, 为了避免以后再去翻找, 所以为此做一篇笔记用来记录搭建的过程与踩坑的地方.</p>
+<!-- raw HTML omitted -->
+<h3 id="-----1"><strong>所属环境</strong></h3>
 <ul>
 <li>Ubuntu16.04 lts server</li>
 <li>git version 2.7.4</li>
 </ul>
-
-<h3 id="开始安装"><strong>开始安装</strong></h3>
-
+<h3 id="-----2"><strong>开始安装</strong></h3>
 <p><strong>安装git</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install git</code></pre></div>
-<p><strong>创建git用户</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo adduser git</code></pre></div>
-<p><strong>生成ssh公钥</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-keygen -t rsa</code></pre></div>
-<p><strong>创建证书登录</strong><br />
-将客户端(自己电脑)的公钥写入<code>/home/git/.ssh/authorized_keys</code>中(此目录文件默认是没有的, 需要自己创建)<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install git
+</code></pre></div><p><strong>创建git用户</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo adduser git
+</code></pre></div><p><strong>生成ssh公钥</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-keygen -t rsa
+</code></pre></div><p><strong>创建证书登录</strong><br>
+将客户端(自己电脑)的公钥写入<code>/home/git/.ssh/authorized_keys</code>中(此目录文件默认是没有的, 需要自己创建)<br>
 公钥一般在用户目录下的<code>.ssh</code>目录下名为<code>id_rsa.pub</code>文件中(如果没有, 执行上一步)</p>
-
 <p><strong>初始化git仓库</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo git init --bare example.git</code></pre></div>
-<p><strong>更改仓库所属权</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo chown -R git:git example.git</code></pre></div>
-<p>_<strong>禁用shell登录</strong>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo git init --bare example.git
+</code></pre></div><p><strong>更改仓库所属权</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo chown -R git:git example.git
+</code></pre></div><p>_<strong>禁用shell登录</strong>
 这里有个坑, 不同的系统的git-shell的位置或许不一样.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4">#查看git-shell的位置</span>
-which git-shell</code></pre></div>
-<p>使用<code>root</code>权限编辑<code>/etc/passwd</code>, 找到<code>git</code></p>
-
+which git-shell
+</code></pre></div><p>使用<code>root</code>权限编辑<code>/etc/passwd</code>, 找到<code>git</code></p>
 <pre><code>git:x:1001:1001:,,,:/home/git:/bin/bash
-</code></pre>
-
-<p>改为</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git:x:1001:1001:,,,:/home/git:填入刚刚which git-shell得到的结果</code></pre></div>
-<h3 id="踩坑开始"><em><strong>踩坑开始</strong></em></h3>
-
+</code></pre><p>改为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git:x:1001:1001:,,,:/home/git:填入刚刚which git-shell得到的结果
+</code></pre></div><h3 id="-----3"><em><strong>踩坑开始</strong></em></h3>
 <p>Git默认情况下是使用ssh的22端口进行数据传输, 但有些时候我们也许会将22改为其他, 那么在clone的时候就需要加上端口clone</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone ssh://git@example.com:port/project.git</code></pre></div>
-<p>同样, push也如此</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone ssh://git@example.com:port/project.git
+</code></pre></div><p>同样, push也如此</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git remote set-url origin ssh://git@example.com:port/~/git/project.git
-git push -u origin master</code></pre></div>
+git push -u origin master
+</code></pre></div>
   </div>
 
 <br>
@@ -168,7 +156,7 @@ git push -u origin master</code></pre></div>
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>

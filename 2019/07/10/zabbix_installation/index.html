@@ -99,86 +99,60 @@
   
 <div class="blog-post">
   <h2>安装zabbix</h2>
-        
-
-<blockquote>
+        <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-
-<h3 id="关于zabbix的安装">关于zabbix的安装</h3>
-
+<h3 id="zabbix">关于zabbix的安装</h3>
 <p>近期需要使用zabbix对线上服务器进行监控, zabbix是一个强大的服务器监控程序, 相对于安装就比较简单了</p>
-
 <p>在这里我使用的二进制包安装, 省的编译了, 如有特殊要求, 请自行编译</p>
-
-<h3 id="开始安装">开始安装</h3>
-
+<h3 id="heading">开始安装</h3>
 <p>使用的环境为CentOS7.6, 说实话我对于这个版本不熟, 但殊途同归, 发行版之间也就包管理的区别最大吧,
-    如果能TMD不用CentOS, 我碰都不会碰它一下, 打心底讨厌这个版本, 但为了工作, 只有这样吧..</p>
-
+如果能TMD不用CentOS, 我碰都不会碰它一下, 打心底讨厌这个版本, 但为了工作, 只有这样吧..</p>
 <p>在这里安装的zabbix版本为zabbix4.0.1, 也就是4.x系列, 从头到位也就几条命令, 但其中的yum包管理踩坑是将我困住了2小时, (Fuck you yum</p>
-
-<p>首先自然是添加国内源, 原因总所周知, 我这里使用阿里的
-&gt; <a href="https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/">https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#8be9fd;font-style:italic">echo</span>  -e <span style="color:#f1fa8c">&#34;[zabbix]\nname=Zabbix Repository\nbaseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/\ngpgcheck=0\nenabled=1&#34;</span> &gt;&gt;/etc/yum.repos.d/zabbix.repo</code></pre></div>
-<p>为了粘贴方便, 我将其合成了一条命令写入, 执行完成就可以了, 如果你现在的时间和这篇记录发生的时间有较大的差异, 请前往网络上寻找最新的源, 该地址有可能会变动</p>
-
+<p>首先自然是添加国内源, 原因总所周知, 我这里使用阿里的</p>
+<blockquote>
+<p><a href="https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/">https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/</a></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#8be9fd;font-style:italic">echo</span>  -e <span style="color:#f1fa8c">&#34;[zabbix]\nname=Zabbix Repository\nbaseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/x86_64/\ngpgcheck=0\nenabled=1&#34;</span> &gt;&gt;/etc/yum.repos.d/zabbix.repo
+</code></pre></div><p>为了粘贴方便, 我将其合成了一条命令写入, 执行完成就可以了, 如果你现在的时间和这篇记录发生的时间有较大的差异, 请前往网络上寻找最新的源, 该地址有可能会变动</p>
 <p>清理缓存</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum clean all
-yum makecache -y</code></pre></div>
-<p>接下来就可以继续安装了, 直接一把梭</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-get zabbix-agent php-fpm</code></pre></div>
-<h3 id="缺少依赖解决-2019-08-13更新">缺少依赖解决(2019-08-13更新)</h3>
-
+yum makecache -y
+</code></pre></div><p>接下来就可以继续安装了, 直接一把梭</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-get zabbix-agent php-fpm
+</code></pre></div><h3 id="2019-08-13">缺少依赖解决(2019-08-13更新)</h3>
 <p>一般使用yum一把梭装的不会出现这样的问题, 而使用rpm直接安装它不会自动补全这些依赖</p>
-
 <p>如若提示需要libiksemel.so.3()(64bit)这个依赖, 请执行下面的操作</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install -y epel-release
 yum install -y iksemel fping libiksemel
 <span style="color:#6272a4">########### or ############</span>
 yum install -y gnutls
-rpm -ivh http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64//iksemel-1.4-6.sdl7.x86_64.rpm</code></pre></div>
-<p>如果上一条执行不成功, 你需要从rpm包安装它</p>
-
+rpm -ivh http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64//iksemel-1.4-6.sdl7.x86_64.rpm
+</code></pre></div><p>如果上一条执行不成功, 你需要从rpm包安装它</p>
 <p>缺少IPMI依赖</p>
-
 <pre><code> libOpenIPMI.so.0()(64bit) is needed by zabbix-server-pgsql-4.2.4-1.el7.x86_64
 	libOpenIPMIposix.so.0()(64bit) is needed by zabbix-server-pgsql-4.2.4-1.el7.x86_64
-</code></pre>
-
-<p>可前往<a href="http://www.rpm-find.net/linux/rpm2html/search.php?query=libOpenIPMI.so.0()(64bit">http://www.rpm-find.net/linux/rpm2html/search.php?query=libOpenIPMI.so.0()(64bit</a>), 在这个网站可以查找到缺少的依赖项源包</p>
-
+</code></pre><p>可前往http://www.rpm-find.net/linux/rpm2html/search.php?query=libOpenIPMI.so.0()(64bit), 在这个网站可以查找到缺少的依赖项源包</p>
 <p>执行<code>yum -y install OpenIPMI</code>安装完成</p>
-
 <p>缺少unixODBC</p>
-
 <pre><code>libodbc.so.2()(64bit) is needed by zabbix-server-pgsql-4.2.4-1.el7.x86_64
-</code></pre>
-
-<p>前往<a href="https://centos.pkgs.org/7/centos-x86_64/unixODBC-2.3.1-11.el7.x86_64.rpm.html">https://centos.pkgs.org/7/centos-x86_64/unixODBC-2.3.1-11.el7.x86_64.rpm.html</a>, 寻找答案</p>
-
+</code></pre><p>前往https://centos.pkgs.org/7/centos-x86_64/unixODBC-2.3.1-11.el7.x86_64.rpm.html, 寻找答案</p>
 <p>使用<code>yum install -y unixODBC</code>完成依赖安装</p>
-
-<h3 id="设置并初始化数据库">设置并初始化数据库</h3>
+<h3 id="heading-1">设置并初始化数据库</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysql -uroot  -e <span style="color:#f1fa8c">&#34;create database zabbix character set utf8 collate utf8_bin;&#34;</span>
 mysql -uroot  -e <span style="color:#f1fa8c">&#34;grant all privileges on zabbix.* to zabbix@localhost identified by &#39;[your_password]&#39;;&#34;</span>
 zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p<span style="color:#ff79c6">[</span>your_password<span style="color:#ff79c6">]</span> zabbix
-sed -i <span style="color:#f1fa8c">&#39;s#\# DBPassword=#DBPassword=[your_password]#g&#39;</span> /etc/zabbix/zabbix_server.conf</code></pre></div>
-<p>上面的方框自行替换, 这四段代码的目的是为了创建数据库与用户, 最后一条同样是为了方便复制粘贴, 你也可以编辑zabbix_server.conf手动修改</p>
-
+sed -i <span style="color:#f1fa8c">&#39;s#\# DBPassword=#DBPassword=[your_password]#g&#39;</span> /etc/zabbix/zabbix_server.conf
+</code></pre></div><p>上面的方框自行替换, 这四段代码的目的是为了创建数据库与用户, 最后一条同样是为了方便复制粘贴, 你也可以编辑zabbix_server.conf手动修改</p>
 <p>更改时区, 根据你所在地理位置修改</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sed -i <span style="color:#f1fa8c">&#39;s#\# php_value date.timezone Europe/Riga#php_value date.timezone Asia/Shanghai#g&#39;</span> /etc/httpd/conf.d/zabbix.conf</code></pre></div>
-<p>同样你也可以手动编辑/etc/httpd/conf.d/zabbix.conf文件进行修改</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sed -i <span style="color:#f1fa8c">&#39;s#\# php_value date.timezone Europe/Riga#php_value date.timezone Asia/Shanghai#g&#39;</span> /etc/httpd/conf.d/zabbix.conf
+</code></pre></div><p>同样你也可以手动编辑/etc/httpd/conf.d/zabbix.conf文件进行修改</p>
 <p>最后, 到这里已经差不多了, 如果你上述的所有操作都顺利的话, (不顺利就去google吧</p>
-
-<p>还有一个操作比较重要, 当你打开<a href="http://localhost/zabbix">http://localhost/zabbix</a>, 显示无法连接数据库, 你需要检查/etc/zabbix/zabbix_server.conf中的数据库密码是否正确,
+<p>还有一个操作比较重要, 当你打开http://localhost/zabbix, 显示无法连接数据库, 你需要检查/etc/zabbix/zabbix_server.conf中的数据库密码是否正确,
 同时还需要进入/etc/zabbix/web/编辑zabbix.conf.php, 并将数据库登入设置完备</p>
-
-<p>如果顺利的话,进入<a href="http://localhost/zabbix">http://localhost/zabbix</a>, 你应该会看到这样的页面
-<img src="https://github.com/0x1un/SavaImg/raw/master/zabbix/zabbix_web_login.png" alt="" />
+<p>如果顺利的话,进入http://localhost/zabbix, 你应该会看到这样的页面
+<img src="https://github.com/0x1un/SavaImg/raw/master/zabbix/zabbix_web_login.png" alt="">
 之所以我这个页面是中文的, 那是因为我设置过, 你默认看到的应该会是英文的, 登入账号与密码默认Admin, zabbix</p>
-
 <p>到这里安装就结束了, 祝你安装顺利,( 安装什么的.. 最特么破事多</p>
 
   </div>
@@ -198,7 +172,7 @@ sed -i <span style="color:#f1fa8c">&#39;s#\# DBPassword=#DBPassword=[your_passwo
 <footer>
     <p style="float:right;margin:0 1rem;">
 	
-		&copy; 2019 </a>
+		&copy; 2020 </a>
         
       </p>
   <hr>
