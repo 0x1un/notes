@@ -102,12 +102,12 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="heading">原始标识符</h3>
+<h3 id="原始标识符">原始标识符</h3>
 <p>有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#8be9fd;font-style:italic">let</span> r#<span style="color:#ff79c6">fn</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;the variable is named &lt;fn&gt;, even though that&#39;s a keyword&#34;</span>;
 <span style="color:#6272a4">// 使用r#可以让关键字变成一个普通的变量名称
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">// 但没有必要这样做, 可能会带来不必要的麻烦
-</span></code></pre></div><h3 id="heading-1">变量的可变性</h3>
+</span><span style="color:#6272a4">// 但没有必要这样做, 可能会带来不必要的麻烦
+</span></code></pre></div><h3 id="变量的可变性">变量的可变性</h3>
 <p>变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。</p>
 <p>例如</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
@@ -118,12 +118,12 @@
 }
 <span style="color:#6272a4">// 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字
 </span><span style="color:#6272a4"></span><span style="color:#f1fa8c">/**
-</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">let mut x = 5; </span><span style="color:#f1fa8c">/</span><span style="color:#f1fa8c">/</span><span style="color:#f1fa8c"> 创建变量x为一个可变变量并初始化值为5
+</span><span style="color:#f1fa8c">let mut x = 5; // 创建变量x为一个可变变量并初始化值为5
 </span><span style="color:#f1fa8c">x = 6; 
-</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">/</span><span style="color:#f1fa8c">/</span><span style="color:#f1fa8c"> 这才是正确的创建可变变量方法
+</span><span style="color:#f1fa8c">// 这才是正确的创建可变变量方法
 </span><span style="color:#f1fa8c">
-</span><span style="color:#f1fa8c"></span><span style="color:#f1fa8c">*/</span>
-</code></pre></div><h3 id="heading-2">常量</h3>
+</span><span style="color:#f1fa8c">*/</span>
+</code></pre></div><h3 id="常量">常量</h3>
 <p>如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的. 但是在rust中let声明的变量, 与const声明的常量是有必要区分的.</p>
 <ul>
 <li>不允许与const搭配mut关键字</li>
@@ -135,7 +135,7 @@
     <span style="color:#ff79c6">const</span> MAX_POINTS: <span style="color:#8be9fd">u32</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100_000</span>;
 }
 </code></pre></div><p>创建了一个常量, 它必须显式标示它的类型, 可以使用下划线配合名称, 数字也可以用下划线分开标示, 这样便于阅读, 我想你并不喜欢阅读一个超过6位的数字而去专门数它有几位吧, 这个特点我很喜欢</p>
-<h3 id="heading-3">函数</h3>
+<h3 id="函数">函数</h3>
 <p>在Rust中, 并不关心函数所定义的位置在前还是后, 只要是定义了即可, main会根据调用的顺序一次执行.</p>
 <p>例</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
@@ -170,7 +170,7 @@
     println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;the value of y is: {}&#34;</span>, y); <span style="color:#6272a4">// 8
 </span><span style="color:#6272a4"></span>}
 <span style="color:#6272a4">// 注意x+1后面没有按照分号结尾, 表达式是不能有分号的, 有了分号它也就成了一个语句
-</span></code></pre></div><h3 id="heading-4">条件控制</h3>
+</span></code></pre></div><h3 id="条件控制">条件控制</h3>
 <p>在各个编程语言当中, 条件控制是一种常用的控制语句.</p>
 <p>根据条件是否为真来决定是否执行某些代码，以及根据条件是否为真来重复运行一段代码是大部分编程语言的基本组成部分. Rust 代码中最常见的用来控制执行流的结构是 if 表达式和循环</p>
 <p>rust中的if语句必须判断的是bool值, 它并不会像ruby, python之类的语言, 必须将bool显式地标识出来.</p>
@@ -186,11 +186,11 @@
 <p><strong>例如</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
     <span style="color:#8be9fd;font-style:italic">let</span> number <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">7</span>;
-    <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> {
+    <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
         println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;number is divisible by 4&#34;</span>);
-    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">3</span> <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> {
+    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">3</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
         println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;number is divisible by 3&#34;</span>);
-    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> {
+    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
         println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;number is divisible by 2&#34;</span>);
     } <span style="color:#ff79c6">else</span> {
         println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;number is not divisible by 4, 3, or 2&#34;</span>);

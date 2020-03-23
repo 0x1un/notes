@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="dockercache">docker的cache机制</h3>
+<h3 id="docker的cache机制">docker的cache机制</h3>
 <p>在使用docker的时候, 构建Image通常都是编译一个Dockerfile, 然后用docker build自动构建</p>
 <p>那么在平常构建的时候, Dockerfile中少不了FROM这一条指令, 它会拉取一个base image来为后面的构建作基础</p>
 <p>而其中的RUN, ADD, VOLUME, CMD指令都会在构建时创建一层新的Image, 这些好像都是些废话..=_=</p>

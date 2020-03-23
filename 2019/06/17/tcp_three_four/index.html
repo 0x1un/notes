@@ -105,7 +105,7 @@
 <blockquote>
 <p>本文截取自<a href="https://github.com/jawil/blog/issues/14">通俗大白话来理解TCP协议的三次握手和四次分手</a>, 以作为备忘记录</p>
 </blockquote>
-<h4 id="tcp">TCP头部</h4>
+<h4 id="tcp头部">TCP头部</h4>
 <p>其中 ACK SYN 序号 这三个部分在以下会用到，它们的介绍也在下面。</p>
 <ul>
 <li>
@@ -195,7 +195,7 @@
 <li>TIME_WAIT: 表示收到了对方的FIN报文，并发送出了ACK报文，就等2MSL后即可回到CLOSED可用状态了。如果FINWAIT1状态下，收到了对方同时带FIN标志和ACK标志的报文时，可以直接进入到TIME_WAIT状态，而无须经过FIN_WAIT_2状态。（主动方）</li>
 <li>CLOSED: 表示连接中断。</li>
 </ul>
-<h4 id="tcpudp">什么时候选择tcp与udp</h4>
+<h4 id="什么时候选择tcp与udp">什么时候选择tcp与udp</h4>
 <p>关于这个问题我寻到了一篇较好的文章, 解释非常明白</p>
 <p><a href="https://blog.csdn.net/yjxsdzx/article/details/71937886">https://blog.csdn.net/yjxsdzx/article/details/71937886</a></p>
 

@@ -266,9 +266,9 @@ SERVERNAME=portsnap3.hshh.org  电信 portsnap.</description>
 查看无线网络的设备接口
 sysctl net.wlan.devices 创建wlan接口, 接口为上一条的结果
 ifconfig wlan0 create wlandev ath0 配置网络自启, 编辑/etc/rc.conf
-wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34;编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
+wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34; 编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
 if_ath_load=&amp;quot;YES&amp;quot; if_wi_load=&amp;quot;YES&amp;quot; wlan_wep_load=&amp;quot;YES&amp;quot; wlan_ccmp_load=&amp;quot;YES&amp;quot; wlan_tkip_load=&amp;quot;YES&amp;quot; 配置wpa_supplicant
-wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.conf  -B 后台运行, -i 指定无线网络接口, -c指定使用的配置文件 第一条为直接连接, MYSSID为wifi名, passphrase为wifi密码  第二条为写入配置文件, 方便自动连接, 如果你的wifi是隐藏的, 需要在配置文件中添加一行scan_ssid=1</description>
+wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.</description>
     </item>
     
     <item>
@@ -588,7 +588,7 @@ git apply --reject --whitespace=fix st-ime-20190202-3be4cf1.diff 它会对st.c�
       <guid>/2019/02/06/disable_sqlalchmey_basic_class_table/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
   在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
- class Base(db.Model): &amp;#34;&amp;#34;&amp;#34;file: base.py&amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34;file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
+ class Base(db.Model): &amp;#34;&amp;#34;&amp;#34; file: base.py &amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34; file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
 __abstract__ = True </description>
     </item>
     
@@ -602,7 +602,7 @@ __abstract__ = True </description>
  原始标识符 有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：
 let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦 变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 例如
-fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; //创建变量x为一个可变变量并初始化值为5 x = 6; //这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
+fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; // 创建变量x为一个可变变量并初始化值为5 x = 6; // 这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
     </item>
     
     <item>
@@ -1054,6 +1054,16 @@ nothing to commit, working tree clean
 在repo中设置绑定的域名
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
  基础指令：    hexo n hexo g hexo s hexo d hexo init hexo s -p [port]   安装hexo:    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/1/01/01/postgres_basic_operation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/01/01/postgres_basic_operation/</guid>
+      <description>记录一些 postgres 常规操作，持续更新。
+CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
     </item>
     
   </channel>

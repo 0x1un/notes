@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h4 id="iptables">iptables之扩展动作</h4>
+<h4 id="iptables之扩展动作">iptables之扩展动作</h4>
 <p>在之前的学习当中, 一直在使用ACCEPT, DROP, REJECT这些常用的动作, 当然, 说是常用, 肯定也有些其他不常用的动作</p>
 <p>其实-j REJECT还有一个选项, 它可以设定REJECT之后的返回消息, 可选的原因如下:</p>
 <ul>
@@ -116,7 +116,7 @@
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -I INPUT -p icmp -s 192.168.0.111 -j REJECT --reject-with icmp-host-unreachable
 </code></pre></div><p>上列规则设定了拒绝来自192.168.0.111主机的ping请求, 并且设定返回的消息为icmp-host-unreachable, 默认的消息是icmp-port-unreachable</p>
-<h4 id="log">LOG日志动作</h4>
+<h4 id="log日志动作">LOG日志动作</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -I INPUT -p tcp --dport <span style="color:#bd93f9">80</span> -j LOG
 </code></pre></div><p>上列规则的目的为将来自80端口的所有tcp请求都记录在日志当中, 日志的位置处于/var/log/messages当中</p>
 <p>编辑/etc/rsyslog.conf, 添加 kern.warning /var/log/iptables.log, 将LOG的日志文件指定于此, 之后重启rsyslog服务便可生效</p>
@@ -125,7 +125,7 @@
 <li>--log-level 选项可以指定日志的级别, 可用的级别有[emerg, alert, crit, error, warning, notice, info, debug]</li>
 <li>--log-prefix 选项可以给记录到相关的信息添加标签信息, 便于区分各种记录的报文信息, 方便分析时过滤, 该选项的值不能超过29个字符</li>
 </ul>
-<h4 id="snat-dnat-masquerade-redirect-">SNAT DNAT MASQUERADE REDIRECT 动作</h4>
+<h4 id="snat-dnat-masquerade-redirect-动作">SNAT DNAT MASQUERADE REDIRECT 动作</h4>
 <p>于此, 如若对NAT不甚了解, 移步到<a href="http://www.zsythink.net/archives/1764">iptables详解(13):iptables动作总结之二</a>中的前半段</p>
 <p>NAT不恰当的说就是一个地址转换的玩意儿, 你家里有7台需要联网的设备, 对于一个wifi, 你只能拥有一个公网ip, 而这7台设备连接到了wifi之后, 路由器会对这些设备建立一个NAT表, 他们之间有相互对应的关系, 也称之为映射, 7台设备的所有流量都经由路由器与外网进行交互,
 这样的好处在于节省ip, 正是因为公网ip总地址的数量不足以让每个人都有七八个公网ip, 所以也就衍生出了这种技术, 这段话是我自己的理解, 意思我懂, 但可能表达的不是很清晰, 可以移步到维基百科查看相关专业的说明</p>
@@ -143,12 +143,12 @@ iptables -t nat -I PREROUTING -d 192.168.3.28 -p tcp --dport <span style="color:
 </code></pre></div><p>DNAT只能配置在PREROUTING和OUTPUT链当中, 这段规则目的是将目标地址192.168.3.28(外网)的tcp 666端口转换成内部主机E, 也就是在外网访问192.168.3.28:666的时候就是在访问内部主机E</p>
 <p>这光配置了DNAT还是行不通的, 还需要配置对应的SNAT才行</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j SNAT --to-source 192.168.3.28
-</code></pre></div><h5 id="masquerade">MASQUERADE动作</h5>
+</code></pre></div><h5 id="masquerade动作">MASQUERADE动作</h5>
 <p>MASQUERADE的效果和SNAT差别不大, 每当重启了一次路由器, 那么这个ip也会随之变动, 这对于内网的主机访问外网会很麻烦,
 而MASQUERADE会自动将要转换的地址转换成指定网卡上可以上网的ip地址, 这样一来就非常方便了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t nat -I POSTROUTING -s 192.168.1.0/24 -o wlp3s0 -j MASQUERADE
 </code></pre></div><p>MASQUERADE会动态的将其转换为一个可用的ip, 它其实和SNAT的功能完全一样, 但SNAT更加高效, 因为它是静态的嘛, 显而易见嘛</p>
-<h5 id="redirect">REDIRECT动作</h5>
+<h5 id="redirect动作">REDIRECT动作</h5>
 <p>REDIRECT可以在本机上进行端口映射, 例如将80端口映射到8080上</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t nat -A PREROUTING -p tcp --dport <span style="color:#bd93f9">80</span> -j REDIRECT --to-ports <span style="color:#bd93f9">8080</span>
 </code></pre></div><p>当访问本机的80端口时, 报文会自动被重定向到本机的8080端口上, REDIRECT只能定义在PREROUTING和OUTPUT链当中</p>

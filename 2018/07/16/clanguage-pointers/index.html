@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h2 id="c">C语言的指针细学笔记</h2>
+<h2 id="c语言的指针细学笔记">C语言的指针细学笔记</h2>
 <p>声明指针:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>pnumber; <span style="color:#6272a4">// 声明一个指向int类型变量的指针
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">*</span> pnumber; <span style="color:#6272a4">// 一样的效果
@@ -113,7 +113,7 @@
     <span style="color:#8be9fd">int</span> number <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">15</span>;
     <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>pointer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">&amp;</span>number;
     <span style="color:#8be9fd">int</span> result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">*</span>pointer <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">5</span>;
-    assert(result <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">20</span>); <span style="color:#6272a4">// pass
+    assert(result <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">20</span>); <span style="color:#6272a4">// pass
 </span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
 }
 </code></pre></div><p>指向常量的指针:</p>
@@ -131,7 +131,7 @@
 {
     <span style="color:#8be9fd">int</span> array[] <span style="color:#ff79c6">=</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">9</span>};
     <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">=</span> array;
-    assert(<span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>); <span style="color:#6272a4">// pass
+    assert(<span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>); <span style="color:#6272a4">// pass
 </span><span style="color:#6272a4"></span>
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
 }
@@ -139,13 +139,13 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
     <span style="color:#8be9fd">char</span> board[<span style="color:#bd93f9">3</span>][<span style="color:#bd93f9">3</span>] <span style="color:#ff79c6">=</span> {
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">1</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">2</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">3</span><span style="color:#f1fa8c">&#39;</span>},
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">4</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">5</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">6</span><span style="color:#f1fa8c">&#39;</span>},
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">7</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">8</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">9</span><span style="color:#f1fa8c">&#39;</span>}
+        {<span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>}
     };
-    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">addres of board : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board);
-    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">addres of board[0][0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">&amp;</span>board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]);
-    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">value of board[0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>]);
+    printf(<span style="color:#f1fa8c">&#34;addres of board : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board);
+    printf(<span style="color:#f1fa8c">&#34;addres of board[0][0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">&amp;</span>board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]);
+    printf(<span style="color:#f1fa8c">&#34;value of board[0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>]);
 
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
 }
@@ -154,18 +154,18 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
     <span style="color:#8be9fd">char</span> board[<span style="color:#bd93f9">3</span>][<span style="color:#bd93f9">3</span>] <span style="color:#ff79c6">=</span> {
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">1</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">2</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">3</span><span style="color:#f1fa8c">&#39;</span>},
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">4</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">5</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">6</span><span style="color:#f1fa8c">&#39;</span>},
-        {<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">7</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">8</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">9</span><span style="color:#f1fa8c">&#39;</span>}
+        {<span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>},
+        {<span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>}
     };
-    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">value of board[0][0]: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]); <span style="color:#6272a4">// output: 1
-</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">value of *board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>board); <span style="color:#6272a4">// output: 1
-</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">value of **board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span><span style="color:#ff79c6">*</span>board); <span style="color:#6272a4">// output: 1
+    printf(<span style="color:#f1fa8c">&#34;value of board[0][0]: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>][<span style="color:#bd93f9">0</span>]); <span style="color:#6272a4">// output: 1
+</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c">&#34;value of *board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>board); <span style="color:#6272a4">// output: 1
+</span><span style="color:#6272a4"></span>    printf(<span style="color:#f1fa8c">&#34;value of **board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">**</span>board); <span style="color:#6272a4">// output: 1
 </span><span style="color:#6272a4"></span>
     <span style="color:#6272a4">// 遍历数组
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> ( <span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; i <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">9</span>; <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>i )
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> ( <span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; i <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">9</span>; <span style="color:#ff79c6">++</span>i )
     {
-        printf(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>(<span style="color:#ff79c6">*</span>board <span style="color:#ff79c6">+</span> i)));
+        printf(<span style="color:#f1fa8c">&#34;board: %c</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#ff79c6">*</span>(<span style="color:#ff79c6">*</span>board <span style="color:#ff79c6">+</span> i)));
     }
 
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;

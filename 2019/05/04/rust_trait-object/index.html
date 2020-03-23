@@ -153,7 +153,7 @@
 <p>以<code>impl Bar for Foo</code>为例, data指针指向trait对象保存的类型数据T, vtable指针指向包含T实现的Bar的vtable, 这样就可以将共同拥有相同行为的类型集合抽象为一个类型.<br>
 静态分发会在编译期被单态化生成具体类型的实例, 在使用静态分发运行时是零成本的, 它不需要在运行时进行方法查找.</p>
 <p>然而并不是每个trait都可以作为trait对象使用, 它需要满足以下的条件.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">#![</span><span style="color:#ff79c6">allow(non_snake_case)</span><span style="color:#ff79c6">]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">#![allow(non_snake_case)]</span>
 <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
     <span style="color:#6272a4">// println!(&#34;Hello, world!&#34;);
 </span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">let</span> foo <span style="color:#ff79c6">=</span> Foo;
@@ -174,25 +174,25 @@
 </span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">new</span>(<span style="color:#ff79c6">&amp;</span>self); <span style="color:#6272a4">// 当这个trait被限定为?Sized的时候, 且它为trait对象的时候, new不能被调用
 </span><span style="color:#6272a4"></span>
 
-    <span style="color:#6272a4">/*</span><span style="color:#6272a4">
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> 对象安全的trait需满足两个条件
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> 1). trait的Self类型参数不能被限定为Sized
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> 2). trait中所有的方法必须时对象安全的, 而对象安全正是下面的3个条件才能满足的.
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> </span><span style="color:#6272a4">*/</span>
+    <span style="color:#6272a4">/*
+</span><span style="color:#6272a4">     * 对象安全的trait需满足两个条件
+</span><span style="color:#6272a4">     * 1). trait的Self类型参数不能被限定为Sized
+</span><span style="color:#6272a4">     * 2). trait中所有的方法必须时对象安全的, 而对象安全正是下面的3个条件才能满足的.
+</span><span style="color:#6272a4">     * */</span>
 
-    <span style="color:#6272a4">/*</span><span style="color:#6272a4">
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> 根据规则来, 对象安全的方法必须满足以下三个条件(</span><span style="color:#6272a4">*</span><span style="color:#6272a4">方法</span><span style="color:#6272a4">*</span><span style="color:#6272a4">是必须受到Self: Sized的约束):
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4">  1). 必须不包含任何泛型参数
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4">  2). 第一个参数必须为Self类型或者解引用为Self的类型(self, &amp;self, &amp;mut self, self: Box&lt;Self&gt;)
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4">  3). Self不能出现在</span><span style="color:#6272a4">*</span><span style="color:#6272a4">除</span><span style="color:#6272a4">*</span><span style="color:#6272a4">第一个参数之外的地方, 包括返回值中. 
-</span><span style="color:#6272a4">     </span><span style="color:#6272a4">*</span><span style="color:#6272a4"> </span><span style="color:#6272a4">*/</span>
+    <span style="color:#6272a4">/*
+</span><span style="color:#6272a4">     * 根据规则来, 对象安全的方法必须满足以下三个条件(*方法*是必须受到Self: Sized的约束):
+</span><span style="color:#6272a4">     *  1). 必须不包含任何泛型参数
+</span><span style="color:#6272a4">     *  2). 第一个参数必须为Self类型或者解引用为Self的类型(self, &amp;self, &amp;mut self, self: Box&lt;Self&gt;)
+</span><span style="color:#6272a4">     *  3). Self不能出现在*除*第一个参数之外的地方, 包括返回值中. 
+</span><span style="color:#6272a4">     * */</span>
 }
 
 <span style="color:#ff79c6">impl</span> Bar <span style="color:#ff79c6">for</span> Foo {
-   <span style="color:#6272a4">/*</span><span style="color:#6272a4">  fn bad&lt;T&gt;(&amp;self, x: T) { </span><span style="color:#6272a4">*/</span>
+   <span style="color:#6272a4">/*  fn bad&lt;T&gt;(&amp;self, x: T) { */</span>
         <span style="color:#6272a4">// println!(&#34;Bad...&#34;); // 这里出现了泛型, 不符合规则, 不能当做对象使用
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// }
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">/*</span><span style="color:#6272a4">  </span><span style="color:#6272a4">*/</span>
+</span><span style="color:#6272a4"></span><span style="color:#6272a4">/*  */</span>
     <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">bad_yes</span>(<span style="color:#ff79c6">&amp;</span>self, x: <span style="color:#8be9fd">i32</span>) {
         println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;{:?}&#34;</span>, x); <span style="color:#6272a4">//符合规则
 </span><span style="color:#6272a4"></span>    }

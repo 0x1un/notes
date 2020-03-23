@@ -102,13 +102,13 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="heading">准备</h3>
+<h3 id="准备">准备</h3>
 <p>安装Arch-linux非常简单, 首先需要做以下的准备</p>
 <p>前往Arch Linux的官网下载最新chroot<br>
 刻录系统到U盘与设置BIOS开机以U盘启动<br>
 这里就不赘述了, 自行百度</p>
 <!-- raw HTML omitted -->
-<h3 id="----"><strong>开始安装</strong></h3>
+<h3 id="__开始安装__"><strong>开始安装</strong></h3>
 <p>当完成了上述的准备之后, 就可以开始安装系统了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 查看磁盘分区情况，并视情况进行格式化分区</span>
 fdisk -l   
@@ -145,7 +145,7 @@ pacstrap -i /mnt base base-devel
 <span style="color:#6272a4"># 生成fstab文件 -U为使用UUID, 使用blkid可查询UUID(用以挂在文件, 启动系统所用)</span>  
 genfstab -U /mnt &gt;&gt; /mnt/etc/fstab  
 cat /mnt/etc/fstab   <span style="color:#6272a4">#务必查看挂载的分区与类型是否正确</span>
-</code></pre></div><h3 id="heading-1">后续配置</h3>
+</code></pre></div><h3 id="后续配置">后续配置</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 拷贝dns信息到系统当中</span>
 cp /etc/resolv.conf /mnt/etc/resolv.conf 
 arch-chroot /mnt bash <span style="color:#6272a4">#进入系统进行后续配置</span>  
@@ -178,10 +178,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S dosfstools grub efibootmgr  
 grub-install <span style="color:#8be9fd;font-style:italic">target</span><span style="color:#ff79c6">=</span>x86_64-efi --efidirectory<span style="color:#ff79c6">=</span>&lt;EFI 分区挂载点&gt; --bootloaderid<span style="color:#ff79c6">=</span>grub --removable 
 grubmkconfig -o /boot/grub/grub.cfg 
-</code></pre></div><h3 id="-----1"><strong>完成安装</strong></h3>
+</code></pre></div><h3 id="__完成安装__"><strong>完成安装</strong></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#8be9fd;font-style:italic">exit</span>   
 umount -R /mnt  
-</code></pre></div><h3 id="-----2"><strong>为桌面做准备</strong></h3>
+</code></pre></div><h3 id="__为桌面做准备__"><strong>为桌面做准备</strong></h3>
 <p>创建用户</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd -m -g users -G wheel -s /bin/bash YourName  
 vi /etc/sudoers <span style="color:#6272a4">#为新用户设置权限</span>  
@@ -199,7 +199,7 @@ pacman -S ttf-dejavu wqy-microhei wqy-zenhei
 sudo pacman -S xorg <span style="color:#6272a4"># 务必安装</span>
 sudo pacman -S i3-gaps i3blocks i3status comptom conky 
 sudo pacman -S noto-fonts-cjk <span style="color:#6272a4"># 安装中文字体</span>
-</code></pre></div><h3 id="heading-2">总结</h3>
+</code></pre></div><h3 id="总结">总结</h3>
 <p>相比于Gentoo的安装, Arch无疑是非常快速的, 两个发行版安装过程大同小异<br>
 如果你的电脑性能不是很强劲, 那么我建议你还是选择Arch, 包资源无比丰富<br>
 这里是我的i3桌面配置文件, <a href="https://github.com/0x1un/dotFiles">https://github.com/0x1un/dotFiles</a><br>

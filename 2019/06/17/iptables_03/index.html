@@ -115,13 +115,13 @@ iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22
 <p>如若需要匹配第二次握手, 根据上图</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p tcp -m tcp --dport <span style="color:#bd93f9">22</span> --tcp-flags ALL SYN,ACK -j REJECT
 </code></pre></div><p>其中的ALL就是第一个例子当中的那一串标志列表的简写, 你大可不必那么费劲将他们都写出来</p>
-<h4 id="udp-">udp 扩展</h4>
+<h4 id="udp-扩展">udp 扩展</h4>
 <p>udp模块与tcp模块相似, 它也有--dport与--sport, 但它也只有这两个选项</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p udp -m udp --dport <span style="color:#bd93f9">138</span> -j ACCEPT
 <span style="color:#6272a4">###### OR ######</span>
 iptables -t filter -I INPUT -p udp --dport 137:139 -j ACCEPT
 </code></pre></div><p>tcp与udp模块中的dport与sport同样可以指定一定范围的端口, 但并不能指定离散的端口, 根据前文, 可以使用--multiport模块来使用</p>
-<h4 id="icmp-">icmp 扩展</h4>
+<h4 id="icmp-扩展">icmp 扩展</h4>
 <p>ping这个命令使用的icmp协议, <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">icmp</a>全称为(Internet Control Message Protocol), 互联网控制报文协议, 主要用于探测网络上的主机是否可用, 目标是否可达</p>
 <p><img src="https://github.com/0x1un/SavaImg/raw/master/ICMP/icmp-types-codes.gif" alt=""></p>
 <p>根据上图, type 3代表着目标不可达, 其中细分了多种不可达的原因, 比如可用 3/1表示为主机不可达</p>
@@ -135,7 +135,7 @@ iptables -t filter -I INPUT -p udp --dport 137:139 -j ACCEPT
 <p>上面的8/0, 3/1之类的也许有些难以让人清楚它的具体含义, 可以使用与其对应的描述进行匹配</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -p icmp --icmp-type <span style="color:#f1fa8c">&#34;echo-request&#34;</span> -j REJECT
 </code></pre></div><p>只要根据上面的对照图把其描述中的空格替换成(-)就可以了</p>
-<h4 id="state-">state 扩展</h4>
+<h4 id="state-扩展">state 扩展</h4>
 <p>state, 英文直译为&quot;状态&rdquo;, 实际上它可以让iptables实现&quot;连接追踪&rdquo;, 对于state扩展模块来说, 只要两台主机在相互通信, 就算建立起了连接</p>
 <p>通常用于判断报文是否是为了回应之前发出的报文</p>
 <p>其中对于state, 其中的报文可以分为5钟状态, 分别为[NEW, ESTABLISHED, RELATED, INVALID, UNTRACKED]</p>

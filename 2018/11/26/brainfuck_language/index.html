@@ -102,11 +102,11 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="heading">起因</h3>
+<h3 id="起因">起因</h3>
 <p>很无聊, 一时兴起到网上搜索了<code>最难编程语言</code>, 其中的<code>brainfuck</code>语言惊艳到了我, 我觉得它非常有趣.
 实际上还有很多奇葩好玩的东西, 今天就折腾一下<code>brainfuck</code>吧.</p>
 <!-- raw HTML omitted -->
-<h3 id="heading-1">开始懵逼</h3>
+<h3 id="开始懵逼">开始懵逼</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-brainfuck" data-lang="brainfuck"><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">+++++++</span><span style="color:#ff79c6">..</span><span style="color:#8be9fd;font-style:italic">+++</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">+++++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
@@ -114,7 +114,7 @@
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">++++++++</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">++++</span><span style="color:#8be9fd;font-style:italic">&gt;</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">&lt;</span><span style="color:#8be9fd;font-style:italic">+</span><span style="color:#ff79c6">.</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd;font-style:italic">-</span><span style="color:#ff79c6">]</span><span style="color:#8be9fd;font-style:italic">++++++++++</span><span style="color:#ff79c6">.</span><span style="color:#6272a4">
 </span></code></pre></div><p>这段玩意儿会输出<code>Hello World!</code>, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~
 <code>brainfuck</code>它只有八个指令, 除去这八个之外的所有字符都将忽略.</p>
-<h3 id="brainfuck">Brainfuck的指令定义</h3>
+<h3 id="brainfuck的指令定义">Brainfuck的指令定义</h3>
 <ul>
 <li>+ : 指针指向的单元的值加1</li>
 <li>- : 指针指向的单元的值减1</li>
@@ -133,13 +133,13 @@
     <span style="color:#ff79c6">print</span>(<span style="color:#8be9fd;font-style:italic">input</span>())
 </code></pre></div><p>下面是使用的C实现的<code>Brainfuck</code>的解释器, 说实在的以后无聊了可以使用<code>Brainfuck</code>自举自己的解释器:)&gt;</p>
 <p>之后使用<code>Python</code>或<code>Golang</code>来实现一个, 实现它很简单</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
-</span><span style="color:#ff79c6"></span><span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;stdlib.h&gt;</span><span style="color:#ff79c6">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdlib.h&gt;</span><span style="color:#ff79c6">
 </span><span style="color:#ff79c6"></span>
-<span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;unistd.h&gt;</span><span style="color:#ff79c6">
-</span><span style="color:#ff79c6"></span><span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;sys/types.h&gt;</span><span style="color:#ff79c6">
-</span><span style="color:#ff79c6"></span><span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;sys/stat.h&gt;</span><span style="color:#ff79c6">
-</span><span style="color:#ff79c6"></span><span style="color:#ff79c6">#</span><span style="color:#ff79c6">include</span> <span style="color:#ff79c6">&lt;fcntl.h&gt;</span><span style="color:#ff79c6">
+<span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;unistd.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;sys/types.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;sys/stat.h&gt;</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;fcntl.h&gt;</span><span style="color:#ff79c6">
 </span><span style="color:#ff79c6"></span>
 <span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">int</span> argc, <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>argv[])
 {
@@ -160,8 +160,8 @@
         fd <span style="color:#ff79c6">=</span> open(argv[<span style="color:#bd93f9">1</span>], O_RDONLY);
 
         <span style="color:#ff79c6">if</span>(fd <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>){
-            fprintf(stderr, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">Error opening %s!</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, argv[<span style="color:#bd93f9">1</span>]);
-            perror(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">open</span><span style="color:#f1fa8c">&#34;</span>);
+            fprintf(stderr, <span style="color:#f1fa8c">&#34;Error opening %s!</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, argv[<span style="color:#bd93f9">1</span>]);
+            perror(<span style="color:#f1fa8c">&#34;open&#34;</span>);
             exit(<span style="color:#bd93f9">1</span>);
         }
     }
@@ -170,57 +170,57 @@
     aux_ptr <span style="color:#ff79c6">=</span> program;
     ret <span style="color:#ff79c6">=</span> read(fd, aux_ptr, aux_size);
 
-    <span style="color:#ff79c6">while</span> (ret <span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">&amp;</span> (prg_size <span style="color:#ff79c6">&lt;</span> <span style="color:#ff79c6">sizeof</span>(program))) {
-        aux_size <span style="color:#ff79c6">-</span><span style="color:#ff79c6">=</span> ret;
-        prg_size <span style="color:#ff79c6">+</span><span style="color:#ff79c6">=</span> ret;
-        aux_ptr <span style="color:#ff79c6">+</span><span style="color:#ff79c6">=</span> ret;
+    <span style="color:#ff79c6">while</span> (ret <span style="color:#ff79c6">&amp;&amp;</span> (prg_size <span style="color:#ff79c6">&lt;</span> <span style="color:#ff79c6">sizeof</span>(program))) {
+        aux_size <span style="color:#ff79c6">-=</span> ret;
+        prg_size <span style="color:#ff79c6">+=</span> ret;
+        aux_ptr <span style="color:#ff79c6">+=</span> ret;
         ret <span style="color:#ff79c6">=</span> read(fd, aux_ptr, aux_size);
     }
 
     <span style="color:#ff79c6">while</span> (ip <span style="color:#ff79c6">&lt;</span> (program <span style="color:#ff79c6">+</span> prg_size)) {
         <span style="color:#ff79c6">switch</span>(<span style="color:#ff79c6">*</span>ip) {
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">&gt;</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>ptr; <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">&lt;</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">-</span><span style="color:#ff79c6">-</span>ptr; <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">+</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">-</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">-</span><span style="color:#ff79c6">-</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">.</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> putchar(<span style="color:#ff79c6">*</span>ptr); 
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;&gt;&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">++</span>ptr; <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;&lt;&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">--</span>ptr; <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;+&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">++</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;-&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">--</span>(<span style="color:#ff79c6">*</span>ptr); <span style="color:#ff79c6">break</span>;
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;.&#39;</span><span style="color:#ff79c6">:</span> putchar(<span style="color:#ff79c6">*</span>ptr); 
                       fflush(stdout); 
                       <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">,</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span> getchar(); 
-                      <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> EOF) exit(<span style="color:#bd93f9">0</span>);
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;,&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span> getchar(); 
+                      <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">==</span> EOF) exit(<span style="color:#bd93f9">0</span>);
                       <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">[</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span>
-                <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#ff79c6">*</span>ptr) {
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;[&#39;</span><span style="color:#ff79c6">:</span>
+                <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!*</span>ptr) {
                     count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
                     <span style="color:#ff79c6">while</span> (count) {
-                        <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>ip;
-                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">[</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>count;
-                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">]</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#ff79c6">-</span><span style="color:#ff79c6">-</span>count;
+                        <span style="color:#ff79c6">++</span>ip;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span>) <span style="color:#ff79c6">++</span>count;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;]&#39;</span>) <span style="color:#ff79c6">--</span>count;
                     }
                 }
                 <span style="color:#ff79c6">break</span>;
-            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">]</span><span style="color:#f1fa8c">&#39;</span><span style="color:#ff79c6">:</span>
+            <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;]&#39;</span><span style="color:#ff79c6">:</span>
                 <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ptr) {
                     count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
                     <span style="color:#ff79c6">while</span> (count) {
-                        <span style="color:#ff79c6">-</span><span style="color:#ff79c6">-</span>ip;
-                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">]</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>count;
-                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">=</span><span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">[</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#ff79c6">-</span><span style="color:#ff79c6">-</span>count;
+                        <span style="color:#ff79c6">--</span>ip;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;]&#39;</span>) <span style="color:#ff79c6">++</span>count;
+                        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">*</span>ip <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;[&#39;</span>) <span style="color:#ff79c6">--</span>count;
                     }
                 }
                 <span style="color:#ff79c6">break</span>;
         }
-        <span style="color:#ff79c6">+</span><span style="color:#ff79c6">+</span>ip;
+        <span style="color:#ff79c6">++</span>ip;
     }
 
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
 }
-</code></pre></div><h3 id="heading-2">最后总结</h3>
+</code></pre></div><h3 id="最后总结">最后总结</h3>
 <p>对这个语言, 说是语言实际上我将它当做玩具, 无聊的时候用来活动脑筋, 我想应该地球上不会有人用它来做项目吧, 根据上面的C语言实现的解释器起初我也是没有想到的, 最后看了github上的大神实现的代码, 无聊的我也开始折腾, 当然折腾之后还有些别的收获, 但是我又无法用言语表达出来我的这份收获, 我记得这种感觉.</p>
-<h3 id="heading-3">本文参考文献</h3>
+<h3 id="本文参考文献">本文参考文献</h3>
 <p><a href="https://segmentfault.com/a/1190000000395225?utm_source=tuicool&amp;utm_medium=referral">Y分钟学Brainfuck</a></p>
 <p><a href="http://ascii.911cha.com/">Ascii对照表</a></p>
-<h3 id="heading-4">在线演示过程(工具)</h3>
+<h3 id="在线演示过程工具">在线演示过程(工具)</h3>
 <p><a href="https://fatiherikli.github.io/brainfuck-visualizer/#K1ssWz4rPC1dPi48LV0=">brainfuck-visualizer</a></p>
 <p>未完待续&hellip;</p>
 

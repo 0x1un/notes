@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h2 id="iptables">iptables查看规则</h2>
+<h2 id="iptables查看规则">iptables查看规则</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t tablename -L
 </code></pre></div><p>查看tablename表中的所有规则, 如果省略-t选项, 则默认为filter表, -L选项为查看规则</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -v -L INPUT
@@ -113,7 +113,7 @@
 </code></pre></div><p>-x选项表示显示计数器的精确值</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -vxnL INPUT
 </code></pre></div><p>在日常使用中会使用组合选项(方便), 效果等同于上一条</p>
-<h5 id="heading">清空/删除规则</h5>
+<h5 id="清空删除规则">清空/删除规则</h5>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -F INPUT
 </code></pre></div><p>-F flush 清空filter表中INPUT链路中的所有规则(因为没有-t选项, 根据前文所述默认为filter表)</p>
 <p>删除规则有两种办法: 根据编号删除, 根据动作与条件删除</p>
@@ -121,7 +121,7 @@
 </code></pre></div><p>删除filter表中INPUT链路中编号为2的规则, 如需知晓编号你需要加&ndash;line选项在查看规则的时候</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -D INPUT -s 192.168.0.111 -j DROP
 </code></pre></div><p>删除filter表中INPUT链路中源地址为192.168.0.111且行为为DROP的规则</p>
-<h2 id="iptables-1">iptables的规则管理</h2>
+<h2 id="iptables的规则管理">iptables的规则管理</h2>
 <p>添加一条丢弃规则</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">iptables -t filter -I INPUT -s 192.168.0.7 -j DROP
 </code></pre></div><p>添加多条ip的规则, 使用(,)号隔开, 注意(,)两侧不能有空格</p>

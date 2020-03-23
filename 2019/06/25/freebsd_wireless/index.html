@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="freebsd">关于FreeBSD无线网络的问题</h3>
+<h3 id="关于freebsd无线网络的问题">关于FreeBSD无线网络的问题</h3>
 <p>在折腾了一下FreeBSD, 发现这个系统异常的稳健, 而在网路上的同行大多都是这种感受, 当你将一台FreeBSD服务器架设好了之后, 可能等到你忘记root密码它都还在平稳运行,
 它的安装非常简单, 懂几个单词就可以顺利安装, 比之Gentoo/Arch这类Linux发行版要友好很多, 这里就不再赘述安装过程了, 来记录下无线网络的连接问题</p>
 <p>在安装完成FreeBSD之后, 默认用的是有线连接, 使用的网卡接口为re0(我的设备), 而无线网络的接口是ath0, 但是默认没有使用的, 需要自己手动开启, 这里贴
@@ -114,7 +114,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ifconfig wlan0 create wlandev ath0
 </code></pre></div><p>配置网络自启, 编辑/etc/rc.conf</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">wlans_ath0</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;wlan0&#34;</span>
-<span style="color:#8be9fd;font-style:italic">ifconfig_wlan0</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;WPA SYNCDHCP&#34;</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">
+<span style="color:#8be9fd;font-style:italic">ifconfig_wlan0</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;WPA SYNCDHCP&#34;&#34;
 </span></code></pre></div><p>编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效</p>
 <pre><code class="language-config" data-lang="config">if_ath_load=&quot;YES&quot;
 if_wi_load=&quot;YES&quot;

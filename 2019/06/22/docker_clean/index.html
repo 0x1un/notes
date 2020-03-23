@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="docker">docker的清理</h3>
+<h3 id="docker的清理">docker的清理</h3>
 <p>docker带来的好处无疑的巨大的, 但是有个令人无奈的缺点就是占用很大的空间,
 本来本子就一块128G的固态作为系统盘, 被一些杂七杂八的Image占用了一大部分,
 肯定是要清理的, 例如一些不再使用的Image, 数据卷(volume), 容器(container)
@@ -169,7 +169,7 @@ docker volume rm VOLUME
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 删除所有已经关闭的容器</span>
 docker ps -a | grep Exit | cut -d <span style="color:#f1fa8c">&#39; &#39;</span> -f <span style="color:#bd93f9">1</span> | xargs docker rm
 <span style="color:#6272a4"># 删除所有标示为&lt;none&gt;的镜像</span>
-docker rmi <span style="color:#ff79c6">(</span>docker images | grep <span style="color:#f1fa8c">&#34;^&lt;none&gt;&#34;</span> | awk <span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{print </span><span style="color:#8be9fd;font-style:italic">$3</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">)</span>
+docker rmi <span style="color:#ff79c6">(</span>docker images | grep <span style="color:#f1fa8c">&#34;^&lt;none&gt;&#34;</span> | awk <span style="color:#f1fa8c">&#34;{print </span><span style="color:#8be9fd;font-style:italic">$3</span><span style="color:#f1fa8c">}&#34;</span><span style="color:#ff79c6">)</span>
 </code></pre></div><p>在这里就是示范一下如何配合shell操作, shell很灵活, 就不再过多赘述了</p>
 
   </div>

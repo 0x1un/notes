@@ -102,10 +102,10 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="heading">起因</h3>
+<h3 id="起因">起因</h3>
 <p>因为宅在家无聊, 想起了<code>Python</code>技术栈里还有个很重要的框架没有学习, 那就是<code>Django</code>, 我发现它并不是那么的简单, 其中的过程非常难受, 在我学习开始使用它的时候就趟过以下的坑(其中的有些坑真的让我很迷), 寥寥数语, 记录我逝去的8个小时.</p>
 <!-- raw HTML omitted -->
-<h3 id="appsettings-app">将app注册到了settings, 但是生成数据表仍然提示无法找到app</h3>
+<h3 id="将app注册到了settings-但是生成数据表仍然提示无法找到app">将app注册到了settings, 但是生成数据表仍然提示无法找到app</h3>
 <pre><code>No module nomed '***'
 </code></pre><p>在<code>Pycharm</code>当中因为设置过<code>Source root</code>, 所以Idea运行是没有问题的, 当使用命令行运行时就会报此错误.
 这是因为python的搜索路径中没有它, 需要将这个地址加入到python搜索路径
@@ -114,10 +114,10 @@
 curPath <span style="color:#ff79c6">=</span> os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>abspath(os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>dirname(__file__))
 rootPath <span style="color:#ff79c6">=</span> os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>split(curPath)[<span style="color:#bd93f9">0</span>]
 sys<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>append(rootPath)
-</code></pre></div><h3 id="heading-1">运行报错</h3>
+</code></pre></div><h3 id="运行报错">运行报错</h3>
 <pre><code>django.core.exceptions.AppRegistryNotReady: Apps aren't loaded yet.
 </code></pre><p>原因是根目录下<code>manage.py</code>中包含没有使用的包(这又不是go, 为什么会这样, 反正去掉就没事了, 很玄学)</p>
-<h3 id="heading-2">导包的坑</h3>
+<h3 id="导包的坑">导包的坑</h3>
 <pre><code>RuntimeError: Model class apps.message.models.UserMessage doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.
 </code></pre><p>原因有可能是使用以下相对路劲导入包时发生</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">from</span> .models <span style="color:#ff79c6">import</span> <span style="color:#ff79c6">*</span>
@@ -125,19 +125,19 @@ sys<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>a
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">from</span> appname.models <span style="color:#ff79c6">import</span> <span style="color:#ff79c6">*</span>
 </code></pre></div><p>检查setting中app注册的方式, 需要使用如下方式</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">INSTALLED_APPS <span style="color:#ff79c6">=</span> [
-    <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">apps.appname</span><span style="color:#f1fa8c">&#39;</span>
+    <span style="color:#f1fa8c">&#39;apps.appname&#39;</span>
     <span style="color:#6272a4"># 按理说1.9.8版本只需要写appname就行</span>
 ]
-</code></pre></div><h3 id="css">后台页面css样式丢失</h3>
+</code></pre></div><h3 id="后台页面css样式丢失">后台页面css样式丢失</h3>
 <p>这个打开浏览器的开发者工具可以查看它请求的css路径
 修改settings文件中的STATIC_ROOT为static, 如果还是不行就设置绝对路径, 后台界面的样式一般放在<code>django</code>包中</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6272a4"># settings.py</span>
 <span style="color:#6272a4"># 这个方法用过之后行得通了, 但我还原之前代码之后也可以运行(这让我很迷)</span>
 <span style="color:#ff79c6">import</span> os
 <span style="color:#ff79c6">import</span> django
-ADMIN_STYLE <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">/contrib/admin/static/admin/</span><span style="color:#f1fa8c">&#39;</span>
+ADMIN_STYLE <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;/contrib/admin/static/admin/&#39;</span>
 STATIC_ROOT <span style="color:#ff79c6">=</span> os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>join(BASE_DIR, os<span style="color:#ff79c6">.</span>path<span style="color:#ff79c6">.</span>dirname(django<span style="color:#ff79c6">.</span>__file__)<span style="color:#ff79c6">+</span>ADMIN_STYLE)
-</code></pre></div><h3 id="orm">ORM无法向数据库中写入数据</h3>
+</code></pre></div><h3 id="orm无法向数据库中写入数据">ORM无法向数据库中写入数据</h3>
 <p>它没有报任何错误与异常, 所有的设置都很正确, 但我折腾了将近3个小时, 依然无法写入数据, 最后一怒之下猛踢主机箱后奇迹般的能写入了, 我觉得<code>Django</code>天生与我八字不合.</p>
 
   </div>
