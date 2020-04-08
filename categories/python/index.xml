@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on 正经人</title>
+    <title>Python on 老实人</title>
     <link>/categories/python/</link>
-    <description>Recent content in Python on 正经人</description>
+    <description>Recent content in Python on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 23 Feb 2019 22:05:00 +0000</lastBuildDate>
@@ -75,6 +75,16 @@ myset.defference(another_set) 等同于 myset - another_set 返回一个新值
 __new__(cls,[&amp;hellip;) __new__ 是对象实例化时第一个调用的方法，它只取下 cls 参数，并把其他参数传给 __init__ 。 __new__ 很少使用，但是也有它适合的场景，尤其是当类继承自一个像元组或者字符串这样不经常改变的类型的时候。我不打算深入讨论 __new__ ，因为它并不是很有用， Python文档 中 有详细的说明。
 __init__(self,[&amp;hellip;]) 类的初始化方法。它获取任何传给构造器的参数（比如我们调用 x = SomeClass(10, ‘foo’) ， __init__ 就会接到参数 10 和 ‘foo’ 。 __init__ 在Python的类定义中用的最多。
 __del__(self) __new__ 和 __init__ 是对象的构造器， __del__ 是对象的销毁器。它并非实现了语句 del x (因此该语句不等同于 x.</description>
+    </item>
+    
+    <item>
+      <title>Postgres常规操作</title>
+      <link>/2018/07/10/postgres_basic_operation/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/10/postgres_basic_operation/</guid>
+      <description>记录一些 postgres 常规操作，持续更新。
+CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
     </item>
     
     <item>

@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>正经人</title>
+    <title>老实人</title>
     <link>/</link>
-    <description>Recent content on 正经人</description>
+    <description>Recent content on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>从头到尾搭建Zabbix</title>
+      <link>/2020/04/07/zabbix-setup/</link>
+      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/07/zabbix-setup/</guid>
+      <description>基于的环境 cat /etc/redhat-release &amp;gt; CentOS Linux release 7.7.1908 (Core) zabbix version: 4.4.4 MariaDB Server: 10.4.12-MariaDB 前期准备 在CentOS-7安装完成之后，因为咱们国情的原因，我们需要对系统的软件源进行更换。什么是源，其实简单来说就是软件资源的服务器。
+为了安装方便，作为教程，那就使用root用户吧，当然生产环境慎用就是了，度自己拿捏。
+关闭防火墙（防火墙不在本文的讲解范围，先关闭再说）
+systemctl stop firewalld 关闭selinux（这个也关闭吧，不精通它就关闭它，否则有你好受的）
+# 查看selinux状态 getenforce # 临时关闭selinux setenforce 0 # 永久关闭selinux, 编辑/etc/selinux/config # This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded.</description>
+    </item>
+    
+    <item>
+      <title>Rust认真学习的第一天</title>
+      <link>/2020/03/23/rust-day1/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/23/rust-day1/</guid>
+      <description>前言 说起学习Rust，那得从2018年的10月份开始。我买了一本《Rust编程之道》张汉东老师编著的，买回来之后的两个月我看的非常认真。
+也是在2019年的7月份吧，我找了一份工作。就在那时，我渐渐把Rust给淡忘了。。。转投到Golang（真香）的怀抱中，但我依然每天关注着Rust的动态。
+当时我看完了一遍官方的tuto，才买的编程之道，这本书的前五章我认真看了将近两个月，看的非常仔细，乃至于我现在都能回忆起一些细节。为什么看的那么仔细呢，说实话我将Rust当作了一种兴趣，没有功利心的那种学习态度。然而后面在工作上都是用的Python/Goalng渐渐将其淡忘。当时学习也没认真做点笔记，也不是没有做，而是我将笔记记在了书上。说实话，这很不利于检索。
+那么从现在开始，我将重新学一学Rust，并且动手实践。在这个过程中呢，我将会把Rust学习的历程一字一句记录在此。但我不会保证正确性，如果你看了我学习Golang时写的日志就知道了。我现在翻看以前写的Golang日志，会发现很多不妥的地方，我也懒得将其修正了。请记住，这不是教程文章，只是我的学习历程！</description>
+    </item>
     
     <item>
       <title>Linux各种疑难问题</title>
@@ -27,19 +52,27 @@ I instance.cpp:903] Override Enabled Addons: {} I instance.cpp:904] Override Dis
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/12/24/2019_end/</guid>
-      <description>2019年就要结束了，2018年恍如昨日······
-2018年我浑浑噩噩地度过，甚至不知道自己都做了什么，好似度过了一段真空期。
-在2019年的7月份，我换一份工作，直到现在感觉还不错，在我为数不多的面试中于我而言是较好的一份工作。即使得到的报酬少得可怜，但工作较为清闲，留给自己的时间很多，我可以做一些自己喜欢的事。
+      <description>2019 年就要结束了，2018 年恍如昨日······
+2018 年我浑浑噩噩地度过，甚至不知道自己都做了什么，好似度过了一段真空期。
+在 2019 年的 7 月份，我换一份工作，直到现在感觉还不错，在我为数不多的面试中于我而言是较好的一份工作。即使得到的报酬少得可怜，但工作较为清闲，留给自己的时间很多，我可以做一些自己喜欢的事。
 但是说实在的，这一年中我貌似还没有做出点什么值得炫耀的事情，平平淡淡，这一切都看起来没有生机。
 准备自己开发一个云盘，这是在三个月前开始的，前端是在开源仓库中随便找的一个改改。自己主要实现全部的后端逻辑，但在一个月后，我烂尾了。现在才想起有这么一个项目没有完成（抹脸，这个项目不为别的，主要是用它来练练手(Golang)。
 七月初，我在入职这家公司后感受到的就是无聊，工作枯燥，相对的自由性也高。但我心底觉得如今的我不配享受这种安逸，不断告诉自己要走出这个舒适圈，哎，妈的真香。。
 每一次的热血上头，都来源于同行的打击与朋友同学之间交流，因为在这种交流中，会了解到一些同学的发展近况。有些同学顺利的进了华为，拿到了高于我一倍的报酬，还有了女朋友，竟然还养了猫！ 在这种刺激下，我疯了一般的学习，看书，但令人恼火的是这往往不会持续太久。当热情渐渐减弱，我又回到了之前的咸鱼状态。我讨厌这种状态，甚至于厌恶至极，这样催生出来的就是抑郁症。
-庆幸的是我还有这种状态，在这种打了鸡血一样的状态结束之后，往往收获也良多。所以总是在想，如果能多坚持一段时间，也许会更好。但对于我个人来说，这可遇不可求。
-我经常跑偏，怎么个偏法？举一个我的实际存在的状态，在做一件事的时候，往往会被其他的东西所吸引，比如我现在正在用Golang开发一个东西。。。然而在用Golang的时候，我心里想用Rust。。。
+庆幸的是我还有这种状态，在这种打了鸡血一样的状态结束之后，往往也收获良多。所以总是在想，如果能多坚持一段时间，也许会更好。但对于我个人来说，这可遇不可求。
+我经常跑偏，怎么个偏法？举一个我的实际存在的状态，在做一件事的时候，往往会被其他的东西所吸引，比如我现在正在用 Golang 开发一个东西。。。然而在用 Golang 的时候，我心里想用 Rust。。。
 若我能在一个领域坚持一段时间，我相信自己定会有些小作为。但这不可能，我这人就是这么一个性格，无法坚持长久做一件事情。
-说了那么多，也就是对2019年做一个草草的总结。看的出来，这一年中我过的并不好，希望明年的这个时候再看到这篇日志能感到一点点欣慰。
-然后就是做一个2020年的目标吧，我也不做什么看起来逼格满满的虚伪目标了，就列一列我实际想做的吧。
-2020年目标  RHCE证书 英语词汇量达到5000（不强求，4500也行 完成今年烂尾的云盘项目 起码再做一个开源项目吧 学习高等数学，线性代数 给自己换个手机 坚持使用Go, 就坚守10个月吧，一定不能跑偏了 在Github上对一个项目做点贡献，哪怕一段注释，总要勇敢迈出这一步！  好了，就这些，这些坚持坚持怎么也能完成。</description>
+说了那么多，也就是对 2019 年做一个草草的总结。看的出来，这一年中我过的并不好，希望明年的这个时候再看到这篇日志能感到一点点欣慰。
+然后就是做一个 2020 年的目标吧，我也不做什么看起来逼格满满的虚伪目标了，就列一列我实际想做的吧。
+2020 年目标   RHCE 证书
+  英语词汇量达到 5000（不强求，4500 也行
+  完成今年烂尾的云盘项目
+  起码再做一个开源项目吧
+  学习高等数学，线性代数
+  给自己换个手机
+  坚持使用 Go, 就坚守 10 个月吧，一定不能跑偏了
+  在 Github 上对一个项目做点贡献，哪怕一段注释，总要勇敢迈出这一步！
+  好了，就这些，这些坚持坚持怎么也能完成。</description>
     </item>
     
     <item>
@@ -71,7 +104,7 @@ options = []chromedp.ExecAllocatorOption{ chromedp.Flag(&amp;#34;disable-gpu&amp
     </item>
     
     <item>
-      <title>判断网卡的类型</title>
+      <title>Linux判断网卡的类型</title>
       <link>/2019/11/07/linux_sys_file/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
       
@@ -841,20 +874,28 @@ Python代码实现Huffman编码(网摘) import queue class HuffmanNode(object): 
       <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/29/math_vector/</guid>
-      <description>这是一篇没有技术含量的文章...
+      <description>这是一篇没有技术含量的文章&amp;hellip;
  概述 在平面解析几何当中, 通过坐标法将平面上的点与一对有次序的数对应起来, 把平面上的图形和方程对应起来, 从而可以用代数方法来研究几何问题。空间解析几何也是按照类似的方法建立的。
 平面解析几何的只是对于学习一元函数微积分是不可以缺失的学习, 空间解析几何的知识对于学习多元函数微积分也是十分必要的。
-行向量与列向量 行向量: \((x, y)\)
-列向量: \(\dbinom{x}{y}\)
+行向量与列向量 行向量: $$(x, y)$$
+列向量: $$\dbinom{x}{y}$$
 目前两者没啥分别, 在用到矩阵的时候会区别开来, 而通常提到的向量一般都是列向量
-由于很多教材书籍时横向印刷的, 表示为\((x, y)^T\), 和上面一个意思
+由于很多教材书籍时横向印刷的, 表示为$$(x, y)^T$$, 和上面一个意思
 与之向量相反的是标量
 向量之间的操作 加法
-\((x, y)^T\) + \((a, b)^T\) = \((x + a, y + b)^T\)
+$$(x, y)^T$$ + $$(a, b)^T$$ = $$(x + a, y + b)^T$$
 乘法
-\(k\times(x, y)^T\) = \((kx, ky)^T\)
+$$k\times(x, y)^T$$ = $$(kx, ky)^T$$
 数量乘法
-\(k \cdot\left\{\begin{matrix} v1 \\ v2 \\ ... \\ v_n \\ \end{matrix}\right\}\) = \(\left\{\begin{matrix} k\cdot v1 \\ k\cdot v2 \\ ... \\ k\cdot v_n \\ \end{matrix}\right\}\)</description>
+$$k \cdot\left{\begin{matrix} v1 \
+v2 \
+&amp;hellip; \
+v_n \
+\end{matrix}\right}$$ = $$\left{\begin{matrix} k\cdot v1 \
+k\cdot v2 \
+&amp;hellip; \
+k\cdot v_n \
+\end{matrix}\right}$$</description>
     </item>
     
     <item>
@@ -976,6 +1017,16 @@ int main(void) { int count = 43; int *const pcount = &amp;amp;count; // Defines 
     </item>
     
     <item>
+      <title>Postgres常规操作</title>
+      <link>/2018/07/10/postgres_basic_operation/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/10/postgres_basic_operation/</guid>
+      <description>记录一些 postgres 常规操作，持续更新。
+CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
+    </item>
+    
+    <item>
       <title>Python中Pymysql操作常见异常</title>
       <link>/2018/07/10/pymysql_exception/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
@@ -1054,16 +1105,6 @@ nothing to commit, working tree clean
 在repo中设置绑定的域名
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.
  基础指令：    hexo n hexo g hexo s hexo d hexo init hexo s -p [port]   安装hexo:    npm install hexo-cli -g    生成依赖：    npm install hexo-generator-index --save npm install hexo-generator-archive --save npm install hexo-generator-category --save npm install hexo-generator-tag --save    本地运行依赖：    npm install hexo-server --save    发布依赖：    npm install hexo-deployer-git --save npm install hexo-deployer-heroku --save npm install hexo-deployer-rsync --save npm install hexo-deployer-openshift --save    git全局声明：    git config --global user.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/1/01/01/postgres_basic_operation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/01/01/postgres_basic_operation/</guid>
-      <description>记录一些 postgres 常规操作，持续更新。
-CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
     </item>
     
   </channel>

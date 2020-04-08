@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>计算机语言 on 正经人</title>
+    <title>计算机语言 on 老实人</title>
     <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/</link>
-    <description>Recent content in 计算机语言 on 正经人</description>
+    <description>Recent content in 计算机语言 on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rust认真学习的第一天</title>
+      <link>/2020/03/23/rust-day1/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/23/rust-day1/</guid>
+      <description>前言 说起学习Rust，那得从2018年的10月份开始。我买了一本《Rust编程之道》张汉东老师编著的，买回来之后的两个月我看的非常认真。
+也是在2019年的7月份吧，我找了一份工作。就在那时，我渐渐把Rust给淡忘了。。。转投到Golang（真香）的怀抱中，但我依然每天关注着Rust的动态。
+当时我看完了一遍官方的tuto，才买的编程之道，这本书的前五章我认真看了将近两个月，看的非常仔细，乃至于我现在都能回忆起一些细节。为什么看的那么仔细呢，说实话我将Rust当作了一种兴趣，没有功利心的那种学习态度。然而后面在工作上都是用的Python/Goalng渐渐将其淡忘。当时学习也没认真做点笔记，也不是没有做，而是我将笔记记在了书上。说实话，这很不利于检索。
+那么从现在开始，我将重新学一学Rust，并且动手实践。在这个过程中呢，我将会把Rust学习的历程一字一句记录在此。但我不会保证正确性，如果你看了我学习Golang时写的日志就知道了。我现在翻看以前写的Golang日志，会发现很多不妥的地方，我也懒得将其修正了。请记住，这不是教程文章，只是我的学习历程！</description>
+    </item>
     
     <item>
       <title>Rust基本概念</title>

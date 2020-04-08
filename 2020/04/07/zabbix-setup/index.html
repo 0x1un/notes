@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>从头到尾搭建Zabbix</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>从头到尾搭建Zabbix</h2>
+        <h3 id="基于的环境">基于的环境</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat /etc/redhat-release
+    &gt; CentOS Linux release 7.7.1908 <span style="color:#ff79c6">(</span>Core<span style="color:#ff79c6">)</span>
+zabbix version: 4.4.4
+MariaDB Server: 10.4.12-MariaDB
+</code></pre></div><h3 id="前期准备">前期准备</h3>
+<p>在CentOS-7安装完成之后，因为咱们国情的原因，我们需要对系统的软件源进行更换。什么是源，其实简单来说就是软件资源的服务器。</p>
+<p>为了安装方便，作为教程，那就使用<code>root</code>用户吧，当然生产环境慎用就是了，度自己拿捏。</p>
+<p>关闭防火墙（防火墙不在本文的讲解范围，先关闭再说）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl stop firewalld
+</code></pre></div><p>关闭selinux（这个也关闭吧，不精通它就关闭它，否则有你好受的）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看selinux状态</span>
+getenforce
+<span style="color:#6272a4"># 临时关闭selinux</span>
+setenforce <span style="color:#bd93f9">0</span>
+
+<span style="color:#6272a4"># 永久关闭selinux, 编辑/etc/selinux/config</span>
+
+<span style="color:#6272a4"># This file controls the state of SELinux on the system.</span>
+<span style="color:#6272a4"># SELINUX= can take one of these three values:</span>
+<span style="color:#6272a4">#     enforcing - SELinux security policy is enforced.</span>
+<span style="color:#6272a4">#     permissive - SELinux prints warnings instead of enforcing.</span>
+<span style="color:#6272a4">#     disabled - No SELinux policy is loaded.</span>
+<span style="color:#8be9fd;font-style:italic">SELINUX</span><span style="color:#ff79c6">=</span>disabled 这里的值改成disabled
+<span style="color:#6272a4"># SELINUXTYPE= can take one of three values:</span>
+<span style="color:#6272a4">#     targeted - Targeted processes are protected,</span>
+<span style="color:#6272a4">#     minimum - Modification of targeted policy. Only selected processes are protected.</span>
+<span style="color:#6272a4">#     mls - Multi Level Security protection.</span>
+<span style="color:#8be9fd;font-style:italic">SELINUXTYPE</span><span style="color:#ff79c6">=</span>targeted
+</code></pre></div><h5 id="更换为国内软件源">更换为国内软件源</h5>
+<p>在CentOS中，软件源的配置放置在<code>/etc/yum.repos.d</code>中，你可以在这个目录中放置符合规则的源配置。</p>
+<ul>
+<li>阿里源添加：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 将软件源配置写入到系统配置中</span>
+curl -o /etc/yum.repos.d/CentOS-Base-7.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+
+<span style="color:#6272a4"># 清空缓存，建立缓存，更新源</span>
+yum clean all <span style="color:#ff79c6">&amp;&amp;</span> yum makecache <span style="color:#ff79c6">&amp;&amp;</span> yum update
+</code></pre></div><ul>
+<li>
+<p>添加zabbix阿里源</p>
+<p>（因为原仓库中的软件不一定是最新的，这里可以添加指定版本的源，直接复制下面的代码）</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tee -a /etc/yum.repos.d/zabbix.repo <span style="color:#f1fa8c">&lt;&lt; EOF
+</span><span style="color:#f1fa8c">[zabbix]
+</span><span style="color:#f1fa8c">name=Zabbix Official Repository - $basearch
+</span><span style="color:#f1fa8c">baseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.4/rhel/7/$basearch/
+</span><span style="color:#f1fa8c">enabled=1
+</span><span style="color:#f1fa8c">gpgcheck=1
+</span><span style="color:#f1fa8c">gpgkey=https://mirrors.aliyun.com/zabbix/RPM-GPG-KEY-ZABBIX
+</span><span style="color:#f1fa8c">EOF</span>
+</code></pre></div><ul>
+<li>
+<p>添加mariadb阿里源</p>
+<p>（因为咱们使用mysql数据库，你也可以用PostgreSQL)</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tee -a /etc/yum.repos.d/mariadb.repo <span style="color:#f1fa8c">&lt;&lt; EOF
+</span><span style="color:#f1fa8c">[mariadb]
+</span><span style="color:#f1fa8c">name = MariaDB
+</span><span style="color:#f1fa8c">baseurl = https://mirrors.aliyun.com/mariadb/yum/10.4/centos7-amd64/
+</span><span style="color:#f1fa8c">gpgkey=https://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
+</span><span style="color:#f1fa8c">gpgcheck=1
+</span><span style="color:#f1fa8c">EOF</span>
+</code></pre></div><ul>
+<li>
+<p>安装mariadb</p>
+<p>（咱们对mariadb也没啥版本需求，就不用指定版本号了）</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 建立缓存并安装mariadb</span>
+yum makecache <span style="color:#ff79c6">&amp;&amp;</span> yum install mariadb mariadb-server
+<span style="color:#6272a4"># 启动mariadb并加入开机自启动</span>
+systemctl --now enbale mariadb
+
+<span style="color:#6272a4"># 初始化设置mariadb，按照自己的需要设置</span>
+mysql_secure_installation
+</code></pre></div><h5 id="开始安装zabbix">开始安装zabbix</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum search zabbix
+</code></pre></div><p>搜索一下当前仓库的所有zabbix软件，选择你所需要的进行安装：</p>
+<p>之所以一条一条输入yum，是为了便于清晰介绍每个包是什么，如果遇到gpg验证错误，添加参数<code>--nogpg</code>即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 也可以是zabbix-server-pgsql-x.x.x,这取决于你用什么数据库，这个是zabbix的服务端，使用的mysql数据库</span>
+yum install zabbix-server-mysql-4.4.4 
+<span style="color:#6272a4"># 同上，也可以是zabbix-web-pgsql-x.x.x，这个是zabbix的web端（前端）界面，使用的mysql数据库</span>
+yum install zabbix-web-mysql-4.4.4 
+<span style="color:#6272a4"># 这个是zabbix的客户端，每台要监控的服务器都可以安装这一个与zabbix-server进行交互，其实你本机装不装无所谓，要监控哪个服务器，就在哪个服务器安装即可</span>
+yum install zabbix-agent-4.4.4 
+</code></pre></div><p>先创建一个数据，用来给zabbix使用，这里我给的权限是root级的，生产环境自行配置需要的权限！</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mysql -uroot  -e <span style="color:#f1fa8c">&#34;create database zabbix character set utf8 collate utf8_bin;&#34;</span>
+mysql -uroot  -e <span style="color:#f1fa8c">&#34;grant all privileges on zabbix.* to zabbix@localhost identified by &#39;[your_password]&#39;;&#34;</span>
+</code></pre></div><p>导入zabbix基础数据库，数据库一般放在软件的doc目录中，doc目录一般放在<code>/usr/share/</code>中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 导入数据库结构与数据到zabbix数据库中</span>
+zcat /usr/share/doc/zabbix-server-*/create.sql.gz | mysql -uroot zabbix -p
+</code></pre></div><p>之后在<code>/etc/zabbix/zabbix_server.conf</code>中更改一些设置，比如数据库的口令，端口，用户名</p>
+<p>最后，启动zabbix-server</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 重启zabbix-server服务</span>
+systemctl restart zabbix-server
+<span style="color:#6272a4"># 查看zabbix-server状态</span>
+systemctl status zabbix-server
+</code></pre></div><p>如果启动失败，请前往<code>/var/log/zabbix/zabbix_server.log</code>查看具体的报错</p>
+<ul>
+<li>
+<p>设置zabbix-web（界面）</p>
+<p>因为zabbix默认使用的是apache，所以直接设置就行了，编辑<code>/etc/httpd/conf.d/zabbix.conf</code></p>
+<p>更改其中的时区为<code>Asia/Shanghai</code>，具体哪一行自己找。</p>
+</li>
+</ul>
+<p><strong>最最最后，重启httpd服务，访问<code>http://your_ip/zabbix</code>进行web端的配置，正常按照我的文档一步一步来，一般不会出现问题。</strong></p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2020 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

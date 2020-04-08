@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>pgsql</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+            
+        
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+	
+
+
+
+  <div class="outer">
+  <ul class="list-group">
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2020/04/07/zabbix-setup/" data-series="Zabbix" style="margin-left:1rem;"><time style="color:black;">2020-04-07</time>  / 从头到尾搭建Zabbix </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2020/03/23/rust-day1/" data-series="Rust" style="margin-left:1rem;"><time style="color:black;">2020-03-23</time>  / Rust认真学习的第一天 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2020/01/08/linux_problem/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2020-01-08</time>  / Linux各种疑难问题 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/12/24/2019_end/" data-series="21世纪" style="margin-left:1rem;"><time style="color:black;">2019-12-24</time>  / 2019年年终总结 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/12/20/btrfs_usb_mount_failed/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-12-20</time>  / btrfs USB无法挂载 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/11/07/linux_sys_file/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-11-07</time>  / Linux判断网卡的类型 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/11/07/chromedp_screenshot_overlapping/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2019-11-07</time>  / chromedp针对某些网页截图重叠问题 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/11/03/zabbix_profile_error/" data-series="Zabbix" style="margin-left:1rem;"><time style="color:black;">2019-11-03</time>  / zabbix无法进入个人中心 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/10/19/zbx_server_docker_mem_err_and_golang_program_question/" data-series="Zabbix" style="margin-left:1rem;"><time style="color:black;">2019-10-19</time>  / zabbix&amp;docker问题与注意事项 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/10/18/golang_slice_map_note/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2019-10-18</time>  / golang意事项注之Slice^Map </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/09/04/zabbix_distributed/" data-series="Zabbix" style="margin-left:1rem;"><time style="color:black;">2019-09-04</time>  / 关于zabbix分布式搭建的一些坑 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/08/13/esxi_network_not_working/" data-series="VM" style="margin-left:1rem;"><time style="color:black;">2019-08-13</time>  / 踩坑之Esxi虚拟服务器无法联网 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/08/07/golang_channel/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2019-08-07</time>  / golang的channel后续学习 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/07/26/alg_is_valid_brackets/" data-series="Alg" style="margin-left:1rem;"><time style="color:black;">2019-07-26</time>  / 算法之&lt;有效括号&gt; Rust </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/07/10/zabbix_installation/" data-series="Zabbix" style="margin-left:1rem;"><time style="color:black;">2019-07-10</time>  / 安装zabbix </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/26/freebsd_apic_error/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-26</time>  / FreeBSD livecd挂载boot(zfs) </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/25/nmcli_hidden_wifi/" data-series="*nix-tools" style="margin-left:1rem;"><time style="color:black;">2019-06-25</time>  / 关于nmcli连接隐藏wifi的问题 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/25/freebsd_wireless/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-25</time>  / FreeBSD无线网络问题 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/25/freebsd_ports/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-25</time>  / FreeBSD 12使用ports </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/23/docker_cache/" data-series="Docker" style="margin-left:1rem;"><time style="color:black;">2019-06-23</time>  / docker cache机制记录 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/22/docker_clean/" data-series="Docker" style="margin-left:1rem;"><time style="color:black;">2019-06-22</time>  / docker的清理 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/20/singnal_nginx/" data-series="WebServer" style="margin-left:1rem;"><time style="color:black;">2019-06-20</time>  / nginx信号与热升级 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/20/docker-base/" data-series="Docker" style="margin-left:1rem;"><time style="color:black;">2019-06-20</time>  / docker basic </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/17/tcp_three_four/" data-series="计算机基础原理" style="margin-left:1rem;"><time style="color:black;">2019-06-17</time>  / tcp的三次握手和四次挥手(记录) </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/17/iptables_04/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-17</time>  / iptables黑白名单 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/17/iptables_06/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-17</time>  / iptables之扩展动作 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/17/iptables_03/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-17</time>  / iptables之--tcp-flags, udp, icmp扩展 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/17/iptables_05/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-17</time>  / iptables 自定义链 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/13/iptables_02/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-13</time>  / iptables基础-常用的扩展模块 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/06/12/iptables_01/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-06-12</time>  / iptables基础 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/05/04/rust_trait-object/" data-series="Rust" style="margin-left:1rem;"><time style="color:black;">2019-05-04</time>  / Rust之Trait-Object笔记 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/04/05/ncmpcpp/" data-series="*nix-tools" style="margin-left:1rem;"><time style="color:black;">2019-04-05</time>  / 在终端中配置使用音乐播放器 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/04/04/mysql-questions/" data-series="Database" style="margin-left:1rem;"><time style="color:black;">2019-04-04</time>  / MySql踩坑集 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/03/11/gentoo-installation-tutoria/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2019-03-11</time>  / Gentoo安装历程 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/02/23/flask-batch-save-feild-to-database/" data-series="WebApp" style="margin-left:1rem;"><time style="color:black;">2019-02-23</time>  / flask保存字段到数据库(批量保存) </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/02/23/st_terminal/" data-series="*nix-tools" style="margin-left:1rem;"><time style="color:black;">2019-02-23</time>  / suckless-st中文输入法问题 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/02/06/disable_sqlalchmey_basic_class_table/" data-series="ORM" style="margin-left:1rem;"><time style="color:black;">2019-02-06</time>  / Sqlalchemy禁止创建基类表 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/01/13/rust_basic/" data-series="Rust" style="margin-left:1rem;"><time style="color:black;">2019-01-13</time>  / Rust基本概念 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2019/01/11/abstract/" data-series="理解" style="margin-left:1rem;"><time style="color:black;">2019-01-11</time>  / 理解&#34;抽象&#34;这个词 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/26/brainfuck_language/" data-series="猎奇" style="margin-left:1rem;"><time style="color:black;">2018-11-26</time>  / BrainFuck </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/24/django_pit/" data-series="WebApp" style="margin-left:1rem;"><time style="color:black;">2018-11-24</time>  / Django初入趟坑 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/21/setup_git_server/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2018-11-21</time>  / 搭建简易Git服务器 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/14/golang_concurrent/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-14</time>  / golang并发编程学习 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/11/i3_installation/" data-series="WM" style="margin-left:1rem;"><time style="color:black;">2018-11-11</time>  / 折腾i3 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/11/golang_error_exception/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-11</time>  / golang的错误处理与资源管理 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/11/golang_os/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-11</time>  / golang之文件操作 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/08/golang_interface_oriented/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-08</time>  / golang面向接口 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/08/golang_functional/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-08</time>  / golang函数式编程 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/04/golang_object_oriented/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-04</time>  / golang面向对象 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/11/01/golang_builtin_collections/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-11-01</time>  / golang的內建容器 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/10/27/golang_conversion_type/" data-series="Golang" style="margin-left:1rem;"><time style="color:black;">2018-10-27</time>  / golang初窥 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/10/18/huffman/" data-series="Alg" style="margin-left:1rem;"><time style="color:black;">2018-10-18</time>  / 哈夫曼树与编码的一些笔记 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/09/29/math_vector/" data-series="Math" style="margin-left:1rem;"><time style="color:black;">2018-09-29</time>  / 关于向量代数的一些笔记 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/09/10/set_collection/" data-series="Python" style="margin-left:1rem;"><time style="color:black;">2018-09-10</time>  / Python-set数据类型 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/08/26/basic_datatype_time_complex/" data-series="Alg" style="margin-left:1rem;"><time style="color:black;">2018-08-26</time>  / Python基本数据类型效率 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/08/11/setting-switchyomega-auto-proxy/" data-series="*nix-tools" style="margin-left:1rem;"><time style="color:black;">2018-08-11</time>  / 设置SwitchyOmega自动切换代理 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/26/scrapy_order/" data-series="Python" style="margin-left:1rem;"><time style="color:black;">2018-07-26</time>  / Scrapy组件执行顺序-记录 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/25/magic-function/" data-series="Python" style="margin-left:1rem;"><time style="color:black;">2018-07-25</time>  / 转载记录Python的魔法函数 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/22/grep_mono/" data-series="Shell" style="margin-left:1rem;"><time style="color:black;">2018-07-22</time>  / Linux-grep使用笔记 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/16/clanguage-pointers/" data-series="C" style="margin-left:1rem;"><time style="color:black;">2018-07-16</time>  / C语言的指针细学笔记 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/11/arch_linux_installation/" data-series="*nix" style="margin-left:1rem;"><time style="color:black;">2018-07-11</time>  / Arch-Linux安装笔记(只作为参考) </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/10/pymysql_exception/" data-series="ORM" style="margin-left:1rem;"><time style="color:black;">2018-07-10</time>  / Python中Pymysql操作常见异常 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/10/postgres_basic_operation/" data-series="Database" style="margin-left:1rem;"><time style="color:black;">2018-07-10</time>  / Postgres常规操作 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/07/serial_parallel_concurrent/" data-series="计算机基础原理" style="margin-left:1rem;"><time style="color:black;">2018-07-07</time>  / 关于计算机并发与并行的一些记录 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/02/adb_usb/" data-series="Android" style="margin-left:1rem;"><time style="color:black;">2018-07-02</time>  / 使用adb工具对安卓进行刷机 </a>
+              
+        
+      
+    </li>
+    
+
+    <li class="list-group-item title">
+      
+         
+        
+        
+            
+                <a href="/2018/07/01/hexo_pit/" data-series="Blog" style="margin-left:1rem;"><time style="color:black;">2018-07-01</time>  / Hexo踩坑 </a>
+              
+        
+      
+    </li>
+    
+  </ul>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2020 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.js"></script>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>
+

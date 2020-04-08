@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 正经人</title>
+    <title>Tags on 老实人</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on 正经人</description>
+    <description>Recent content in Tags on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rust</title>
+      <link>/tags/rust/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rust/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Linux</title>
@@ -89,15 +98,6 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rust</title>
-      <link>/tags/rust/</link>
-      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rust/</guid>
       <description></description>
     </item>
     
@@ -305,6 +305,15 @@
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pgsql</title>
+      <link>/tags/pgsql/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/pgsql/</guid>
       <description></description>
     </item>
     

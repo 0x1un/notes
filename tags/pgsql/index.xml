@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pgsql on 老实人</title>
+    <link>/tags/pgsql/</link>
+    <description>Recent content in pgsql on 老实人</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/pgsql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Postgres常规操作</title>
+      <link>/2018/07/10/postgres_basic_operation/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/10/postgres_basic_operation/</guid>
+      <description>记录一些 postgres 常规操作，持续更新。
+CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
+    </item>
+    
+  </channel>
+</rss>

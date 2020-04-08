@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>高等数学 on 正经人</title>
+    <title>高等数学 on 老实人</title>
     <link>/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</link>
-    <description>Recent content in 高等数学 on 正经人</description>
+    <description>Recent content in 高等数学 on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
@@ -17,20 +17,28 @@
       <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/29/math_vector/</guid>
-      <description>这是一篇没有技术含量的文章...
+      <description>这是一篇没有技术含量的文章&amp;hellip;
  概述 在平面解析几何当中, 通过坐标法将平面上的点与一对有次序的数对应起来, 把平面上的图形和方程对应起来, 从而可以用代数方法来研究几何问题。空间解析几何也是按照类似的方法建立的。
 平面解析几何的只是对于学习一元函数微积分是不可以缺失的学习, 空间解析几何的知识对于学习多元函数微积分也是十分必要的。
-行向量与列向量 行向量: \((x, y)\)
-列向量: \(\dbinom{x}{y}\)
+行向量与列向量 行向量: $$(x, y)$$
+列向量: $$\dbinom{x}{y}$$
 目前两者没啥分别, 在用到矩阵的时候会区别开来, 而通常提到的向量一般都是列向量
-由于很多教材书籍时横向印刷的, 表示为\((x, y)^T\), 和上面一个意思
+由于很多教材书籍时横向印刷的, 表示为$$(x, y)^T$$, 和上面一个意思
 与之向量相反的是标量
 向量之间的操作 加法
-\((x, y)^T\) + \((a, b)^T\) = \((x + a, y + b)^T\)
+$$(x, y)^T$$ + $$(a, b)^T$$ = $$(x + a, y + b)^T$$
 乘法
-\(k\times(x, y)^T\) = \((kx, ky)^T\)
+$$k\times(x, y)^T$$ = $$(kx, ky)^T$$
 数量乘法
-\(k \cdot\left\{\begin{matrix} v1 \\ v2 \\ ... \\ v_n \\ \end{matrix}\right\}\) = \(\left\{\begin{matrix} k\cdot v1 \\ k\cdot v2 \\ ... \\ k\cdot v_n \\ \end{matrix}\right\}\)</description>
+$$k \cdot\left{\begin{matrix} v1 \
+v2 \
+&amp;hellip; \
+v_n \
+\end{matrix}\right}$$ = $$\left{\begin{matrix} k\cdot v1 \
+k\cdot v2 \
+&amp;hellip; \
+k\cdot v_n \
+\end{matrix}\right}$$</description>
     </item>
     
   </channel>
