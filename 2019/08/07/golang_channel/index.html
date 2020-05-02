@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>golang的channel后续学习</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>golang的channel后续学习</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -103,7 +103,7 @@
 <p>在2018年的11月份我囫囵学习过一点golang, 并用它写过一个简单的爬虫, 但这大半年的时间中我却再也没有碰过golang
 , 近来工作中有些东西需要使用golang. 终于有了用武之地啊&hellip;(逃&ndash;_-_-, 重新复习一下&hellip; 莱磁苟!!!</p>
 </blockquote>
-<h4 id="golang的channel">golang的channel</h4>
+<h4 id="golangchannel">golang的channel</h4>
 <p>receive操作符(<code>&lt;-channel</code>)从channel中接收数据, 这个表达式会一直被block, 直到有数据可以接收为止</p>
 <p>上面说的这个有箭头的channel是有方向的, 如果没有方向那么这个channel就是双向的, 既可以接收数据,同样也可以发送数据.</p>
 <ul>
@@ -124,12 +124,12 @@
 <p>往nil channel中发送数据会一直被阻塞着</p>
 </li>
 </ul>
-<h4 id="使用forrange处理channel">使用for&hellip;range处理channel</h4>
+<h4 id="forrangechannel">使用for&hellip;range处理channel</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">xy <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(xy <span style="color:#8be9fd">int</span>, <span style="color:#bd93f9">10</span>)
 <span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() { <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i = i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> { xy <span style="color:#ff79c6">&lt;-</span> i } <span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>() }()
 <span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() { <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> xy { fmt.<span style="color:#50fa7b">Println</span>(i) } }()
 </code></pre></div><p>可以使用range方便地遍历channel, 它会一直迭代直到channel被关闭, 如果你在上述的代码中注释了close, 那么它将会一直阻塞在那里出不来, 因为range没有检测到channel被关闭, 所以..就卡在那儿了</p>
-<h4 id="使用select处理channel">使用select处理channel</h4>
+<h4 id="selectchannel">使用select处理channel</h4>
 <p>此select并非C/Unix I/O中的select, 它可以让一个Goroutine同时等待多个channel达到准备状态, 下面用一个斐波那契数列的例子来演示如何使用它(基本操作)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">fibonacci</span>(c <span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>, quit <span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>) {
 	x, y : = <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>
@@ -147,10 +147,10 @@
 <p>如若同时有多个case处理, 且多个channel都可以进行接收/发送数据, 那么会随机(伪)选取一个case处理(pseudo-random), 如果没有了case需要处理, 则会选择default case处理. select语句和switch都只能执行一次, 所以当我们需要处理多次的情况下, 通常都会配合循环来使用.</p>
 <p>当select中只有一个case时, 编译器将会优化成if语句</p>
 <p>当select中有两个case(其中一个是default case)时, 编译器会将case中的所有channel都转换为指向channel的地址</p>
-<h5 id="0x001-非阻塞收发">0x001. 非阻塞收发</h5>
+<h5 id="0x001-">0x001. 非阻塞收发</h5>
 <p>如果select语句中包含一个default表达式, 那么这个select就不会等待其他的case channel就绪, 而是会非阻塞读取/写入数据, 不信可以在上面的fibonacci中添加一个default, 看看会有什么样的效果.</p>
 <p>关于golang的select深入知识, 前往<a href="https://draveness.me/golang/keyword/golang-select.html">文档</a>, 巨详细!!</p>
-<h5 id="0x002-超时处理">0x002. 超时处理</h5>
+<h5 id="0x002-">0x002. 超时处理</h5>
 <p>当select中没有需要处理的case时, select将会一直被阻塞, 这时候可以进行超时处理</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
 	c1 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">string</span>, <span style="color:#bd93f9">1</span>)
@@ -167,7 +167,7 @@
 }
 </code></pre></div><p>编译执行上面的代码, 发现会打印<code>timeout 1</code>而非<code>result 1</code>, 因为第二条case设定了channel的超时时间小于go func中的2秒, 即go func中想要返回结果需要等待两秒, 而第二条case设定超时界限为1秒, 所以它肯定是不会到第一条case的</p>
 <p><code>time.After</code>方法会返回一个<code>&lt;-chan Time</code>的类型, 它是单向的channel, 会在指定的时间发送一个当前时间给返回的channel当中.</p>
-<h4 id="粗略了解channel在goroutine之间的同步">粗略了解channel在goroutine之间的同步</h4>
+<h4 id="channelgoroutine">粗略了解channel在goroutine之间的同步</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">worker</span>(done <span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">bool</span>) {
 	time.<span style="color:#50fa7b">Sleep</span>(time.Second)
 	done <span style="color:#ff79c6">&lt;-</span> <span style="color:#ff79c6">true</span> <span style="color:#6272a4">// 到这里就代表程序执行完成了, 发出结束信号
@@ -180,7 +180,7 @@
 	<span style="color:#ff79c6">&lt;-</span> done <span style="color:#6272a4">// 任务完成之后代表done已经能发出值了
 </span><span style="color:#6272a4"></span>}
 </code></pre></div><p>这里先记录一下浅显的示例, 深入等到之后用go开发再作进一步记录</p>
-<h4 id="关于channel被close的一些注意事项总理">关于channel被close的一些注意事项总理</h4>
+<h4 id="channelclose">关于channel被close的一些注意事项总理</h4>
 <ul>
 <li>
 <p>向已经被close的channel中发送数据会panic出一个(<code>send on closed channel</code>)的错误</p>
@@ -209,22 +209,22 @@
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
-        
-      </p>
-  <hr>
-  <hr>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
 
-  
+    
 
-  <ul class="tags"  style="float: left!important;">
-      
-      <span>  </span>
+    <ul class="tags"  style="float: left!important;">
         
-  </ul>
-  
-  <br>
+        <span>  </span>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -242,11 +242,10 @@
 
 
 
-    
-
 
 
 </body>
+
 
 
 

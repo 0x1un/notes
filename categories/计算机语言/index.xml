@@ -6,22 +6,10 @@
     <description>Recent content in 计算机语言 on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Rust认真学习的第一天</title>
-      <link>/2020/03/23/rust-day1/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/03/23/rust-day1/</guid>
-      <description>前言 说起学习Rust，那得从2018年的10月份开始。我买了一本《Rust编程之道》张汉东老师编著的，买回来之后的两个月我看的非常认真。
-也是在2019年的7月份吧，我找了一份工作。就在那时，我渐渐把Rust给淡忘了。。。转投到Golang（真香）的怀抱中，但我依然每天关注着Rust的动态。
-当时我看完了一遍官方的tuto，才买的编程之道，这本书的前五章我认真看了将近两个月，看的非常仔细，乃至于我现在都能回忆起一些细节。为什么看的那么仔细呢，说实话我将Rust当作了一种兴趣，没有功利心的那种学习态度。然而后面在工作上都是用的Python/Goalng渐渐将其淡忘。当时学习也没认真做点笔记，也不是没有做，而是我将笔记记在了书上。说实话，这很不利于检索。
-那么从现在开始，我将重新学一学Rust，并且动手实践。在这个过程中呢，我将会把Rust学习的历程一字一句记录在此。但我不会保证正确性，如果你看了我学习Golang时写的日志就知道了。我现在翻看以前写的Golang日志，会发现很多不妥的地方，我也懒得将其修正了。请记住，这不是教程文章，只是我的学习历程！</description>
-    </item>
     
     <item>
       <title>Rust基本概念</title>
@@ -33,7 +21,7 @@
  原始标识符 有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：
 let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦 变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 例如
-fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; // 创建变量x为一个可变变量并初始化值为5 x = 6; // 这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
+fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; //创建变量x为一个可变变量并初始化值为5 x = 6; //这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
     </item>
     
   </channel>

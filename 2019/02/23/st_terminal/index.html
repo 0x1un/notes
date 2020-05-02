@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>suckless-st中文输入法问题</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>suckless-st中文输入法问题</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="st-terminal输入法问题">st terminal输入法问题</h3>
+<h3 id="st-terminal">st terminal输入法问题</h3>
 <blockquote>
 <p>原本使用的termite终端, 因为它很简洁轻便, 但对于ranger显示图片会有重叠的效果, 这点令我非常不爽, 后来发现suckless中有个叫st的终端, 并且完美支持ranger. 而且它比termite更加轻便, 启动更加快速, 但有个瑕疵就是无法使用中文输入法, 其中间折腾了很久, 什么环境变量之类的, 但最终在官网找到了一份关于修复IME的补丁.</p>
 </blockquote>
@@ -129,28 +129,28 @@
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
         <span>标签:</span>
         <li><a class="link" href="/tags/suckless"> #suckless </a></li><li><a class="link" href="/tags/terminal"> #terminal </a></li>
-      
-      <span>  </span>
+        
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Linux"> #Linux </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -168,11 +168,10 @@
 
 
 
-    
-
 
 
 </body>
+
 
 
 

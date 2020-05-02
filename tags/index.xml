@@ -6,19 +6,10 @@
     <description>Recent content in Tags on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Rust</title>
-      <link>/tags/rust/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rust/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Linux</title>
@@ -44,15 +35,6 @@
       <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/btrfs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>/tags/go/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/go/</guid>
       <description></description>
     </item>
     
@@ -84,6 +66,15 @@
     </item>
     
     <item>
+      <title>go</title>
+      <link>/tags/go/</link>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Esxi</title>
       <link>/tags/esxi/</link>
       <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
@@ -98,6 +89,15 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>/tags/rust/</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rust/</guid>
       <description></description>
     </item>
     

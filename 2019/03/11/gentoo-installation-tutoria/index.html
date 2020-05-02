@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>Gentoo安装历程</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>Gentoo安装历程</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,13 +102,13 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="gentoo安装历程">Gentoo安装历程</h3>
-<h4 id="准备开始">准备开始</h4>
+<h3 id="gentoo">Gentoo安装历程</h3>
+<h4 id="heading">准备开始</h4>
 <p>第一步当然是下载所需的chroot环境与Gentoo的stage3包<br>
 当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的<br>
 那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧</p>
 <!-- raw HTML omitted -->
-<h4 id="开始安装">开始安装</h4>
+<h4 id="heading-1">开始安装</h4>
 <p>当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘</span>
 fdisk -l
@@ -136,7 +136,7 @@ tar xvpf stage3-amd64-* --xattrs-include<span style="color:#ff79c6">=</span><spa
 <span style="color:#6272a4"># --xattrs-include为保留文件的扩展属性, --numeric-owner为保留文件的user和group IDs</span>
 
 <span style="color:#6272a4"># 当解压完成之后就要开始真正的安装了</span>
-</code></pre></div><h4 id="配置编译选项">配置编译选项</h4>
+</code></pre></div><h4 id="heading-2">配置编译选项</h4>
 <p>编辑/mnt/gentoo/etc/portage/make.conf 添加或修改</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CFLAGS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;-march=native -O2 -pipe&#34;</span>
 <span style="color:#8be9fd;font-style:italic">CXXFLAGS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">CFLAGS</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
@@ -168,8 +168,8 @@ nano -w /etc/locale.gen <span style="color:#6272a4"># 选择所需的语言编�
 locale-gen <span style="color:#6272a4"># 使上述操作生效</span>
 eselect locale list <span style="color:#6272a4"># 列出语言编码列表</span>
 eselect locale <span style="color:#8be9fd;font-style:italic">set</span> 序号 <span style="color:#6272a4"># 设置语言编码</span>
-env-update <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">source</span> /etc/profile <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PS1</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;(chroot) </span><span style="color:#8be9fd;font-style:italic">$PS1</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#6272a4"># 更新环境变量</span>
-</code></pre></div><h4 id="内核安装与配置">内核安装与配置</h4>
+env-update <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">source</span> /etc/profile <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PS1</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">(chroot) </span><span style="color:#8be9fd;font-style:italic">$PS1</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#6272a4"># 更新环境变量</span>
+</code></pre></div><h4 id="heading-3">内核安装与配置</h4>
 <p>经过这么长一段时间的煎熬, 终于快要完成了, 配置内核开始!<br>
 这一步是极为重要的, Gentoo的安装难点也在于此吧(如果手动裁剪内核)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 下载内核源码(下载位置于 /usr/src/)</span>
@@ -202,7 +202,7 @@ CONFIG_EFI_VARS
 如wifi模块, 有线网卡模块, nvme固态硬盘支持等等, 因每个电脑会有些许不一样, 这里就不详细描述了<br>
 当配置完成之后开始编译</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make -j9 <span style="color:#ff79c6">&amp;&amp;</span> make modules_install
-</code></pre></div><h4 id="自动构建内核">自动构建内核</h4>
+</code></pre></div><h4 id="heading-4">自动构建内核</h4>
 <p>当然, 这种方式是最简单的, 我也推荐那些从来没有裁剪过内核的朋友使用这种方式<br>
 避免耗费大量的时间精力去踏精简内核的坑, 但这种安装方式它会将所有的模块都编译到内核<br>
 所以编译出来的内核难免会比精简过的内核臃肿很多, 先让它跑起来才是最重要的嘛, 你说是不是</p>
@@ -210,13 +210,13 @@ CONFIG_EFI_VARS
 genkernel all <span style="color:#ff79c6">&amp;&amp;</span> genkernel --install initramfs <span style="color:#6272a4"># 这一步也非常耗时, 因为它不是全核心编译</span>
 <span style="color:#6272a4"># 完成之后安装固件</span>
 emerge --ask sys-kernel/linux-firmware
-</code></pre></div><h4 id="网络配置">网络配置</h4>
+</code></pre></div><h4 id="heading-5">网络配置</h4>
 <p>网络这里使用的软件是NetworkManager, 它功能比较强大</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 添加use flag, 如果没有此命令, 需要安装app-portage/gentoolkit, 也可以直接编辑/etc/portage/make.conf 并添加USE=&#34;networkmanager&#34;</span>
 euse -E networkmanager emerge --ask --changed-use --deep @world
 emerge --ask net-misc/networkmanager <span style="color:#6272a4"># 这一步很耗时</span>
 rc-update add NetworkManager default <span style="color:#6272a4"># 设置为开机自启动</span>
-</code></pre></div><h4 id="创建用户与必要工具安装">创建用户与必要工具安装</h4>
+</code></pre></div><h4 id="heading-6">创建用户与必要工具安装</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">useradd -m -G users, wheel, audio, video, usb -s /bin/bash 用户名
 passwd 用户名
 passwd root
@@ -234,7 +234,7 @@ emerge --ask sys-apps/mlocate
 
 <span style="color:#6272a4"># vim (也可以以后安装)</span>
 emerge --ask vim
-</code></pre></div><h4 id="配置引导加载">配置引导加载</h4>
+</code></pre></div><h4 id="heading-7">配置引导加载</h4>
 <p>历经艰辛, 总算是要开始配置启动引导了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘设备的uuid</span>
 blkid | grep nvme0n1 <span style="color:#6272a4"># 这里是你系统安装的硬盘</span>
@@ -272,28 +272,28 @@ grub-mkconfig -o /boot/grub/grub.cfg <span style="color:#6272a4"># 不出意外�
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
         <span>标签:</span>
         <li><a class="link" href="/tags/Linux"> #Linux </a></li><li><a class="link" href="/tags/%e7%b3%bb%e7%bb%9f"> #系统 </a></li>
-      
-      <span>  </span>
+        
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Gentoo"> #Gentoo </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -311,11 +311,10 @@ grub-mkconfig -o /boot/grub/grub.cfg <span style="color:#6272a4"># 不出意外�
 
 
 
-    
-
 
 
 </body>
+
 
 
 

@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>zabbix无法进入个人中心</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>zabbix无法进入个人中心</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -99,12 +99,12 @@
   
 <div class="blog-post">
   <h2>zabbix无法进入个人中心</h2>
-        <h3 id="zabbix-奇葩问题">zabbix 奇葩问题</h3>
+        <h3 id="zabbix-">zabbix 奇葩问题</h3>
 <p>其实这也不算一个奇葩的问题，就是掉进坑里长达一下午。</p>
 <p>在进入 zabbix 首页时，点击右上角的人像标志（也就是个人设置中心这种类似的标志），会出现一个错误：</p>
 <pre><code>Fatal error: Uncaught Error: Call to undefined function mime_content_type() in /usr/share/zabbix/include/sounds.inc.php:27 Stack trace: #0 /usr/share/zabbix/include/views/administration.users.edit.php(345): getSounds() #1 /usr/share/zabbix/include/classes/mvc/CView.php(199): include('/usr/share/zabb...') #2 /usr/share/zabbix/profile.php(189): CView-&gt;render() #3 {main} thrown in /usr/share/zabbix/include/sounds.inc.php on line 27
 </code></pre><p>这个错误是突然冒出来的，出现的原因我至今都不知道，因为已经解决了。</p>
-<h4 id="解决办法">解决办法</h4>
+<h4 id="heading">解决办法</h4>
 <p>因为 zabbix 安装在 docker 当中，使用的镜像为 alphine 基础系统。</p>
 <ul>
 <li>
@@ -133,22 +133,22 @@
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
-        
-      </p>
-  <hr>
-  <hr>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
 
-  
+    
 
-  <ul class="tags"  style="float: left!important;">
-      
-      <span>  </span>
+    <ul class="tags"  style="float: left!important;">
         
-  </ul>
-  
-  <br>
+        <span>  </span>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -166,11 +166,10 @@
 
 
 
-    
-
 
 
 </body>
+
 
 
 

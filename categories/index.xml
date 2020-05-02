@@ -6,28 +6,10 @@
     <description>Recent content in Categories on 老实人</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>计算机</title>
-      <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>计算机语言</title>
-      <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Linux</title>
@@ -138,6 +120,15 @@
     </item>
     
     <item>
+      <title>计算机语言</title>
+      <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>计算机理论</title>
       <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA/</link>
       <pubDate>Fri, 11 Jan 2019 00:00:00 +0000</pubDate>
@@ -179,6 +170,15 @@
       <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/helpdoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机</title>
+      <link>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
       <description></description>
     </item>
     

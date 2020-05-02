@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>使用adb工具对安卓进行刷机</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>使用adb工具对安卓进行刷机</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h5 id="使用adb进行安卓刷机">使用adb进行安卓刷机</h5>
+<h5 id="adb">使用adb进行安卓刷机</h5>
 <ul>
 <li>安装adb<br>
 平台ubuntu16.04(其他的系统自行搜索):<br>
@@ -162,28 +162,28 @@ fastboot <span style="color:#ff79c6">continue</span> // 自动重启设备
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
         <span>标签:</span>
         <li><a class="link" href="/tags/Android"> #Android </a></li><li><a class="link" href="/tags/%e5%88%b7%e6%9c%ba"> #刷机 </a></li>
-      
-      <span>  </span>
+        
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/%e5%88%b7%e6%9c%ba"> #刷机 </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -201,11 +201,10 @@ fastboot <span style="color:#ff79c6">continue</span> // 自动重启设备
 
 
 
-    
-
 
 
 </body>
+
 
 
 

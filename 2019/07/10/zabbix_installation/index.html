@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>安装zabbix</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>安装zabbix</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,10 +102,10 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="关于zabbix的安装">关于zabbix的安装</h3>
+<h3 id="zabbix">关于zabbix的安装</h3>
 <p>近期需要使用zabbix对线上服务器进行监控, zabbix是一个强大的服务器监控程序, 相对于安装就比较简单了</p>
 <p>在这里我使用的二进制包安装, 省的编译了, 如有特殊要求, 请自行编译</p>
-<h3 id="开始安装">开始安装</h3>
+<h3 id="heading">开始安装</h3>
 <p>使用的环境为CentOS7.6, 说实话我对于这个版本不熟, 但殊途同归, 发行版之间也就包管理的区别最大吧,
 如果能TMD不用CentOS, 我碰都不会碰它一下, 打心底讨厌这个版本, 但为了工作, 只有这样吧..</p>
 <p>在这里安装的zabbix版本为zabbix4.0.1, 也就是4.x系列, 从头到位也就几条命令, 但其中的yum包管理踩坑是将我困住了2小时, (Fuck you yum</p>
@@ -120,7 +120,7 @@
 yum makecache -y
 </code></pre></div><p>接下来就可以继续安装了, 直接一把梭</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-get zabbix-agent php-fpm
-</code></pre></div><h3 id="缺少依赖解决2019-08-13更新">缺少依赖解决(2019-08-13更新)</h3>
+</code></pre></div><h3 id="2019-08-13">缺少依赖解决(2019-08-13更新)</h3>
 <p>一般使用yum一把梭装的不会出现这样的问题, 而使用rpm直接安装它不会自动补全这些依赖</p>
 <p>如若提示需要libiksemel.so.3()(64bit)这个依赖, 请执行下面的操作</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum install -y epel-release
@@ -138,7 +138,7 @@ rpm -ivh http://springdale.math.ias.edu/data/puias/unsupported/7/x86_64//iksemel
 <pre><code>libodbc.so.2()(64bit) is needed by zabbix-server-pgsql-4.2.4-1.el7.x86_64
 </code></pre><p>前往https://centos.pkgs.org/7/centos-x86_64/unixODBC-2.3.1-11.el7.x86_64.rpm.html, 寻找答案</p>
 <p>使用<code>yum install -y unixODBC</code>完成依赖安装</p>
-<h3 id="设置并初始化数据库">设置并初始化数据库</h3>
+<h3 id="heading-1">设置并初始化数据库</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysql -uroot  -e <span style="color:#f1fa8c">&#34;create database zabbix character set utf8 collate utf8_bin;&#34;</span>
 mysql -uroot  -e <span style="color:#f1fa8c">&#34;grant all privileges on zabbix.* to zabbix@localhost identified by &#39;[your_password]&#39;;&#34;</span>
 zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p<span style="color:#ff79c6">[</span>your_password<span style="color:#ff79c6">]</span> zabbix
@@ -171,22 +171,22 @@ sed -i <span style="color:#f1fa8c">&#39;s#\# DBPassword=#DBPassword=[your_passwo
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
-        
-      </p>
-  <hr>
-  <hr>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
 
-  
+    
 
-  <ul class="tags"  style="float: left!important;">
-      
-      <span>  </span>
+    <ul class="tags"  style="float: left!important;">
         
-  </ul>
-  
-  <br>
+        <span>  </span>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -204,11 +204,10 @@ sed -i <span style="color:#f1fa8c">&#39;s#\# DBPassword=#DBPassword=[your_passwo
 
 
 
-    
-
 
 
 </body>
+
 
 
 

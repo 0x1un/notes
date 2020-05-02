@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>关于向量代数的一些笔记</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>关于向量代数的一些笔记</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,16 +102,16 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h2 id="概述">概述</h2>
+<h2 id="heading">概述</h2>
 <p>在<code>平面解析几</code>何当中, 通过坐标法将平面上的点与一对有次序的数对应起来, 把平面上的图形和方程对应起来, 从而可以用代数方法来研究几何问题。空间解析几何也是按照类似的方法建立的。</p>
 <p>平面解析几何的只是对于学习<code>一元函数微积分</code>是不可以缺失的学习, 空间解析几何的知识对于学习<code>多元函数微积分</code>也是十分必要的。</p>
-<h2 id="行向量与列向量">行向量与列向量</h2>
+<h2 id="heading-1">行向量与列向量</h2>
 <p>行向量: $$(x, y)$$<br>
 列向量: $$\dbinom{x}{y}$$</p>
 <p>目前两者没啥分别, 在用到矩阵的时候会区别开来, 而通常提到的向量一般都是列向量</p>
 <p>由于很多教材书籍时横向印刷的, 表示为$$(x, y)^T$$, 和上面一个意思</p>
 <p>与之向量相反的是<strong>标量</strong></p>
-<h2 id="向量之间的操作">向量之间的操作</h2>
+<h2 id="heading-2">向量之间的操作</h2>
 <p>加法</p>
 <p>$$(x, y)^T$$ + $$(a, b)^T$$ = $$(x + a, y + b)^T$$</p>
 <p>乘法</p>
@@ -130,7 +130,7 @@ k\cdot v_n \<br>
 \end{matrix}\right}$$</p>
 <p>n维向量也是如此</p>
 <!-- raw HTML omitted -->
-<h2 id="1向量及其线性运算">1、向量及其线性运算</h2>
+<h2 id="1">1、向量及其线性运算</h2>
 <blockquote>
 <p>既有大小，又有方向的量叫做向量（或矢量）</p>
 </blockquote>
@@ -169,7 +169,7 @@ $$|\lambda\overrightarrow{a}| = |\lambda| |\overrightarrow{a}|$$</p>
 <p>一个非零向量除以它的模的结果是一个与原向量同方向的单位向量，即$$\vec a |\vec a| = \vec e_{\vec a}$$<br>
 定理1：设向量$$\vec a \ne \vec 0$$ ，则向量$$\vec b$$ 平行于$$\vec a$$ 的充分必要条件是：存在唯一的实数λ，使$$\vec b = \lambda \vec a$$ ，$$\lambda$$可为$$0$$<br>
 给定一个点及一个单位向量就确定了一条数轴，数轴上的点与实数之间有一一对应的关系，$$\vec {OP}= \vec {xi}$$</p>
-<h2 id="空间直角坐标系">空间直角坐标系</h2>
+<h2 id="heading-3">空间直角坐标系</h2>
 <p>空间直角坐标系也称为$$Oxyz$$坐标系，其符合右手规则(右手握拳做出‘你真棒’的手势)</p>
 <p>注意空间直角坐标系卦限的分布(顺序为逆时针)</p>
 <p>点$$M$$、向量$$\vec \gamma$$ 与三个有序数$$x$$、$$y$$、$$z$$之间有一一对应的关系</p>
@@ -194,25 +194,25 @@ $$|\lambda\overrightarrow{a}| = |\lambda| |\overrightarrow{a}|$$</p>
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
-      <span>  </span>
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/%e9%ab%98%e7%ad%89%e6%95%b0%e5%ad%a6"> #高等数学 </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -230,13 +230,9 @@ $$|\lambda\overrightarrow{a}| = |\lambda| |\overrightarrow{a}|$$</p>
 
 
 
-    
-
 
 
 </body>
-
-
 
 
 
@@ -250,9 +246,12 @@ $$|\lambda\overrightarrow{a}| = |\lambda| |\overrightarrow{a}|$$</p>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-      renderMathInElement(document.body);
+        renderMathInElement(document.body);
     });
 </script>
+
+
+
 
 </html>
 

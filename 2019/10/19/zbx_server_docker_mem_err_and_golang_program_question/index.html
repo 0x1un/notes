@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>zabbix&amp;docker问题与注意事项</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>zabbix&amp;docker问题与注意事项</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -100,15 +100,15 @@
 <div class="blog-post">
   <h2>zabbix&amp;docker问题与注意事项</h2>
         <p>这几天在折腾 zabbix, 因为工作上的需求，使用 docker 是最好的方式。</p>
-<h4 id="q1-alphine-镜像无法使用-go-编译的程序">Q1: alphine 镜像无法使用 go 编译的程序</h4>
+<h4 id="q1-alphine--go-">Q1: alphine 镜像无法使用 go 编译的程序</h4>
 <p>ps: 虽然使用 Python 非常便利快捷，但它依赖环境，我都使用 alphine 镜像了那必然不想再增个依赖。自然而然地，我选择了 go。</p>
 <p>然而在我写好了程序编译之后，将其挂载到 docker 中，却发现无法使用。当你用<code>./run</code>的时候，它会报 bash 未找到的错误。在翻阅相关文档后，发现编译时增添<code>-tags netgo</code>会起到作用。</p>
-<h4 id="zabbix-server-缓存不足">zabbix server 缓存不足</h4>
+<h4 id="zabbix-server-">zabbix server 缓存不足</h4>
 <p>log 如下：</p>
 <pre><code>zabbix-server_1    |      7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): out of memory (requested 14216 bytes)
 zabbix-server_1    |      7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_mem_realloc(): please increase CacheSize configuration parameter
 </code></pre><p>这段日志说的很明白了，就是让你提升 CacheSize。再次打开此镜像的文档，找到了<code>ZBX_CACHESIZE</code>这个环境变量，并设置为 50M(默认 8M)，ok,结束。</p>
-<h4 id="总结">总结</h4>
+<h4 id="heading">总结</h4>
 <p>当你遇到与相关程序的坑时，一定要看 log 排查。像 zabbix 这种存在多年的程序，他的社区是无比强大，你的坑人家也许早就趟过了。</p>
 
   </div>
@@ -127,28 +127,28 @@ zabbix-server_1    |      7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
         <span>标签:</span>
         <li><a class="link" href="/tags/OM"> #OM </a></li>
-      
-      <span>  </span>
+        
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Unix-like"> #Unix-like </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -166,11 +166,10 @@ zabbix-server_1    |      7:20191019:110640.896 [file:dbconfig.c,line:94] __zbx_
 
 
 
-    
-
 
 
 </body>
+
 
 
 

@@ -17,23 +17,11 @@
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/04/07/zabbix-setup/</guid>
-      <description>基于的环境 cat /etc/redhat-release &amp;gt; CentOS Linux release 7.7.1908 (Core) zabbix version: 4.4.4 MariaDB Server: 10.4.12-MariaDB 前期准备 在CentOS-7安装完成之后，因为咱们国情的原因，我们需要对系统的软件源进行更换。什么是源，其实简单来说就是软件资源的服务器。
+      <description>基于的环境 cat /etc/redhat-release &amp;gt; CentOS Linux release 7.7.1908 (Core) zabbix version: 4.4.4 MariaDB Server: 10.4.12-MariaDB 安装流程 在开始安装之前，先来了解下Zabbix完整的安装流程
+classDiagram 开始 &amp;lt;|-- 更换or添加软件源 : step 1 开始 &amp;lt;|-- 添加软件 : step 2 开始 &amp;lt;|-- 配置服务 : step 3 开始 : +关闭SELinux : 开始 : +关闭Firewalld守护进程 class 更换or添加软件源{ +国内阿里源 +阿里zabbix源 +阿里mariadb源 } class 添加软件{ +安装mariadb +安装httpd/nginx +安装zabbix-server-mysql +安装zabbix-web-mysql } class 配置服务{ +配置nginx或nginx服务 +配置zabbix_server.conf +创建zabbix数据库帐号，赋予相应权限 +将zabbix数据表导入数据库中 } 前期准备 在CentOS-7安装完成之后，因为咱们国情的原因，我们需要对系统的软件源进行更换。什么是源，其实简单来说就是软件资源的服务器。
 为了安装方便，作为教程，那就使用root用户吧，当然生产环境慎用就是了，度自己拿捏。
 关闭防火墙（防火墙不在本文的讲解范围，先关闭再说）
-systemctl stop firewalld 关闭selinux（这个也关闭吧，不精通它就关闭它，否则有你好受的）
-# 查看selinux状态 getenforce # 临时关闭selinux setenforce 0 # 永久关闭selinux, 编辑/etc/selinux/config # This file controls the state of SELinux on the system. # SELINUX= can take one of these three values: # enforcing - SELinux security policy is enforced. # permissive - SELinux prints warnings instead of enforcing. # disabled - No SELinux policy is loaded.</description>
-    </item>
-    
-    <item>
-      <title>Rust认真学习的第一天</title>
-      <link>/2020/03/23/rust-day1/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/03/23/rust-day1/</guid>
-      <description>前言 说起学习Rust，那得从2018年的10月份开始。我买了一本《Rust编程之道》张汉东老师编著的，买回来之后的两个月我看的非常认真。
-也是在2019年的7月份吧，我找了一份工作。就在那时，我渐渐把Rust给淡忘了。。。转投到Golang（真香）的怀抱中，但我依然每天关注着Rust的动态。
-当时我看完了一遍官方的tuto，才买的编程之道，这本书的前五章我认真看了将近两个月，看的非常仔细，乃至于我现在都能回忆起一些细节。为什么看的那么仔细呢，说实话我将Rust当作了一种兴趣，没有功利心的那种学习态度。然而后面在工作上都是用的Python/Goalng渐渐将其淡忘。当时学习也没认真做点笔记，也不是没有做，而是我将笔记记在了书上。说实话，这很不利于检索。
-那么从现在开始，我将重新学一学Rust，并且动手实践。在这个过程中呢，我将会把Rust学习的历程一字一句记录在此。但我不会保证正确性，如果你看了我学习Golang时写的日志就知道了。我现在翻看以前写的Golang日志，会发现很多不妥的地方，我也懒得将其修正了。请记住，这不是教程文章，只是我的学习历程！</description>
+systemctl stop firewalld 关闭SELinux（这个也关闭吧，不精通它就关闭它，否则有你好受的）</description>
     </item>
     
     <item>
@@ -299,9 +287,9 @@ SERVERNAME=portsnap3.hshh.org  电信 portsnap.</description>
 查看无线网络的设备接口
 sysctl net.wlan.devices 创建wlan接口, 接口为上一条的结果
 ifconfig wlan0 create wlandev ath0 配置网络自启, 编辑/etc/rc.conf
-wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34; 编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
+wlans_ath0=&amp;#34;wlan0&amp;#34; ifconfig_wlan0=&amp;#34;WPA SYNCDHCP&amp;#34;&amp;#34;编辑/boot/loader.conf配置文件, 添加以下几条并重启系统生效
 if_ath_load=&amp;quot;YES&amp;quot; if_wi_load=&amp;quot;YES&amp;quot; wlan_wep_load=&amp;quot;YES&amp;quot; wlan_ccmp_load=&amp;quot;YES&amp;quot; wlan_tkip_load=&amp;quot;YES&amp;quot; 配置wpa_supplicant
-wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.</description>
+wpa_supplicant -B -i interface -c &amp;lt;(wpa_passphrase MYSSID passphrase) wpa_passphrase MYSSID passphrase &amp;gt; /etc/wpa_supplicant.conf wpa_supplicant -B -i interface -c /etc/wpa_supplicant.conf  -B 后台运行, -i 指定无线网络接口, -c指定使用的配置文件 第一条为直接连接, MYSSID为wifi名, passphrase为wifi密码  第二条为写入配置文件, 方便自动连接, 如果你的wifi是隐藏的, 需要在配置文件中添加一行scan_ssid=1</description>
     </item>
     
     <item>
@@ -621,7 +609,7 @@ git apply --reject --whitespace=fix st-ime-20190202-3be4cf1.diff 它会对st.c�
       <guid>/2019/02/06/disable_sqlalchmey_basic_class_table/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
   在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
- class Base(db.Model): &amp;#34;&amp;#34;&amp;#34; file: base.py &amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34; file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
+ class Base(db.Model): &amp;#34;&amp;#34;&amp;#34;file: base.py&amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34;file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
 __abstract__ = True </description>
     </item>
     
@@ -635,7 +623,7 @@ __abstract__ = True </description>
  原始标识符 有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：
 let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦 变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 例如
-fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; // 创建变量x为一个可变变量并初始化值为5 x = 6; // 这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
+fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; //创建变量x为一个可变变量并初始化值为5 x = 6; //这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
     </item>
     
     <item>

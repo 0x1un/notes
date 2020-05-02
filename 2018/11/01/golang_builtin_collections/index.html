@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="zh-CN" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    
-    
-    <title>golang的內建容器</title>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="zh-CN" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        
+        
+        <title>golang的內建容器</title>
 
-    
+        
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                visible: 'hover',
-                placement: 'left',
-                icon: "¶"
+                    visible: 'hover',
+                    placement: 'left',
+                    icon: "¶"
                 };
-            anchors.add();
+                anchors.add();
             })
         </script>
-        
+
         
 
         
-            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-            
-        
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
         
         
 
+
         
-        
-            <link rel="stylesheet" href="/css/main.css">
         
 
         
+        
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+        
+
+
+
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+
+    </head>
+
+
+    <body>
+        <script>
+            window.addEventListener("resize", resizeThrottler, false);
+
+var resizeTimeout;
+function resizeThrottler() {
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-
-    
-
-</head>
-
-
-<body>
-    <script>
-        window.addEventListener("resize", resizeThrottler, false);
-
-        var resizeTimeout;
-        function resizeThrottler() {
-        
-        if ( !resizeTimeout ) {
-            resizeTimeout = setTimeout(function() {
+    if ( !resizeTimeout ) {
+        resizeTimeout = setTimeout(function() {
             resizeTimeout = null;
             actualResizeHandler();
-        
+
             
-            }, 66);
-        }
-        }
-        actualResizeHandler()
-        function actualResizeHandler() {
-                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-                {
-                    document.body.classList.add('mobile');
-                }else{
-                    document.body.classList.remove('mobile');  
-                }
-    }</script>
+        }, 66);
+    }
+}
+actualResizeHandler()
+function actualResizeHandler() {
+    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+    {
+        document.body.classList.add('mobile');
+    }else{
+        document.body.classList.remove('mobile');  
+    }
+}</script>
 
-    
-    
+        
+        
 
 
-    
-
-	
+        
 
 
 <div class="inner" style="position:relative;">
@@ -102,7 +102,7 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="__数组__"><strong>数组</strong></h3>
+<h3 id="----"><strong>数组</strong></h3>
 <p>首先, golang中的数组是值类型, golang中的传值也是值传递的(拷贝)。</p>
 <ul>
 <li>示例</li>
@@ -147,7 +147,7 @@
 fmt.<span style="color:#50fa7b">Println</span>(array)
 </code></pre></div><p>你会发现结果外面的array并没有被改变, 所以golang中的数组传值是会对数组进行一次拷贝, 这样呢在某些情况下还是很安全的, 但是有利就有弊, 拷贝一份会有额外的开销。</p>
 <p>但是每次写一个函数需要传递数组的时候都要预先知道数组的长度, 但有些情况是不可控的, 这下就会引入一个概念：切片, 在golang中一般是不会直接引用数组的, 我们通常都会使用切片。</p>
-<h3 id="__切片slice__"><strong>切片(Slice)</strong></h3>
+<h3 id="--slice--"><strong>切片(Slice)</strong></h3>
 <p>golang中的Slice与其他语言的数组切片相似, 并且Slice本身是没有数据的, 它只是对底层array的一个view(视图)。</p>
 <ul>
 <li>示例</li>
@@ -221,7 +221,7 @@ s1's cap=6
 The s2's value=[5 6]
 The s2 length is 2
 s2's cap=3
-</code></pre><h3 id="__切片slice操作__"><strong>切片(Slice)操作</strong></h3>
+</code></pre><h3 id="--slice---1"><strong>切片(Slice)操作</strong></h3>
 <ul>
 <li>示例</li>
 </ul>
@@ -311,7 +311,7 @@ Poping from back
 }
 <span style="color:#6272a4">// 方法二
 </span><span style="color:#6272a4"></span>m2 <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd">int</span>) <span style="color:#6272a4">// m2 == empty map
-</span><span style="color:#6272a4">// 方法三
+</span><span style="color:#6272a4"></span><span style="color:#6272a4">// 方法三
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">var</span> m3 <span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd">string</span> <span style="color:#6272a4">// m3 == nil
 </span><span style="color:#6272a4"></span>fmt.<span style="color:#50fa7b">Println</span>(m, m2, m3)
 </code></pre></div><ul>
@@ -383,7 +383,7 @@ neme, ok <span style="color:#ff79c6">:=</span> m[<span style="color:#f1fa8c">&#3
 <li>如果没有取到, 什么事也没有继续往下遍历并且将maxLength自增, 最后将字符存入map</li>
 <li>循环以上的步骤</li>
 </ul>
-<h3 id="__字符串__"><strong>字符串</strong></h3>
+<h3 id="-----1"><strong>字符串</strong></h3>
 <p>字符串是编程当中可以说是用的非常频繁的类型之一, 让我们来了解下golang中是怎么处理的</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
     s <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;Yes, 哈哈哈哈!&#34;</span> <span style="color:#6272a4">// UTF-8
@@ -419,7 +419,7 @@ bytes <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-st
 }
 </code></pre></div><p>其实我们平常使用是很少对字符进行底层的解析, 我们通常会用到下面这种方法</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 将字符串s转换成rune并且将它slice
-</span><span style="color:#6272a4">// 直接range s是不行的, 中文字符长度为3
+</span><span style="color:#6272a4"></span><span style="color:#6272a4">// 直接range s是不行的, 中文字符长度为3
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">for</span> i, char <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s) {
     fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;(%d,%c)&#34;</span>, i, char)
 }
@@ -455,28 +455,28 @@ bytes <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-st
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-	
-		&copy; 2020 </a>
+    
+    &copy; 2020 </a>
+    
+    </p>
+    <hr>
+    <hr>
+
+    
+
+    <ul class="tags"  style="float: left!important;">
         
-      </p>
-  <hr>
-  <hr>
-
-  
-
-  <ul class="tags"  style="float: left!important;">
-      
         <span>标签:</span>
         <li><a class="link" href="/tags/go"> #go </a></li>
-      
-      <span>  </span>
+        
+        <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Code"> #Code </a></li>
-      
-  </ul>
-  
-  <br>
+        
+    </ul>
+    
+    <br>
 
 
 </footer>
@@ -494,11 +494,10 @@ bytes <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-st
 
 
 
-    
-
 
 
 </body>
+
 
 
 
