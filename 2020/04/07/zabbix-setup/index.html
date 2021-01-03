@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>从头到尾搭建Zabbix</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>从头到尾搭建Zabbix</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -99,12 +99,12 @@ function actualResizeHandler() {
   
 <div class="blog-post">
   <h2>从头到尾搭建Zabbix</h2>
-        <h3 id="heading">基于的环境</h3>
+        <h3 id="基于的环境">基于的环境</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat /etc/redhat-release
     &gt; CentOS Linux release 7.7.1908 <span style="color:#ff79c6">(</span>Core<span style="color:#ff79c6">)</span>
 zabbix version: 4.4.4
 MariaDB Server: 10.4.12-MariaDB
-</code></pre></div><h3 id="heading-1">安装流程</h3>
+</code></pre></div><h3 id="安装流程">安装流程</h3>
 <p>在开始安装之前，先来了解下Zabbix完整的安装流程</p>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
       开始 &lt;|-- 更换or添加软件源 : step 1
@@ -130,7 +130,7 @@ MariaDB Server: 10.4.12-MariaDB
       	  +创建zabbix数据库帐号，赋予相应权限
       	  +将zabbix数据表导入数据库中
       }
-</code></pre><h3 id="heading-2">前期准备</h3>
+</code></pre><h3 id="前期准备">前期准备</h3>
 <p>在CentOS-7安装完成之后，因为咱们国情的原因，我们需要对系统的软件源进行更换。什么是源，其实简单来说就是软件资源的服务器。</p>
 <p>为了安装方便，作为教程，那就使用<code>root</code>用户吧，当然生产环境慎用就是了，度自己拿捏。</p>
 <p>关闭防火墙（防火墙不在本文的讲解范围，先关闭再说）</p>
@@ -154,7 +154,7 @@ setenforce <span style="color:#bd93f9">0</span>
 <span style="color:#6272a4">#     minimum - Modification of targeted policy. Only selected processes are protected.</span>
 <span style="color:#6272a4">#     mls - Multi Level Security protection.</span>
 <span style="color:#8be9fd;font-style:italic">SELINUXTYPE</span><span style="color:#ff79c6">=</span>targeted
-</code></pre></div><h5 id="heading-3">添加国内软件源</h5>
+</code></pre></div><h5 id="添加国内软件源">添加国内软件源</h5>
 <p>在CentOS中，软件源的配置放置在<code>/etc/yum.repos.d</code>中，你可以在这个目录中放置符合规则的源配置。</p>
 <ul>
 <li>阿里源添加：</li>
@@ -191,7 +191,7 @@ yum clean all <span style="color:#ff79c6">&amp;&amp;</span> yum makecache <span 
 </span><span style="color:#f1fa8c">gpgkey=https://mirrors.aliyun.com/mariadb/yum/RPM-GPG-KEY-MariaDB
 </span><span style="color:#f1fa8c">gpgcheck=1
 </span><span style="color:#f1fa8c">EOF</span>
-</code></pre></div><h5 id="heading-4">开始安装所需软件</h5>
+</code></pre></div><h5 id="开始安装所需软件">开始安装所需软件</h5>
 <ul>
 <li>
 <p>安装MariaDB</p>
@@ -224,7 +224,7 @@ yum install zabbix-agent-4.4.4
 </li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install nginx php-fpm -y
-</code></pre></div><h3 id="heading-5">配置服务</h3>
+</code></pre></div><h3 id="配置服务">配置服务</h3>
 <ul>
 <li>创建数据库并导入zabbix数据表</li>
 </ul>
@@ -548,7 +548,7 @@ chown nginx:nginx -R /etc/zabbix/web
 <p>最后，启动所有必要服务，如果你跟着这个步骤做下来并不顺利，那么查看对应的日志或许能解决你的问题</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl <span style="color:#8be9fd;font-style:italic">enable</span> --now zabbix-server nginx php-fpm mariadb
 </code></pre></div><p><strong>最后呢，打开你的浏览器键入：http://your_server_ip:your_port/zabbix</strong></p>
-<h3 id="heading-6">自动化一键部署</h3>
+<h3 id="自动化一键部署">自动化一键部署</h3>
 <p>下面的仓库是我用ansible-playbook编写的一些自己用到的服务部署剧本，其中就包含了zabbix，有兴趣可以去看看。</p>
 <p><a href="https://github.com/0x1un/playbooks">https://github.com/0x1un/playbooks</a></p>
 
@@ -568,22 +568,22 @@ chown nginx:nginx -R /etc/zabbix/web
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
-        <span>  </span>
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
         
-    </ul>
-    
-    <br>
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -600,15 +600,7 @@ chown nginx:nginx -R /etc/zabbix/web
 
 
 
-
-
-
-</body>
-
-
-
-
-
+    
 
 
 
@@ -619,6 +611,16 @@ chown nginx:nginx -R /etc/zabbix/web
         mermaid.init(undefined, ".language-mermaid");
     };
 </script>
+
+</body>
+
+
+
+
+
+
+
+
 
 
 </html>

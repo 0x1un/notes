@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on 老实人</title>
+    <title>Linux on 0xNote</title>
     <link>/tags/linux/</link>
-    <description>Recent content in Linux on 老实人</description>
+    <description>Recent content in Linux on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux各种疑难问题</title>
       <link>/2020/01/08/linux_problem/</link>
@@ -50,7 +46,7 @@ ifdown ens192 ifup ens192 嗯&amp;hellip;中间没有任何异常, 通过ip addr
 iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
 --src-range是源地址的范围, --dst-range是目标地址的范围
 同样, --src-range和--dst-range可以使用取反(!)操作
-string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;rdquo;, 就对此报文进行进一步的操作
+string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;quot;, 就对此报文进行进一步的操作
 iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;quot;hello, world&amp;quot;这个字符串, 就将其拒绝
 --algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
 time扩展模块 time模块可以对特定时间段的报文进行处理
@@ -129,7 +125,7 @@ pacman -S mariadb # 当遇到无法启动时查看启动日志, 如果安装后�
 刻录系统到U盘与设置BIOS开机以U盘启动
 这里就不赘述了, 自行百度
 开始安装 当完成了上述的准备之后, 就可以开始安装系统了
-# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap # 并对其进行格式化操作: mkfs.vfat -F32 /dev/nvme0n1p1 # boot mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap mkfs.ext4 /dev/nvme0n1p3 # / # 创建目录并挂载分区: mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源: vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行 # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
+# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap # 并对其进行格式化操作:  mkfs.vfat -F32 /dev/nvme0n1p1 # boot  mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap  mkfs.ext4 /dev/nvme0n1p3 # / # 创建目录并挂载分区:  mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源:  vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行  # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
     </item>
     
     <item>

@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>golang之文件操作</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>golang之文件操作</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -102,7 +102,7 @@ function actualResizeHandler() {
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="----"><strong>常用的导出操作函数</strong></h3>
+<h3 id="__常用的导出操作函数__"><strong>常用的导出操作函数</strong></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Hostname</span>() (name <span style="color:#8be9fd">string</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Hostname返回内核提供的主机名
 </span><span style="color:#6272a4"></span>
 <span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Environ</span>() []<span style="color:#8be9fd">string</span> <span style="color:#6272a4">// Environ返回表示环境变量的格式为&#34;key=value&#34;的字符串的切片拷贝
@@ -127,7 +127,7 @@ function actualResizeHandler() {
 </span><span style="color:#6272a4"></span>
 <span style="color:#8be9fd;font-style:italic">var</span> Args []<span style="color:#8be9fd">string</span> Args保管了命令行参数，第一个是程序名。
 </code></pre></div><!-- raw HTML omitted -->
-<h3 id="file">file结构体</h3>
+<h3 id="file结构体">file结构体</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Create</span>(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Create采用模式0666（任何人都可读写，不可执行）创建一个名为name的文件，如果文件已存在会截断它（为空文件）
 </span><span style="color:#6272a4"></span>
 <span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Open</span>(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Open打开一个文件用于读取。如果操作成功，返回的文件对象的方法可用于读取数据；对应的文件描述符具有O_RDONLY模式
@@ -143,11 +143,11 @@ function actualResizeHandler() {
 <span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Sync</span>() (err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Sync递交文件的当前内容进行稳定的存储。一般来说，这表示将文件系统的最近写入的数据在内存中的拷贝刷新到硬盘中稳定保存
 </span><span style="color:#6272a4"></span>
 <span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Close</span>() <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// Close关闭文件f，使文件不能用于读写
-</span></code></pre></div><h3 id="fileinfo">FileInfo(描述文件对象)</h3>
+</span></code></pre></div><h3 id="fileinfo描述文件对象">FileInfo(描述文件对象)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Stat</span>(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Stat 返回描述文件的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接指向的文件的信息，本函数会尝试跳转该链接
 </span><span style="color:#6272a4"></span>
 <span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Lstat</span>(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Lstat 返回描述文件对象的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接的信息，本函数不会试图跳转该链接。
-</span></code></pre></div><h3 id="flag">文件操作的flag可选值</h3>
+</span></code></pre></div><h3 id="文件操作的flag可选值">文件操作的flag可选值</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// flag可选值
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">const</span> (
     O_RDONLY <span style="color:#8be9fd">int</span> = syscall.O_RDONLY <span style="color:#6272a4">// open the file read-only.
@@ -184,7 +184,7 @@ function actualResizeHandler() {
 </code></pre></div><p>上述可选值是权限位的高有效位，低有效位的值还是要用户自己写数字。</p>
 <p>文件的写入</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Write</span>(b []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>)
-</code></pre></div><h3 id="heading">创建空的文件</h3>
+</code></pre></div><h3 id="创建空的文件">创建空的文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -202,7 +202,7 @@ function actualResizeHandler() {
     log.<span style="color:#50fa7b">Println</span>(newFile)
     newFile.<span style="color:#50fa7b">Close</span>()
 }
-</code></pre></div><h3 id="truncate">Truncate文件(裁剪文件)</h3>
+</code></pre></div><h3 id="truncate文件裁剪文件">Truncate文件(裁剪文件)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -219,7 +219,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="heading-1">获取文件的详细信息</h3>
+</code></pre></div><h3 id="获取文件的详细信息">获取文件的详细信息</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;fmt&#34;</span>
@@ -244,7 +244,7 @@ function actualResizeHandler() {
     fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;System interface type: %T\n&#34;</span>, fileInfo.<span style="color:#50fa7b">Sys</span>())
     fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;System info: %+v\n\n&#34;</span>, fileInfo.<span style="color:#50fa7b">Sys</span>())
 }
-</code></pre></div><h3 id="heading-2">重命名文件与移动文件</h3>
+</code></pre></div><h3 id="重命名文件与移动文件">重命名文件与移动文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -258,7 +258,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="heading-3">删除文件</h3>
+</code></pre></div><h3 id="删除文件">删除文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -270,7 +270,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="heading-4">检查文件是否存在</h3>
+</code></pre></div><h3 id="检查文件是否存在">检查文件是否存在</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -291,7 +291,7 @@ function actualResizeHandler() {
     log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;File does exist. File information:&#34;</span>)
     log.<span style="color:#50fa7b">Println</span>(fileInfo)
 }
-</code></pre></div><h3 id="heading-5">检查读写权限</h3>
+</code></pre></div><h3 id="检查读写权限">检查读写权限</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -316,7 +316,7 @@ function actualResizeHandler() {
     }
     file.<span style="color:#50fa7b">Close</span>()
 }
-</code></pre></div><h3 id="heading-6">改变权限、拥有者、时间戳</h3>
+</code></pre></div><h3 id="改变权限拥有者时间戳">改变权限、拥有者、时间戳</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -343,7 +343,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Println</span>(err)
     }
 }
-</code></pre></div><h3 id="nix">创建软连接与硬链接(*nix操作系统)</h3>
+</code></pre></div><h3 id="创建软连接与硬链接nix操作系统">创建软连接与硬链接(*nix操作系统)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;os&#34;</span>
@@ -377,7 +377,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="heading-7">跳转到文件中的指定位置</h3>
+</code></pre></div><h3 id="跳转到文件中的指定位置">跳转到文件中的指定位置</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;os&#34;</span>
@@ -415,7 +415,7 @@ function actualResizeHandler() {
     }
     fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Position after seeking 0,0:&#34;</span>, newPosition)
 }
-</code></pre></div><h3 id="heading-8">写入文件</h3>
+</code></pre></div><h3 id="写入文件">写入文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 普通写入
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -443,7 +443,7 @@ function actualResizeHandler() {
 }
 </code></pre></div><p>&lt;=================================================&gt;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 快写文件
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">// ioutil包有一个非常有用的方法WriteFile()可以处理创建／打开文件、写字节slice和关闭文件一系列的操作。如果你需要简洁快速地写字节slice到文件中，你可以使用它。
+</span><span style="color:#6272a4">// ioutil包有一个非常有用的方法WriteFile()可以处理创建／打开文件、写字节slice和关闭文件一系列的操作。如果你需要简洁快速地写字节slice到文件中，你可以使用它。
 </span><span style="color:#6272a4"></span>
 <span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -458,7 +458,7 @@ function actualResizeHandler() {
 }
 </code></pre></div><p>&lt;=================================================&gt;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 使用缓存写
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">// bufio包提供了带缓存功能的writer，所以你可以在写字节到硬盘前使用内存缓存。当你处理很多的数据很有用，因为它可以节省操作硬盘I/O的时间。在其它一些情况下它也很有用，比如你每次写一个字节，把它们攒在内存缓存中，然后一次写入到硬盘中，减少硬盘的磨损以及提升性能。
+</span><span style="color:#6272a4">// bufio包提供了带缓存功能的writer，所以你可以在写字节到硬盘前使用内存缓存。当你处理很多的数据很有用，因为它可以节省操作硬盘I/O的时间。在其它一些情况下它也很有用，比如你每次写一个字节，把它们攒在内存缓存中，然后一次写入到硬盘中，减少硬盘的磨损以及提升性能。
 </span><span style="color:#6272a4"></span>
 <span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -528,7 +528,7 @@ function actualResizeHandler() {
     log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
 }
 </code></pre></div><p>&lt;=================================================&gt;</p>
-<h3 id="heading-9">读取文件</h3>
+<h3 id="读取文件">读取文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -592,11 +592,11 @@ function actualResizeHandler() {
     fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Read string: %s\n&#34;</span>, dataString)     
     <span style="color:#6272a4">//这个例子读取了很多行，所以test.txt应该包含多行文本才不至于出错
 </span><span style="color:#6272a4"></span>}
-</code></pre></div><h3 id="heading-10">打包文件</h3>
+</code></pre></div><h3 id="打包文件">打包文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 打包(zip) 文件
 </span><span style="color:#6272a4"></span>
 <span style="color:#6272a4">// This example uses zip but standard library
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">// also supports tar archives
+</span><span style="color:#6272a4">// also supports tar archives
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;archive/zip&#34;</span>
@@ -637,9 +637,9 @@ function actualResizeHandler() {
             log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="unzip-">抽取(unzip) 文件</h3>
+</code></pre></div><h3 id="抽取unzip-文件">抽取(unzip) 文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// This example uses zip but standard library
-</span><span style="color:#6272a4"></span><span style="color:#6272a4">// also supports tar archives
+</span><span style="color:#6272a4">// also supports tar archives
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;archive/zip&#34;</span>
@@ -695,7 +695,7 @@ function actualResizeHandler() {
         }
     }
 }
-</code></pre></div><h3 id="heading-11">压缩文件</h3>
+</code></pre></div><h3 id="压缩文件">压缩文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 这个例子中使用gzip压缩格式，标准库还支持zlib, bz2, flate, lzw
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -718,7 +718,7 @@ function actualResizeHandler() {
     }
     log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Compressed data written to file.&#34;</span>)
 }
-</code></pre></div><h3 id="heading-12">解压缩文件</h3>
+</code></pre></div><h3 id="解压缩文件">解压缩文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 这个例子中使用gzip压缩格式，标准库还支持zlib, bz2, flate, lzw
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -752,7 +752,7 @@ function actualResizeHandler() {
         log.<span style="color:#50fa7b">Fatal</span>(err)
     }
 }
-</code></pre></div><h3 id="http">HTTP下载文件</h3>
+</code></pre></div><h3 id="http下载文件">HTTP下载文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
      <span style="color:#f1fa8c">&#34;os&#34;</span>
@@ -794,28 +794,28 @@ function actualResizeHandler() {
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
         <span>标签:</span>
         <li><a class="link" href="/tags/go"> #go </a></li>
-        
-        <span>  </span>
+      
+      <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/HelpDoc"> #HelpDoc </a></li>
-        
-    </ul>
-    
-    <br>
+      
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -832,10 +832,12 @@ function actualResizeHandler() {
 
 
 
+    
 
 
 
 </body>
+
 
 
 

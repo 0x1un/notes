@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>flask保存字段到数据库(批量保存)</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>flask保存字段到数据库(批量保存)</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -103,10 +103,10 @@ function actualResizeHandler() {
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
 <p>在我使用flask编写网站后端的时候, 要将前端表单提交的字段进行保存, 字段少的时候还好, 当字段有几十个甚至上百个的时候, 如果手动的一条一条添加, 这将是个噩梦, 如下例代码.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">@web.route(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">/register</span><span style="color:#f1fa8c">&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">GET</span><span style="color:#f1fa8c">&#39;</span>])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">@web.route(<span style="color:#f1fa8c">&#39;/register&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#39;POST&#39;</span>, <span style="color:#f1fa8c">&#39;GET&#39;</span>])
 <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">register</span>():
     form <span style="color:#ff79c6">=</span> RegisterForm(request<span style="color:#ff79c6">.</span>form)
-    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
+    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
         user <span style="color:#ff79c6">=</span> User()
         user<span style="color:#ff79c6">.</span>nickname <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>nickname<span style="color:#ff79c6">.</span>data
         user<span style="color:#ff79c6">.</span>password <span style="color:#ff79c6">=</span> form<span style="color:#ff79c6">.</span>password<span style="color:#ff79c6">.</span>data
@@ -115,12 +115,12 @@ function actualResizeHandler() {
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span>(db<span style="color:#ff79c6">.</span>models):
     <span style="color:#8be9fd;font-style:italic">id</span> <span style="color:#ff79c6">=</span> Column(Integer, primary_key<span style="color:#ff79c6">=</span>True)
     email <span style="color:#ff79c6">=</span> Column()
-    _password <span style="color:#ff79c6">=</span> Column(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">password</span><span style="color:#f1fa8c">&#39;</span>) <span style="color:#6272a4"># 至于为什么有(_), 下面会继续说明</span>
+    _password <span style="color:#ff79c6">=</span> Column(<span style="color:#f1fa8c">&#39;password&#39;</span>) <span style="color:#6272a4"># 至于为什么有(_), 下面会继续说明</span>
     nickname <span style="color:#ff79c6">=</span> Column()
     
     <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">set_attrs</span>(self, attrs_dict: <span style="color:#8be9fd;font-style:italic">dict</span>):
         <span style="color:#ff79c6">for</span> key, value <span style="color:#ff79c6">in</span> attrs_dict<span style="color:#ff79c6">.</span>items(): <span style="color:#6272a4"># 遍历传入的字典类型, 获取属性及其数据</span>
-            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">hasattr</span>(self, key) <span style="color:#ff79c6">and</span> key <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">id</span><span style="color:#f1fa8c">&#39;</span>: <span style="color:#6272a4"># 判断本类中是否有k这个属性, 并且讲id排除掉, 不对它进行赋值, 因为id是主键</span>
+            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">hasattr</span>(self, key) <span style="color:#ff79c6">and</span> key <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#39;id&#39;</span>: <span style="color:#6272a4"># 判断本类中是否有k这个属性, 并且讲id排除掉, 不对它进行赋值, 因为id是主键</span>
                 <span style="color:#8be9fd;font-style:italic">setattr</span>(self, key, value) <span style="color:#6272a4"># 存入字段中</span>
 
     @property
@@ -132,10 +132,10 @@ function actualResizeHandler() {
         self<span style="color:#ff79c6">.</span>_password <span style="color:#ff79c6">=</span> generate_password_hash(value)
 
                                              
-@web.route(<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">/register</span><span style="color:#f1fa8c">&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#39;</span>, <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#39;</span><span style="color:#f1fa8c">GET</span><span style="color:#f1fa8c">&#39;</span>])
+@web.route(<span style="color:#f1fa8c">&#39;/register&#39;</span>, methods<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#39;POST&#39;</span>, <span style="color:#f1fa8c">&#39;GET&#39;</span>])
 <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">register</span>():
     form <span style="color:#ff79c6">=</span> RegisterForm(request<span style="color:#ff79c6">.</span>form)
-    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c"></span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">POST</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
+    <span style="color:#ff79c6">if</span> request<span style="color:#ff79c6">.</span>method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> <span style="color:#ff79c6">and</span> form<span style="color:#ff79c6">.</span>validate():
         user <span style="color:#ff79c6">=</span> User()
         user<span style="color:#ff79c6">.</span>set_attrs(form<span style="color:#ff79c6">.</span>data) <span style="color:#6272a4"># form.data会返回一个dict类型, 其中的key为字段名, value为表单获取的数据</span>
 </code></pre></div><blockquote>
@@ -165,28 +165,28 @@ function actualResizeHandler() {
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
         <span>标签:</span>
         <li><a class="link" href="/tags/Python"> #Python </a></li><li><a class="link" href="/tags/Flask"> #Flask </a></li><li><a class="link" href="/tags/Sqlalchmey"> #Sqlalchmey </a></li>
-        
-        <span>  </span>
+      
+      <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Python"> #Python </a></li>
-        
-    </ul>
-    
-    <br>
+      
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -203,10 +203,12 @@ function actualResizeHandler() {
 
 
 
+    
 
 
 
 </body>
+
 
 
 

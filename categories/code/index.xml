@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Code on 老实人</title>
+    <title>Code on 0xNote</title>
     <link>/categories/code/</link>
-    <description>Recent content in Code on 老实人</description>
+    <description>Recent content in Code on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/code/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>golang意事项注之Slice^Map</title>
       <link>/2019/10/18/golang_slice_map_note/</link>
@@ -97,7 +93,7 @@ golang没有其他语言中class这种东西, 它只有struct
  示例  type treeNode struct { value int left, right *treeNode } 在示例当中我构造了一棵树的节点, 它接受三个值, 节点的序号, 和左右叶子节点, 叶子节点又指向了这棵树, 从而起到了一个递归的作用。
 我要创建如下图一样的二叉树
 创建节点
- 示例  var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;rdquo;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
+ 示例  var root treeNode //定义root是一个名为treeNode的type结构体 root = treeNode{value:3} root.left = &amp;amp;treeNode{} root.right = &amp;amp;treeNode{5, nil, nil} root.right.left = new(treeNode) 以上我们可以看到访问成员都是可以用点&amp;quot;.&amp;ldquo;来访问的, 它不局限于它们之间的差异。
 golang中没有构造函数, 但是可以使用工厂函数喊解决, 本身构造函数已经有了(new()), 工厂函数返回了局部变量的地址。
  示例  func createNode(value int) *treeNode { return &amp;amp;treeNode{value: value} } root.</description>
     </item>

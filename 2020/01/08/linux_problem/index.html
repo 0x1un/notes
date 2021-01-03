@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>Linux各种疑难问题</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>Linux各种疑难问题</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -99,7 +99,7 @@ function actualResizeHandler() {
   
 <div class="blog-post">
   <h2>Linux各种疑难问题</h2>
-        <h3 id="0x001-fcitx5">0x001 fcitx5输入法无法启东</h3>
+        <h3 id="0x001-fcitx5输入法无法启东">0x001 fcitx5输入法无法启东</h3>
 <p>其报错如下:</p>
 <pre><code>I instance.cpp:903] Override Enabled Addons: {}
 I instance.cpp:904] Override Disabled Addons: {}
@@ -135,7 +135,7 @@ fcitx5(+0xa42a)[0x5605579be42a]
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
 eval $(dbus-launch --auto-syntax)
-</code></pre><h3 id="0x002-fcitx5-chinese-addons">0x002 fcitx5-chinese-addons无法编译</h3>
+</code></pre><h3 id="0x002-fcitx5-chinese-addons无法编译">0x002 fcitx5-chinese-addons无法编译</h3>
 <p>无法编译的原因有很多种，我这边使用的overlay gentoo-zh，其中的标准版本无论无怎么编译都不会成功，看日志会查到一个<code>wordView</code>无法调用，原因为不存在。这种情况一般是依赖没有安装完整，但我确认我是安装完整的。（通过手动clone官方仓库编译，顺利成功）</p>
 <p><strong>Solution:</strong>
 手动安装，或者修改gentoo-zh中的ebuild文件。
@@ -153,7 +153,7 @@ SRC_URI=&quot;https://download.fcitx-im.org/data/py_stroke-20121124.tar.gz -&gt;
 https://download.fcitx-im.org/data/py_table-20121124.tar.gz -&gt; fcitx-data-py_table-20121124.tar.gz
 &quot;
 </code></pre><p>以<code>#</code>包裹的部分为需要注释的，然后解决！应该是<code>999999999</code>版本的ebuild中依赖没有填写准确，而稳定版本中拉取的那个<code>commit</code>与相关的依赖又不兼容造成的。</p>
-<h3 id="0x003-lightdm">0x003 lightdm登陆后直接黑屏</h3>
+<h3 id="0x003-lightdm登陆后直接黑屏">0x003 lightdm登陆后直接黑屏</h3>
 <p>在进入lightdm-greeter登录界面时，当输入密码后直接被返回到黑色类似tty的界面，并且有nm-dispatcher之类的log。</p>
 <p>这个问题我当时是如何解决的呢？因为当时没有连接网络的时候是正常进入i3桌面，所以我重新试了两次，果然。遂去官方文档查询NetworkManager相关问题与文档。</p>
 <p><strong>Solution:</strong></p>
@@ -177,28 +177,28 @@ https://download.fcitx-im.org/data/py_table-20121124.tar.gz -&gt; fcitx-data-py_
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
         <span>标签:</span>
         <li><a class="link" href="/tags/Linux"> #Linux </a></li>
-        
-        <span>  </span>
+      
+      <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Linux"> #Linux </a></li>
-        
-    </ul>
-    
-    <br>
+      
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -215,10 +215,12 @@ https://download.fcitx-im.org/data/py_table-20121124.tar.gz -&gt; fcitx-data-py_
 
 
 
+    
 
 
 
 </body>
+
 
 
 

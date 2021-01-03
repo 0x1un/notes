@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>chromedp针对某些网页截图重叠问题</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>chromedp针对某些网页截图重叠问题</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -99,12 +99,12 @@ function actualResizeHandler() {
   
 <div class="blog-post">
   <h2>chromedp针对某些网页截图重叠问题</h2>
-        <h3 id="heading">因</h3>
+        <h3 id="因">因</h3>
 <p>业务上有个小需求，那就是定时网络巡检（zabbix），于是使用go手撸一个自动截图并上传图床的小程序。</p>
 <p>编写很顺利，大概用了三个小时，其中两个小时是为了熟悉golang的浏览器操作库chromedp。说实在的这个库支持的很丰富，功能非常全面。</p>
 <p>因为临近双十一，在当天会以大概30分钟为步长进行网络巡检。要巡检的网络又包括了深信服，而深信服的action在添加进去后运行良好，当我要以headless模式正要部署时发现深信服的截图会有元素重叠的现象。</p>
 <p>所有的图标，文字都挤在了一坨。</p>
-<h3 id="heading-1">排查</h3>
+<h3 id="排查">排查</h3>
 <p>因为之前一直都是非headless模式运行的，浏览器的窗口每次都会以我屏幕最大的水平打开，所以元素的重叠是不会发生的。</p>
 <p>在截图函数中(FullScreenShot)函数中，打印了当前窗口内容宽度与高度，针对于深信服的web页面，会呈现800×600的大小。非常无奈，深信服的前端做的是真的垃圾，自适应都没有。正因为800×600的大小，所有的元素都挤在一起。显然我需要固定打开浏览器的窗口大小，按照一般市面上的显示器1366×768应该算是标准。</p>
 <p>在options中添加WindowSize覆盖默认浏览器打开大小：</p>
@@ -112,7 +112,7 @@ function actualResizeHandler() {
 		chromedp.<span style="color:#50fa7b">Flag</span>(<span style="color:#f1fa8c">&#34;disable-gpu&#34;</span>, <span style="color:#ff79c6">true</span>),
 		chromedp.<span style="color:#50fa7b">Flag</span>(<span style="color:#f1fa8c">&#34;mute-audio&#34;</span>, <span style="color:#ff79c6">false</span>),
 		chromedp.<span style="color:#50fa7b">Flag</span>(<span style="color:#f1fa8c">&#34;ignore-certificate-errors&#34;</span>, <span style="color:#ff79c6">true</span>),
-		chromedp.<span style="color:#50fa7b">UserAgent</span>(<span style="color:#f1fa8c">`</span><span style="color:#f1fa8c">Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36</span><span style="color:#f1fa8c">`</span>),
+		chromedp.<span style="color:#50fa7b">UserAgent</span>(<span style="color:#f1fa8c">`Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36`</span>),
 		chromedp.<span style="color:#50fa7b">WindowSize</span>(<span style="color:#bd93f9">1366</span>, <span style="color:#bd93f9">768</span>), <span style="color:#6272a4">// 覆盖WindowSize
 </span><span style="color:#6272a4"></span>	}
 </code></pre></div><p>这个问题出现的原因非常简单，但对于此框架的不熟悉造成在这个怪圈中困了一个小时。我太菜了&hellip;</p>
@@ -133,28 +133,28 @@ function actualResizeHandler() {
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
         <span>标签:</span>
         <li><a class="link" href="/tags/golang"> #golang </a></li>
-        
-        <span>  </span>
+      
+      <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Golang"> #Golang </a></li>
-        
-    </ul>
-    
-    <br>
+      
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -171,10 +171,12 @@ function actualResizeHandler() {
 
 
 
+    
 
 
 
 </body>
+
 
 
 

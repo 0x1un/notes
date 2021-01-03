@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>从零开始搭建Docker</title>
+
+    
+
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                anchors.options = {
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
+                };
+            anchors.add();
+            })
+        </script>
+        
+        
+
+        
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
+
+            
+        
+
+
+        
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>从零开始搭建Docker</h2>
+        <blockquote>
+<p>这是一篇没有技术含量的文章&hellip;</p>
+</blockquote>
+<h3 id="前言">前言</h3>
+<p>这篇教程呢是给一些想入门学习容器的人准备的，因为有部分同事想要学习一下<code>docker</code>，避免他们少走些弯路浪费时间，我就在这写一下安装过程吧，非常简单，没啥技术含量。</p>
+<h3 id="环境准备">环境准备</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /etc/redhat-release</span>
+CentOS Linux release 7.7.1908 <span style="color:#ff79c6">(</span>Core<span style="color:#ff79c6">)</span>
+</code></pre></div><p>我这里使用的环境还是<code>CentOS 7</code>，大家使用其他发行版也没关系，最大的差异在本文中无非就是包管理的使用。</p>
+<p>因为大家都懂的原因，我们需要添加yum的阿里软件源（直接复制下面的指令即可）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+
+curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</code></pre></div><p>更新一下软件缓存：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum clean all <span style="color:#ff79c6">&amp;&amp;</span> yum makecahce <span style="color:#ff79c6">&amp;&amp;</span> yum update -y
+</code></pre></div><p>移除一些旧的组件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum remove docker* -y
+</code></pre></div><p>安装docker社区版</p>
+<ul>
+<li>如果你要指定安装版本，替换成<code>docker-ce-[version]</code>这种即可</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install docker-ce docker-ce-cli containerd.io -y
+</code></pre></div><p>启动服务</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl <span style="color:#8be9fd;font-style:italic">enable</span> --now docker
+</code></pre></div><p>如果你要修改docker拉取镜像的源：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># vim /etc/docker/daemon.json</span>
+粘贴内容如下，列表中可以填写多个源:
+<span style="color:#ff79c6">{</span>
+    <span style="color:#f1fa8c">&#34;registry-mirrors&#34;</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;https://registry.docker-cn.com&#34;</span><span style="color:#ff79c6">]</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>修改源之后，需要重新加载配置。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart docker <span style="color:#ff79c6">&amp;&amp;</span> docker info
+</code></pre></div><p>最后，正常输出应该类似这下面</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Client:
+ Debug Mode: <span style="color:#8be9fd;font-style:italic">false</span>
+
+Server:
+ Containers: <span style="color:#bd93f9">42</span>
+  Running: <span style="color:#bd93f9">5</span>
+  Paused: <span style="color:#bd93f9">0</span>
+  Stopped: <span style="color:#bd93f9">37</span>
+ Images: <span style="color:#bd93f9">11</span>
+ Server Version: 19.03.8
+ Storage Driver: overlay2
+  Backing Filesystem: &lt;unknown&gt;
+  Supports d_type: <span style="color:#8be9fd;font-style:italic">true</span>
+  Native Overlay Diff: <span style="color:#8be9fd;font-style:italic">true</span>
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Plugins:
+  Volume: <span style="color:#8be9fd;font-style:italic">local</span>
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span style="color:#8be9fd;font-style:italic">local</span> logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc version: dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ init version: fec3683
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: 3.10.0-1062.el7.x86_64
+ Operating System: CentOS Linux <span style="color:#bd93f9">7</span> <span style="color:#ff79c6">(</span>Core<span style="color:#ff79c6">)</span>
+ OSType: linux
+ Architecture: x86_64
+ CPUs: <span style="color:#bd93f9">2</span>
+ Total Memory: 3.701GiB
+ Name: k8s-master
+ ID: ZURK:6ITC:2HUC:FBPE:4NJM:SBTK:63WZ:4U3W:2W6R:EUQS:YSSG:ZAMK
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span style="color:#8be9fd;font-style:italic">false</span>
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: <span style="color:#8be9fd;font-style:italic">false</span>
+ Insecure Registries:
+  127.0.0.0/8
+ Registry Mirrors:
+  https://registry.docker-cn.com/
+ Live Restore Enabled: <span style="color:#8be9fd;font-style:italic">false</span>
+</code></pre></div><p>就这么简单，接下来就开始尽情的玩耍吧。</p>
+
+  </div>
+
+<br>
+  
+
+
+<br>
+
+
+
+<script src="/js/copyCode.js"></script>
+<script src="/js/tooltips.js"></script>
+
+
+<footer>
+    <p style="float:right;margin:0 1rem;">
+	
+		&copy; 2021 </a>
+        
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
+      <span>  </span>
+        
+  </ul>
+  
+  <br>
+
+
+</footer>
+</div> 
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.js"></script>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>
+

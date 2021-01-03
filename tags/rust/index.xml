@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rust on 老实人</title>
+    <title>Rust on 0xNote</title>
     <link>/tags/rust/</link>
-    <description>Recent content in Rust on 老实人</description>
+    <description>Recent content in Rust on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 04 May 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/rust/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 04 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rust之Trait-Object笔记</title>
       <link>/2019/05/04/rust_trait-object/</link>
@@ -34,7 +30,7 @@ static_dispatch是为泛型T做了类型的限定, 只有实现了Bar这个trait
  原始标识符 有时出于某种原因你可能需要将关键字作为名称。比如你需要调用 C 语言库中名为 match 的函数，在 C 语言中 match 不是关键字。为此你可以使用 “原始标识符”（“raw identifier”）。原始标识符以 r# 开头：
 let r#fn = &amp;#34;the variable is named &amp;lt;fn&amp;gt;, even though that&amp;#39;s a keyword&amp;#34;; // 使用r#可以让关键字变成一个普通的变量名称 // 但没有必要这样做, 可能会带来不必要的麻烦 变量的可变性 变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 例如
-fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; //创建变量x为一个可变变量并初始化值为5 x = 6; //这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
+fn main() { let x = 5; println!(&amp;#34;the value of x is: {}&amp;#34;, x); x = 6; println!(&amp;#34;the value of x is: {}&amp;#34;, x); } // 这段代码并不会被成功编译, 因为默认的变量是不可改变的, 如果需要使用可变的变量需要在创建变量的时候使用mut关键字 /** let mut x = 5; // 创建变量x为一个可变变量并初始化值为5 x = 6; // 这才是正确的创建可变变量方法 */ 常量 如上所述, 这样的特性你可能会想到常量, 因为常量就是不可变的.</description>
     </item>
     
   </channel>

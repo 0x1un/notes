@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>数据类型 on 老实人</title>
+    <title>数据类型 on 0xNote</title>
     <link>/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-    <description>Recent content in 数据类型 on 老实人</description>
+    <description>Recent content in 数据类型 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 10 Sep 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python-set数据类型</title>
       <link>/2018/09/10/set_collection/</link>
@@ -33,7 +29,7 @@ myset.defference(another_set) 等同于 myset - another_set 返回一个新值
       
       <guid>/2018/08/26/basic_datatype_time_complex/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;lsquo;n&#39;是容器中当前的元素数， &amp;lsquo;k&#39;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
+ list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;lsquo;n&amp;rsquo;是容器中当前的元素数， &amp;lsquo;k&amp;rsquo;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
     </item>
     
   </channel>

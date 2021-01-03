@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on 老实人</title>
+    <title>Linux on 0xNote</title>
     <link>/categories/linux/</link>
-    <description>Recent content in Linux on 老实人</description>
+    <description>Recent content in Linux on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux各种疑难问题</title>
       <link>/2020/01/08/linux_problem/</link>
@@ -32,7 +28,7 @@ I instance.cpp:903] Override Enabled Addons: {} I instance.cpp:904] Override Dis
 iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
 --src-range是源地址的范围, --dst-range是目标地址的范围
 同样, --src-range和--dst-range可以使用取反(!)操作
-string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;rdquo;, 就对此报文进行进一步的操作
+string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;quot;, 就对此报文进行进一步的操作
 iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;quot;hello, world&amp;quot;这个字符串, 就将其拒绝
 --algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
 time扩展模块 time模块可以对特定时间段的报文进行处理

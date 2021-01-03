@@ -1,96 +1,96 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="content-language" content="zh-CN" />
-        
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        
-        
-        <title>golang的错误处理与资源管理</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="zh-CN" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>golang的错误处理与资源管理</title>
 
-        
+    
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 anchors.options = {
-                    visible: 'hover',
-                    placement: 'left',
-                    icon: "¶"
+                visible: 'hover',
+                placement: 'left',
+                icon: "¶"
                 };
-                anchors.add();
+            anchors.add();
             })
         </script>
-
-        
-
-        
-        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
-        <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
-
-        
-        
-
-
         
         
 
         
-        
-        <link rel="stylesheet" href="/css/main.css">
-        
-
-        
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-        
-
-
-
-        <script>hljs.initHighlightingOnLoad();</script>
-
-        
-
-    </head>
-
-
-    <body>
-        <script>
-            window.addEventListener("resize", resizeThrottler, false);
-
-var resizeTimeout;
-function resizeThrottler() {
-    
-    if ( !resizeTimeout ) {
-        resizeTimeout = setTimeout(function() {
-            resizeTimeout = null;
-            actualResizeHandler();
+            <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+            <link href="https://clipboardjs.com/bower_components/primer-css/css/primer.css" rel="stylesheet">
 
             
-        }, 66);
-    }
-}
-actualResizeHandler()
-function actualResizeHandler() {
-    if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
-    {
-        document.body.classList.add('mobile');
-    }else{
-        document.body.classList.remove('mobile');  
-    }
-}</script>
-
-        
         
 
 
         
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/main.css">
+        
+
+        
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+    }</script>
+
+    
+    
+
+
+    
 
 
 <div class="inner" style="position:relative;">
@@ -102,7 +102,7 @@ function actualResizeHandler() {
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="defer">defer的使用</h3>
+<h3 id="defer的使用">defer的使用</h3>
 <p>defer的作用是在函数return之前调用, 我们之后一般会在进行以下操作时会使用它</p>
 <ul>
 <li>Open/Close</li>
@@ -156,7 +156,7 @@ output:
 <li>参数在defer语句时计算</li>
 <li>defer列表先进后出(堆栈)</li>
 </ul>
-<h3 id="heading">错误处理</h3>
+<h3 id="错误处理">错误处理</h3>
 <p>错误处理是在任何编程语言中都有的, 且是编程当中非常重要的概念, 我们常常编写程序会对它进行错误预判处理, 保证它出错的时候不被挂掉, 或者让报错信息更加清晰方便于调试</p>
 <p>这里对上一个示例代码进行错误处理, 只贴关键部分</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">writeFile</span>(filename <span style="color:#8be9fd">string</span>) {
@@ -216,7 +216,7 @@ fmt.<span style="color:#50fa7b">Println</span>(reflect.<span style="color:#50fa7
 </code></pre></div><p>上面这段代码说明了recover在defer中调用, 它获取了panic的值, 如果没有panic值能获取, 他将会重新panic一个空的, 这里的自定义panic它不会立马抛出, 遇到了recover之后&gt;他将会暂时停在那儿, 等待函数快要结束的时候被defer中的recover接收, 并被recover进一步处理.</p>
 <p>我们将第10行代码注释掉, 添加第11的代码, 这个panic毫无意义, 它并没有被定义到系统自带的error中, recover那段逻辑判断将无法处理, 直接重新抛出如下图结果<br>
 <img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/recoverPanic.png" alt="recoverPanic"></p>
-<h3 id="heading-1">服务器错误处理案例一</h3>
+<h3 id="服务器错误处理案例一">服务器错误处理案例一</h3>
 <p>我们经常在打开网站的时候遇到404, 500, 502, 302之类的报错代码, 这是怎么处理的呢, 下面示例将演示一个简单服务器错误处理方式</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 逻辑部分, 如果有错误就将错误抛出, 函数返回一个error类型, 等待errWrapper接收处理
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Server</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>{
@@ -265,7 +265,7 @@ fmt.<span style="color:#50fa7b">Println</span>(reflect.<span style="color:#50fa7
 		<span style="color:#8be9fd;font-style:italic">panic</span>(err)
 	}
 }
-</code></pre></div><h3 id="heading-2">服务器错误处理案例二</h3>
+</code></pre></div><h3 id="服务器错误处理案例二">服务器错误处理案例二</h3>
 <p>在之前的案例一当中, 简单编写了一个文件显示的服务, 他可以捕获文件不存在, 权限, 服务器等错误, 而且它只能在 localhost:8888/list/ 下面访问文件, 如果不在list下面它将会报一个很难看的错误, 接下来就对它进行进一步的优化.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// Error-wrapper-handling, received error values from file-web-server
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> appHandler <span style="color:#8be9fd;font-style:italic">func</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>
@@ -366,28 +366,28 @@ fmt.<span style="color:#50fa7b">Println</span>(reflect.<span style="color:#50fa7
 
 <footer>
     <p style="float:right;margin:0 1rem;">
-    
-    &copy; 2020 </a>
-    
-    </p>
-    <hr>
-    <hr>
-
-    
-
-    <ul class="tags"  style="float: left!important;">
+	
+		&copy; 2021 </a>
         
+      </p>
+  <hr>
+  <hr>
+
+  
+
+  <ul class="tags"  style="float: left!important;">
+      
         <span>标签:</span>
         <li><a class="link" href="/tags/go"> #go </a></li>
-        
-        <span>  </span>
+      
+      <span>  </span>
         
         <span>分类:</span>
         <li><a class="link" href="/categories/Code"> #Code </a></li>
-        
-    </ul>
-    
-    <br>
+      
+  </ul>
+  
+  <br>
 
 
 </footer>
@@ -404,10 +404,12 @@ fmt.<span style="color:#50fa7b">Println</span>(reflect.<span style="color:#50fa7
 
 
 
+    
 
 
 
 </body>
+
 
 
 

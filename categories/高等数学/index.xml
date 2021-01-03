@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>高等数学 on 老实人</title>
+    <title>高等数学 on 0xNote</title>
     <link>/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</link>
-    <description>Recent content in 高等数学 on 老实人</description>
+    <description>Recent content in 高等数学 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于向量代数的一些笔记</title>
       <link>/2018/09/29/math_vector/</link>

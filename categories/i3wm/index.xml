@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>i3WM on 老实人</title>
+    <title>i3WM on 0xNote</title>
     <link>/categories/i3wm/</link>
-    <description>Recent content in i3WM on 老实人</description>
+    <description>Recent content in i3WM on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/i3wm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/i3wm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在终端中配置使用音乐播放器</title>
       <link>/2019/04/05/ncmpcpp/</link>
