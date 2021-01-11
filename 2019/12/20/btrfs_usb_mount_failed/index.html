@@ -99,16 +99,21 @@
   
 <div class="blog-post">
   <h2>btrfs USB无法挂载</h2>
-        <p>平台:</p>
-<ul>
-<li>ArchLinux - 5.1.15-arch1-1-ARCH</li>
-</ul>
+        <p>平台:
+- ArchLinux - 5.1.15-arch1-1-ARCH</p>
+
 <p>具体报错:</p>
+
 <pre><code>mount: /mnt: mount(2) system call failed: File exists.
-</code></pre><p>解决:</p>
+</code></pre>
+
+<p>解决:</p>
+
 <pre><code>sudo btrfstune -m /dev/sdc
 sudo mount /dev/sdc /mnt
-</code></pre><p>参考:
+</code></pre>
+
+<p>参考:
 <a href="https://unix.stackexchange.com/questions/537029/error-for-mount-system-call-failed-file-exists">Error for <code>mount</code>: <code>system call failed: File exists.</code></a></p>
 
   </div>

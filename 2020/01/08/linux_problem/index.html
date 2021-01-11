@@ -99,8 +99,12 @@
   
 <div class="blog-post">
   <h2>Linux各种疑难问题</h2>
-        <h3 id="0x001-fcitx5输入法无法启东">0x001 fcitx5输入法无法启东</h3>
+        
+
+<h3 id="0x001-fcitx5输入法无法启东">0x001 fcitx5输入法无法启东</h3>
+
 <p>其报错如下:</p>
+
 <pre><code>I instance.cpp:903] Override Enabled Addons: {}
 I instance.cpp:904] Override Disabled Addons: {}
 I addonmanager.cpp:177] Loaded addon xcb
@@ -130,16 +134,21 @@ fcitx5(+0xb265)[0x5605579bf265]
 fcitx5(+0x9d3a)[0x5605579bdd3a]
 /lib64/libc.so.6(__libc_start_main+0xeb)[0x7efdfca4ce9b]
 fcitx5(+0xa42a)[0x5605579be42a]
-</code></pre><p><strong>Solution:</strong></p>
-<pre><code class="language-shell=zsh" data-lang="shell=zsh">export GTK_IM_MODULE=fcitx5
+</code></pre>
+
+<p><strong>Solution:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell=zsh" data-lang="shell=zsh">export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
-eval $(dbus-launch --auto-syntax)
-</code></pre><h3 id="0x002-fcitx5-chinese-addons无法编译">0x002 fcitx5-chinese-addons无法编译</h3>
+eval $(dbus-launch --auto-syntax)</code></pre></div>
+<h3 id="0x002-fcitx5-chinese-addons无法编译">0x002 fcitx5-chinese-addons无法编译</h3>
+
 <p>无法编译的原因有很多种，我这边使用的overlay gentoo-zh，其中的标准版本无论无怎么编译都不会成功，看日志会查到一个<code>wordView</code>无法调用，原因为不存在。这种情况一般是依赖没有安装完整，但我确认我是安装完整的。（通过手动clone官方仓库编译，顺利成功）</p>
+
 <p><strong>Solution:</strong>
 手动安装，或者修改gentoo-zh中的ebuild文件。
 第一种办法我就不再过多赘述了，说说第二种吧。一般gentoo中的ebuild文件名字部分后缀为<code>999999999</code>的都是拉取官方仓库，但我手动编译这个ebuild显示缺少依赖。因为是gentoo新用户，对于ebuild file还是不甚了解，索性将其中的稳定版本的三行代码给注释，让其拉去官方最新分支:</p>
+
 <pre><code>EAPI=&quot;6&quot;
 
 inherit cmake-utils gnome2-utils xdg-utils git-r3
@@ -152,13 +161,22 @@ EGIT_REPO_URI=&quot;https://github.com/fcitx/fcitx5-chinese-addons.git&quot;
 SRC_URI=&quot;https://download.fcitx-im.org/data/py_stroke-20121124.tar.gz -&gt; fcitx-data-py_stroke-20121124.tar.gz
 https://download.fcitx-im.org/data/py_table-20121124.tar.gz -&gt; fcitx-data-py_table-20121124.tar.gz
 &quot;
-</code></pre><p>以<code>#</code>包裹的部分为需要注释的，然后解决！应该是<code>999999999</code>版本的ebuild中依赖没有填写准确，而稳定版本中拉取的那个<code>commit</code>与相关的依赖又不兼容造成的。</p>
+</code></pre>
+
+<p>以<code>#</code>包裹的部分为需要注释的，然后解决！应该是<code>999999999</code>版本的ebuild中依赖没有填写准确，而稳定版本中拉取的那个<code>commit</code>与相关的依赖又不兼容造成的。</p>
+
 <h3 id="0x003-lightdm登陆后直接黑屏">0x003 lightdm登陆后直接黑屏</h3>
+
 <p>在进入lightdm-greeter登录界面时，当输入密码后直接被返回到黑色类似tty的界面，并且有nm-dispatcher之类的log。</p>
+
 <p>这个问题我当时是如何解决的呢？因为当时没有连接网络的时候是正常进入i3桌面，所以我重新试了两次，果然。遂去官方文档查询NetworkManager相关问题与文档。</p>
+
 <p><strong>Solution:</strong></p>
+
 <p>在<code>/etc/conf.d/hostname</code>中修改主机名，至于为什么，请访问以下链接</p>
+
 <p><a href="https://wiki.gentoo.org/wiki/NetworkManager">NetworkManager of Gentoo</a></p>
+
 <p>重新启动即可!</p>
 
   </div>

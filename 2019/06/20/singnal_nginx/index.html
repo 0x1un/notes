@@ -99,40 +99,50 @@
   
 <div class="blog-post">
   <h2>nginx信号与热升级</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h4 id="nginx-信号">nginx 信号</h4>
+
 <p>nginx -s [reopen, reload, stop, quit]与之对应的信号如下</p>
+
 <pre><code>reopen =&gt; USR1 重新打开日志文件
 reload =&gt; HUP 重载配置文件
 stop =&gt; TERM / INT 立即停止nginx
 quit =&gt; QUIT 温柔优雅地停止nginx
 WINCH 优雅地关闭相应的worker进程
 USR2 热升级nginx程序
-</code></pre><p>所谓的热升级, 便是在不影响程序运行的状态下对其进行升级</p>
+</code></pre>
+
+<p>所谓的热升级, 便是在不影响程序运行的状态下对其进行升级</p>
+
 <p>使用kill命令发送信号到特定pid</p>
+
 <pre><code>kill -INT 12345
-</code></pre><p>这段命令目的为终止12345这个进程</p>
+</code></pre>
+
+<p>这段命令目的为终止12345这个进程</p>
+
 <h4 id="热升级">热升级</h4>
+
 <ul>
-<li>
-<p>再做热升级的时候, 最重要的一步自然是备份</p>
-</li>
-<li>
-<p>编译nginx得到其二进制文件</p>
-</li>
-<li>
-<p>替换旧的nginx为新编译的nginx二进制文件</p>
-</li>
-<li>
-<p>替换内存当中运行的nginx程序
+<li>再做热升级的时候, 最重要的一步自然是备份</li>
+<li>编译nginx得到其二进制文件</li>
+<li>替换旧的nginx为新编译的nginx二进制文件</li>
+
+<li><p>替换内存当中运行的nginx程序
 在上面已经说了USR2是热升级nginx的信号, 自然是要使用该信号</p>
+
 <p>对正在运行的nginxMasterPid发送USR2, 在旧版本的master进程收到后, 会通过前面已经替换的新nginx二进制文件进行启动</p>
+
 <p>而此时新旧两版本却同时存在于内存当中, 需要使用WINCH信号停止旧版worker进程, 而旧master却还存在着</p>
-<p>这是为了防止在热升级的时候出现问题, 以便随时回滚到原来, 使用HUP信号即可重新生成worker进程</p>
-</li>
+
+<p>这是为了防止在热升级的时候出现问题, 以便随时回滚到原来, 使用HUP信号即可重新生成worker进程</p></li>
 </ul>
+
 <p>continue&hellip;</p>
 
   </div>

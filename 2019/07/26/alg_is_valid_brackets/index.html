@@ -102,9 +102,13 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<p>这里是原题的链接https://leetcode-cn.com/problems/valid-parentheses/submissions/</p>
+
+<p>这里是原题的链接<a href="https://leetcode-cn.com/problems/valid-parentheses/submissions/">https://leetcode-cn.com/problems/valid-parentheses/submissions/</a></p>
+
 <p>这道题我有两种解法, 第一是用删除法, 当最后字符串中还有字符代表着里面的括号不配对</p>
+
 <p>第二是用栈的方法, 两者都比较优雅, 使用rust实现</p>
+
 <p>方式一:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Solution</span>;
 
@@ -117,8 +121,8 @@
             s <span style="color:#ff79c6">=</span> s.replace(<span style="color:#f1fa8c">&#34;()&#34;</span>, <span style="color:#f1fa8c">&#34;&#34;</span>);
         }
         <span style="color:#ff79c6">return</span> s <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;&#34;</span>;
-    }
-</code></pre></div><p>方式二:</p>
+    }</code></pre></div>
+<p>方式二:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Solution</span>;
 
 <span style="color:#ff79c6">impl</span> Solution {
@@ -151,8 +155,7 @@
         stack.is_empty()
 
     }
-}
-</code></pre></div>
+}</code></pre></div>
   </div>
 
 <br>

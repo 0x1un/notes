@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>趟坑 on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in 趟坑 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 24 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E8%B6%9F%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E8%B6%9F%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Django初入趟坑</title>
       <link>/2018/11/24/django_pit/</link>
@@ -14,12 +18,10 @@
       
       <guid>/2018/11/24/django_pit/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 起因 因为宅在家无聊, 想起了Python技术栈里还有个很重要的框架没有学习, 那就是Django, 我发现它并不是那么的简单, 其中的过程非常难受, 在我学习开始使用它的时候就趟过以下的坑(其中的有些坑真的让我很迷), 寥寥数语, 记录我逝去的8个小时.
-将app注册到了settings, 但是生成数据表仍然提示无法找到app No module nomed &#39;***&#39; 在Pycharm当中因为设置过Source root, 所以Idea运行是没有问题的, 当使用命令行运行时就会报此错误. 这是因为python的搜索路径中没有它, 需要将这个地址加入到python搜索路径 在settings文件中添加
-import os, sys curPath = os.path.abspath(os.path.dirname(__file__)) rootPath = os.path.split(curPath)[0] sys.path.append(rootPath) 运行报错 django.core.exceptions.AppRegistryNotReady: Apps aren&#39;t loaded yet. 原因是根目录下manage.py中包含没有使用的包(这又不是go, 为什么会这样, 反正去掉就没事了, 很玄学)
-导包的坑 RuntimeError: Model class apps.message.models.UserMessage doesn&#39;t declare an explicit app_label and isn&#39;t in an application in INSTALLED_APPS. 原因有可能是使用以下相对路劲导入包时发生
-from .models import * 需要指定明确的app中的models
-from appname.models import * 检查setting中app注册的方式, 需要使用如下方式</description>
+ 起因 因为宅在家无聊, 想起了Python技术栈里还有个很重要的框架没有学习, 那就是Django, 我发现它并不是那么的简单, 其中的过程非常难受, 在我学习开始使用它的时候就趟过以下的坑(其中的有些坑真的让我很迷), 寥寥数语, 记录我逝去的8个小时. 将app注册到了settings, 但是生成数据表仍然提示无法找到app No module nomed &#39;***&#39;  在Pycharm当中因为设置过Source root, 所以Idea运行是没有问题的, 当使用命令行运行时就会报此错误. 这是因为python的搜索路径中没有它, 需要将这个地址加入到python搜索路径 在settings文件中添加
+import os, sys curPath = os.path.abspath(os.path.dirname(__file__)) rootPath = os.path.split(curPath)[0] sys.path.append(rootPath) 运行报错 django.core.exceptions.AppRegistryNotReady: Apps aren&#39;t loaded yet.  原因是根目录下manage.py中包含没有使用的包(这又不是go, 为什么会这样, 反正去掉就没事了, 很玄学)
+导包的坑 RuntimeError: Model class apps.message.models.UserMessage doesn&#39;t declare an explicit app_label and isn&#39;t in an application in INSTALLED_APPS.  原因有可能是使用以下相对路劲导入包时发生
+from .models import * 需要指定明确的app中的models</description>
     </item>
     
   </channel>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Esxi on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in Esxi on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/esxi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/esxi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>踩坑之Esxi虚拟服务器无法联网</title>
       <link>/2019/08/13/esxi_network_not_working/</link>
@@ -18,8 +22,8 @@
  这是一篇没有技术含量的文章&amp;hellip;
  虚拟机无法联网? 这个倒也不算一个坑, 只能归结于我自己不熟悉esxi平台吧, 但它浪费了我将近40分钟的时间, 特在此记录一下
 首先在CentOS中查看到它的网卡没有获取到ip地址, 这时我以迅雷不及掩耳之势 熟练地敲下了
-ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network 然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
-ifdown ens192 ifup ens192 嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
+ip link set down ens192 &amp;amp;&amp;amp; ip link set up ens192 systemctl restart network  然并卵&amp;hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡
+ifdown ens192 ifup ens192  嗯&amp;hellip;中间没有任何异常, 通过ip addr也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了ping网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.
 解决办法:
 在esxi控制台中的networking栏为虚拟网卡链接到物理网卡, 问题解决&amp;hellip;
 总结 这个问题说难那是一点都不难, 但往往很容易忽略, 这时候便需要你停下来静心思考, 这个坑的主要原因还是因为对该控制台不熟悉造成的, 这也是一个小经验吧, 以后不会再犯了&amp;hellip;</description>

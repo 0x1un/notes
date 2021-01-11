@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>golang on 0xNote</title>
+    <title>Golang on 0xNote</title>
     <link>/tags/golang/</link>
-    <description>Recent content in golang on 0xNote</description>
+    <description>Recent content in Golang on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>chromedp针对某些网页截图重叠问题</title>
       <link>/2019/11/07/chromedp_screenshot_overlapping/</link>
@@ -20,7 +24,7 @@
 排查 因为之前一直都是非headless模式运行的，浏览器的窗口每次都会以我屏幕最大的水平打开，所以元素的重叠是不会发生的。
 在截图函数中(FullScreenShot)函数中，打印了当前窗口内容宽度与高度，针对于深信服的web页面，会呈现800×600的大小。非常无奈，深信服的前端做的是真的垃圾，自适应都没有。正因为800×600的大小，所有的元素都挤在一起。显然我需要固定打开浏览器的窗口大小，按照一般市面上的显示器1366×768应该算是标准。
 在options中添加WindowSize覆盖默认浏览器打开大小：
-options = []chromedp.ExecAllocatorOption{ chromedp.Flag(&amp;#34;disable-gpu&amp;#34;, true), chromedp.Flag(&amp;#34;mute-audio&amp;#34;, false), chromedp.Flag(&amp;#34;ignore-certificate-errors&amp;#34;, true), chromedp.UserAgent(`Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36`), chromedp.WindowSize(1366, 768), // 覆盖WindowSize 	} 这个问题出现的原因非常简单，但对于此框架的不熟悉造成在这个怪圈中困了一个小时。我太菜了&amp;hellip;</description>
+options = []chromedp.ExecAllocatorOption{ chromedp.Flag(&amp;#34;disable-gpu&amp;#34;, true), chromedp.Flag(&amp;#34;mute-audio&amp;#34;, false), chromedp.Flag(&amp;#34;ignore-certificate-errors&amp;#34;, true), chromedp.UserAgent(`Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36`), chromedp.WindowSize(1366, 768), // 覆盖WindowSize  } 这个问题出现的原因非常简单，但对于此框架的不熟悉造成在这个怪圈中困了一个小时。我太菜了&amp;hellip;</description>
     </item>
     
   </channel>

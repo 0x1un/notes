@@ -99,59 +99,70 @@
   
 <div class="blog-post">
   <h2>哈夫曼树与编码的一些笔记</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h2 id="数据压缩----哈夫曼huffman">数据压缩 &ndash; 哈夫曼（Huffman）</h2>
+
+<h2 id="数据压缩-哈夫曼-huffman">数据压缩 &ndash; 哈夫曼（Huffman）</h2>
+
 <h3 id="关于哈夫曼编码与哈夫曼树的一点简述">关于哈夫曼编码与哈夫曼树的一点简述</h3>
+
 <p>哈弗曼树也叫作赫夫曼树，也叫作霍夫曼树，都指的是同一个玩意儿.
 首先说哈夫曼树吧，哈夫曼树是一种特殊的二叉树，它设计的二进制前缀的编码在通信领域有着广泛的应用。
-哈夫曼编码可以极大的节省数据占用的空间，且压缩的效果是无损压缩，根据数据类型的不同，压缩率也将不同。</p>
-<!-- raw HTML omitted -->
-<h3 id="哈夫曼树huffman-tree的构建步骤">哈夫曼树(Huffman Tree)的构建步骤</h3>
+哈夫曼编码可以极大的节省数据占用的空间，且压缩的效果是无损压缩，根据数据类型的不同，压缩率也将不同。
+<!-- more --></p>
+
+<h3 id="哈夫曼树-huffman-tree-的构建步骤">哈夫曼树(Huffman Tree)的构建步骤</h3>
+
 <ul>
-<li>将给定的n个权值看做n棵只有根节点（无左右孩子）的二叉树，组成一个集合HT，每棵树的权值为该节点的权值。</li>
-<li>从集合HT中选出2棵权值最小的二叉树，组成一棵新的二叉树，其权值为这2棵二叉树的权值之和。</li>
-<li>将步骤2中选出的2棵二叉树从集合HT中删去，同时将步骤2中新得到的二叉树加入到集合HT中。</li>
-<li>重复步骤2和步骤3，直到集合HT中只含一棵树，这棵树便是赫夫曼树。</li>
+<li>将给定的n个权值看做n棵只有根节点（无左右孩子）的二叉树，组成一个集合HT，每棵树的权值为该节点的权值。<br /></li>
+<li>从集合HT中选出2棵权值最小的二叉树，组成一棵新的二叉树，其权值为这2棵二叉树的权值之和。<br /></li>
+<li>将步骤2中选出的2棵二叉树从集合HT中删去，同时将步骤2中新得到的二叉树加入到集合HT中。<br /></li>
+<li>重复步骤2和步骤3，直到集合HT中只含一棵树，这棵树便是赫夫曼树。<br /></li>
 </ul>
+
 <h3 id="哈夫曼树有以下几种特性">哈夫曼树有以下几种特性</h3>
+
 <ul>
-<li>
-<p>根据节点的个数以及权值的不同，赫夫曼树的形状也各不相同，赫夫曼树具有如下特性：</p>
-</li>
-<li>
-<p>对于同一组权值，所能得到的赫夫曼树不一定是唯一的。</p>
-</li>
-<li>
-<p>哈夫曼树的左右子树可以互换，因为这并不影响树的带权路径长度。</p>
-</li>
-<li>
-<p>带权值的节点都是叶子节点，不带权值的节点都是某棵子二叉树的根节点。</p>
-</li>
-<li>
-<p>权值越大的节点越靠近赫夫曼树的根节点，权值越小的节点越远离赫夫曼树的根节点。</p>
-</li>
-<li>
-<p>哈夫曼树中只有叶子节点和度为2的节点，没有度为1的节点。</p>
-</li>
-<li>
-<p>一棵有n个叶子节点的赫夫曼树共有2n-1个节点。</p>
-</li>
+<li><p>根据节点的个数以及权值的不同，赫夫曼树的形状也各不相同，赫夫曼树具有如下特性：</p></li>
+
+<li><p>对于同一组权值，所能得到的赫夫曼树不一定是唯一的。</p></li>
+
+<li><p>哈夫曼树的左右子树可以互换，因为这并不影响树的带权路径长度。</p></li>
+
+<li><p>带权值的节点都是叶子节点，不带权值的节点都是某棵子二叉树的根节点。</p></li>
+
+<li><p>权值越大的节点越靠近赫夫曼树的根节点，权值越小的节点越远离赫夫曼树的根节点。</p></li>
+
+<li><p>哈夫曼树中只有叶子节点和度为2的节点，没有度为1的节点。</p></li>
+
+<li><p>一棵有n个叶子节点的赫夫曼树共有2n-1个节点。</p></li>
 </ul>
+
 <h3 id="哈夫曼编码">哈夫曼编码</h3>
+
 <p>哈夫曼编码是在哈夫曼树的基础上进行的二进制编码，首先将频率高的放在右边标号为1，频率低的放在左边标号为0，编码原理是根据根节点到子节点经过的距离编码而成，我也不知道该如何表述其原理，具体看下图吧。</p>
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/Alg/Huffman.png" alt="local-port"></p>
+
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/Alg/Huffman.png" alt="local-port" /></p>
+
 <p>首先给定五个字符，而字符旁边的数字代表该字母出现的次数，依据上述的规定条件，我将其集合中最小的两个值放在一起组合成一个二叉树，计算其两个值的和，往复循环。</p>
+
 <p>根据图中所得：</p>
-<pre><code>       X=0
-       E=10
-       V=111
-       A=1100
-       B=1101
-</code></pre><p>哈夫曼编码的效率计算是通过每个权值到根节点经过了多少条线相乘，再加上其他权值与根节点的距离相乘，以此反复直到结束计算出压缩后的大小。</p>
+
+<pre><code>        X=0
+        E=10
+        V=111
+        A=1100
+        B=1101
+</code></pre>
+
+<p>哈夫曼编码的效率计算是通过每个权值到根节点经过了多少条线相乘，再加上其他权值与根节点的距离相乘，以此反复直到结束计算出压缩后的大小。</p>
+
 <p>在通常情况下，霍夫曼编码并不是最高效的压缩方法，但它压缩和解压缩的速度非常快。一般来说，造成霍夫曼编码比较耗时的原因是它需要扫描两次数据：一次用来计算频率，另一次才是用来压缩数据。而解压缩数据非常高效，因为解码每个符号的位序列只需要扫描一次霍夫曼树。</p>
-<h3 id="python代码实现huffman编码网摘">Python代码实现Huffman编码(网摘)</h3>
+
+<h3 id="python代码实现huffman编码-网摘">Python代码实现Huffman编码(网摘)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#ff79c6">import</span> queue
     <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">HuffmanNode</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
         <span style="color:#ff79c6">def</span> __init__(self, left<span style="color:#ff79c6">=</span>None, right<span style="color:#ff79c6">=</span>None, root<span style="color:#ff79c6">=</span>None):
@@ -207,8 +218,9 @@
             <span style="color:#ff79c6">print</span>(i[<span style="color:#bd93f9">1</span>], <span style="color:#f1fa8c">&#39;{:6.2f}&#39;</span><span style="color:#ff79c6">.</span>format(i[<span style="color:#bd93f9">0</span>]), code[i[<span style="color:#bd93f9">1</span>]])
         <span style="color:#ff79c6">except</span> Exception <span style="color:#ff79c6">as</span> e:
             <span style="color:#ff79c6">print</span>(e)
-            <span style="color:#ff79c6">continue</span>    
-</code></pre></div><p>输出结果：</p>
+            <span style="color:#ff79c6">continue</span>    </code></pre></div>
+<p>输出结果：</p>
+
 <pre><code>e  12.70 100
 t   9.06 000
 a   8.17 1110
@@ -236,6 +248,7 @@ x   0.15 001011010
 q   0.10 001011001
 z   0.07 001011000
 </code></pre>
+
 <p>未完待续&hellip;</p>
 
   </div>

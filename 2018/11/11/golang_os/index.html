@@ -99,55 +99,59 @@
   
 <div class="blog-post">
   <h2>golang之文件操作</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="__常用的导出操作函数__"><strong>常用的导出操作函数</strong></h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Hostname</span>() (name <span style="color:#8be9fd">string</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Hostname返回内核提供的主机名
+
+<h3 id="常用的导出操作函数"><strong>常用的导出操作函数</strong></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> Hostname() (name <span style="color:#8be9fd">string</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Hostname返回内核提供的主机名
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Environ</span>() []<span style="color:#8be9fd">string</span> <span style="color:#6272a4">// Environ返回表示环境变量的格式为&#34;key=value&#34;的字符串的切片拷贝
+<span style="color:#8be9fd;font-style:italic">func</span> Environ() []<span style="color:#8be9fd">string</span> <span style="color:#6272a4">// Environ返回表示环境变量的格式为&#34;key=value&#34;的字符串的切片拷贝
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Getenv</span>(key <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">string</span> <span style="color:#6272a4">// Getenv检索并返回名为key的环境变量的值
+<span style="color:#8be9fd;font-style:italic">func</span> Getenv(key <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">string</span> <span style="color:#6272a4">// Getenv检索并返回名为key的环境变量的值
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Getpid</span>() <span style="color:#8be9fd">int</span> <span style="color:#6272a4">// Getpid返回调用者所在进程的进程ID
+<span style="color:#8be9fd;font-style:italic">func</span> Getpid() <span style="color:#8be9fd">int</span> <span style="color:#6272a4">// Getpid返回调用者所在进程的进程ID
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Exit</span>(code <span style="color:#8be9fd">int</span>) <span style="color:#6272a4">// Exit让当前程序以给出的状态码code退出。一般来说，状态码0表示成功，非0表示出错。程序会立刻终止，defer的函数不会被执行
+<span style="color:#8be9fd;font-style:italic">func</span> Exit(code <span style="color:#8be9fd">int</span>) <span style="color:#6272a4">// Exit让当前程序以给出的状态码code退出。一般来说，状态码0表示成功，非0表示出错。程序会立刻终止，defer的函数不会被执行
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Stat</span>(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// 获取文件信息
+<span style="color:#8be9fd;font-style:italic">func</span> Stat(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// 获取文件信息
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Getwd</span>() (dir <span style="color:#8be9fd">string</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Getwd返回一个对应当前工作目录的根路径
+<span style="color:#8be9fd;font-style:italic">func</span> Getwd() (dir <span style="color:#8be9fd">string</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Getwd返回一个对应当前工作目录的根路径
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Mkdir</span>(name <span style="color:#8be9fd">string</span>, perm FileMode) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 使用指定的权限和名称创建一个目录
+<span style="color:#8be9fd;font-style:italic">func</span> Mkdir(name <span style="color:#8be9fd">string</span>, perm FileMode) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 使用指定的权限和名称创建一个目录
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">MkdirAll</span>(path <span style="color:#8be9fd">string</span>, perm FileMode) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 使用指定的权限和名称创建一个目录，包括任何必要的上级目录，并返回nil，否则返回错误
+<span style="color:#8be9fd;font-style:italic">func</span> MkdirAll(path <span style="color:#8be9fd">string</span>, perm FileMode) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 使用指定的权限和名称创建一个目录，包括任何必要的上级目录，并返回nil，否则返回错误
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Remove</span>(name <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 删除name指定的文件或目录
+<span style="color:#8be9fd;font-style:italic">func</span> Remove(name <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// 删除name指定的文件或目录
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TempDir</span>() <span style="color:#8be9fd">string</span> <span style="color:#6272a4">// 返回一个用于保管临时文件的默认目录
+<span style="color:#8be9fd;font-style:italic">func</span> TempDir() <span style="color:#8be9fd">string</span> <span style="color:#6272a4">// 返回一个用于保管临时文件的默认目录
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">var</span> Args []<span style="color:#8be9fd">string</span> Args保管了命令行参数，第一个是程序名。
-</code></pre></div><!-- raw HTML omitted -->
+<span style="color:#8be9fd;font-style:italic">var</span> Args []<span style="color:#8be9fd">string</span> Args保管了命令行参数，第一个是程序名。</code></pre></div>
+<!-- more -->
+
 <h3 id="file结构体">file结构体</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Create</span>(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Create采用模式0666（任何人都可读写，不可执行）创建一个名为name的文件，如果文件已存在会截断它（为空文件）
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> Create(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Create采用模式0666（任何人都可读写，不可执行）创建一个名为name的文件，如果文件已存在会截断它（为空文件）
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Open</span>(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Open打开一个文件用于读取。如果操作成功，返回的文件对象的方法可用于读取数据；对应的文件描述符具有O_RDONLY模式
+<span style="color:#8be9fd;font-style:italic">func</span> Open(name <span style="color:#8be9fd">string</span>) (file <span style="color:#ff79c6">*</span>File, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Open打开一个文件用于读取。如果操作成功，返回的文件对象的方法可用于读取数据；对应的文件描述符具有O_RDONLY模式
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Stat</span>() (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Stat返回描述文件f的FileInfo类型值
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Stat() (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Stat返回描述文件f的FileInfo类型值
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Readdir</span>(n <span style="color:#8be9fd">int</span>) (fi []FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Readdir读取目录f的内容，返回一个有n个成员的[]FileInfo，这些FileInfo是被Lstat返回的，采用目录顺序
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Readdir(n <span style="color:#8be9fd">int</span>) (fi []FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Readdir读取目录f的内容，返回一个有n个成员的[]FileInfo，这些FileInfo是被Lstat返回的，采用目录顺序
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Read</span>(b []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Read方法从f中读取最多len(b)字节数据并写入b
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Read(b []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Read方法从f中读取最多len(b)字节数据并写入b
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">WriteString</span>(s <span style="color:#8be9fd">string</span>) (ret <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// 向文件中写入字符串
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) WriteString(s <span style="color:#8be9fd">string</span>) (ret <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// 向文件中写入字符串
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Sync</span>() (err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Sync递交文件的当前内容进行稳定的存储。一般来说，这表示将文件系统的最近写入的数据在内存中的拷贝刷新到硬盘中稳定保存
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Sync() (err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Sync递交文件的当前内容进行稳定的存储。一般来说，这表示将文件系统的最近写入的数据在内存中的拷贝刷新到硬盘中稳定保存
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Close</span>() <span style="color:#8be9fd">error</span> <span style="color:#6272a4">// Close关闭文件f，使文件不能用于读写
-</span></code></pre></div><h3 id="fileinfo描述文件对象">FileInfo(描述文件对象)</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Stat</span>(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Stat 返回描述文件的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接指向的文件的信息，本函数会尝试跳转该链接
+<span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Close() <span style="color:#8be9fd">error</span> <span style="color:#ff79c6">//</span> Close关闭文件f，使文件不能用于读写</code></pre></div>
+<h3 id="fileinfo-描述文件对象">FileInfo(描述文件对象)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> Stat(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Stat 返回描述文件的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接指向的文件的信息，本函数会尝试跳转该链接
 </span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Lstat</span>(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#6272a4">// Lstat 返回描述文件对象的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接的信息，本函数不会试图跳转该链接。
-</span></code></pre></div><h3 id="文件操作的flag可选值">文件操作的flag可选值</h3>
+<span style="color:#8be9fd;font-style:italic">func</span> Lstat(name <span style="color:#8be9fd">string</span>) (fi FileInfo, err <span style="color:#8be9fd">error</span>) <span style="color:#ff79c6">//</span> Lstat 返回描述文件对象的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接的信息，本函数不会试图跳转该链接。</code></pre></div>
+<h3 id="文件操作的flag可选值">文件操作的flag可选值</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// flag可选值
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">const</span> (
     O_RDONLY <span style="color:#8be9fd">int</span> = syscall.O_RDONLY <span style="color:#6272a4">// open the file read-only.
@@ -158,8 +162,7 @@
 </span><span style="color:#6272a4"></span>    O_EXCL   <span style="color:#8be9fd">int</span> = syscall.O_EXCL   <span style="color:#6272a4">// 与O_CREATE一起用，构成一个新建文件的功能，它要求文件必须不存在
 </span><span style="color:#6272a4"></span>    O_SYNC   <span style="color:#8be9fd">int</span> = syscall.O_SYNC   <span style="color:#6272a4">// 同步方式打开，没有缓存，这样写入内容直接写入硬盘，系统掉电文件内容有一定保证
 </span><span style="color:#6272a4"></span>    O_TRUNC  <span style="color:#8be9fd">int</span> = syscall.O_TRUNC  <span style="color:#6272a4">// 打开并清空文件
-</span><span style="color:#6272a4"></span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// *nix文件权限位
+</span><span style="color:#6272a4"></span>)</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// *nix文件权限位
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">const</span> (
     <span style="color:#6272a4">// The single letters are the abbreviations
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// used by the String method&#39;s formatting.
@@ -180,11 +183,12 @@
 </span><span style="color:#6272a4"></span>    ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice
 
     ModePerm FileMode = <span style="color:#bd93f9">0777</span> <span style="color:#6272a4">// permission bits
-</span><span style="color:#6272a4"></span>)
-</code></pre></div><p>上述可选值是权限位的高有效位，低有效位的值还是要用户自己写数字。</p>
+</span><span style="color:#6272a4"></span>)</code></pre></div>
+<p>上述可选值是权限位的高有效位，低有效位的值还是要用户自己写数字。</p>
+
 <p>文件的写入</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) <span style="color:#50fa7b">Write</span>(b []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>)
-</code></pre></div><h3 id="创建空的文件">创建空的文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> (f <span style="color:#ff79c6">*</span>File) Write(b []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>)</code></pre></div>
+<h3 id="创建空的文件">创建空的文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -194,32 +198,32 @@
     newFile <span style="color:#ff79c6">*</span>os.File
     err     <span style="color:#8be9fd">error</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    newFile, err = os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    newFile, err = os.Create(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Println</span>(newFile)
-    newFile.<span style="color:#50fa7b">Close</span>()
-}
-</code></pre></div><h3 id="truncate文件裁剪文件">Truncate文件(裁剪文件)</h3>
+    log.Println(newFile)
+    newFile.Close()
+}</code></pre></div>
+<h3 id="truncate文件-裁剪文件">Truncate文件(裁剪文件)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 裁剪一个文件到100个字节。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果文件本来就少于100个字节，则文件中原始内容得以保留，剩余的字节以null字节填充。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果文件本来超过100个字节，则超过的字节会被抛弃。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 这样我们总是得到精确的100个字节的文件。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 传入0则会清空文件。
-</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Truncate</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#bd93f9">100</span>)
+</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.Truncate(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#bd93f9">100</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="获取文件的详细信息">获取文件的详细信息</h3>
+}</code></pre></div>
+<h3 id="获取文件的详细信息">获取文件的详细信息</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;fmt&#34;</span>
@@ -230,47 +234,47 @@
     fileInfo os.FileInfo
     err      <span style="color:#8be9fd">error</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 如果文件不存在，则返回错误
-</span><span style="color:#6272a4"></span>    fileInfo, err = os.<span style="color:#50fa7b">Stat</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    fileInfo, err = os.Stat(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;File name:&#34;</span>, fileInfo.<span style="color:#50fa7b">Name</span>())
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Size in bytes:&#34;</span>, fileInfo.<span style="color:#50fa7b">Size</span>())
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Permissions:&#34;</span>, fileInfo.<span style="color:#50fa7b">Mode</span>())
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Last modified:&#34;</span>, fileInfo.<span style="color:#50fa7b">ModTime</span>())
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Is Directory: &#34;</span>, fileInfo.<span style="color:#50fa7b">IsDir</span>())
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;System interface type: %T\n&#34;</span>, fileInfo.<span style="color:#50fa7b">Sys</span>())
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;System info: %+v\n\n&#34;</span>, fileInfo.<span style="color:#50fa7b">Sys</span>())
-}
-</code></pre></div><h3 id="重命名文件与移动文件">重命名文件与移动文件</h3>
+    fmt.Println(<span style="color:#f1fa8c">&#34;File name:&#34;</span>, fileInfo.Name())
+    fmt.Println(<span style="color:#f1fa8c">&#34;Size in bytes:&#34;</span>, fileInfo.Size())
+    fmt.Println(<span style="color:#f1fa8c">&#34;Permissions:&#34;</span>, fileInfo.Mode())
+    fmt.Println(<span style="color:#f1fa8c">&#34;Last modified:&#34;</span>, fileInfo.ModTime())
+    fmt.Println(<span style="color:#f1fa8c">&#34;Is Directory: &#34;</span>, fileInfo.IsDir())
+    fmt.Printf(<span style="color:#f1fa8c">&#34;System interface type: %T\n&#34;</span>, fileInfo.Sys())
+    fmt.Printf(<span style="color:#f1fa8c">&#34;System info: %+v\n\n&#34;</span>, fileInfo.Sys())
+}</code></pre></div>
+<h3 id="重命名文件与移动文件">重命名文件与移动文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     originalPath <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;test.txt&#34;</span>
     newPath <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;test2.txt&#34;</span>
-    err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Rename</span>(originalPath, newPath)
+    err <span style="color:#ff79c6">:=</span> os.Rename(originalPath, newPath)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="删除文件">删除文件</h3>
+}</code></pre></div>
+<h3 id="删除文件">删除文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Remove</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    err <span style="color:#ff79c6">:=</span> os.Remove(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="检查文件是否存在">检查文件是否存在</h3>
+}</code></pre></div>
+<h3 id="检查文件是否存在">检查文件是否存在</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
@@ -280,113 +284,113 @@
     fileInfo <span style="color:#ff79c6">*</span>os.FileInfo
     err      <span style="color:#8be9fd">error</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 文件不存在则返回error
-</span><span style="color:#6272a4"></span>    fileInfo, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Stat</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    fileInfo, err <span style="color:#ff79c6">:=</span> os.Stat(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#ff79c6">if</span> os.<span style="color:#50fa7b">IsNotExist</span>(err) {
-            log.<span style="color:#50fa7b">Fatal</span>(<span style="color:#f1fa8c">&#34;File does not exist.&#34;</span>)
+        <span style="color:#ff79c6">if</span> os.IsNotExist(err) {
+            log.Fatal(<span style="color:#f1fa8c">&#34;File does not exist.&#34;</span>)
         }
     }
-    log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;File does exist. File information:&#34;</span>)
-    log.<span style="color:#50fa7b">Println</span>(fileInfo)
-}
-</code></pre></div><h3 id="检查读写权限">检查读写权限</h3>
+    log.Println(<span style="color:#f1fa8c">&#34;File does exist. File information:&#34;</span>)
+    log.Println(fileInfo)
+}</code></pre></div>
+<h3 id="检查读写权限">检查读写权限</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 这个例子测试写权限，如果没有写权限则返回error。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 注意文件不存在也会返回error，需要检查error的信息来获取到底是哪个错误导致。
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">OpenFile</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_WRONLY, <span style="color:#bd93f9">0666</span>)
+</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.OpenFile(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_WRONLY, <span style="color:#bd93f9">0666</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#ff79c6">if</span> os.<span style="color:#50fa7b">IsPermission</span>(err) {
-            log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Error: Write permission denied.&#34;</span>)
+        <span style="color:#ff79c6">if</span> os.IsPermission(err) {
+            log.Println(<span style="color:#f1fa8c">&#34;Error: Write permission denied.&#34;</span>)
         }
     }
-    file.<span style="color:#50fa7b">Close</span>()
+    file.Close()
     <span style="color:#6272a4">// 测试读权限
-</span><span style="color:#6272a4"></span>    file, err = os.<span style="color:#50fa7b">OpenFile</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_RDONLY, <span style="color:#bd93f9">0666</span>)
+</span><span style="color:#6272a4"></span>    file, err = os.OpenFile(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_RDONLY, <span style="color:#bd93f9">0666</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#ff79c6">if</span> os.<span style="color:#50fa7b">IsPermission</span>(err) {
-            log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Error: Read permission denied.&#34;</span>)
+        <span style="color:#ff79c6">if</span> os.IsPermission(err) {
+            log.Println(<span style="color:#f1fa8c">&#34;Error: Read permission denied.&#34;</span>)
         }
     }
-    file.<span style="color:#50fa7b">Close</span>()
-}
-</code></pre></div><h3 id="改变权限拥有者时间戳">改变权限、拥有者、时间戳</h3>
+    file.Close()
+}</code></pre></div>
+<h3 id="改变权限-拥有者-时间戳">改变权限、拥有者、时间戳</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;time&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 使用Linux风格改变文件权限
-</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Chmod</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#bd93f9">0777</span>)
+</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.Chmod(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#bd93f9">0777</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Println</span>(err)
+        log.Println(err)
     }
     <span style="color:#6272a4">// 改变文件所有者
-</span><span style="color:#6272a4"></span>    err = os.<span style="color:#50fa7b">Chown</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.<span style="color:#50fa7b">Getuid</span>(), os.<span style="color:#50fa7b">Getgid</span>())
+</span><span style="color:#6272a4"></span>    err = os.Chown(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.Getuid(), os.Getgid())
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Println</span>(err)
+        log.Println(err)
     }
     <span style="color:#6272a4">// 改变时间戳
-</span><span style="color:#6272a4"></span>    twoDaysFromNow <span style="color:#ff79c6">:=</span> time.<span style="color:#50fa7b">Now</span>().<span style="color:#50fa7b">Add</span>(<span style="color:#bd93f9">48</span> <span style="color:#ff79c6">*</span> time.Hour)
+</span><span style="color:#6272a4"></span>    twoDaysFromNow <span style="color:#ff79c6">:=</span> time.Now().Add(<span style="color:#bd93f9">48</span> <span style="color:#ff79c6">*</span> time.Hour)
     lastAccessTime <span style="color:#ff79c6">:=</span> twoDaysFromNow
     lastModifyTime <span style="color:#ff79c6">:=</span> twoDaysFromNow
-    err = os.<span style="color:#50fa7b">Chtimes</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, lastAccessTime, lastModifyTime)
+    err = os.Chtimes(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, lastAccessTime, lastModifyTime)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Println</span>(err)
+        log.Println(err)
     }
-}
-</code></pre></div><h3 id="创建软连接与硬链接nix操作系统">创建软连接与硬链接(*nix操作系统)</h3>
+}</code></pre></div>
+<h3 id="创建软连接与硬链接-nix操作系统">创建软连接与硬链接(*nix操作系统)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;fmt&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 创建一个硬链接。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 创建后同一个文件内容会有两个文件名，改变一个文件的内容会影响另一个。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 删除和重命名不会影响另一个。
-</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Link</span>(<span style="color:#f1fa8c">&#34;original.txt&#34;</span>, <span style="color:#f1fa8c">&#34;original_also.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> os.Link(<span style="color:#f1fa8c">&#34;original.txt&#34;</span>, <span style="color:#f1fa8c">&#34;original_also.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;creating sym&#34;</span>)
+    fmt.Println(<span style="color:#f1fa8c">&#34;creating sym&#34;</span>)
     <span style="color:#6272a4">// Create a symlink
-</span><span style="color:#6272a4"></span>    err = os.<span style="color:#50fa7b">Symlink</span>(<span style="color:#f1fa8c">&#34;original.txt&#34;</span>, <span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    err = os.Symlink(<span style="color:#f1fa8c">&#34;original.txt&#34;</span>, <span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
     <span style="color:#6272a4">// Lstat返回一个文件的信息，但是当文件是一个软链接时，它返回软链接的信息，而不是引用的文件的信息。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Symlink在Windows中不工作。
-</span><span style="color:#6272a4"></span>    fileInfo, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Lstat</span>(<span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    fileInfo, err <span style="color:#ff79c6">:=</span> os.Lstat(<span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Link info: %+v&#34;</span>, fileInfo)
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Link info: %+v&#34;</span>, fileInfo)
     <span style="color:#6272a4">//改变软链接的拥有者不会影响原始文件。
-</span><span style="color:#6272a4"></span>    err = os.<span style="color:#50fa7b">Lchown</span>(<span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>, os.<span style="color:#50fa7b">Getuid</span>(), os.<span style="color:#50fa7b">Getgid</span>())
+</span><span style="color:#6272a4"></span>    err = os.Lchown(<span style="color:#f1fa8c">&#34;original_sym.txt&#34;</span>, os.Getuid(), os.Getgid())
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="跳转到文件中的指定位置">跳转到文件中的指定位置</h3>
+}</code></pre></div>
+<h3 id="跳转到文件中的指定位置">跳转到文件中的指定位置</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;fmt&#34;</span>
     <span style="color:#f1fa8c">&#34;log&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    file, _ <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
-    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    file, _ <span style="color:#ff79c6">:=</span> os.Open(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+    <span style="color:#ff79c6">defer</span> file.Close()
     <span style="color:#6272a4">// 偏离位置，可以是正数也可以是负数
 </span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">var</span> offset <span style="color:#8be9fd">int64</span> = <span style="color:#bd93f9">5</span>
     <span style="color:#6272a4">// 用来计算offset的初始位置
@@ -394,54 +398,54 @@
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 1 = 当前位置
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 2 = 文件结尾处
 </span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">var</span> whence <span style="color:#8be9fd">int</span> = <span style="color:#bd93f9">0</span>
-    newPosition, err <span style="color:#ff79c6">:=</span> file.<span style="color:#50fa7b">Seek</span>(offset, whence)
+    newPosition, err <span style="color:#ff79c6">:=</span> file.Seek(offset, whence)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Just moved to 5:&#34;</span>, newPosition)
+    fmt.Println(<span style="color:#f1fa8c">&#34;Just moved to 5:&#34;</span>, newPosition)
     <span style="color:#6272a4">// 从当前位置回退两个字节
-</span><span style="color:#6272a4"></span>    newPosition, err = file.<span style="color:#50fa7b">Seek</span>(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>)
+</span><span style="color:#6272a4"></span>    newPosition, err = file.Seek(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Just moved back two:&#34;</span>, newPosition)
+    fmt.Println(<span style="color:#f1fa8c">&#34;Just moved back two:&#34;</span>, newPosition)
     <span style="color:#6272a4">// 使用下面的技巧得到当前的位置
-</span><span style="color:#6272a4"></span>    currentPosition, err <span style="color:#ff79c6">:=</span> file.<span style="color:#50fa7b">Seek</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>)
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Current position:&#34;</span>, currentPosition)
+</span><span style="color:#6272a4"></span>    currentPosition, err <span style="color:#ff79c6">:=</span> file.Seek(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>)
+    fmt.Println(<span style="color:#f1fa8c">&#34;Current position:&#34;</span>, currentPosition)
     <span style="color:#6272a4">// 转到文件开始处
-</span><span style="color:#6272a4"></span>    newPosition, err = file.<span style="color:#50fa7b">Seek</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>)
+</span><span style="color:#6272a4"></span>    newPosition, err = file.Seek(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Position after seeking 0,0:&#34;</span>, newPosition)
-}
-</code></pre></div><h3 id="写入文件">写入文件</h3>
+    fmt.Println(<span style="color:#f1fa8c">&#34;Position after seeking 0,0:&#34;</span>, newPosition)
+}</code></pre></div>
+<h3 id="写入文件">写入文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 普通写入
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;log&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 可写方式打开文件
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">OpenFile</span>(
+</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.OpenFile(
         <span style="color:#f1fa8c">&#34;test.txt&#34;</span>,
         os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
         <span style="color:#bd93f9">0666</span>,
     )
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> file.Close()
     <span style="color:#6272a4">// 写字节到文件中
 </span><span style="color:#6272a4"></span>    byteSlice <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;Bytes!\n&#34;</span>)
-    bytesWritten, err <span style="color:#ff79c6">:=</span> file.<span style="color:#50fa7b">Write</span>(byteSlice)
+    bytesWritten, err <span style="color:#ff79c6">:=</span> file.Write(byteSlice)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Wrote %d bytes.\n&#34;</span>, bytesWritten)
-}
-</code></pre></div><p>&lt;=================================================&gt;</p>
+    log.Printf(<span style="color:#f1fa8c">&#34;Wrote %d bytes.\n&#34;</span>, bytesWritten)
+}</code></pre></div>
+<p>&lt;=================================================&gt;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 快写文件
 </span><span style="color:#6272a4">// ioutil包有一个非常有用的方法WriteFile()可以处理创建／打开文件、写字节slice和关闭文件一系列的操作。如果你需要简洁快速地写字节slice到文件中，你可以使用它。
 </span><span style="color:#6272a4"></span>
@@ -450,13 +454,13 @@
     <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
     <span style="color:#f1fa8c">&#34;log&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">WriteFile</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;Hi\n&#34;</span>), <span style="color:#bd93f9">0666</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    err <span style="color:#ff79c6">:=</span> ioutil.WriteFile(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;Hi\n&#34;</span>), <span style="color:#bd93f9">0666</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><p>&lt;=================================================&gt;</p>
+}</code></pre></div>
+<p>&lt;=================================================&gt;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 使用缓存写
 </span><span style="color:#6272a4">// bufio包提供了带缓存功能的writer，所以你可以在写字节到硬盘前使用内存缓存。当你处理很多的数据很有用，因为它可以节省操作硬盘I/O的时间。在其它一些情况下它也很有用，比如你每次写一个字节，把它们攒在内存缓存中，然后一次写入到硬盘中，减少硬盘的磨损以及提升性能。
 </span><span style="color:#6272a4"></span>
@@ -466,83 +470,84 @@
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;bufio&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 打开文件，只写
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">OpenFile</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_WRONLY, <span style="color:#bd93f9">0666</span>)
+</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.OpenFile(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, os.O_WRONLY, <span style="color:#bd93f9">0666</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> file.Close()
     <span style="color:#6272a4">// 为这个文件创建buffered writer
-</span><span style="color:#6272a4"></span>    bufferedWriter <span style="color:#ff79c6">:=</span> bufio.<span style="color:#50fa7b">NewWriter</span>(file)
+</span><span style="color:#6272a4"></span>    bufferedWriter <span style="color:#ff79c6">:=</span> bufio.NewWriter(file)
     <span style="color:#6272a4">// 写字节到buffer
-</span><span style="color:#6272a4"></span>    bytesWritten, err <span style="color:#ff79c6">:=</span> bufferedWriter.<span style="color:#50fa7b">Write</span>(
+</span><span style="color:#6272a4"></span>    bytesWritten, err <span style="color:#ff79c6">:=</span> bufferedWriter.Write(
         []<span style="color:#8be9fd">byte</span>{<span style="color:#bd93f9">65</span>, <span style="color:#bd93f9">66</span>, <span style="color:#bd93f9">67</span>},
     )
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Bytes written: %d\n&#34;</span>, bytesWritten)
+    log.Printf(<span style="color:#f1fa8c">&#34;Bytes written: %d\n&#34;</span>, bytesWritten)
     <span style="color:#6272a4">// 写字符串到buffer
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 也可以使用 WriteRune() 和 WriteByte()   
-</span><span style="color:#6272a4"></span>    bytesWritten, err = bufferedWriter.<span style="color:#50fa7b">WriteString</span>(
+</span><span style="color:#6272a4"></span>    bytesWritten, err = bufferedWriter.WriteString(
         <span style="color:#f1fa8c">&#34;Buffered string\n&#34;</span>,
     )
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Bytes written: %d\n&#34;</span>, bytesWritten)
+    log.Printf(<span style="color:#f1fa8c">&#34;Bytes written: %d\n&#34;</span>, bytesWritten)
     <span style="color:#6272a4">// 检查缓存中的字节数
-</span><span style="color:#6272a4"></span>    unflushedBufferSize <span style="color:#ff79c6">:=</span> bufferedWriter.<span style="color:#50fa7b">Buffered</span>()
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Bytes buffered: %d\n&#34;</span>, unflushedBufferSize)
+</span><span style="color:#6272a4"></span>    unflushedBufferSize <span style="color:#ff79c6">:=</span> bufferedWriter.Buffered()
+    log.Printf(<span style="color:#f1fa8c">&#34;Bytes buffered: %d\n&#34;</span>, unflushedBufferSize)
     <span style="color:#6272a4">// 还有多少字节可用（未使用的缓存大小）
-</span><span style="color:#6272a4"></span>    bytesAvailable <span style="color:#ff79c6">:=</span> bufferedWriter.<span style="color:#50fa7b">Available</span>()
+</span><span style="color:#6272a4"></span>    bytesAvailable <span style="color:#ff79c6">:=</span> bufferedWriter.Available()
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
+    log.Printf(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
     <span style="color:#6272a4">// 写内存buffer到硬盘
-</span><span style="color:#6272a4"></span>    bufferedWriter.<span style="color:#50fa7b">Flush</span>()
+</span><span style="color:#6272a4"></span>    bufferedWriter.Flush()
     <span style="color:#6272a4">// 丢弃还没有flush的缓存的内容，清除错误并把它的输出传给参数中的writer
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 当你想将缓存传给另外一个writer时有用
-</span><span style="color:#6272a4"></span>    bufferedWriter.<span style="color:#50fa7b">Reset</span>(bufferedWriter)
-    bytesAvailable = bufferedWriter.<span style="color:#50fa7b">Available</span>()
+</span><span style="color:#6272a4"></span>    bufferedWriter.Reset(bufferedWriter)
+    bytesAvailable = bufferedWriter.Available()
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
+    log.Printf(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
     <span style="color:#6272a4">// 重新设置缓存的大小。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 第一个参数是缓存应该输出到哪里，这个例子中我们使用相同的writer。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果我们设置的新的大小小于第一个参数writer的缓存大小， 比如10，我们不会得到一个10字节大小的缓存，
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 而是writer的原始大小的缓存，默认是4096。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 它的功能主要还是为了扩容。
-</span><span style="color:#6272a4"></span>    bufferedWriter = bufio.<span style="color:#50fa7b">NewWriterSize</span>(
+</span><span style="color:#6272a4"></span>    bufferedWriter = bufio.NewWriterSize(
         bufferedWriter,
         <span style="color:#bd93f9">8000</span>,
     )
     <span style="color:#6272a4">// resize后检查缓存的大小
-</span><span style="color:#6272a4"></span>    bytesAvailable = bufferedWriter.<span style="color:#50fa7b">Available</span>()
+</span><span style="color:#6272a4"></span>    bytesAvailable = bufferedWriter.Available()
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
-}
-</code></pre></div><p>&lt;=================================================&gt;</p>
+    log.Printf(<span style="color:#f1fa8c">&#34;Available buffer: %d\n&#34;</span>, bytesAvailable)
+}</code></pre></div>
+<p>&lt;=================================================&gt;</p>
+
 <h3 id="读取文件">读取文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 读取文件到byte slice中
-</span><span style="color:#6272a4"></span>    data, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadFile</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    data, err <span style="color:#ff79c6">:=</span> ioutil.ReadFile(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Data read: %s\n&#34;</span>, data)
-}
-</code></pre></div><p>&lt;=================================================&gt;</p>
+    log.Printf(<span style="color:#f1fa8c">&#34;Data read: %s\n&#34;</span>, data)
+}</code></pre></div>
+<p>&lt;=================================================&gt;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 有缓存写也有缓存读。 缓存reader会把一些内容缓存在内存中。它会提供比os.File和io.Reader更多的函数,缺省的缓存大小是4096，最小缓存是16。
 </span><span style="color:#6272a4"></span>
 <span style="color:#ff79c6">package</span> main
@@ -552,47 +557,47 @@
     <span style="color:#f1fa8c">&#34;bufio&#34;</span>
     <span style="color:#f1fa8c">&#34;fmt&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 打开文件，创建buffered reader
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.Open(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    bufferedReader <span style="color:#ff79c6">:=</span> bufio.<span style="color:#50fa7b">NewReader</span>(file)
+    bufferedReader <span style="color:#ff79c6">:=</span> bufio.NewReader(file)
     <span style="color:#6272a4">// 得到字节，当前指针不变
 </span><span style="color:#6272a4"></span>    byteSlice <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">byte</span>, <span style="color:#bd93f9">5</span>)
-    byteSlice, err = bufferedReader.<span style="color:#50fa7b">Peek</span>(<span style="color:#bd93f9">5</span>)
+    byteSlice, err = bufferedReader.Peek(<span style="color:#bd93f9">5</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Peeked at 5 bytes: %s\n&#34;</span>, byteSlice)
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Peeked at 5 bytes: %s\n&#34;</span>, byteSlice)
     <span style="color:#6272a4">// 读取，指针同时移动
-</span><span style="color:#6272a4"></span>    numBytesRead, err <span style="color:#ff79c6">:=</span> bufferedReader.<span style="color:#50fa7b">Read</span>(byteSlice)
+</span><span style="color:#6272a4"></span>    numBytesRead, err <span style="color:#ff79c6">:=</span> bufferedReader.Read(byteSlice)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Read %d bytes: %s\n&#34;</span>, numBytesRead, byteSlice)
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Read %d bytes: %s\n&#34;</span>, numBytesRead, byteSlice)
     <span style="color:#6272a4">// 读取一个字节, 如果读取不成功会返回Error
-</span><span style="color:#6272a4"></span>    myByte, err <span style="color:#ff79c6">:=</span> bufferedReader.<span style="color:#50fa7b">ReadByte</span>()
+</span><span style="color:#6272a4"></span>    myByte, err <span style="color:#ff79c6">:=</span> bufferedReader.ReadByte()
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Read 1 byte: %c\n&#34;</span>, myByte)     
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Read 1 byte: %c\n&#34;</span>, myByte)     
     <span style="color:#6272a4">// 读取到分隔符，包含分隔符，返回byte slice
-</span><span style="color:#6272a4"></span>    dataBytes, err <span style="color:#ff79c6">:=</span> bufferedReader.<span style="color:#50fa7b">ReadBytes</span>(<span style="color:#f1fa8c">&#39;\n&#39;</span>)
+</span><span style="color:#6272a4"></span>    dataBytes, err <span style="color:#ff79c6">:=</span> bufferedReader.ReadBytes(<span style="color:#f1fa8c">&#39;\n&#39;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Read bytes: %s\n&#34;</span>, dataBytes)           
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Read bytes: %s\n&#34;</span>, dataBytes)           
     <span style="color:#6272a4">// 读取到分隔符，包含分隔符，返回字符串
-</span><span style="color:#6272a4"></span>    dataString, err <span style="color:#ff79c6">:=</span> bufferedReader.<span style="color:#50fa7b">ReadString</span>(<span style="color:#f1fa8c">&#39;\n&#39;</span>)
+</span><span style="color:#6272a4"></span>    dataString, err <span style="color:#ff79c6">:=</span> bufferedReader.ReadString(<span style="color:#f1fa8c">&#39;\n&#39;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Read string: %s\n&#34;</span>, dataString)     
+    fmt.Printf(<span style="color:#f1fa8c">&#34;Read string: %s\n&#34;</span>, dataString)     
     <span style="color:#6272a4">//这个例子读取了很多行，所以test.txt应该包含多行文本才不至于出错
-</span><span style="color:#6272a4"></span>}
-</code></pre></div><h3 id="打包文件">打包文件</h3>
+</span><span style="color:#6272a4"></span>}</code></pre></div>
+<h3 id="打包文件">打包文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 打包(zip) 文件
 </span><span style="color:#6272a4"></span>
 <span style="color:#6272a4">// This example uses zip but standard library
@@ -603,15 +608,15 @@
     <span style="color:#f1fa8c">&#34;log&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 创建一个打包文件
-</span><span style="color:#6272a4"></span>    outFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;test.zip&#34;</span>)
+</span><span style="color:#6272a4"></span>    outFile, err <span style="color:#ff79c6">:=</span> os.Create(<span style="color:#f1fa8c">&#34;test.zip&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> outFile.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> outFile.Close()
     <span style="color:#6272a4">// 创建zip writer
-</span><span style="color:#6272a4"></span>    zipWriter <span style="color:#ff79c6">:=</span> zip.<span style="color:#50fa7b">NewWriter</span>(outFile)
+</span><span style="color:#6272a4"></span>    zipWriter <span style="color:#ff79c6">:=</span> zip.NewWriter(outFile)
     <span style="color:#6272a4">// 往打包文件中写文件。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 这里我们使用硬编码的内容，你可以遍历一个文件夹，把文件夹下的文件以及它们的内容写入到这个打包文件中。
 </span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">var</span> filesToArchive = []<span style="color:#8be9fd;font-style:italic">struct</span> {
@@ -622,22 +627,22 @@
     }
     <span style="color:#6272a4">// 下面将要打包的内容写入到打包文件中，依次写入。
 </span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> _, file <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> filesToArchive {
-            fileWriter, err <span style="color:#ff79c6">:=</span> zipWriter.<span style="color:#50fa7b">Create</span>(file.Name)
+            fileWriter, err <span style="color:#ff79c6">:=</span> zipWriter.Create(file.Name)
             <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-                    log.<span style="color:#50fa7b">Fatal</span>(err)
+                    log.Fatal(err)
             }
-            _, err = fileWriter.<span style="color:#50fa7b">Write</span>([]<span style="color:#8be9fd;font-style:italic">byte</span>(file.Body))
+            _, err = fileWriter.Write([]<span style="color:#8be9fd;font-style:italic">byte</span>(file.Body))
             <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-                    log.<span style="color:#50fa7b">Fatal</span>(err)
+                    log.Fatal(err)
             }
     }
     <span style="color:#6272a4">// 清理
-</span><span style="color:#6272a4"></span>    err = zipWriter.<span style="color:#50fa7b">Close</span>()
+</span><span style="color:#6272a4"></span>    err = zipWriter.Close()
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            log.<span style="color:#50fa7b">Fatal</span>(err)
+            log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="抽取unzip-文件">抽取(unzip) 文件</h3>
+}</code></pre></div>
+<h3 id="抽取-unzip-文件">抽取(unzip) 文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// This example uses zip but standard library
 </span><span style="color:#6272a4">// also supports tar archives
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
@@ -648,54 +653,54 @@
     <span style="color:#f1fa8c">&#34;os&#34;</span>
     <span style="color:#f1fa8c">&#34;path/filepath&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    zipReader, err <span style="color:#ff79c6">:=</span> zip.<span style="color:#50fa7b">OpenReader</span>(<span style="color:#f1fa8c">&#34;test.zip&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    zipReader, err <span style="color:#ff79c6">:=</span> zip.OpenReader(<span style="color:#f1fa8c">&#34;test.zip&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> zipReader.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> zipReader.Close()
     <span style="color:#6272a4">// 遍历打包文件中的每一文件/文件夹
 </span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> _, file <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> zipReader.Reader.File {
         <span style="color:#6272a4">// 打包文件中的文件就像普通的一个文件对象一样
-</span><span style="color:#6272a4"></span>        zippedFile, err <span style="color:#ff79c6">:=</span> file.<span style="color:#50fa7b">Open</span>()
+</span><span style="color:#6272a4"></span>        zippedFile, err <span style="color:#ff79c6">:=</span> file.Open()
         <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            log.<span style="color:#50fa7b">Fatal</span>(err)
+            log.Fatal(err)
         }
-        <span style="color:#ff79c6">defer</span> zippedFile.<span style="color:#50fa7b">Close</span>()
+        <span style="color:#ff79c6">defer</span> zippedFile.Close()
         <span style="color:#6272a4">// 指定抽取的文件名。
 </span><span style="color:#6272a4"></span>        <span style="color:#6272a4">// 你可以指定全路径名或者一个前缀，这样可以把它们放在不同的文件夹中。
 </span><span style="color:#6272a4"></span>        <span style="color:#6272a4">// 我们这个例子使用打包文件中相同的文件名。
 </span><span style="color:#6272a4"></span>        targetDir <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;./&#34;</span>
-        extractedFilePath <span style="color:#ff79c6">:=</span> filepath.<span style="color:#50fa7b">Join</span>(
+        extractedFilePath <span style="color:#ff79c6">:=</span> filepath.Join(
             targetDir,
             file.Name,
         )
         <span style="color:#6272a4">// 抽取项目或者创建文件夹
-</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">if</span> file.<span style="color:#50fa7b">FileInfo</span>().<span style="color:#50fa7b">IsDir</span>() {
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">if</span> file.FileInfo().IsDir() {
             <span style="color:#6272a4">// 创建文件夹并设置同样的权限
-</span><span style="color:#6272a4"></span>            log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Creating directory:&#34;</span>, extractedFilePath)
-            os.<span style="color:#50fa7b">MkdirAll</span>(extractedFilePath, file.<span style="color:#50fa7b">Mode</span>())
+</span><span style="color:#6272a4"></span>            log.Println(<span style="color:#f1fa8c">&#34;Creating directory:&#34;</span>, extractedFilePath)
+            os.MkdirAll(extractedFilePath, file.Mode())
         } <span style="color:#ff79c6">else</span> {
             <span style="color:#6272a4">//抽取正常的文件
-</span><span style="color:#6272a4"></span>            log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Extracting file:&#34;</span>, file.Name)
-            outputFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">OpenFile</span>(
+</span><span style="color:#6272a4"></span>            log.Println(<span style="color:#f1fa8c">&#34;Extracting file:&#34;</span>, file.Name)
+            outputFile, err <span style="color:#ff79c6">:=</span> os.OpenFile(
                 extractedFilePath,
                 os.O_WRONLY|os.O_CREATE|os.O_TRUNC,
-                file.<span style="color:#50fa7b">Mode</span>(),
+                file.Mode(),
             )
             <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-                log.<span style="color:#50fa7b">Fatal</span>(err)
+                log.Fatal(err)
             }
-            <span style="color:#ff79c6">defer</span> outputFile.<span style="color:#50fa7b">Close</span>()
+            <span style="color:#ff79c6">defer</span> outputFile.Close()
             <span style="color:#6272a4">// 通过io.Copy简洁地复制文件内容
-</span><span style="color:#6272a4"></span>            _, err = io.<span style="color:#50fa7b">Copy</span>(outputFile, zippedFile)
+</span><span style="color:#6272a4"></span>            _, err = io.Copy(outputFile, zippedFile)
             <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-                log.<span style="color:#50fa7b">Fatal</span>(err)
+                log.Fatal(err)
             }
         }
     }
-}
-</code></pre></div><h3 id="压缩文件">压缩文件</h3>
+}</code></pre></div>
+<h3 id="压缩文件">压缩文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 这个例子中使用gzip压缩格式，标准库还支持zlib, bz2, flate, lzw
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -703,22 +708,22 @@
     <span style="color:#f1fa8c">&#34;compress/gzip&#34;</span>
     <span style="color:#f1fa8c">&#34;log&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    outputFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;test.txt.gz&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    outputFile, err <span style="color:#ff79c6">:=</span> os.Create(<span style="color:#f1fa8c">&#34;test.txt.gz&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    gzipWriter <span style="color:#ff79c6">:=</span> gzip.<span style="color:#50fa7b">NewWriter</span>(outputFile)
-    <span style="color:#ff79c6">defer</span> gzipWriter.<span style="color:#50fa7b">Close</span>()
+    gzipWriter <span style="color:#ff79c6">:=</span> gzip.NewWriter(outputFile)
+    <span style="color:#ff79c6">defer</span> gzipWriter.Close()
     <span style="color:#6272a4">// 当我们写如到gizp writer数据时，它会依次压缩数据并写入到底层的文件中。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 我们不必关心它是如何压缩的，还是像普通的writer一样操作即可。
-</span><span style="color:#6272a4"></span>    _, err = gzipWriter.<span style="color:#50fa7b">Write</span>([]<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;Gophers rule!\n&#34;</span>))
+</span><span style="color:#6272a4"></span>    _, err = gzipWriter.Write([]<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;Gophers rule!\n&#34;</span>))
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Compressed data written to file.&#34;</span>)
-}
-</code></pre></div><h3 id="解压缩文件">解压缩文件</h3>
+    log.Println(<span style="color:#f1fa8c">&#34;Compressed data written to file.&#34;</span>)
+}</code></pre></div>
+<h3 id="解压缩文件">解压缩文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 这个例子中使用gzip压缩格式，标准库还支持zlib, bz2, flate, lzw
 </span><span style="color:#6272a4"></span><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
@@ -727,32 +732,32 @@
     <span style="color:#f1fa8c">&#34;io&#34;</span>
     <span style="color:#f1fa8c">&#34;os&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
     <span style="color:#6272a4">// 打开一个gzip文件。
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 文件是一个reader,但是我们可以使用各种数据源，比如web服务器返回的gzipped内容，
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 它的内容不是一个文件，而是一个内存流
-</span><span style="color:#6272a4"></span>    gzipFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;test.txt.gz&#34;</span>)
+</span><span style="color:#6272a4"></span>    gzipFile, err <span style="color:#ff79c6">:=</span> os.Open(<span style="color:#f1fa8c">&#34;test.txt.gz&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    gzipReader, err <span style="color:#ff79c6">:=</span> gzip.<span style="color:#50fa7b">NewReader</span>(gzipFile)
+    gzipReader, err <span style="color:#ff79c6">:=</span> gzip.NewReader(gzipFile)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> gzipReader.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> gzipReader.Close()
     <span style="color:#6272a4">// 解压缩到一个writer,它是一个file writer
-</span><span style="color:#6272a4"></span>    outfileWriter, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;unzipped.txt&#34;</span>)
+</span><span style="color:#6272a4"></span>    outfileWriter, err <span style="color:#ff79c6">:=</span> os.Create(<span style="color:#f1fa8c">&#34;unzipped.txt&#34;</span>)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-    <span style="color:#ff79c6">defer</span> outfileWriter.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">defer</span> outfileWriter.Close()
     <span style="color:#6272a4">// 复制内容
-</span><span style="color:#6272a4"></span>    _, err = io.<span style="color:#50fa7b">Copy</span>(outfileWriter, gzipReader)
+</span><span style="color:#6272a4"></span>    _, err = io.Copy(outfileWriter, gzipReader)
     <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        log.<span style="color:#50fa7b">Fatal</span>(err)
+        log.Fatal(err)
     }
-}
-</code></pre></div><h3 id="http下载文件">HTTP下载文件</h3>
+}</code></pre></div>
+<h3 id="http下载文件">HTTP下载文件</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#ff79c6">package</span> main
 <span style="color:#ff79c6">import</span> (
      <span style="color:#f1fa8c">&#34;os&#34;</span>
@@ -760,24 +765,23 @@
      <span style="color:#f1fa8c">&#34;log&#34;</span>
      <span style="color:#f1fa8c">&#34;net/http&#34;</span>
 )
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-     newFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;httpbin.html&#34;</span>)
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+     newFile, err <span style="color:#ff79c6">:=</span> os.Create(<span style="color:#f1fa8c">&#34;httpbin.html&#34;</span>)
      <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-          log.<span style="color:#50fa7b">Fatal</span>(err)
+          log.Fatal(err)
      }
-     <span style="color:#ff79c6">defer</span> newFile.<span style="color:#50fa7b">Close</span>()
+     <span style="color:#ff79c6">defer</span> newFile.Close()
      url <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;http://httpbin.org/get&#34;</span>
-     response, err <span style="color:#ff79c6">:=</span> http.<span style="color:#50fa7b">Get</span>(url)
-     <span style="color:#ff79c6">defer</span> response.Body.<span style="color:#50fa7b">Close</span>()
+     response, err <span style="color:#ff79c6">:=</span> http.Get(url)
+     <span style="color:#ff79c6">defer</span> response.Body.Close()
      <span style="color:#6272a4">// 将HTTP response Body中的内容写入到文件
 </span><span style="color:#6272a4"></span>     <span style="color:#6272a4">// Body满足reader接口，因此我们可以使用ioutil.Copy
-</span><span style="color:#6272a4"></span>     numBytesWritten, err <span style="color:#ff79c6">:=</span> io.<span style="color:#50fa7b">Copy</span>(newFile, response.Body)
+</span><span style="color:#6272a4"></span>     numBytesWritten, err <span style="color:#ff79c6">:=</span> io.Copy(newFile, response.Body)
      <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-          log.<span style="color:#50fa7b">Fatal</span>(err)
+          log.Fatal(err)
      }
-     log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Downloaded %d byte file.\n&#34;</span>, numBytesWritten)
-}
-</code></pre></div>
+     log.Printf(<span style="color:#f1fa8c">&#34;Downloaded %d byte file.\n&#34;</span>, numBytesWritten)
+}</code></pre></div>
   </div>
 
 <br>

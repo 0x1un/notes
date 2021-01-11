@@ -99,57 +99,67 @@
   
 <div class="blog-post">
   <h2>FreeBSD 12使用ports</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="freebsd-12使用ports">FreeBSD 12使用ports</h3>
+
 <p>久仰FreeBSD大名, 据称为最稳健的系统之一, 属于稳得一批那种, 我目前对于它还是不太熟悉, 在熟悉的途中</p>
+
 <p>因为要安装一些软件, ports默认使用的源非国内, 导致速度非常的慢, 需要更换为国内的源</p>
+
 <p>pkg是安装已编译好的二进制文件的, 而ports嘛就是放着源码, 需要自己去目录下手动编译, 与Gentoo相像, 但绝没有Gentoo那么方便, 不过作为一个稳的一批的系统, 自然用来当做服务器</p>
+
 <p>先把pkg的官方源换成国内中科大的, 感谢中科大提供的所有免费源</p>
+
 <p>编辑/etc/pkg/FreeBSD.conf, 把官方的源注释掉</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">FreeBSD: <span style="color:#ff79c6">{</span>
-  <span style="color:#6272a4"># url: &#34;pkg+http://pkg.FreeBSD.org/${ABI}/quarterly&#34;,</span>
-  url: <span style="color:#f1fa8c">&#34;pkg+http://mirrors.ustc.edu.cn/freebsd-pkg/</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ABI</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">/quarterly&#34;</span>,
+  <span style="color:#6272a4"># url: &#34;pkg+http://pkg.FreeBSD.org/${ABI}/quarterly&#34;,
+</span><span style="color:#6272a4"></span>  url: <span style="color:#f1fa8c">&#34;pkg+http://mirrors.ustc.edu.cn/freebsd-pkg/</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ABI</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">/quarterly&#34;</span>,
   mirror_type: <span style="color:#f1fa8c">&#34;srv&#34;</span>,
   signature_type: <span style="color:#f1fa8c">&#34;fingerprints&#34;</span>,
   fingerprints: <span style="color:#f1fa8c">&#34;/usr/share/keys/pkg&#34;</span>,
   enabled: yes
-<span style="color:#ff79c6">}</span>
-</code></pre></div><p>强制更新pkg索引</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg update -f
-</code></pre></div><p>接下来为本章主题, 更换ports源, 因为ports自带的下载器实在不咋地, 这里用axel代替, 这玩意儿下片是个好手</p>
+<span style="color:#ff79c6">}</span></code></pre></div>
+<p>强制更新pkg索引</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg update -f</code></pre></div>
+<p>接下来为本章主题, 更换ports源, 因为ports自带的下载器实在不咋地, 这里用axel代替, 这玩意儿下片是个好手</p>
+
 <p>自然先安装axel</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg install axel
-</code></pre></div><p>编辑/新建/etc/make.conf</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg install axel</code></pre></div>
+<p>编辑/新建/etc/make.conf</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">FETCH_CMD</span><span style="color:#ff79c6">=</span>axel -n <span style="color:#bd93f9">10</span> -a 
 <span style="color:#8be9fd;font-style:italic">DISABLE_SIZE</span><span style="color:#ff79c6">=</span>yes 
 MASTER_SITE_OVERRIDE?<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>http://mirrors.ustc.edu.cn/freebsd-ports/distfiles/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">DIST_SUBDIR</span><span style="color:#f1fa8c">}</span>/ <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>http://mirrors.163.com/freebsd-ports/distfiles/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">DIST_SUBDIR</span><span style="color:#f1fa8c">}</span>/
-</code></pre></div><p>这里添加了两个源, 一个中科大的, 一个163网易的</p>
+</span><span style="color:#f1fa8c"></span>http://mirrors.163.com/freebsd-ports/distfiles/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">DIST_SUBDIR</span><span style="color:#f1fa8c">}</span>/</code></pre></div>
+<p>这里添加了两个源, 一个中科大的, 一个163网易的</p>
+
 <p>更换portsnap源, 编辑/etc/portsnap.conf</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">SERVERNAME</span><span style="color:#ff79c6">=</span>portsnap3.hshh.org
-</code></pre></div><ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">SERVERNAME</span><span style="color:#ff79c6">=</span>portsnap3.hshh.org</code></pre></div>
+<ul>
 <li>电信 portsnap.hshh.org</li>
 <li>电信 portsnap2.hshh.org</li>
 <li>电信 portsnap4.hshh.org</li>
 <li>网通 portsnap3.hshh.org</li>
 <li>台湾 portsnap.tw.freebsd.org</li>
 </ul>
+
 <p>第一次使用ports需要执行以下的指令</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">portsnap fetch extract
-portsnap update
-</code></pre></div><p>以后使用的话, 先更新</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">portsnap fetch update
-</code></pre></div><p>更换update源, 编辑/etc/freebsd-update.conf文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ServerName update.tw.freebsd.org
-</code></pre></div><p>安装补丁</p>
+portsnap update</code></pre></div>
+<p>以后使用的话, 先更新</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">portsnap fetch update</code></pre></div>
+<p>更换update源, 编辑/etc/freebsd-update.conf文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ServerName update.tw.freebsd.org</code></pre></div>
+<p>安装补丁</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">freebsd-update fetch
-freebsd-update install
-</code></pre></div><p>查找软件是否有漏洞补丁</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg audit -F
-</code></pre></div>
+freebsd-update install</code></pre></div>
+<p>查找软件是否有漏洞补丁</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pkg audit -F</code></pre></div>
   </div>
 
 <br>

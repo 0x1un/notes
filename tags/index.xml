@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 0xNote</title>
@@ -6,27 +6,31 @@
     <description>Recent content in Tags on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
-      <title>自我总结</title>
-      <link>/tags/%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93/</link>
-      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <title>Android</title>
+      <link>/tags/android/</link>
+      <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93/</guid>
+      <guid>/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>/tags/linux/</link>
-      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <title>Brainfuck</title>
+      <link>/tags/brainfuck/</link>
+      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/linux/</guid>
+      <guid>/tags/brainfuck/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>btrfs</title>
+      <title>Btrfs</title>
       <link>/tags/btrfs/</link>
       <pubDate>Fri, 20 Dec 2019 00:00:00 +0000</pubDate>
       
@@ -35,137 +39,11 @@
     </item>
     
     <item>
-      <title>golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Command</title>
+      <link>/tags/command/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>网卡类型</title>
-      <link>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OM</title>
-      <link>/tags/om/</link>
-      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/om/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>/tags/go/</link>
-      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Esxi</title>
-      <link>/tags/esxi/</link>
-      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/esxi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Network</title>
-      <link>/tags/network/</link>
-      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rust</title>
-      <link>/tags/rust/</link>
-      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rust/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Trait</title>
-      <link>/tags/trait/</link>
-      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/trait/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>数据库</title>
-      <link>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Thu, 04 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>系统</title>
-      <link>/tags/%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E7%B3%BB%E7%BB%9F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Flask</title>
-      <link>/tags/flask/</link>
-      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
-      
-      <guid>/tags/flask/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
-      
-      <guid>/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sqlalchmey</title>
-      <link>/tags/sqlalchmey/</link>
-      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
-      
-      <guid>/tags/sqlalchmey/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>suckless</title>
-      <link>/tags/suckless/</link>
-      <pubDate>Sat, 23 Feb 2019 20:40:00 +0000</pubDate>
-      
-      <guid>/tags/suckless/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>terminal</title>
-      <link>/tags/terminal/</link>
-      <pubDate>Sat, 23 Feb 2019 20:40:00 +0000</pubDate>
-      
-      <guid>/tags/terminal/</guid>
+      <guid>/tags/command/</guid>
       <description></description>
     </item>
     
@@ -179,34 +57,61 @@
     </item>
     
     <item>
-      <title>计算机概念</title>
-      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5/</link>
-      <pubDate>Fri, 11 Jan 2019 00:00:00 +0000</pubDate>
+      <title>Esxi</title>
+      <link>/tags/esxi/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5/</guid>
+      <guid>/tags/esxi/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>brainfuck</title>
-      <link>/tags/brainfuck/</link>
-      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+      <title>Flask</title>
+      <link>/tags/flask/</link>
+      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
       
-      <guid>/tags/brainfuck/</guid>
+      <guid>/tags/flask/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python, Django</title>
-      <link>/tags/python-django/</link>
-      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
+      <title>Go</title>
+      <link>/tags/go/</link>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/python-django/</guid>
+      <guid>/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linux, Git</title>
+      <title>Golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hexo</title>
+      <link>/tags/hexo/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hexo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux Git</title>
       <link>/tags/linux-git/</link>
       <pubDate>Wed, 21 Nov 2018 00:00:00 +0000</pubDate>
       
@@ -215,38 +120,29 @@
     </item>
     
     <item>
-      <title>桌面</title>
-      <link>/tags/%E6%A1%8C%E9%9D%A2/</link>
-      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      <title>Network</title>
+      <link>/tags/network/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E6%A1%8C%E9%9D%A2/</guid>
+      <guid>/tags/network/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>算法</title>
-      <link>/tags/%E7%AE%97%E6%B3%95/</link>
-      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Om</title>
+      <link>/tags/om/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E7%AE%97%E6%B3%95/</guid>
+      <guid>/tags/om/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>计算机结构</title>
-      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/</link>
-      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Pgsql</title>
+      <link>/tags/pgsql/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>数据类型</title>
-      <link>/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
-      <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>/tags/pgsql/</guid>
       <description></description>
     </item>
     
@@ -260,60 +156,6 @@
     </item>
     
     <item>
-      <title>SSR</title>
-      <link>/tags/ssr/</link>
-      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ssr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scrapy</title>
-      <link>/tags/scrapy/</link>
-      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/scrapy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>爬虫</title>
-      <link>/tags/%E7%88%AC%E8%99%AB/</link>
-      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E7%88%AC%E8%99%AB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>魔法函数</title>
-      <link>/tags/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>command</title>
-      <link>/tags/command/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/command/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>pgsql</title>
-      <link>/tags/pgsql/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/pgsql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Pymysql</title>
       <link>/tags/pymysql/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
@@ -323,20 +165,83 @@
     </item>
     
     <item>
-      <title>计算机原理</title>
-      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
       
-      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/</guid>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Android</title>
-      <link>/tags/android/</link>
-      <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
+      <title>Python Django</title>
+      <link>/tags/python-django/</link>
+      <pubDate>Sat, 24 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/android/</guid>
+      <guid>/tags/python-django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rust</title>
+      <link>/tags/rust/</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scrapy</title>
+      <link>/tags/scrapy/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/scrapy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sqlalchmey</title>
+      <link>/tags/sqlalchmey/</link>
+      <pubDate>Sat, 23 Feb 2019 22:05:00 +0000</pubDate>
+      
+      <guid>/tags/sqlalchmey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ssr</title>
+      <link>/tags/ssr/</link>
+      <pubDate>Sat, 11 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ssr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Suckless</title>
+      <link>/tags/suckless/</link>
+      <pubDate>Sat, 23 Feb 2019 20:40:00 +0000</pubDate>
+      
+      <guid>/tags/suckless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terminal</title>
+      <link>/tags/terminal/</link>
+      <pubDate>Sat, 23 Feb 2019 20:40:00 +0000</pubDate>
+      
+      <guid>/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Trait</title>
+      <link>/tags/trait/</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/trait/</guid>
       <description></description>
     </item>
     
@@ -350,11 +255,110 @@
     </item>
     
     <item>
-      <title>Hexo</title>
-      <link>/tags/hexo/</link>
-      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      <title>数据库</title>
+      <link>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Thu, 04 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/hexo/</guid>
+      <guid>/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据类型</title>
+      <link>/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>桌面</title>
+      <link>/tags/%E6%A1%8C%E9%9D%A2/</link>
+      <pubDate>Sun, 11 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%A1%8C%E9%9D%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>爬虫</title>
+      <link>/tags/%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%88%AC%E8%99%AB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>/tags/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>系统</title>
+      <link>/tags/%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%B3%BB%E7%BB%9F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>网卡类型</title>
+      <link>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%BD%91%E5%8D%A1%E7%B1%BB%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机原理</title>
+      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机概念</title>
+      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Fri, 11 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机结构</title>
+      <link>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>随笔</title>
+      <link>/tags/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%9A%8F%E7%AC%94/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>魔法函数</title>
+      <link>/tags/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</guid>
       <description></description>
     </item>
     

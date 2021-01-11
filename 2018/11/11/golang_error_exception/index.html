@@ -99,255 +99,270 @@
   
 <div class="blog-post">
   <h2>golang的错误处理与资源管理</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="defer的使用">defer的使用</h3>
+
 <p>defer的作用是在函数return之前调用, 我们之后一般会在进行以下操作时会使用它</p>
+
 <ul>
 <li>Open/Close</li>
 <li>Lock/Unlock</li>
 <li>PrintHeader/PrintFooter</li>
 </ul>
-<!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">tryDefer</span>() {
-	<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;1&#34;</span>)
-	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;2&#34;</span>)
 
-}
-</code></pre></div><p>上面的代码如果不加defer结果显然是打印(1, 2), 但是如果加上了defer之后他就会先忽略1, 之后在函数快要结束的时候再来调用1, 所以结果为2, 1.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">tryDefer</span>() {
-	<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;1&#34;</span>)
-	<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;2&#34;</span>)
-	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;3&#34;</span>)
+<!-- more -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> tryDefer() {
+    <span style="color:#ff79c6">defer</span> fmt.Println(<span style="color:#f1fa8c">&#34;1&#34;</span>)
+    fmt.Println(<span style="color:#f1fa8c">&#34;2&#34;</span>)
+
+}</code></pre></div>
+<p>上面的代码如果不加defer结果显然是打印(1, 2), 但是如果加上了defer之后他就会先忽略1, 之后在函数快要结束的时候再来调用1, 所以结果为2, 1.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> tryDefer() {
+    <span style="color:#ff79c6">defer</span> fmt.Println(<span style="color:#f1fa8c">&#34;1&#34;</span>)
+    <span style="color:#ff79c6">defer</span> fmt.Println(<span style="color:#f1fa8c">&#34;2&#34;</span>)
+    fmt.Println(<span style="color:#f1fa8c">&#34;3&#34;</span>)
 }
 output:
-	<span style="color:#bd93f9">3</span>
-	<span style="color:#bd93f9">2</span>
-	<span style="color:#bd93f9">1</span>
-</code></pre></div><p>defer是以堆栈(先进后出)的方式进行顺序的处理, 所以结果为3, 2, 1</p>
+    <span style="color:#bd93f9">3</span>
+    <span style="color:#bd93f9">2</span>
+    <span style="color:#bd93f9">1</span></code></pre></div>
+<p>defer是以堆栈(先进后出)的方式进行顺序的处理, 所以结果为3, 2, 1</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 参数在defer语句时计算
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">tryDefer</span>() {
-	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">101</span>; i<span style="color:#ff79c6">++</span> {
-		<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(i)
-		<span style="color:#ff79c6">if</span> i <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">30</span> {
-			<span style="color:#ff79c6">return</span>
-		}
-	}
-}
-</code></pre></div><p><strong>实际应用</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 将斐波那契数列写入文件
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">writeFile</span>(filename <span style="color:#8be9fd">string</span>) {
-	<span style="color:#ff79c6">if</span> file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(filename); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#8be9fd;font-style:italic">panic</span>(err)
-	} <span style="color:#ff79c6">else</span> {
-		<span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
-		writer <span style="color:#ff79c6">:=</span> bufio.<span style="color:#50fa7b">NewWriter</span>(file)
-		<span style="color:#ff79c6">defer</span> writer.<span style="color:#50fa7b">Flush</span>()
-		f <span style="color:#ff79c6">:=</span> fib.<span style="color:#50fa7b">Fibonacci</span>()
-		<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">30</span>; i<span style="color:#ff79c6">++</span> {
-			fmt.<span style="color:#50fa7b">Fprintln</span>(writer, <span style="color:#50fa7b">f</span>())
-		}
-	}
-}
-</code></pre></div><p>总结:</p>
-<ul>
-<li>确保调用是在函数结束时发生</li>
-<li>参数在defer语句时计算</li>
-<li>defer列表先进后出(堆栈)</li>
-</ul>
-<h3 id="错误处理">错误处理</h3>
-<p>错误处理是在任何编程语言中都有的, 且是编程当中非常重要的概念, 我们常常编写程序会对它进行错误预判处理, 保证它出错的时候不被挂掉, 或者让报错信息更加清晰方便于调试</p>
-<p>这里对上一个示例代码进行错误处理, 只贴关键部分</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">writeFile</span>(filename <span style="color:#8be9fd">string</span>) {
-    <span style="color:#6272a4">// O_EXCL与O_CREATE一起用，构成一个新建文件的功能，它要求文件必须不存在
-</span><span style="color:#6272a4"></span>	file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">OpenFile</span>(filename, os.O_EXCL|os.O_CREATE, <span style="color:#bd93f9">0666</span>)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#6272a4">// // If there is an error, it will be of type *PathError.
-</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> pathError, ok <span style="color:#ff79c6">:=</span> err.(<span style="color:#ff79c6">*</span>os.PathError); !ok {
-			<span style="color:#8be9fd;font-style:italic">panic</span>(err)
-		} <span style="color:#ff79c6">else</span> {
-			fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;对文件进行了什么操作:%s, 文件的路径:%s, 文件发生了什么错误:%s\n&#34;</span>,
-				pathError.Op,
-				pathError.Path,
-				pathError.Err)
-		}
-		<span style="color:#ff79c6">return</span>
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> tryDefer() {
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">101</span>; i<span style="color:#ff79c6">++</span> {
+        <span style="color:#ff79c6">defer</span> fmt.Println(i)
+        <span style="color:#ff79c6">if</span> i <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">30</span> {
+            <span style="color:#ff79c6">return</span>
+        }
     }
-</code></pre></div><p>我们原本使用的os.Create实际上是对OpenFile进行了一次封装, 从源码上我们可以看出
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/osCreate.png" alt="errorHandingImg"></p>
+}</code></pre></div>
+<p><strong>实际应用</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 将斐波那契数列写入文件
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> writeFile(filename <span style="color:#8be9fd">string</span>) {
+    <span style="color:#ff79c6">if</span> file, err <span style="color:#ff79c6">:=</span> os.Create(filename); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    } <span style="color:#ff79c6">else</span> {
+        <span style="color:#ff79c6">defer</span> file.Close()
+        writer <span style="color:#ff79c6">:=</span> bufio.NewWriter(file)
+        <span style="color:#ff79c6">defer</span> writer.Flush()
+        f <span style="color:#ff79c6">:=</span> fib.Fibonacci()
+        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">30</span>; i<span style="color:#ff79c6">++</span> {
+            fmt.Fprintln(writer, f())
+        }
+    }
+}</code></pre></div>
+<p>总结:<br />
+- 确保调用是在函数结束时发生
+- 参数在defer语句时计算
+- defer列表先进后出(堆栈)</p>
+
+<h3 id="错误处理">错误处理</h3>
+
+<p>错误处理是在任何编程语言中都有的, 且是编程当中非常重要的概念, 我们常常编写程序会对它进行错误预判处理, 保证它出错的时候不被挂掉, 或者让报错信息更加清晰方便于调试</p>
+
+<p>这里对上一个示例代码进行错误处理, 只贴关键部分</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> writeFile(filename <span style="color:#8be9fd">string</span>) {
+    <span style="color:#6272a4">// O_EXCL与O_CREATE一起用，构成一个新建文件的功能，它要求文件必须不存在
+</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> os.OpenFile(filename, os.O_EXCL|os.O_CREATE, <span style="color:#bd93f9">0666</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#6272a4">// // If there is an error, it will be of type *PathError.
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">if</span> pathError, ok <span style="color:#ff79c6">:=</span> err.(<span style="color:#ff79c6">*</span>os.PathError); !ok {
+            <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+        } <span style="color:#ff79c6">else</span> {
+            fmt.Printf(<span style="color:#f1fa8c">&#34;对文件进行了什么操作:%s, 文件的路径:%s, 文件发生了什么错误:%s\n&#34;</span>,
+                pathError.Op,
+                pathError.Path,
+                pathError.Err)
+        }
+        <span style="color:#ff79c6">return</span>
+    }</code></pre></div>
+<p>我们原本使用的os.Create实际上是对OpenFile进行了一次封装, 从源码上我们可以看出
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/osCreate.png" alt="errorHandingImg" /></p>
+
 <p>自定义异常提示</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">err <span style="color:#ff79c6">:=</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;What happen?&#34;</span>)
-fmt.<span style="color:#50fa7b">Println</span>(err)
-fmt.<span style="color:#50fa7b">Println</span>(reflect.<span style="color:#50fa7b">ValueOf</span>(err).<span style="color:#50fa7b">Kind</span>())
-<span style="color:#8be9fd;font-style:italic">panic</span>(err)
-</code></pre></div><p>输出如下图<br>
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/customErrMess.png" alt="customErrorMesseges"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">err <span style="color:#ff79c6">:=</span> errors.New(<span style="color:#f1fa8c">&#34;What happen?&#34;</span>)
+fmt.Println(err)
+fmt.Println(reflect.ValueOf(err).Kind())
+<span style="color:#8be9fd;font-style:italic">panic</span>(err)</code></pre></div>
+<p>输出如下图<br />
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/customErrMess.png" alt="customErrorMesseges" /></p>
+
 <p>还有我们也可以对error接口进行自定义, 这个在这里就不过多赘述了</p>
-<h3 id="panic--recover">Panic &amp; Recover</h3>
+
+<h3 id="panic-recover">Panic &amp; Recover</h3>
+
 <p>从最开始到现在, 我们常常用到panic来暂时处理异常, panic翻译过来就是惊恐[滑稽:)&gt;, 在golang当中就是用来抛出异常的东西, 异常这东西确实让人很惊恐, 我们最不喜欢看到
-的, 这个词的意义在golang中体现的很完美, 以下是panic的定义.</p>
-<ul>
-<li>停止当前函数执行</li>
-<li>一直向上返回, 执行每一层的defer</li>
-<li>如果没有遇到recover, 程序将会退出<br>
-<strong>Recover定义</strong></li>
-<li>仅在defer调用中使用</li>
-<li>获取panic的值</li>
-<li>如果无法处理, 可以重新panic
-`</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">tryRecover</span>() {
+的, 这个词的意义在golang中体现的很完美, 以下是panic的定义.<br />
+- 停止当前函数执行
+- 一直向上返回, 执行每一层的defer
+- 如果没有遇到recover, 程序将会退出<br />
+<strong>Recover定义</strong>
+- 仅在defer调用中使用
+- 获取panic的值
+- 如果无法处理, 可以重新panic
+`</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#8be9fd;font-style:italic">func</span> tryRecover() {
     <span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
         r <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">recover</span>()
         <span style="color:#ff79c6">if</span> err, ok <span style="color:#ff79c6">:=</span> r.(<span style="color:#8be9fd">error</span>); ok {
-            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Error occurred:&#34;</span>, err)
+            fmt.Println(<span style="color:#f1fa8c">&#34;Error occurred:&#34;</span>, err)
         } <span style="color:#ff79c6">else</span> {
-            <span style="color:#8be9fd;font-style:italic">panic</span>(fmt.<span style="color:#50fa7b">Sprintf</span>(<span style="color:#f1fa8c">&#34;I don&#39;t know what you&#39;re doing: %v&#34;</span>, r)) 
+            <span style="color:#8be9fd;font-style:italic">panic</span>(fmt.Sprintf(<span style="color:#f1fa8c">&#34;I don&#39;t know what you&#39;re doing: %v&#34;</span>, r)) 
         }
     }() <span style="color:#6272a4">// 注意这里有个括号, 划重点, 意思是直接运行这个函数
 </span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// panic(errors.New(&#34;This is an error&#34;))
 </span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#f1fa8c">&#34;13414312&#34;</span>) <span style="color:#6272a4">// 这里随便写一个panic用来验证Recover第三条定义
 </span><span style="color:#6272a4"></span>}
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-    <span style="color:#50fa7b">tryRecover</span>()
-}
-</code></pre></div><p>上面这段代码说明了recover在defer中调用, 它获取了panic的值, 如果没有panic值能获取, 他将会重新panic一个空的, 这里的自定义panic它不会立马抛出, 遇到了recover之后&gt;他将会暂时停在那儿, 等待函数快要结束的时候被defer中的recover接收, 并被recover进一步处理.</p>
-<p>我们将第10行代码注释掉, 添加第11的代码, 这个panic毫无意义, 它并没有被定义到系统自带的error中, recover那段逻辑判断将无法处理, 直接重新抛出如下图结果<br>
-<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/recoverPanic.png" alt="recoverPanic"></p>
+<span style="color:#8be9fd;font-style:italic">func</span> main() {
+    tryRecover()
+}</code></pre></div>
+<p>上面这段代码说明了recover在defer中调用, 它获取了panic的值, 如果没有panic值能获取, 他将会重新panic一个空的, 这里的自定义panic它不会立马抛出, 遇到了recover之后&gt;他将会暂时停在那儿, 等待函数快要结束的时候被defer中的recover接收, 并被recover进一步处理.</p>
+
+<p>我们将第10行代码注释掉, 添加第11的代码, 这个panic毫无意义, 它并没有被定义到系统自带的error中, recover那段逻辑判断将无法处理, 直接重新抛出如下图结果<br />
+<img src="https://github.com/0x1un/SavaImg/raw/master/Golang/ErrorHandingImg/recoverPanic.png" alt="recoverPanic" /></p>
+
 <h3 id="服务器错误处理案例一">服务器错误处理案例一</h3>
+
 <p>我们经常在打开网站的时候遇到404, 500, 502, 302之类的报错代码, 这是怎么处理的呢, 下面示例将演示一个简单服务器错误处理方式</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// 逻辑部分, 如果有错误就将错误抛出, 函数返回一个error类型, 等待errWrapper接收处理
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Server</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>{
-	path <span style="color:#ff79c6">:=</span> request.URL.Path[<span style="color:#8be9fd;font-style:italic">len</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>):]
-	file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(path)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	<span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
-	all, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	writer.<span style="color:#50fa7b">Write</span>(all)
-	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> Server(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>{
+    path <span style="color:#ff79c6">:=</span> request.URL.Path[<span style="color:#8be9fd;font-style:italic">len</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>):]
+    file, err <span style="color:#ff79c6">:=</span> os.Open(path)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> err
+    }
+    <span style="color:#ff79c6">defer</span> file.Close()
+    all, err <span style="color:#ff79c6">:=</span> ioutil.ReadAll(file)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> err
+    }
+    writer.Write(all)
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
 }
 <span style="color:#6272a4">// 错误处理部分, 处理Server抛出的异常
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> appHandler <span style="color:#8be9fd;font-style:italic">func</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>
 <span style="color:#6272a4">// 设置错误处理装饰器, 用于将Server抛出的异常进行处理, 返回处理后的函数
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">errWrapper</span>(handler appHandler) <span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-	<span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">func</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-		err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">handler</span>(writer, request)
-		<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-			log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Error handling:%s&#34;</span>, err.<span style="color:#50fa7b">Error</span>())
-			code <span style="color:#ff79c6">:=</span> http.StatusOK
-			<span style="color:#ff79c6">switch</span> {
-				<span style="color:#6272a4">// 文件不存在错误
-</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">case</span> os.<span style="color:#50fa7b">IsNotExist</span>(err):
-				code = http.StatusNotFound
-				<span style="color:#6272a4">// 文件权限错误
-</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">case</span> os.<span style="color:#50fa7b">IsPermission</span>(err):
-				code = http.StatusForbidden
-			<span style="color:#ff79c6">default</span>:
-				<span style="color:#6272a4">// 默认设置500, 未知错误
-</span><span style="color:#6272a4"></span>				code = http.StatusInternalServerError
-			}
-			http.<span style="color:#50fa7b">Error</span>(writer, http.<span style="color:#50fa7b">StatusText</span>(code), code)
-		}
-	}
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> errWrapper(handler appHandler) <span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">func</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+        err <span style="color:#ff79c6">:=</span> handler(writer, request)
+        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+            log.Printf(<span style="color:#f1fa8c">&#34;Error handling:%s&#34;</span>, err.Error())
+            code <span style="color:#ff79c6">:=</span> http.StatusOK
+            <span style="color:#ff79c6">switch</span> {
+                <span style="color:#6272a4">// 文件不存在错误
+</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">case</span> os.IsNotExist(err):
+                code = http.StatusNotFound
+                <span style="color:#6272a4">// 文件权限错误
+</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">case</span> os.IsPermission(err):
+                code = http.StatusForbidden
+            <span style="color:#ff79c6">default</span>:
+                <span style="color:#6272a4">// 默认设置500, 未知错误
+</span><span style="color:#6272a4"></span>                code = http.StatusInternalServerError
+            }
+            http.Error(writer, http.StatusText(code), code)
+        }
+    }
 }
 <span style="color:#6272a4">// 启动服务
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-	http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>, <span style="color:#50fa7b">errWrapper</span>(fileListing.Server))
-	err <span style="color:#ff79c6">:=</span> http.<span style="color:#50fa7b">ListenAndServe</span>(<span style="color:#f1fa8c">&#34;:8888&#34;</span>, <span style="color:#ff79c6">nil</span>)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#8be9fd;font-style:italic">panic</span>(err)
-	}
-}
-</code></pre></div><h3 id="服务器错误处理案例二">服务器错误处理案例二</h3>
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> main() {
+    http.HandleFunc(<span style="color:#f1fa8c">&#34;/list/&#34;</span>, errWrapper(fileListing.Server))
+    err <span style="color:#ff79c6">:=</span> http.ListenAndServe(<span style="color:#f1fa8c">&#34;:8888&#34;</span>, <span style="color:#ff79c6">nil</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+}</code></pre></div>
+<h3 id="服务器错误处理案例二">服务器错误处理案例二</h3>
+
 <p>在之前的案例一当中, 简单编写了一个文件显示的服务, 他可以捕获文件不存在, 权限, 服务器等错误, 而且它只能在 localhost:8888/list/ 下面访问文件, 如果不在list下面它将会报一个很难看的错误, 接下来就对它进行进一步的优化.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#6272a4">// Error-wrapper-handling, received error values from file-web-server
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> appHandler <span style="color:#8be9fd;font-style:italic">func</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>
 
 <span style="color:#8be9fd;font-style:italic">type</span> UserError <span style="color:#8be9fd;font-style:italic">interface</span> {
-	<span style="color:#8be9fd">error</span>
-	<span style="color:#50fa7b">Message</span>() <span style="color:#8be9fd">string</span>
+    <span style="color:#8be9fd">error</span>
+    Message() <span style="color:#8be9fd">string</span>
 }
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ErrWrapper</span>(handler appHandler) <span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+<span style="color:#8be9fd;font-style:italic">func</span> ErrWrapper(handler appHandler) <span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
 
-	<span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">func</span> (writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">func</span> (writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
 
-		<span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
-			<span style="color:#ff79c6">if</span> r <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">recover</span>(); r <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-				log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Panic: %v&#34;</span>, r)
-				http.<span style="color:#50fa7b">Error</span>(writer, http.<span style="color:#50fa7b">StatusText</span>(StatusInternalServerError), StatusInternalServerError)
-			}
-		}()
-		err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">handler</span>(writer, request)
-		<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-			log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Error handling: %s&#34;</span>, err.<span style="color:#50fa7b">Error</span>())
-			<span style="color:#6272a4">// If the received err-values is userError-typing,
-</span><span style="color:#6272a4"></span>			<span style="color:#6272a4">// call userError.Message to return custom error-messages
-</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">if</span> userErr, ok <span style="color:#ff79c6">:=</span> err.(UserError); ok {
-				http.<span style="color:#50fa7b">Error</span>(writer, userErr.<span style="color:#50fa7b">Message</span>(), StatusBadRequest)
-				<span style="color:#ff79c6">return</span>
-			}
-			code <span style="color:#ff79c6">:=</span> StatusOK
-			<span style="color:#ff79c6">switch</span> {
-			<span style="color:#ff79c6">case</span> os.<span style="color:#50fa7b">IsNotExist</span>(err):
-				code = StatusNotFound
-			<span style="color:#ff79c6">case</span> os.<span style="color:#50fa7b">IsPermission</span>(err):
-				code = StatusForbidden
-			<span style="color:#ff79c6">default</span>:
-				code = StatusInternalServerError
-			}
-			http.<span style="color:#50fa7b">Error</span>(writer, http.<span style="color:#50fa7b">StatusText</span>(code), code)
-		}
-	}
+        <span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+            <span style="color:#ff79c6">if</span> r <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">recover</span>(); r <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+                log.Printf(<span style="color:#f1fa8c">&#34;Panic: %v&#34;</span>, r)
+                http.Error(writer, http.StatusText(StatusInternalServerError), StatusInternalServerError)
+            }
+        }()
+        err <span style="color:#ff79c6">:=</span> handler(writer, request)
+        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+            log.Printf(<span style="color:#f1fa8c">&#34;Error handling: %s&#34;</span>, err.Error())
+            <span style="color:#6272a4">// If the received err-values is userError-typing,
+</span><span style="color:#6272a4"></span>            <span style="color:#6272a4">// call userError.Message to return custom error-messages
+</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">if</span> userErr, ok <span style="color:#ff79c6">:=</span> err.(UserError); ok {
+                http.Error(writer, userErr.Message(), StatusBadRequest)
+                <span style="color:#ff79c6">return</span>
+            }
+            code <span style="color:#ff79c6">:=</span> StatusOK
+            <span style="color:#ff79c6">switch</span> {
+            <span style="color:#ff79c6">case</span> os.IsNotExist(err):
+                code = StatusNotFound
+            <span style="color:#ff79c6">case</span> os.IsPermission(err):
+                code = StatusForbidden
+            <span style="color:#ff79c6">default</span>:
+                code = StatusInternalServerError
+            }
+            http.Error(writer, http.StatusText(code), code)
+        }
+    }
 }
 
 <span style="color:#6272a4">// File-web-server, return an error values to error-wrapper
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> UserError <span style="color:#8be9fd">string</span>
 
-<span style="color:#8be9fd;font-style:italic">func</span> (e UserError) <span style="color:#50fa7b">Error</span>() <span style="color:#8be9fd">string</span> {
-	<span style="color:#ff79c6">return</span> e.<span style="color:#50fa7b">Message</span>()
+<span style="color:#8be9fd;font-style:italic">func</span> (e UserError) Error() <span style="color:#8be9fd">string</span> {
+    <span style="color:#ff79c6">return</span> e.Message()
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> (e UserError) <span style="color:#50fa7b">Message</span>() <span style="color:#8be9fd">string</span> {
-	<span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">string</span>(e)
+<span style="color:#8be9fd;font-style:italic">func</span> (e UserError) Message() <span style="color:#8be9fd">string</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">string</span>(e)
 }
 
 <span style="color:#8be9fd;font-style:italic">const</span> prefix = <span style="color:#f1fa8c">&#34;/list/&#34;</span>
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">Server</span>(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>{
-	<span style="color:#6272a4">// If the url not exists &#34;/list/&#34; return the message by using userError
-</span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">if</span> strings.<span style="color:#50fa7b">Index</span>(request.URL.Path, prefix) <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">0</span> {
-		<span style="color:#ff79c6">return</span> <span style="color:#50fa7b">UserError</span>(<span style="color:#f1fa8c">&#34;The path must start-with &#34;</span> <span style="color:#ff79c6">+</span> prefix)
-	}
-	path <span style="color:#ff79c6">:=</span> request.URL.Path[<span style="color:#8be9fd;font-style:italic">len</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>):]
-	file, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(path)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	<span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
-	all, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	writer.<span style="color:#50fa7b">Write</span>(all)
-	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
+<span style="color:#8be9fd;font-style:italic">func</span> Server(writer http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) <span style="color:#8be9fd">error</span>{
+    <span style="color:#6272a4">// If the url not exists &#34;/list/&#34; return the message by using userError
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> strings.Index(request.URL.Path, prefix) <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">0</span> {
+        <span style="color:#ff79c6">return</span> UserError(<span style="color:#f1fa8c">&#34;The path must start-with &#34;</span> <span style="color:#ff79c6">+</span> prefix)
+    }
+    path <span style="color:#ff79c6">:=</span> request.URL.Path[<span style="color:#8be9fd;font-style:italic">len</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>):]
+    file, err <span style="color:#ff79c6">:=</span> os.Open(path)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> err
+    }
+    <span style="color:#ff79c6">defer</span> file.Close()
+    all, err <span style="color:#ff79c6">:=</span> ioutil.ReadAll(file)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> err
+    }
+    writer.Write(all)
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
 }
 
 <span style="color:#6272a4">// run simple file web server
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-	http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/list/&#34;</span>, ErrorWrapperHandling.<span style="color:#50fa7b">ErrWrapper</span>(fileWebServer.Server))
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> http.<span style="color:#50fa7b">ListenAndServe</span>(<span style="color:#f1fa8c">&#34;:8888&#34;</span>, <span style="color:#ff79c6">nil</span>); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#8be9fd;font-style:italic">panic</span>(err)
-	}
-}
-</code></pre></div><p>在这个案例当中优化了错误处理, 在file-web中创建一个UserError的结构体, 它返回类型为字符串, 并且判断这个url是否是/list/, 如果不是, 就返回警告信息, 当ErrorWrapper函数接收到了这个信息首先会判断这个错误类型是否属于UserError, 如果属于, 就将这个错误写入web界面用以提示用户, 我们的侧重点不在代码, 而是在于使用了错误处理的骚操作, 函数式编程来处理这文件服务器所发生的一部分错误, 整体代码很简单, 逻辑一比较简单, 无非就是: web服务器它只负责运行自己, 发生了错误就把它扔出来交给ErrorWrapper, ErrorWrapper负责处理这些错误异常.</p>
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> main() {
+    http.HandleFunc(<span style="color:#f1fa8c">&#34;/list/&#34;</span>, ErrorWrapperHandling.ErrWrapper(fileWebServer.Server))
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> http.ListenAndServe(<span style="color:#f1fa8c">&#34;:8888&#34;</span>, <span style="color:#ff79c6">nil</span>); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+}</code></pre></div>
+<p>在这个案例当中优化了错误处理, 在file-web中创建一个UserError的结构体, 它返回类型为字符串, 并且判断这个url是否是/list/, 如果不是, 就返回警告信息, 当ErrorWrapper函数接收到了这个信息首先会判断这个错误类型是否属于UserError, 如果属于, 就将这个错误写入web界面用以提示用户, 我们的侧重点不在代码, 而是在于使用了错误处理的骚操作, 函数式编程来处理这文件服务器所发生的一部分错误, 整体代码很简单, 逻辑一比较简单, 无非就是: web服务器它只负责运行自己, 发生了错误就把它扔出来交给ErrorWrapper, ErrorWrapper负责处理这些错误异常.</p>
+
 <p>到现在为止基础差不多快学完了, 之后的就是golang比较核心的部分了, 加油↖(^ω^)↗</p>
+
 <p>done..</p>
 
   </div>

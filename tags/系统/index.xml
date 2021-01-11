@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>系统 on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in 系统 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Gentoo安装历程</title>
       <link>/2019/03/11/gentoo-installation-tutoria/</link>
@@ -16,8 +20,7 @@
       <description>这是一篇没有技术含量的文章&amp;hellip;
  Gentoo安装历程 准备开始 第一步当然是下载所需的chroot环境与Gentoo的stage3包
 当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的
-那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧
-开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
+那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧 开始安装 当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.
 # 查看硬盘 fdisk -l # 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份) mkfs.ext4 /dev/nvme0n1 # 这里我使用的是cfdisk分区(简单明了) cfdisk /dev/nvme0n1 # 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区 # 对它们进行格式化操作 mkfs.vfat -F 32 /dev/nvme0n1p1 mkfs.swap /dev/nvme0n1p2 mkfs.ext4 /dev/nvme0n1p3 # 待格式话操作完成之后, 讲它们挂载到对应分区 mount /dev/nvme0n1p3 /mnt/gentoo # 此分区为最大的( / )分区 mkdir -p /mnt/gentoo/boot mount /dev/nvme0n1p1 /mnt/gentoo/boot # 下载系统文件并解压(官方的stage3, 这里使用网易的源) wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo # 解压(先切换到/mnt/gentoo目录之下) tar xvpf stage3-amd64-* --xattrs-include=&amp;#34;*.</description>
     </item>
     
@@ -33,7 +36,7 @@
 刻录系统到U盘与设置BIOS开机以U盘启动
 这里就不赘述了, 自行百度
 开始安装 当完成了上述的准备之后, 就可以开始安装系统了
-# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap # 并对其进行格式化操作:  mkfs.vfat -F32 /dev/nvme0n1p1 # boot  mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap  mkfs.ext4 /dev/nvme0n1p3 # / # 创建目录并挂载分区:  mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源:  vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行  # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
+# 查看磁盘分区情况，并视情况进行格式化分区 fdisk -l # 这里我使用的cfdisk对硬盘进行分区 cfdisk /dev/nvme0n1 # (注意看好自己要安装到哪个硬盘) # 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap  # 并对其进行格式化操作: mkfs.vfat -F32 /dev/nvme0n1p1 # boot mkswap /dev/nvme0n1p2 # swap swapon /dev/nvme0n1p2 # swap mkfs.ext4 /dev/nvme0n1p3 # /  # 创建目录并挂载分区: mount /dev/nvme0n1p3 /mnt mkdir /mnt/boot /mnt/var mount /dev/nvme0n1p1 /mnt/boot # 更换国内源: vi /etc/pacman.d/mirrorlist # 找到中国的源, 将其放到首行  # 设置网络(建议使用有线连接): dhcpcd enp4s0 # 后面跟自己的有线网卡名, 使用ip link查看网卡名字 # 如果需要使用wifi, 执行以下的操作后尝试ping baidu.</description>
     </item>
     
   </channel>

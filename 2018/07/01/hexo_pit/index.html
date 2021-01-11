@@ -99,48 +99,58 @@
   
 <div class="blog-post">
   <h2>Hexo踩坑</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h1 id="踩坑记录">踩坑记录</h1>
-<h2 id="无法部署长期卡在这个地方">无法部署,长期卡在这个地方</h2>
+
+<h2 id="无法部署-长期卡在这个地方">无法部署,长期卡在这个地方</h2>
+
 <blockquote>
-<p>On branch master<br>
+<p>On branch master<br />
 nothing to commit, working tree clean</p>
 </blockquote>
+
 <ul>
 <li>原因1：
 <strong>_config.yml文件中冒号后面必须要有个空格</strong></li>
 <li>原因2：
-<strong>网络不好</strong></li>
-<li>原因3：
-<strong>排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署</strong></li>
+<strong>网络不好</strong><br /></li>
+
+<li><p>原因3：
+<strong>排除这两个原因外，删除.deploy_git目录和public目录重新生成并部署</strong>
+<!-- more --></p>
+
+<h2 id="部署时提示输入github账户密码-但一直报错误密码的错误">部署时提示输入github账户密码，但一直报错误密码的错误：</h2></li>
 </ul>
-<!-- raw HTML omitted -->
-<h2 id="部署时提示输入github账户密码但一直报错误密码的错误">部署时提示输入github账户密码，但一直报错误密码的错误：</h2>
+
 <blockquote>
-<p>原因：</p>
-</blockquote>
-<ul>
-<li>如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值</li>
-</ul>
-<blockquote>
-<p><strong>解决办法:
+<p>原因：
+- 如果使用https上传部署，密码则不是github账户本身的密码，而是开发者设置中生成的token值<br />
+<strong>解决办法:
 在自己的账户中生成一个token，token是临时的，如果关闭了网页就需要重新生成，所以使用ssh方式上传部署</strong></p>
 </blockquote>
+
 <h2 id="使用git-push上传">使用git push上传</h2>
+
 <blockquote>
 <p>使用git初始化public目录，然后按照正常push流程上传部署，因为需要上传的文件都是这里的</p>
 </blockquote>
-<h2 id="为hexogithub-pages绑定域名">为hexo+github pages绑定域名：</h2>
+
+<h2 id="为hexo-github-pages绑定域名">为hexo+github pages绑定域名：</h2>
+
 <blockquote>
-<p>注册域名并添加CNAME值为自己github-pages地址<br>
-在repo中设置绑定的域名<br>
+<p>注册域名并添加CNAME值为自己github-pages地址<br />
+在repo中设置绑定的域名<br />
 在source根目录中创建CNAME文件，内容为需要绑定的域名地址，不可有www.</p>
 </blockquote>
+
 <h2 id="基础指令">基础指令：</h2>
+
 <blockquote>
-</blockquote>
 <pre><code>    hexo n
     hexo g
     hexo s
@@ -148,16 +158,21 @@ nothing to commit, working tree clean</p>
     hexo init
     hexo s -p [port]
 </code></pre>
+</blockquote>
+
 <ul>
-<li>安装hexo:</li>
+<li>安装hexo:<br /></li>
 </ul>
+
 <blockquote>
 <pre><code>  npm install hexo-cli -g
 </code></pre>
 </blockquote>
+
 <ul>
 <li>生成依赖：</li>
 </ul>
+
 <blockquote>
 <pre><code>  npm install hexo-generator-index --save
   npm install hexo-generator-archive --save
@@ -165,16 +180,20 @@ nothing to commit, working tree clean</p>
   npm install hexo-generator-tag --save
 </code></pre>
 </blockquote>
+
 <ul>
 <li>本地运行依赖：</li>
 </ul>
+
 <blockquote>
 <pre><code>  npm install hexo-server --save
 </code></pre>
 </blockquote>
+
 <ul>
 <li>发布依赖：</li>
 </ul>
+
 <blockquote>
 <pre><code>  npm install hexo-deployer-git --save
   npm install hexo-deployer-heroku --save
@@ -182,9 +201,11 @@ nothing to commit, working tree clean</p>
   npm install hexo-deployer-openshift --save
 </code></pre>
 </blockquote>
+
 <ul>
 <li>git全局声明：</li>
 </ul>
+
 <blockquote>
 <pre><code>  git config --global user.name &quot;Your Name&quot;
   git config --global user.email &quot;email@example.com&quot;

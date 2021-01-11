@@ -99,14 +99,19 @@
   
 <div class="blog-post">
   <h2>C语言的指针细学笔记</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h2 id="c语言的指针细学笔记">C语言的指针细学笔记</h2>
+
 <p>声明指针:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>pnumber; <span style="color:#6272a4">// 声明一个指向int类型变量的指针
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">*</span> pnumber; <span style="color:#6272a4">// 一样的效果
-</span></code></pre></div><p>pnumber的类型时int*, 而未初始化的指针时非常危险的, 可以将NULL赋值给它<code>int *pnumber = NULL</code>, 这样pnumber便不会乱指内存.</p>
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">*</span> pnumber; <span style="color:#ff79c6">//</span> 一样的效果</code></pre></div>
+<p>pnumber的类型时int*, 而未初始化的指针时非常危险的, 可以将NULL赋值给它<code>int *pnumber = NULL</code>, 这样pnumber便不会乱指内存.</p>
+
 <p>通过指针访问值:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
@@ -115,17 +120,18 @@
     <span style="color:#8be9fd">int</span> result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">*</span>pointer <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">5</span>;
     assert(result <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">20</span>); <span style="color:#6272a4">// pass
 </span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
-}
-</code></pre></div><p>指向常量的指针:</p>
+}</code></pre></div>
+<p>指向常量的指针:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
     <span style="color:#8be9fd">int</span> count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">43</span>;
     <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span><span style="color:#ff79c6">const</span> pcount <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">&amp;</span>count; <span style="color:#6272a4">// Defines a constant pointer
 </span><span style="color:#6272a4"></span>
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
-}
-</code></pre></div><p>使用const关键字声明常量指针, 它指向的内存是不能被改变的.<br>
+}</code></pre></div>
+<p>使用const关键字声明常量指针, 它指向的内存是不能被改变的.<br />
 声明指针时, 指针的命名最好以p开头, 这样就可以清晰明了的知道谁是指针..</p>
+
 <p>数组与指针:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
@@ -134,8 +140,8 @@
     assert(<span style="color:#ff79c6">*</span>parray <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>); <span style="color:#6272a4">// pass
 </span><span style="color:#6272a4"></span>
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
-}
-</code></pre></div><p>多维数组:</p>
+}</code></pre></div>
+<p>多维数组:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
     <span style="color:#8be9fd">char</span> board[<span style="color:#bd93f9">3</span>][<span style="color:#bd93f9">3</span>] <span style="color:#ff79c6">=</span> {
@@ -148,8 +154,8 @@
     printf(<span style="color:#f1fa8c">&#34;value of board[0] : %p</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, board[<span style="color:#bd93f9">0</span>]);
 
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
-}
-</code></pre></div><p>这三个输出的地址是一样的, 三种访问方式是等效的.<br>
+}</code></pre></div>
+<p>这三个输出的地址是一样的, 三种访问方式是等效的.<br />
 接下来使用指针的方式:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">void</span>)
 {
@@ -169,9 +175,10 @@
     }
 
     <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
-}
-</code></pre></div><p>尽管可以把二维数组看作一维数组, 但是这在内存中布置二维数组的方式.<br>
+}</code></pre></div>
+<p>尽管可以把二维数组看作一维数组, 但是这在内存中布置二维数组的方式.<br />
 二维数组的元素存储为一个很大的一维数组, 编译器确保可以像一维数组那样访问它.</p>
+
 <p>未完待续..</p>
 
   </div>

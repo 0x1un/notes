@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in Linux on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Linux各种疑难问题</title>
       <link>/2020/01/08/linux_problem/</link>
@@ -28,8 +32,8 @@ I instance.cpp:903] Override Enabled Addons: {} I instance.cpp:904] Override Dis
 iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.212 -j DROP iptables -t filter -I INPUT -m iprange --src-range 192.168.0.1-192.168.0.3 --dst-range 192.168.0.4-192.168.0.6 -j DROP 上面两条命令有点长, 但意思很明显, 使用了扩展模块iprange
 --src-range是源地址的范围, --dst-range是目标地址的范围
 同样, --src-range和--dst-range可以使用取反(!)操作
-string扩展模块 如果报文信息中包含了字符&amp;quot;hello&amp;quot;, 就对此报文进行进一步的操作
-iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;quot;hello, world&amp;quot;这个字符串, 就将其拒绝
+string扩展模块 如果报文信息中包含了字符&amp;rdquo;hello&amp;rdquo;, 就对此报文进行进一步的操作
+iptables -t filter -I INPUT -m string --algo bm --string &amp;#34;hello, world&amp;#34; -j REJECT 上面的意思很明显, 只要接收到的报文中有&amp;rdquo;hello, world&amp;rdquo;这个字符串, 就将其拒绝
 --algo bm的意思的是指定要使用的算法, 这里指定bm算法来匹配指定的字符串
 time扩展模块 time模块可以对特定时间段的报文进行处理
 iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 07:00:00 --timestop 18:00:00 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --weekdays 6,7 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --monthdays 22,23 -j REJECT iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --datestart 2019-06-15 --datestop 2019-06-23 -j REJECT 上面的意思是对所有在7点钟到18点钟的80端口进行拒绝, 使用的链为OUTPUT</description>
@@ -98,16 +102,16 @@ https://github.com/0x1un/dotFiles</description>
       <guid>/2018/07/22/grep_mono/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  参数  * : 表示当前目录所有文件，也可以是某个文件名
-  -r 是递归查找
-  -n 是显示行号
-  -R 查找所有文件包含子目录
-  -i 忽略大小写
- 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
-  grep -l pattern files ：只列出匹配的文件名，
-  grep -L pattern files ：列出不匹配的文件名，
-  grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
-  grep -C number pattern files ：匹配的上下文分别显示[number]行，
-  grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，</description>
+-r 是递归查找
+-n 是显示行号
+-R 查找所有文件包含子目录
+-i 忽略大小写 下面是一些有意思的命令行参数   grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，
+ grep -l pattern files ：只列出匹配的文件名，
+ grep -L pattern files ：列出不匹配的文件名，
+ grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’），
+ grep -C number pattern files ：匹配的上下文分别显示[number]行，
+ grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，
+ grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</description>
     </item>
     
   </channel>

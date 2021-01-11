@@ -102,56 +102,67 @@
         <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<!-- raw HTML omitted -->
+
+<!-- more -->
+
 <p>在学习Rust的历程中, 其中的灵魂便是trait这个玩意儿, 它的功能非常强大, Rust中所有的抽象几乎都是使用trait来完成的, 同时trait也保证这些抽象都是运行时零开销的. 它与我已知语言中的Python的Duck-Typing(鸭子类型), Golang的接口非常相似但功能据说更加强大, 先在这里记录一篇学习的笔记.</p>
+
 <p>trait的限定与trait对象的用法:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Foo</span>;
 
 <span style="color:#ff79c6">trait</span> Bar {
-	<span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">baz</span>(<span style="color:#ff79c6">&amp;</span>self);
+    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">baz</span>(<span style="color:#ff79c6">&amp;</span>self);
 }
 
 <span style="color:#ff79c6">impl</span> Bar <span style="color:#ff79c6">for</span> Foo {
-	<span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">baz</span>(<span style="color:#ff79c6">&amp;</span>self) {
-		println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;{:?}&#34;</span>, self);
-	}
+    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">baz</span>(<span style="color:#ff79c6">&amp;</span>self) {
+        println<span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;{:?}&#34;</span>, self);
+    }
 }
 
 <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">static_dispatch</span><span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> (t: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">T</span>) <span style="color:#ff79c6">where</span> T: <span style="color:#50fa7b">Bar</span> {
-	t.baz();
+    t.baz();
 }
 
 <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">dynamic_dispatch</span>(t: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Bar</span>) {
-	t.baz();
+    t.baz();
 }
 
 
 <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
-	<span style="color:#8be9fd;font-style:italic">let</span> foo <span style="color:#ff79c6">=</span> Foo;
-	static_dispatch(<span style="color:#ff79c6">&amp;</span>foo); <span style="color:#6272a4">// Foo
-</span><span style="color:#6272a4"></span>	dynamic_dispatch(<span style="color:#ff79c6">&amp;</span>foo); <span style="color:#6272a4">// Foo
-</span><span style="color:#6272a4"></span>}
-</code></pre></div><p>可以看出<code>static_dispatch</code>与<code>dynamic_dispatch</code>行为目的是相同的, <code>static_dispatch</code>是泛型限定为静态分发, 而<code>dynamic_dispatch</code>时动态分发. (从方法命名就可以看出来, 这不是废话么(逃..</p>
+    <span style="color:#8be9fd;font-style:italic">let</span> foo <span style="color:#ff79c6">=</span> Foo;
+    static_dispatch(<span style="color:#ff79c6">&amp;</span>foo); <span style="color:#6272a4">// Foo
+</span><span style="color:#6272a4"></span>    dynamic_dispatch(<span style="color:#ff79c6">&amp;</span>foo); <span style="color:#6272a4">// Foo
+</span><span style="color:#6272a4"></span>}</code></pre></div>
+<p>可以看出<code>static_dispatch</code>与<code>dynamic_dispatch</code>行为目的是相同的, <code>static_dispatch</code>是泛型限定为静态分发, 而<code>dynamic_dispatch</code>时动态分发. (从方法命名就可以看出来, 这不是废话么(逃..</p>
+
 <p><code>static_dispatch</code>是为泛型<code>T</code>做了类型的限定, 只有实现了<code>Bar</code>这个trait的类型才能够使用, 因为上面已经为<code>Foo</code>这个结构体实现了<code>Bar</code>, 理所应当的t是可以调用baz()方法的.</p>
+
 <p>而<code>dynamic_dispatch</code>的参数t标注的类型是Bar(trait), trait本身也是一种类型, 但是它的类型在编译期间是无法确定的, 所以triat对象必须使用指针, 指针是已知的大小的</p>
-<pre><code>		 TraitObject
-		   +++++
-|		   |*|*|						stack |
+
+<pre><code>         TraitObject
+           +++++
+|          |*|*|                        stack |
                    /   \
                   /     \
                (data)  (vtable)
-		 ^     +++^++++   
-|		|T|	|#|#|#|#|				        heap   |
-	                 ^ ^ ^ ^
-			 | | | |
-		        /  | |   \
-		       /   |  \   \
-	        析构函数   大小 对齐 方法
+         ^     +++^++++   
+|       |T| |#|#|#|#|                       heap   |
+                     ^ ^ ^ ^
+             | | | |
+                /  | |   \
+               /   |  \   \
+            析构函数   大小 对齐 方法
 
-</code></pre><p>当<code>dynamic_dispatch(&amp;foo)</code>在运行时期被调用时, 如上所示, 指针会在vtable中寻找相应的方法<code>t.baz()</code>调用</p>
+</code></pre>
+
+<p>当<code>dynamic_dispatch(&amp;foo)</code>在运行时期被调用时, 如上所示, 指针会在vtable中寻找相应的方法<code>t.baz()</code>调用</p>
+
 <p>vtable本质上是一个结构体, 包含了析构函数, 大小, 对齐, 方法等信息</p>
-<p>以<code>impl Bar for Foo</code>为例, data指针指向trait对象保存的类型数据T, vtable指针指向包含T实现的Bar的vtable, 这样就可以将共同拥有相同行为的类型集合抽象为一个类型.<br>
+
+<p>以<code>impl Bar for Foo</code>为例, data指针指向trait对象保存的类型数据T, vtable指针指向包含T实现的Bar的vtable, 这样就可以将共同拥有相同行为的类型集合抽象为一个类型.<br />
 静态分发会在编译期被单态化生成具体类型的实例, 在使用静态分发运行时是零成本的, 它不需要在运行时进行方法查找.</p>
+
 <p>然而并不是每个trait都可以作为trait对象使用, 它需要满足以下的条件.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">#![allow(non_snake_case)]</span>
 <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() {
@@ -214,8 +225,7 @@
     <span style="color:#6272a4">// t.bad(1);
 </span><span style="color:#6272a4"></span>    t.new();
     
-}
-</code></pre></div>
+}</code></pre></div>
   </div>
 
 <br>

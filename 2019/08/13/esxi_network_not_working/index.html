@@ -99,23 +99,40 @@
   
 <div class="blog-post">
   <h2>踩坑之Esxi虚拟服务器无法联网</h2>
-        <p>在这个分类中主要记载在运维时所遇到的坑</p>
+        
+
+<p>在这个分类中主要记载在运维时所遇到的坑</p>
+
 <p>惯例:</p>
+
 <blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h4 id="虚拟机无法联网">虚拟机无法联网?</h4>
+
 <p>这个倒也不算一个坑, 只能归结于我自己不熟悉esxi平台吧, 但它浪费了我将近40分钟的时间, 特在此记录一下</p>
+
 <p>首先在CentOS中查看到它的网卡没有获取到ip地址, 这时我以迅雷不及掩耳之势 熟练地敲下了</p>
+
 <pre><code>ip link set down ens192 &amp;&amp; ip link set up ens192
 systemctl restart network
-</code></pre><p>然并卵&hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡</p>
+</code></pre>
+
+<p>然并卵&hellip;经过修改了网卡的配置文件, 将BOOTPROTO置为static, ONBOOT置为yes,重新禁用启用网卡</p>
+
 <pre><code>ifdown ens192
 ifup ens192
-</code></pre><p>嗯&hellip;中间没有任何异常, 通过<code>ip addr</code>也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了<code>ping</code>网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.</p>
+</code></pre>
+
+<p>嗯&hellip;中间没有任何异常, 通过<code>ip addr</code>也看到了它获取到的ip地址, 我想这时候已经可以上网了吧, 意外的是依然不行, 我尝试了<code>ping</code>网关与DNS, 这两个都不可达. 这时候询问了一下同事, 他是网工嘛, 自然问他咯, 他说这是配置有问题, 我依然在虚拟机中与其死磕(捂脸=-=), 接连操作了几台服务器, 发现配置都没毛病.</p>
+
 <p>解决办法:</p>
+
 <p>在esxi控制台中的networking栏为虚拟网卡链接到物理网卡, 问题解决&hellip;</p>
+
 <h3 id="总结">总结</h3>
+
 <p>这个问题说难那是一点都不难, 但往往很容易忽略, 这时候便需要你停下来静心思考, 这个坑的主要原因还是因为对该控制台不熟悉造成的, 这也是一个小经验吧, 以后不会再犯了&hellip;</p>
 
   </div>

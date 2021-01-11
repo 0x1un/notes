@@ -99,30 +99,41 @@
   
 <div class="blog-post">
   <h2>关于nmcli连接隐藏wifi的问题</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="关于nmcli连接隐藏wifi的问题">关于nmcli连接隐藏wifi的问题</h3>
+
 <p>在之前的使用当中, 我的笔记本大部分时间直接连的是网线接口, 在使用wifi的时候也就是使用nmcli简单临时连接一下,
-而有个让人很无奈的问题困扰了我一些时候, 这个问题虽然可以直接通过看文档就可以得到解决, 但是嘛..拖延症, 觉得问题不大就一直搁那儿了,
-今天正好给做个记录, 以便之后再用到</p>
+    而有个让人很无奈的问题困扰了我一些时候, 这个问题虽然可以直接通过看文档就可以得到解决, 但是嘛..拖延症, 觉得问题不大就一直搁那儿了,
+    今天正好给做个记录, 以便之后再用到</p>
+
 <p>Networkmanager这个软件我就不过多介绍了, 官方的文档有很详细的说明, 简单提一下, 它是基于wpa_supplicant的, 但功能非常强大方便</p>
+
 <p>在之前的使用中, 我通常是使用以下的命令用来连接我家的隐藏wifi, 但有个毛病, 那就是连接wifi是要看脸的&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli dev wifi connect &lt;SSID&gt; hidden <span style="color:#8be9fd;font-style:italic">true</span> password &lt;PASSWORD&gt;
-</code></pre></div><p>有时候被这个bug给气的不轻, 但又懒得管, 毕竟我有网线嘛=_=</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli dev wifi connect &lt;SSID&gt; hidden <span style="color:#8be9fd;font-style:italic">true</span> password &lt;PASSWORD&gt;</code></pre></div>
+<p>有时候被这个bug给气的不轻, 但又懒得管, 毕竟我有网线嘛=_=</p>
+
 <p>看了文档之后, 就知道一种稳定的连接方法 ( 果然人不能懒啊=_=</p>
+
 <p>这个软件的基本操作我就不介绍了, 去看文档吧, 直入主题</p>
+
 <p>打开wifi开关</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli r wifi on
-</code></pre></div><p>隐藏网络是一种普通的无线网络, 除非你主动去请求连接它, 否则你是找不到的, 需要从其详细参数连接</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli r wifi on</code></pre></div>
+<p>隐藏网络是一种普通的无线网络, 除非你主动去请求连接它, 否则你是找不到的, 需要从其详细参数连接</p>
+
 <p>创建隐藏网络的关联</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli c add <span style="color:#8be9fd;font-style:italic">type</span> wifi con-name &lt;NAME&gt; ifname &lt;INTERFACE&gt; ssid &lt;SSID&gt;
-nmcli c modify &lt;NAME&gt; wifi-sec.key-mgmt wpa-psk wifi-sec.psk &lt;PASSWORD&gt;
-</code></pre></div><p>在创建了关联之后, 就可以使用以下的命令连接到对应网络</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli c up &lt;NAME&gt;
-</code></pre></div><p>在之后的使用当中如果碰到连接失败, 找不到wifi的情况下, 可以试试重新开关wifi</p>
+nmcli c modify &lt;NAME&gt; wifi-sec.key-mgmt wpa-psk wifi-sec.psk &lt;PASSWORD&gt;</code></pre></div>
+<p>在创建了关联之后, 就可以使用以下的命令连接到对应网络</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nmcli c up &lt;NAME&gt;</code></pre></div>
+<p>在之后的使用当中如果碰到连接失败, 找不到wifi的情况下, 可以试试重新开关wifi</p>
+
 <p>本文参考文档:
-<a href="https://developer.gnome.org/NetworkManager/unstable/nmcli.html">https://developer.gnome.org/NetworkManager/unstable/nmcli.html</a></p>
+    <a href="https://developer.gnome.org/NetworkManager/unstable/nmcli.html">https://developer.gnome.org/NetworkManager/unstable/nmcli.html</a></p>
 
   </div>
 

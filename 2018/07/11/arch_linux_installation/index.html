@@ -99,110 +99,120 @@
   
 <div class="blog-post">
   <h2>Arch-Linux安装笔记(只作为参考)</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="准备">准备</h3>
+
 <p>安装Arch-linux非常简单, 首先需要做以下的准备</p>
-<p>前往Arch Linux的官网下载最新chroot<br>
-刻录系统到U盘与设置BIOS开机以U盘启动<br>
+
+<p>前往Arch Linux的官网下载最新chroot<br />
+刻录系统到U盘与设置BIOS开机以U盘启动<br />
 这里就不赘述了, 自行百度</p>
-<!-- raw HTML omitted -->
-<h3 id="__开始安装__"><strong>开始安装</strong></h3>
+
+<!-- more -->
+
+<h3 id="开始安装"><strong>开始安装</strong></h3>
+
 <p>当完成了上述的准备之后, 就可以开始安装系统了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 查看磁盘分区情况，并视情况进行格式化分区</span>
-fdisk -l   
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 查看磁盘分区情况，并视情况进行格式化分区
+</span><span style="color:#6272a4"></span>fdisk -l   
 
-<span style="color:#6272a4"># 这里我使用的cfdisk对硬盘进行分区</span>
-cfdisk /dev/nvme0n1 <span style="color:#6272a4"># (注意看好自己要安装到哪个硬盘)</span>
-<span style="color:#6272a4"># 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap</span>
-
-<span style="color:#6272a4"># 并对其进行格式化操作:  </span>
-mkfs.vfat -F32 /dev/nvme0n1p1  <span style="color:#6272a4"># boot    </span>
-mkswap /dev/nvme0n1p2 <span style="color:#6272a4"># swap</span>
-swapon /dev/nvme0n1p2 <span style="color:#6272a4"># swap </span>
-mkfs.ext4 /dev/nvme0n1p3 <span style="color:#6272a4"># /</span>
-
-<span style="color:#6272a4"># 创建目录并挂载分区:  </span>
-mount /dev/nvme0n1p3 /mnt  
+<span style="color:#6272a4"># 这里我使用的cfdisk对硬盘进行分区
+</span><span style="color:#6272a4"></span>cfdisk /dev/nvme0n1 <span style="color:#6272a4"># (注意看好自己要安装到哪个硬盘)
+</span><span style="color:#6272a4"># 需要划分为三个区, [boot swap /], 如果不需要使用交换空间可以不用划分swap
+</span><span style="color:#6272a4"></span>
+<span style="color:#6272a4"># 并对其进行格式化操作:  
+</span><span style="color:#6272a4"></span>mkfs.vfat -F32 /dev/nvme0n1p1  <span style="color:#6272a4"># boot    
+</span><span style="color:#6272a4"></span>mkswap /dev/nvme0n1p2 <span style="color:#6272a4"># swap
+</span><span style="color:#6272a4"></span>swapon /dev/nvme0n1p2 <span style="color:#6272a4"># swap 
+</span><span style="color:#6272a4"></span>mkfs.ext4 /dev/nvme0n1p3 <span style="color:#6272a4"># /
+</span><span style="color:#6272a4"></span>
+<span style="color:#6272a4"># 创建目录并挂载分区:  
+</span><span style="color:#6272a4"></span>mount /dev/nvme0n1p3 /mnt  
 mkdir /mnt/boot /mnt/var  
 mount /dev/nvme0n1p1 /mnt/boot  
 
-<span style="color:#6272a4"># 更换国内源:  </span>
-vi /etc/pacman.d/mirrorlist  
-<span style="color:#6272a4"># 找到中国的源, 将其放到首行  </span>
-
-<span style="color:#6272a4"># 设置网络(建议使用有线连接):</span>
-dhcpcd enp4s0 <span style="color:#6272a4"># 后面跟自己的有线网卡名, 使用ip link查看网卡名字</span>
-<span style="color:#6272a4"># 如果需要使用wifi, 执行以下的操作后尝试ping baidu.com</span>
-systemctl restart dhcpcd   
+<span style="color:#6272a4"># 更换国内源:  
+</span><span style="color:#6272a4"></span>vi /etc/pacman.d/mirrorlist  
+<span style="color:#6272a4"># 找到中国的源, 将其放到首行  
+</span><span style="color:#6272a4"></span>
+<span style="color:#6272a4"># 设置网络(建议使用有线连接):
+</span><span style="color:#6272a4"></span>dhcpcd enp4s0 <span style="color:#6272a4"># 后面跟自己的有线网卡名, 使用ip link查看网卡名字
+</span><span style="color:#6272a4"># 如果需要使用wifi, 执行以下的操作后尝试ping baidu.com
+</span><span style="color:#6272a4"></span>systemctl restart dhcpcd   
 systemctl restart netctl  
 wifi-menu  
 
-<span style="color:#6272a4">## 开始安装:  </span>
-<span style="color:#6272a4"># base-devel为一些开发组件, 非必要安装, 但建议个人电脑安装</span>
-pacstrap -i /mnt base base-devel 
-<span style="color:#6272a4"># 生成fstab文件 -U为使用UUID, 使用blkid可查询UUID(用以挂在文件, 启动系统所用)  </span>
-genfstab -U /mnt &gt;&gt; /mnt/etc/fstab  
-cat /mnt/etc/fstab   <span style="color:#6272a4">#务必查看挂载的分区与类型是否正确</span>
-</code></pre></div><h3 id="后续配置">后续配置</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 拷贝dns信息到系统当中</span>
-cp /etc/resolv.conf /mnt/etc/resolv.conf 
-arch-chroot /mnt bash <span style="color:#6272a4">#进入系统进行后续配置  </span>
-
-<span style="color:#6272a4"># 设置时间:  </span>
-rm -rf /etc/localtime  
+<span style="color:#6272a4">## 开始安装:  
+</span><span style="color:#6272a4"># base-devel为一些开发组件, 非必要安装, 但建议个人电脑安装
+</span><span style="color:#6272a4"></span>pacstrap -i /mnt base base-devel 
+<span style="color:#6272a4"># 生成fstab文件 -U为使用UUID, 使用blkid可查询UUID(用以挂在文件, 启动系统所用)  
+</span><span style="color:#6272a4"></span>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab  
+cat /mnt/etc/fstab   #务必查看挂载的分区与类型是否正确</code></pre></div>
+<h3 id="后续配置">后续配置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># 拷贝dns信息到系统当中
+</span><span style="color:#6272a4"></span>cp /etc/resolv.conf /mnt/etc/resolv.conf 
+arch-chroot /mnt bash <span style="color:#6272a4">#进入系统进行后续配置  
+</span><span style="color:#6272a4"></span>
+<span style="color:#6272a4"># 设置时间:  
+</span><span style="color:#6272a4"></span>rm -rf /etc/localtime  
 ln -s /usr/share/zoneinfo/Asia/Shanghai   /etc/localtime  
 
-<span style="color:#6272a4"># 设置硬件时间:  </span>
-hwclock --systohc-utc  
+<span style="color:#6272a4"># 设置硬件时间:  
+</span><span style="color:#6272a4"></span>hwclock --systohc-utc  
 
-<span style="color:#6272a4"># 设置编码:  </span>
-vi /etc/locale.gen <span style="color:#6272a4">#选择你所需要的编码  </span>
-localegen  
+<span style="color:#6272a4"># 设置编码:  
+</span><span style="color:#6272a4"></span>vi /etc/locale.gen <span style="color:#6272a4">#选择你所需要的编码  
+</span><span style="color:#6272a4"></span>localegen  
 <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#8be9fd;font-style:italic">LANG</span><span style="color:#ff79c6">=</span>en.GB.UTF8 &gt; /etc/locale.conf  
 <span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">LANG</span><span style="color:#ff79c6">=</span>en.GB.UTF8  
 
-<span style="color:#6272a4"># 设置计算机名:  </span>
-<span style="color:#8be9fd;font-style:italic">echo</span> YourName &gt; /etc/hostname  
+<span style="color:#6272a4"># 设置计算机名:  
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">echo</span> YourName &gt; /etc/hostname  
 <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;127.0.0.1 YourName&#34;</span> &gt;&gt; /etc/hosts  
 
-<span style="color:#6272a4"># BIOS 系统：  </span>
-
+<span style="color:#6272a4"># BIOS 系统：  
+</span><span style="color:#6272a4"></span>
 pacman -S grub osprober  
-grub-install --target<span style="color:#ff79c6">=</span>i386-pc /dev/sdX    <span style="color:#6272a4"># sdX 为目标磁盘  </span>
-grub-mkconfig -o /boot/grub/grub.cfg  
+grub-install --target<span style="color:#ff79c6">=</span>i386-pc /dev/sdX    <span style="color:#6272a4"># sdX 为目标磁盘  
+</span><span style="color:#6272a4"></span>grub-mkconfig -o /boot/grub/grub.cfg  
 
-<span style="color:#6272a4"># UEFI 系统：  </span>
-
+<span style="color:#6272a4"># UEFI 系统：  
+</span><span style="color:#6272a4"></span>
 pacman -S dosfstools grub efibootmgr  
 grub-install <span style="color:#8be9fd;font-style:italic">target</span><span style="color:#ff79c6">=</span>x86_64-efi --efidirectory<span style="color:#ff79c6">=</span>&lt;EFI 分区挂载点&gt; --bootloaderid<span style="color:#ff79c6">=</span>grub --removable 
-grubmkconfig -o /boot/grub/grub.cfg 
-</code></pre></div><h3 id="__完成安装__"><strong>完成安装</strong></h3>
+grubmkconfig -o /boot/grub/grub.cfg </code></pre></div>
+<h3 id="完成安装"><strong>完成安装</strong></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#8be9fd;font-style:italic">exit</span>   
-umount -R /mnt  
-</code></pre></div><h3 id="__为桌面做准备__"><strong>为桌面做准备</strong></h3>
+umount -R /mnt  </code></pre></div>
+<h3 id="为桌面做准备"><strong>为桌面做准备</strong></h3>
+
 <p>创建用户</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd -m -g users -G wheel -s /bin/bash YourName  
-vi /etc/sudoers <span style="color:#6272a4">#为新用户设置权限  </span>
+vi /etc/sudoers <span style="color:#6272a4">#为新用户设置权限  
+</span><span style="color:#6272a4"></span>
+<span style="color:#6272a4"># 显卡驱动:  
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4"># Intel:  
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4"># xf86-video-intel  
+</span><span style="color:#6272a4"># AMD/ATI:  
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4"># xf86-video-ati
+</span><span style="color:#6272a4"># 自动挂载:
+</span><span style="color:#6272a4"></span>sudo pacman -S gvfs
+<span style="color:#6272a4"># 字体:
+</span><span style="color:#6272a4"></span>pacman -S ttf-dejavu wqy-microhei wqy-zenhei
+<span style="color:#6272a4"># 这里本人使用i3-gaps作为桌面, 想用xfce4之类的请自行查阅官方wiki
+</span><span style="color:#6272a4"></span>sudo pacman -S xorg <span style="color:#6272a4"># 务必安装
+</span><span style="color:#6272a4"></span>sudo pacman -S i3-gaps i3blocks i3status comptom conky 
+sudo pacman -S noto-fonts-cjk # 安装中文字体</code></pre></div>
+<h3 id="总结">总结</h3>
 
-<span style="color:#6272a4"># 显卡驱动:  </span>
-    <span style="color:#6272a4"># Intel:  </span>
-    <span style="color:#6272a4"># xf86-video-intel  </span>
-<span style="color:#6272a4"># AMD/ATI:  </span>
-    <span style="color:#6272a4"># xf86-video-ati</span>
-<span style="color:#6272a4"># 自动挂载:</span>
-sudo pacman -S gvfs
-<span style="color:#6272a4"># 字体:</span>
-pacman -S ttf-dejavu wqy-microhei wqy-zenhei
-<span style="color:#6272a4"># 这里本人使用i3-gaps作为桌面, 想用xfce4之类的请自行查阅官方wiki</span>
-sudo pacman -S xorg <span style="color:#6272a4"># 务必安装</span>
-sudo pacman -S i3-gaps i3blocks i3status comptom conky 
-sudo pacman -S noto-fonts-cjk <span style="color:#6272a4"># 安装中文字体</span>
-</code></pre></div><h3 id="总结">总结</h3>
-<p>相比于Gentoo的安装, Arch无疑是非常快速的, 两个发行版安装过程大同小异<br>
-如果你的电脑性能不是很强劲, 那么我建议你还是选择Arch, 包资源无比丰富<br>
-这里是我的i3桌面配置文件, <a href="https://github.com/0x1un/dotFiles">https://github.com/0x1un/dotFiles</a><br>
+<p>相比于Gentoo的安装, Arch无疑是非常快速的, 两个发行版安装过程大同小异<br />
+如果你的电脑性能不是很强劲, 那么我建议你还是选择Arch, 包资源无比丰富<br />
+这里是我的i3桌面配置文件, <a href="https://github.com/0x1un/dotFiles">https://github.com/0x1un/dotFiles</a><br />
 如果觉得不错你可以给我加个小星星或者点把叉子^_^</p>
 
   </div>

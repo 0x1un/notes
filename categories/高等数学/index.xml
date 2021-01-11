@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>高等数学 on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in 高等数学 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>关于向量代数的一些笔记</title>
       <link>/2018/09/29/math_vector/</link>
@@ -26,15 +30,11 @@ $$(x, y)^T$$ + $$(a, b)^T$$ = $$(x + a, y + b)^T$$
 乘法
 $$k\times(x, y)^T$$ = $$(kx, ky)^T$$
 数量乘法
-$$k \cdot\left{\begin{matrix} v1 \
-v2 \
-&amp;hellip; \
-v_n \
-\end{matrix}\right}$$ = $$\left{\begin{matrix} k\cdot v1 \
-k\cdot v2 \
-&amp;hellip; \
-k\cdot v_n \
-\end{matrix}\right}$$</description>
+$$k \cdot\left{\begin{matrix} v1 v2 &amp;hellip; v_n \end{matrix}\right}$$ = $$\left{\begin{matrix} k\cdot v1 k\cdot v2 &amp;hellip; k\cdot v_n \end{matrix}\right}$$
+n维向量也是如此
+1、向量及其线性运算  既有大小，又有方向的量叫做向量（或矢量）
+ 在数学上，常用有向线段来表示向量。有向线段的长度表示向量的大小，有向线段的方向表示向量的方向，注意向量的记法（坚持使用箭头记法）
+在数学上，我们只研究与起点无关的向量，并称这种向量为自由向量。如果遇到与起点有关的向量时，可在一般原则下作特别处理</description>
     </item>
     
   </channel>

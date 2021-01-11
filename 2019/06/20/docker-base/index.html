@@ -99,87 +99,118 @@
   
 <div class="blog-post">
   <h2>docker basic</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="docker基本操作">docker基本操作</h3>
+
 <p>从docker安装Image</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker search mysql
-docker pull mysql
-</code></pre></div><p>第一条命令为搜索关于mysql的所有Image, 第二条则是安装mysql</p>
+docker pull mysql</code></pre></div>
+<p>第一条命令为搜索关于mysql的所有Image, 第二条则是安装mysql</p>
+
 <p>启动使用mysql</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name mysql -e <span style="color:#8be9fd;font-style:italic">MYSQL_ROOT_PASSWORD</span><span style="color:#ff79c6">=</span>qwer123 -d -i -p 3306:3306 --restart<span style="color:#ff79c6">=</span>always mysql
-docker <span style="color:#8be9fd;font-style:italic">exec</span> -it mysql bash
-</code></pre></div><p>--name 运行名为mysql的Image<br>
--e, --env 设置环境变量<br>
--d, --detach 运行容器在后台并打印容器ID<br>
--i, --interactive 即使没有连接, 也要保持STDIN打开<br>
--p, --publish 将容器端口暴露出来, 即映射端口<br>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name mysql -e <span style="color:#8be9fd;font-style:italic">MYSQL_ROOT_PASSWORD</span><span style="color:#ff79c6">=</span>qwer123 -d -i -p <span style="color:#bd93f9">3306</span>:3306 --restart<span style="color:#ff79c6">=</span>always mysql
+docker <span style="color:#8be9fd;font-style:italic">exec</span> -it mysql bash</code></pre></div>
+<p>--name 运行名为mysql的Image<br />
+-e, --env 设置环境变量<br />
+-d, --detach 运行容器在后台并打印容器ID<br />
+-i, --interactive 即使没有连接, 也要保持STDIN打开<br />
+-p, --publish 将容器端口暴露出来, 即映射端口<br />
 --restart 设置重新启动容器退出时应用的策略, 也就是说上列命令mysql会随docker的重启而重启</p>
+
 <p>上面关于docker run命令的一些参数详见官方的<a href="https://docs.docker.com/v17.12/edge/engine/reference/commandline/run/#extended-description">文档</a></p>
+
 <p>关于第二条命令的解释</p>
-<p>-i, --interactive 即使没有连接, 也要保持STDIN打开, 也就是说需要打开shell<br>
+
+<p>-i, --interactive 即使没有连接, 也要保持STDIN打开, 也就是说需要打开shell<br />
 -t, --tty 分配伪tty</p>
+
 <h3 id="dockerfile的run-cmd-entrypoint">Dockerfile的RUN, CMD, ENTRYPOINT</h3>
-<p>RUN 执行命令并创建新的Image Layer<br>
-CMD 设置容器启动后默认执行的命令与参数<br>
+
+<p>RUN 执行命令并创建新的Image Layer<br />
+CMD 设置容器启动后默认执行的命令与参数<br />
 ENTRYPOINT 执行容器启动时执行的命令</p>
+
 <p>在运行docker run的时候如果指定了需要运行的命令, 但是在Dockerfile中的CMD并不会被执行, 它被覆盖了</p>
+
 <p>而ENTRYPOINT也是可以被覆盖的, 当docker run时指定了--entrypoint选项, 则Dockerfile中的ENTRYPOINT就不会被执行</p>
+
 <p>倘若一个Docker Image里没有调用ENTRYPOINT或CMD, 必定会返回错误的信息, 不信可以试试</p>
+
 <p>而这三个关键字有两种写法, 一种是shell, 一种是exec</p>
+
 <p>shell方式</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;hello, docker&#34;</span>
-</code></pre></div><p>就如像使用shell命令一般, 当使用shell方式, 命令行程序作为sh程序的子程序运行, docker使用的/bin/sh -c的语法调用, 使用docker ps就可以查看到</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> echo &#34;hello, docker&#34;</span></code></pre></div>
+<p>就如像使用shell命令一般, 当使用shell方式, 命令行程序作为sh程序的子程序运行, docker使用的/bin/sh -c的语法调用, 使用docker ps就可以查看到</p>
+
 <p>如果使用了shell方式, 那么这个Image必将会拥有一个shell, 没有shell它就无法运行了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;/usr/bin/echo&#34;</span>, <span style="color:#f1fa8c">&#34;hello, docker&#34;</span>]
-</code></pre></div><p>而更好的方式就是使用exec方式, 这样, docker就不需要调用/bin/sh执行命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;/usr/bin/echo&#34;, &#34;hello, docker&#34;]</span></code></pre></div>
+<p>而更好的方式就是使用exec方式, 这样, docker就不需要调用/bin/sh执行命令</p>
+
 <p>根据上述的说明, CMD和ENTRYPOINT是用来指定Image默认运行的程序, 而ENTRYPOINT和CMD组合起来或许能够发挥更大的作用</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> archlinux/base</span>
-<span style="color:#ff79c6">ENTRYPOINT</span> [<span style="color:#f1fa8c">&#34;/usr/bin/curl&#34;</span>, <span style="color:#f1fa8c">&#34;-i&#34;</span>]
-<span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;http://baidu.com&#34;</span>]
-</code></pre></div><p>倘若你构建了这个Dockerfile, 并且启动了它, 如果没有指定其他第三方参数, 那么默认执行的便是</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -i http://baidu.com
-</code></pre></div><p>而两个关键字组合的使用, 好处就是如果你在运行这个Image的时候, 想要curl -i其他的地址, 那么这个组合就会发挥它的作用了, CMD会被docker run指定的运行命令所替换.</p>
+<span style="color:#ff79c6">ENTRYPOINT</span><span style="color:#f1fa8c"> [&#34;/usr/bin/curl&#34;, &#34;-i&#34;]</span>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;http://baidu.com&#34;]</span></code></pre></div>
+<p>倘若你构建了这个Dockerfile, 并且启动了它, 如果没有指定其他第三方参数, 那么默认执行的便是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -i http://baidu.com</code></pre></div>
+<p>而两个关键字组合的使用, 好处就是如果你在运行这个Image的时候, 想要curl -i其他的地址, 那么这个组合就会发挥它的作用了, CMD会被docker run指定的运行命令所替换.</p>
+
 <p>想要达到这样的效果, 必须使用exec的方式, 如果使用shell与exec的混合, 那必然是不可能达到的这种效果的</p>
+
 <h3 id="了解commit"><strong>了解commit</strong></h3>
+
 <p>而在使用commit之前, 先来介绍一下docker diff这条命令, 它可以用来查看容器文件的改动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile">docker diff CONTAINER
-</code></pre></div><p>commit可以用来构建一个Image, 但并不推荐使用commit来构建, 应当使用Dockerfile构建Image</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile">docker diff CONTAINER</code></pre></div>
+<p>commit可以用来构建一个Image, 但并不推荐使用commit来构建, 应当使用Dockerfile构建Image</p>
+
 <p>原文介绍:</p>
+
 <blockquote>
 <p>commit Create a new image from a container&rsquo;s changes</p>
 </blockquote>
+
 <p>commit可以将改动后的容器打包构建成一个新的Image:
-当运行一个容器的时候若不使用卷, 其中操作后所有的文件改动都会被记录于容器的存储层中.
-docker commit 命令可以将在存储层有过改动的部分重新打包, 并叠加构建出一个新的Image</p>
+    当运行一个容器的时候若不使用卷, 其中操作后所有的文件改动都会被记录于容器的存储层中.
+    docker commit 命令可以将在存储层有过改动的部分重新打包, 并叠加构建出一个新的Image</p>
+
 <p>对于一个Dockerfile构建的过程</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> ubuntu:14.04</span>
 <span style="color:#ff79c6">RUN</span> apt-get update
-<span style="color:#ff79c6">ADD</span> run.sh /
+<span style="color:#ff79c6">ADD</span><span style="color:#f1fa8c"> run.sh /</span>
 <span style="color:#ff79c6">VOLUME</span><span style="color:#f1fa8c"> /data</span>
-<span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;./run.sh&#34;</span>]
-</code></pre></div><p>根据上面的Dockerfile, 其中的过程原理如下解释</p>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c"> [&#34;./run.sh&#34;]</span></code></pre></div>
+<p>根据上面的Dockerfile, 其中的过程原理如下解释</p>
+
 <p><a href="http://guide.daocloud.io/dcs/docker-commit-9153991.html">图片来源</a>
-<img src="https://github.com/0x1un/SavaImg/raw/master/Docker/docker_commit_all.jpg" alt=""></p>
-<p><img src="https://github.com/0x1un/SavaImg/raw/master/Docker/docker_commit.jpg" alt=""></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile">docker commit <span style="color:#ff79c6">[</span>option<span style="color:#ff79c6">]</span> &lt;container name/id&gt; <span style="color:#ff79c6">[</span>&lt;repository&gt;<span style="color:#ff79c6">[</span>:&lt;tags&gt;<span style="color:#ff79c6">]]</span>
-</code></pre></div><p>这是docker commit的用法, 具体的参数参见<a href="https://docs.docker.com/engine/reference/commandline/commit/">官网</a></p>
+<img src="https://github.com/0x1un/SavaImg/raw/master/Docker/docker_commit_all.jpg" alt="" /></p>
+
+<p><img src="https://github.com/0x1un/SavaImg/raw/master/Docker/docker_commit.jpg" alt="" /></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile">docker commit <span style="color:#ff79c6">[</span>option<span style="color:#ff79c6">]</span> &lt;container name/id&gt; <span style="color:#ff79c6">[</span>&lt;repository&gt;<span style="color:#ff79c6">[</span>:&lt;tags&gt;<span style="color:#ff79c6">]]</span></code></pre></div>
+<p>这是docker commit的用法, 具体的参数参见<a href="https://docs.docker.com/engine/reference/commandline/commit/">官网</a></p>
+
 <h5 id="构建属于自己的image">构建属于自己的Image</h5>
+
 <p>想要构建自己的Image, 那么就需要编写Dockerfile</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> python:3.6-slim</span>
 <span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /app</span>
-<span style="color:#ff79c6">ADD</span> . /app
+<span style="color:#ff79c6">ADD</span><span style="color:#f1fa8c"> . /app</span>
 <span style="color:#ff79c6">RUN</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;pip&#34;</span>, <span style="color:#f1fa8c">&#34;install&#34;</span>, <span style="color:#f1fa8c">&#34;--trusted-host&#34;</span>, <span style="color:#f1fa8c">&#34;pypi.python.org&#34;</span>, <span style="color:#f1fa8c">&#34;-r&#34;</span>, <span style="color:#f1fa8c">&#34;requirements.txt&#34;</span><span style="color:#ff79c6">]</span>
 <span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 80</span>
-<span style="color:#ff79c6">CMD</span>[<span style="color:#f1fa8c">&#34;python&#34;</span>, <span style="color:#f1fa8c">&#34;app.py&#34;</span>]
-</code></pre></div><p>上面的Dockerfile会构建一个python运行环境, 并且安装requirements.txt中的所有指定库, 并对外暴露80端口</p>
+<span style="color:#ff79c6">CMD</span><span style="color:#f1fa8c">[&#34;python&#34;, &#34;app.py&#34;]</span></code></pre></div>
+<p>上面的Dockerfile会构建一个python运行环境, 并且安装requirements.txt中的所有指定库, 并对外暴露80端口</p>
+
 <p>Dockerfile中的每一条指令都会创建一层, 在执行完成之后将会commit并构成新的Image.</p>
+
 <p>当在Dockerfile中需要在构建Image的时候运行一些必要的命令, 而多条命令就不用使用多个RUN指令了, 可以写在一起</p>
+
 <p>如:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">RUN</span> yes | pacman -Sy <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>		<span style="color:#ff79c6">&amp;&amp;</span> yes | pacman -S neofetch 
-</code></pre></div><p>这样RUN构建一层就执行了两条命令, 而不用使用多条RUN指令使得构建臃肿且速度缓慢</p>
+</span><span style="color:#f1fa8c"></span>        <span style="color:#ff79c6">&amp;&amp;</span> yes | pacman -S neofetch </code></pre></div>
+<p>这样RUN构建一层就执行了两条命令, 而不用使用多条RUN指令使得构建臃肿且速度缓慢</p>
 
   </div>
 

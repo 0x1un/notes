@@ -99,12 +99,20 @@
   
 <div class="blog-post">
   <h2>关于zabbix分布式搭建的一些坑</h2>
-        <h4 id="zabbix-无法连接到-agent-报错权限问题">zabbix 无法连接到 agent, 报错权限问题</h4>
+        
+
+<h4 id="zabbix-无法连接到-agent-报错权限问题">zabbix 无法连接到 agent, 报错权限问题</h4>
+
 <p>这里 zabbix 我是使用 docker 安装的，因为便于打包</p>
+
 <p>如果要监控 zabbix server 本身的话，那么 agent 我是不建议安装在 docker 中，具体为什么，自己体会吧。。</p>
+
 <p>将 zabbix server 的 10051 端口暴露出来，agent 需填写 zabbix server 的 docker 地址（ip），查看容器中的地址可以使用 docker exec 或者 docker inspect，具体怎么操作去网上搜索吧，这里就不再过多赘述了。</p>
+
 <h4 id="报-system-interrupted-call-错误">报 system interrupted call 错误</h4>
+
 <p>这是因为要监控的 agent 地址错了，如果你的 zabbix server 在外网，请填写你 zabbix server 内网的地址！！举例如下：</p>
+
 <blockquote>
 <ol>
 <li>zabbix server 主机外网地址：140.246.111.111</li>
@@ -112,12 +120,19 @@
 <li>装有 zabbix server 的 docker 容器地址：172.18.0.4</li>
 </ol>
 </blockquote>
+
 <p>这台主机也装有 agent, 需求是监控自己</p>
+
 <p>agent 中需填写第 3 条的地址(172.18.0.4)</p>
+
 <p>在 zabbix web 中编辑 Zabbix server, 地址不能是 127.0.0.1, 需要是第二条的地址(192.168.1.12)</p>
+
 <p>注意：这是一个不起眼的小坑，但可以把人坑死。。</p>
+
 <h4 id="关于-proxy-agent-server-的配置顺序">关于 proxy agent server 的配置顺序</h4>
+
 <p>这个很重要！！</p>
+
 <blockquote>
 <ol>
 <li>首先搭建好了 zabbix server+zabbix web 之后，在 Administrator 中配置好 proxies</li>
@@ -125,11 +140,14 @@
 <li>其次再配置 zabbix agent, 将其指向到 zabbix proxy, 测试是否联通</li>
 </ol>
 </blockquote>
+
 <p>几款友好的测试工具：</p>
+
 <ul>
 <li>tcpdump 监测端口数据流</li>
 <li>telnet 检测端口通行状态</li>
 </ul>
+
 <p>至于怎么用，自行搜索吧，没啥好说的。。</p>
 
   </div>

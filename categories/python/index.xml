@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in Python on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 23 Feb 2019 22:05:00 +0000</lastBuildDate><atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Feb 2019 22:05:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>flask保存字段到数据库(批量保存)</title>
       <link>/2019/02/23/flask-batch-save-feild-to-database/</link>
@@ -26,9 +30,9 @@ class User(db.models): id = Column(Integer, primary_key=True) email = Column() _
       
       <guid>/2019/02/06/disable_sqlalchmey_basic_class_table/</guid>
       <description> 这是一篇没有技术含量的文章&amp;hellip;
-  在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
+在使用sqlalchemy的时候遇到一个小坑, 它使我停止了10分钟, 特此在这里记录一下.
  class Base(db.Model): &amp;#34;&amp;#34;&amp;#34; file: base.py &amp;#34;&amp;#34;&amp;#34; status = Column(Integer, default=0) class Gift(Base): &amp;#34;&amp;#34;&amp;#34; file: gift.py &amp;#34;&amp;#34;&amp;#34; nickname = Column(String, nullable=False) 这个Base类它并不需要在数据库中创建一个表, 它的目的是为了成为一些子模块的基类, 但sqlalchemy它并不知道, 所以需要在Base下写下如下的代码, 才能使sqlalchemy不去创建这个数据表.
-__abstract__ = True </description>
+__abstract__ = True</description>
     </item>
     
     <item>
@@ -37,13 +41,13 @@ __abstract__ = True </description>
       <pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/09/10/set_collection/</guid>
-      <description> 这是一篇没有技术含量的文章&amp;hellip;
- 关于Python中的set  set集合中的元素不可重复且元素无序(可变) frozenset与set一样(不可变) set与dict实现的机制相似, 它的性能很高, 时间复杂度为O(1)   创建一个set集合:
-myset = set(可迭代对象) myfrozenset = frozenset() # 不可变类型(可作为dict的key)    对myset进行操作
+      <description>  这是一篇没有技术含量的文章&amp;hellip;
+ 关于Python中的set  set集合中的元素不可重复且元素无序(可变) frozenset与set一样(不可变) set与dict实现的机制相似, 它的性能很高, 时间复杂度为O(1)
+ 创建一个set集合:
+myset = set(可迭代对象) myfrozenset = frozenset() # 不可变类型(可作为dict的key)  对myset进行操作
 myset.add() # 添加数据
-myset.update() # 合并数据
-myset.defference(another_set) 等同于 myset - another_set 返回一个新值
-  set集合运算操作 `a = t | s` t 和 s的并集 `b = t &amp;amp; s` t 和 s的交集 `c = t – s` 求差集（项在t中，但不在s中） `d = t ^ s` 对称差集（项在t或s中，但不会同时出现在二者中）  </description>
+  myset.update() # 合并数据
+`myset.defference(another_set)` 等同于 `myset - another_set` 返回一个新值  set集合运算操作 `a = t | s` t 和 s的并集 `b = t &amp;amp; s` t 和 s的交集 `c = t – s` 求差集（项在t中，但不在s中） `d = t ^ s` 对称差集（项在t或s中，但不会同时出现在二者中）  </description>
     </item>
     
     <item>
@@ -53,7 +57,7 @@ myset.defference(another_set) 等同于 myset - another_set 返回一个新值
       
       <guid>/2018/08/26/basic_datatype_time_complex/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;lsquo;n&amp;rsquo;是容器中当前的元素数， &amp;lsquo;k&amp;rsquo;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
+ list  python的列表内部实现是数组（具体实现要看解析器, CPython的实现 ），因此就有组数的特点。超过容量会增加更多的容量，set, get 是O(1)，但del, insert, in的性能是O(n)。具体的看下表，&amp;rsquo;n&amp;rsquo;是容器中当前的元素数， &amp;lsquo;k&amp;rsquo;需要操作的元素个数     Operation Average Case Amortized Worst Case     Copy O(n) O(n)   Append[1] O(1) O(1)   Insert O(n) O(n)   Get Item O(1) O(1)   Set Item O(1) O(1)   Delete Item O(n) O(n)   Iteration O(n) O(n)   Get Slice O(k) O(k)   Del Slice O(n) O(n)   Set Slice O(k+n) O(k+n)   Extend[1] O(k) O(k)   Sort O(n log n) O(n log n)   Multiply O(nk) O(nk)   x in s O(n)    min(s), max(s) O(n)    Get Length O(1) O(1)    dict  关于字典需要了解的是hash函数和哈希桶。一个好的hash函数使到哈希桶中的值只有一个，若多个key hash到了同一个哈希桶中，称之为哈希冲突。查找值时，会先定位到哈希桶中，再遍历hash桶。更详细的信息请点这里。在hash基本没有冲突的情况下get, set, delete, in方面都是O(1)。     Operation Average Case Amortized Worst Case     Copy[2] O(n) O(n)   Get Item O(1) O(n)   Set Item[1] O(1) O(n)   Delete Item O(1) O(n)   x in s O(1) O(n)   Iteration[2] O(n) O(n)    set  内部实现是dict的。在in操作上是O(1), 这一点比list要强。     Operation Average case Worst Case     x in s O(1) O(n)   Union s t O(len(s)+len(t))   Intersection s&amp;amp;t O(min(len(s), len(t)) O(len(s) * len(t))   Multiple intersection s1&amp;amp;s2&amp;amp;.</description>
     </item>
     
     <item>
@@ -65,8 +69,7 @@ myset.defference(another_set) 等同于 myset - another_set 返回一个新值
       <description>这是一篇没有技术含量的文章&amp;hellip;
  11.1. 简介 本指南归纳于我的几个月的博客，主题是 魔法方法 。
 什么是魔法方法呢？它们在面向对象的Python的处处皆是。它们是一些可以让你对类添加“魔法”的特殊方法。 它们经常是两个下划线包围来命名的（比如 __init__ ， __lt__ ）。但是现在没有很好的文档来解释它们。 所有的魔法方法都会在Python的官方文档中找到，但是它们组织松散。而且很少会有示例（有的是无聊的语法描述， 语言参考）。
-所以，为了修复我感知的Python文档的缺陷，我开始提供更为通俗的，有示例支持的Python魔法方法指南。我一开始 写了一些博文，现在我把这些博文总起来成为一篇指南。
-希望你喜欢这篇指南，一篇友好，通俗易懂的Python魔法方法指南！
+所以，为了修复我感知的Python文档的缺陷，我开始提供更为通俗的，有示例支持的Python魔法方法指南。我一开始 写了一些博文，现在我把这些博文总起来成为一篇指南。 希望你喜欢这篇指南，一篇友好，通俗易懂的Python魔法方法指南！
 11.2. 构造方法 我们最为熟知的基本的魔法方法就是 __init__ ，我们可以用它来指明一个对象初始化的行为。然而，当我们调用 x = SomeClass() 的时候， __init__ 并不是第一个被调用的方法。事实上，第一个被调用的是 __new__ ，这个 方法才真正地创建了实例。当这个对象的生命周期结束的时候， __del__ 会被调用。让我们近一步理解这三个方法：
 __new__(cls,[&amp;hellip;) __new__ 是对象实例化时第一个调用的方法，它只取下 cls 参数，并把其他参数传给 __init__ 。 __new__ 很少使用，但是也有它适合的场景，尤其是当类继承自一个像元组或者字符串这样不经常改变的类型的时候。我不打算深入讨论 __new__ ，因为它并不是很有用， Python文档 中 有详细的说明。
 __init__(self,[&amp;hellip;]) 类的初始化方法。它获取任何传给构造器的参数（比如我们调用 x = SomeClass(10, ‘foo’) ， __init__ 就会接到参数 10 和 ‘foo’ 。 __init__ 在Python的类定义中用的最多。
@@ -80,7 +83,7 @@ __del__(self) __new__ 和 __init__ 是对象的构造器， __del__ 是对象的
       
       <guid>/2018/07/10/postgres_basic_operation/</guid>
       <description>记录一些 postgres 常规操作，持续更新。
-CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) ); ALTER TABLE [table_name] OWNER TO new_owner </description>
+CREATE DATABASE database_name; DROP DATABASE database_name;CREATE TABLE table_name( column1 TYPE, PRIMARY KEY(one or more colums) );ALTER TABLE [table_name] OWNER TO new_owner</description>
     </item>
     
     <item>
@@ -91,14 +94,13 @@ CREATE DATABASE database_name; DROP DATABASE database_name; CREATE TABLE table_n
       <guid>/2018/07/10/pymysql_exception/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
  pymysql.Warning 当有严重警告时触发，例如插入数据是被截断等等。
-pymysql.Error	警告以外所有其他错误类。
-pymysql.InterfaceError 当有数据库接口模块本身的错误（而不是数据库的错误）发生时触发。
-pymysql.DatabaseError	和数据库有关的错误发生时触发。
-pymysql.DataError	当有数据处理时的错误发生时触发，例如：除零错误，数据超范围等等。
+pymysql.Error 警告以外所有其他错误类。
+pymysql.InterfaceError 当有数据库接口模块本身的错误（而不是数据库的错误）发生时触发。 pymysql.DatabaseError 和数据库有关的错误发生时触发。
+pymysql.DataError 当有数据处理时的错误发生时触发，例如：除零错误，数据超范围等等。
 pymysql.OperationalError 指非用户控制的，而是操作数据库时发生的错误。
 例如：连接意外断开、 数据库名未找到、事务处理失败、内存分配错误等等操作数据库是发生的错误。
 pymysql.IntegrityError 完整性相关的错误，例如外键检查失败等。
-pymysql.InternalError	数据库的内部错误，例如游标（cursor）失效了、事务同步失败等等。
+pymysql.InternalError 数据库的内部错误，例如游标（cursor）失效了、事务同步失败等等。
 pymysql.ProgrammingError 程序错误，例如数据表（table）没找到或已存在、SQL语句语法错误、 参数数量错误等等。
 pymysql.NotSupportedError 不支持错误，指使用了数据库不支持的函数或API等。例如在连接对象上 使用.rollback()函数，然而数据库并不支持事务或者事务已关闭</description>
     </item>

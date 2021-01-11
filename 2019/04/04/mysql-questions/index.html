@@ -99,22 +99,29 @@
   
 <div class="blog-post">
   <h2>MySql踩坑集</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<!-- raw HTML omitted -->
+
+<!-- more -->
+
 <h3 id="mysql踩坑集">MySql踩坑集</h3>
+
 <h4 id="mysql无法启动">MySql无法启动</h4>
-<p>自从Gentoo换回Arch Linux之后, 数据库这些都需要重新安装.<br>
+
+<p>自从Gentoo换回Arch Linux之后, 数据库这些都需要重新安装.<br />
 当然我肯定是备份过的, 但重装系统总要有重装的效果吧(干净)..</p>
+
 <p>在Arch Linux上安装MySql(MariaDb)后无法启动MySql</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pacman -S mariadb
-<span style="color:#6272a4"># 当遇到无法启动时查看启动日志, 如果安装后什么都没做, 你应该试试这个方法</span>
-<span style="color:#6272a4"># 错误日志无法重现了, 一般就是这个问题</span>
-mysql_install_db --user<span style="color:#ff79c6">=</span>mysql --basedir<span style="color:#ff79c6">=</span>/usr --datadir<span style="color:#ff79c6">=</span>/var/lib/mysql <span style="color:#6272a4"># 设置数据库存储位置</span>
-mysqladmin -u root password <span style="color:#ff79c6">[</span>new password<span style="color:#ff79c6">]</span> <span style="color:#6272a4"># 设置数据库密码</span>
-mysql_secure_installation <span style="color:#6272a4"># 初始化数据库设置, 如果要进行一些进一步设置</span>
-</code></pre></div><p>后续如果还遇到mysql问题会再次进行追加.</p>
+<span style="color:#6272a4"># 当遇到无法启动时查看启动日志, 如果安装后什么都没做, 你应该试试这个方法
+</span><span style="color:#6272a4"># 错误日志无法重现了, 一般就是这个问题
+</span><span style="color:#6272a4"></span>mysql_install_db --user<span style="color:#ff79c6">=</span>mysql --basedir<span style="color:#ff79c6">=</span>/usr --datadir<span style="color:#ff79c6">=</span>/var/lib/mysql <span style="color:#6272a4"># 设置数据库存储位置
+</span><span style="color:#6272a4"></span>mysqladmin -u root password <span style="color:#ff79c6">[</span>new password<span style="color:#ff79c6">]</span> <span style="color:#6272a4"># 设置数据库密码
+</span><span style="color:#6272a4"></span>mysql_secure_installation # 初始化数据库设置, 如果要进行一些进一步设置</code></pre></div>
+<p>后续如果还遇到mysql问题会再次进行追加.</p>
 
   </div>
 

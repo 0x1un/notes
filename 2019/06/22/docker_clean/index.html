@@ -99,78 +99,93 @@
   
 <div class="blog-post">
   <h2>docker的清理</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="docker的清理">docker的清理</h3>
+
 <p>docker带来的好处无疑的巨大的, 但是有个令人无奈的缺点就是占用很大的空间,
-本来本子就一块128G的固态作为系统盘, 被一些杂七杂八的Image占用了一大部分,
-肯定是要清理的, 例如一些不再使用的Image, 数据卷(volume), 容器(container)
-清理的方式docker已经贴心的为我们准备好了</p>
+    本来本子就一块128G的固态作为系统盘, 被一些杂七杂八的Image占用了一大部分,
+    肯定是要清理的, 例如一些不再使用的Image, 数据卷(volume), 容器(container)
+    清理的方式docker已经贴心的为我们准备好了</p>
+
 <p><strong>注意</strong></p>
+
 <blockquote>
 <p>我本人使用的shell是fish, 所以有些shell命令的括号, 变量的使用或许和bash, zsh之类的不大一样, 但很简单, 大同小异罢了</p>
-</blockquote>
-<blockquote>
+
 <p>一定, 务必小心使用删除之类的一些操作, 在执行前先思量好</p>
 </blockquote>
+
 <p>查看docker占用的空间, 此命令类似于Linux的df命令</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker system df
-</code></pre></div><p>通过docker ps可以查看当前运行的容器信息, 加上参数-a则是表示所有的容器, 包括已经停止的容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker system df</code></pre></div>
+<p>通过docker ps可以查看当前运行的容器信息, 加上参数-a则是表示所有的容器, 包括已经停止的容器</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container prune
-<span style="color:#6272a4">###### or ######</span>
-docker rm <span style="color:#ff79c6">(</span>docker ps -aq<span style="color:#ff79c6">)</span>
-</code></pre></div><ul>
+<span style="color:#6272a4">###### or ######
+</span><span style="color:#6272a4"></span>docker rm <span style="color:#ff79c6">(</span>docker ps -aq<span style="color:#ff79c6">)</span></code></pre></div>
+<ul>
 <li>-a =&gt; all 表示所有</li>
 <li>-q =&gt; 只输出容器的ID
 这里利用了shell的特性, 组合删除容器
-清理单个停止的容器</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker rm -lv CONTAINER/ID
-</code></pre></div><ul>
+清理单个停止的容器
+<code>shell
+docker rm -lv CONTAINER/ID
+</code></li>
 <li>-l =&gt; link</li>
 <li>-v =&gt; volume</li>
 <li>-f =&gt; force</li>
 </ul>
-<p>清理标示为<!-- raw HTML omitted -->的Image</p>
+
+<p>清理标示为<none>的Image</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image prune
-<span style="color:#6272a4">###### or ######</span>
-docker rmi <span style="color:#ff79c6">(</span>docker images -qf <span style="color:#f1fa8c">&#34;dangling=true&#34;</span><span style="color:#ff79c6">)</span>
-</code></pre></div><ul>
+<span style="color:#6272a4">###### or ######
+</span><span style="color:#6272a4"></span>docker rmi <span style="color:#ff79c6">(</span>docker images -qf <span style="color:#f1fa8c">&#34;dangling=true&#34;</span><span style="color:#ff79c6">)</span></code></pre></div>
+<ul>
 <li>-q 列出镜像的id</li>
 <li>-f =&gt; filter 筛选过滤</li>
 </ul>
+
 <p>使用--filter过滤(特殊需求)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker ps -a --filter <span style="color:#f1fa8c">&#39;exited=0&#39;</span>
-</code></pre></div><p>上面这条命令的--filter的意思为筛选出退出状态为0的容器, 关于docker ps的详细参数参见<a href="https://docs.docker.com/engine/reference/commandline/ps/">文档</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker ps -a --filter <span style="color:#f1fa8c">&#39;exited=0&#39;</span></code></pre></div>
+<p>上面这条命令的--filter的意思为筛选出退出状态为0的容器, 关于docker ps的详细参数参见<a href="https://docs.docker.com/engine/reference/commandline/ps/">文档</a></p>
+
 <p>--filter支持的过滤操作都在<a href="https://docs.docker.com/engine/reference/commandline/ps/">文档</a>中详尽描述, 在这里我就不一一赘述了(=_=)麻烦</p>
+
 <p>当清理的是否失败, 尝试重启docker守护进程, 一般都会凑效的, 公司的话最好在业务低谷时段进行</p>
+
 <p>关于镜像(Image)的清理</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker rmi IMAGE/ID
-<span style="color:#6272a4">###### or ######</span>
-docker image rm
-</code></pre></div><p>这两条等价, 第一条为alias(简写)</p>
+<span style="color:#6272a4">###### or ######
+</span><span style="color:#6272a4"></span>docker image rm</code></pre></div>
+<p>这两条等价, 第一条为alias(简写)</p>
+
 <p>清理镜像同样有--filter选项(简写-f)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># docker images [OPTIONS] [REPOSITORY[:TAG]] 用法</span>
-docker images -f <span style="color:#f1fa8c">&#34;dangling=true&#34;</span>
-</code></pre></div><p>关于--filter能够过滤哪些标示这里就不再赘述, 参见<a href="https://docs.docker.com/engine/reference/commandline/images/">文档</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># docker images [OPTIONS] [REPOSITORY[:TAG]] 用法
+</span><span style="color:#6272a4"></span>docker images -f <span style="color:#f1fa8c">&#34;dangling=true&#34;</span></code></pre></div>
+<p>关于--filter能够过滤哪些标示这里就不再赘述, 参见<a href="https://docs.docker.com/engine/reference/commandline/images/">文档</a></p>
+
 <p>清理所有无用的镜像, 小心使用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image prune -a
-</code></pre></div><p>清理数据卷(volume)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image prune -a</code></pre></div>
+<p>清理数据卷(volume)</p>
+
 <blockquote>
 <p>一定要注意, 一般比较重要的文件数据都放在volume中, 千万要小心清理它, 它的威力不亚于Linux的root执行rm -rf /</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 删除所有无用的卷</span>
-docker volume prune
-<span style="color:#6272a4"># 删除单个卷</span>
-docker volume rm VOLUME
-</code></pre></div><p>从宿主机中删除, 我的电脑用的Archlinux, docker的相关文件放在/var/lib/docker目录中, 除非在一些极端情况下, 否则不建议这样操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 删除所有无用的卷
+</span><span style="color:#6272a4"></span>docker volume prune
+<span style="color:#6272a4"># 删除单个卷
+</span><span style="color:#6272a4"></span>docker volume rm VOLUME</code></pre></div>
+<p>从宿主机中删除, 我的电脑用的Archlinux, docker的相关文件放在/var/lib/docker目录中, 除非在一些极端情况下, 否则不建议这样操作</p>
+
 <p>上面这些命令是较新版本docker都支持的, 而在1.13版本之前的docker, 我们常用shell的组合命令来操作</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 删除所有已经关闭的容器</span>
-docker ps -a | grep Exit | cut -d <span style="color:#f1fa8c">&#39; &#39;</span> -f <span style="color:#bd93f9">1</span> | xargs docker rm
-<span style="color:#6272a4"># 删除所有标示为&lt;none&gt;的镜像</span>
-docker rmi <span style="color:#ff79c6">(</span>docker images | grep <span style="color:#f1fa8c">&#34;^&lt;none&gt;&#34;</span> | awk <span style="color:#f1fa8c">&#34;{print </span><span style="color:#8be9fd;font-style:italic">$3</span><span style="color:#f1fa8c">}&#34;</span><span style="color:#ff79c6">)</span>
-</code></pre></div><p>在这里就是示范一下如何配合shell操作, shell很灵活, 就不再过多赘述了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 删除所有已经关闭的容器
+</span><span style="color:#6272a4"></span>docker ps -a | grep Exit | cut -d <span style="color:#f1fa8c">&#39; &#39;</span> -f <span style="color:#bd93f9">1</span> | xargs docker rm
+<span style="color:#6272a4"># 删除所有标示为&lt;none&gt;的镜像
+</span><span style="color:#6272a4"></span>docker rmi <span style="color:#ff79c6">(</span>docker images | grep <span style="color:#f1fa8c">&#34;^&lt;none&gt;&#34;</span> | awk <span style="color:#f1fa8c">&#34;{print </span><span style="color:#8be9fd;font-style:italic">$3</span><span style="color:#f1fa8c">}&#34;</span><span style="color:#ff79c6">)</span></code></pre></div>
+<p>在这里就是示范一下如何配合shell操作, shell很灵活, 就不再过多赘述了</p>
 
   </div>
 

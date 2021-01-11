@@ -99,19 +99,25 @@
   
 <div class="blog-post">
   <h2>suckless-st中文输入法问题</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
+
 <h3 id="st-terminal输入法问题">st terminal输入法问题</h3>
+
 <blockquote>
 <p>原本使用的termite终端, 因为它很简洁轻便, 但对于ranger显示图片会有重叠的效果, 这点令我非常不爽, 后来发现suckless中有个叫st的终端, 并且完美支持ranger. 而且它比termite更加轻便, 启动更加快速, 但有个瑕疵就是无法使用中文输入法, 其中间折腾了很久, 什么环境变量之类的, 但最终在官网找到了一份关于修复IME的补丁.</p>
 </blockquote>
+
 <ul>
 <li><a href="https://st.suckless.org/patches/fix_ime/">fix-ime补丁</a></li>
 </ul>
+
 <p>因为它是.diff格式的补丁(类Unix通用补丁), 可以使用git命令来使其进行合并</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git apply --reject --whitespace<span style="color:#ff79c6">=</span>fix st-ime-20190202-3be4cf1.diff
-</code></pre></div><p>它会对st.c进行对比并更新操作, 之后再次编译st, <code>sudo make install</code>, 就可以进行中文输入法切换了.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git apply --reject --whitespace<span style="color:#ff79c6">=</span>fix st-ime-20190202-3be4cf1.diff</code></pre></div>
+<p>它会对st.c进行对比并更新操作, 之后再次编译st, <code>sudo make install</code>, 就可以进行中文输入法切换了.</p>
 
   </div>
 

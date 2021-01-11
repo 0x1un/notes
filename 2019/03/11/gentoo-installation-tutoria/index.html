@@ -99,163 +99,174 @@
   
 <div class="blog-post">
   <h2>Gentoo安装历程</h2>
-        <blockquote>
+        
+
+<blockquote>
 <p>这是一篇没有技术含量的文章&hellip;</p>
 </blockquote>
-<h3 id="gentoo安装历程">Gentoo安装历程</h3>
-<h4 id="准备开始">准备开始</h4>
-<p>第一步当然是下载所需的chroot环境与Gentoo的stage3包<br>
-当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的<br>
-那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧</p>
-<!-- raw HTML omitted -->
-<h4 id="开始安装">开始安装</h4>
-<p>当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘</span>
-fdisk -l
-<span style="color:#6272a4"># 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份)</span>
-mkfs.ext4 /dev/nvme0n1
 
-<span style="color:#6272a4"># 这里我使用的是cfdisk分区(简单明了)</span>
-cfdisk /dev/nvme0n1
-<span style="color:#6272a4"># 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区</span>
-<span style="color:#6272a4"># 对它们进行格式化操作</span>
-mkfs.vfat -F <span style="color:#bd93f9">32</span> /dev/nvme0n1p1
+<h3 id="gentoo安装历程">Gentoo安装历程</h3>
+
+<h4 id="准备开始">准备开始</h4>
+
+<p>第一步当然是下载所需的chroot环境与Gentoo的stage3包<br />
+当然也可以只下载chroot环境, stage3在chroot中进行下载也是可以的<br />
+那么这些刻录U盘和Bios的步骤我就不再赘述了, 自行搜索吧
+<!-- more --></p>
+
+<h4 id="开始安装">开始安装</h4>
+
+<p>当成功进入了chroot的环境之后(建议事先插好网线), 对硬盘进行分区.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘
+</span><span style="color:#6272a4"></span>fdisk -l
+<span style="color:#6272a4"># 找到你所要安装系统的硬盘, 对其进行第一遍格式化操作(请事先做好备份)
+</span><span style="color:#6272a4"></span>mkfs.ext4 /dev/nvme0n1
+
+<span style="color:#6272a4"># 这里我使用的是cfdisk分区(简单明了)
+</span><span style="color:#6272a4"></span>cfdisk /dev/nvme0n1
+<span style="color:#6272a4"># 这里需要你分区三个部分 [boot swap /], 大小分别为 300M, 2G, 剩下所有容量划分到 / 分区
+</span><span style="color:#6272a4"># 对它们进行格式化操作
+</span><span style="color:#6272a4"></span>mkfs.vfat -F <span style="color:#bd93f9">32</span> /dev/nvme0n1p1
 mkfs.swap /dev/nvme0n1p2
 mkfs.ext4 /dev/nvme0n1p3
 
-<span style="color:#6272a4"># 待格式话操作完成之后, 讲它们挂载到对应分区</span>
-mount /dev/nvme0n1p3 /mnt/gentoo <span style="color:#6272a4"># 此分区为最大的( / )分区</span>
-mkdir -p /mnt/gentoo/boot
+<span style="color:#6272a4"># 待格式话操作完成之后, 讲它们挂载到对应分区
+</span><span style="color:#6272a4"></span>mount /dev/nvme0n1p3 /mnt/gentoo <span style="color:#6272a4"># 此分区为最大的( / )分区
+</span><span style="color:#6272a4"></span>mkdir -p /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/boot
 
-<span style="color:#6272a4"># 下载系统文件并解压(官方的stage3, 这里使用网易的源)</span>
-wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo
-<span style="color:#6272a4"># 解压(先切换到/mnt/gentoo目录之下)</span>
-tar xvpf stage3-amd64-* --xattrs-include<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;*.*&#34;</span> --numeric-owner
+<span style="color:#6272a4"># 下载系统文件并解压(官方的stage3, 这里使用网易的源)
+</span><span style="color:#6272a4"></span>wget http://mirrors.163.com/gentoo/releases/amd64/autobuilds/current-admincd-amd64/stage3-amd64-hardened-20190324T214503Z.tar.xz /mnt/gentoo
+<span style="color:#6272a4"># 解压(先切换到/mnt/gentoo目录之下)
+</span><span style="color:#6272a4"></span>tar xvpf stage3-amd64-* --xattrs-include<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;*.*&#34;</span> --numeric-owner
 
-<span style="color:#6272a4"># --xattrs-include为保留文件的扩展属性, --numeric-owner为保留文件的user和group IDs</span>
+<span style="color:#6272a4"># --xattrs-include为保留文件的扩展属性, --numeric-owner为保留文件的user和group IDs
+</span><span style="color:#6272a4"></span>
+# 当解压完成之后就要开始真正的安装了</code></pre></div>
+<h4 id="配置编译选项">配置编译选项</h4>
 
-<span style="color:#6272a4"># 当解压完成之后就要开始真正的安装了</span>
-</code></pre></div><h4 id="配置编译选项">配置编译选项</h4>
 <p>编辑/mnt/gentoo/etc/portage/make.conf 添加或修改</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CFLAGS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;-march=native -O2 -pipe&#34;</span>
 <span style="color:#8be9fd;font-style:italic">CXXFLAGS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">CFLAGS</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-<span style="color:#8be9fd;font-style:italic">MAKEOPTS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;-j9&#34;</span> <span style="color:#6272a4"># 此选项为你cpu的核心数+1, 但这并不一定是最佳设置, 个人酌情设定</span>
-</code></pre></div><p>复制dns信息(必要操作, 否则进入chroot /mnt/gentoo 没有网络)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
-</code></pre></div><p>挂载必要的文件系统</p>
+<span style="color:#8be9fd;font-style:italic">MAKEOPTS</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;-j9&#34;</span> # 此选项为你cpu的核心数+1, 但这并不一定是最佳设置, 个人酌情设定</code></pre></div>
+<p>复制dns信息(必要操作, 否则进入chroot /mnt/gentoo 没有网络)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp --dereference /etc/resolv.conf /mnt/gentoo/etc/</code></pre></div>
+<p>挂载必要的文件系统</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
-mount --make-rslave /mnt/gentoo/dev
-</code></pre></div><p>进入chroot开始安装配置</p>
+mount --make-rslave /mnt/gentoo/dev</code></pre></div>
+<p>进入chroot开始安装配置</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chroot /mnt/gentoo /bin/bash
 <span style="color:#8be9fd;font-style:italic">source</span> /etc/profile
-mount /dev/nvme0n1p1 /boot <span style="color:#6272a4"># 挂载boot分区, 以便接下来生成内核文件与启动文件</span>
-</code></pre></div><p>更新系统</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge-webrsync <span style="color:#ff79c6">&amp;&amp;</span> emerge --sync <span style="color:#6272a4"># 执行此步时需要网络</span>
-</code></pre></div><p>选择所需的profile</p>
+mount /dev/nvme0n1p1 /boot # 挂载boot分区, 以便接下来生成内核文件与启动文件</code></pre></div>
+<p>更新系统</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge-webrsync <span style="color:#ff79c6">&amp;&amp;</span> emerge --sync # 执行此步时需要网络</code></pre></div>
+<p>选择所需的profile</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">eselect profile list
-<span style="color:#6272a4"># 选择个人所需要的profile</span>
-eselect profile <span style="color:#8be9fd;font-style:italic">set</span> 序号 or 完整路径
-</code></pre></div><p>更新@world (此步骤耗时极长, 因电脑配置而异)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge --ask --update --deep --newuse @world
-</code></pre></div><p>配置时区与地区</p>
+<span style="color:#6272a4"># 选择个人所需要的profile
+</span><span style="color:#6272a4"></span>eselect profile <span style="color:#8be9fd;font-style:italic">set</span> 序号 or 完整路径</code></pre></div>
+<p>更新@world (此步骤耗时极长, 因电脑配置而异)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge --ask --update --deep --newuse @world</code></pre></div>
+<p>配置时区与地区</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;Asia/Shanghai&#34;</span> &gt; /etc/timezone
 emerge --config sys-libs/timezone-data
-nano -w /etc/locale.gen <span style="color:#6272a4"># 选择所需的语言编码</span>
-locale-gen <span style="color:#6272a4"># 使上述操作生效</span>
-eselect locale list <span style="color:#6272a4"># 列出语言编码列表</span>
-eselect locale <span style="color:#8be9fd;font-style:italic">set</span> 序号 <span style="color:#6272a4"># 设置语言编码</span>
-env-update <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">source</span> /etc/profile <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PS1</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;(chroot) </span><span style="color:#8be9fd;font-style:italic">$PS1</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#6272a4"># 更新环境变量</span>
-</code></pre></div><h4 id="内核安装与配置">内核安装与配置</h4>
-<p>经过这么长一段时间的煎熬, 终于快要完成了, 配置内核开始!<br>
+nano -w /etc/locale.gen <span style="color:#6272a4"># 选择所需的语言编码
+</span><span style="color:#6272a4"></span>locale-gen <span style="color:#6272a4"># 使上述操作生效
+</span><span style="color:#6272a4"></span>eselect locale list <span style="color:#6272a4"># 列出语言编码列表
+</span><span style="color:#6272a4"></span>eselect locale <span style="color:#8be9fd;font-style:italic">set</span> 序号 <span style="color:#6272a4"># 设置语言编码
+</span><span style="color:#6272a4"></span>env-update <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">source</span> /etc/profile <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PS1</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;(chroot) </span><span style="color:#8be9fd;font-style:italic">$PS1</span><span style="color:#f1fa8c">&#34;</span> # 更新环境变量</code></pre></div>
+<h4 id="内核安装与配置">内核安装与配置</h4>
+
+<p>经过这么长一段时间的煎熬, 终于快要完成了, 配置内核开始!<br />
 这一步是极为重要的, Gentoo的安装难点也在于此吧(如果手动裁剪内核)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 下载内核源码(下载位置于 /usr/src/)</span>
-emerge --ask sys-kernel/gentoo-sources
-emerge --ask sys-apps/pciutils <span style="color:#6272a4"># 用于检测硬件驱动依赖</span>
-</code></pre></div><p>查看硬件型号与驱动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">lspci -vv | grep -i <span style="color:#f1fa8c">&#34;kernel driver in use&#34;</span> <span style="color:#6272a4">#将输出的所需模块名字记住</span>
-</code></pre></div><p>当完成了上面的步骤, 可以对内核进行裁剪了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 下载内核源码(下载位置于 /usr/src/)
+</span><span style="color:#6272a4"></span>emerge --ask sys-kernel/gentoo-sources
+emerge --ask sys-apps/pciutils # 用于检测硬件驱动依赖</code></pre></div>
+<p>查看硬件型号与驱动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">lspci -vv | grep -i <span style="color:#f1fa8c">&#34;kernel driver in use&#34;</span> #将输出的所需模块名字记住</code></pre></div>
+<p>当完成了上面的步骤, 可以对内核进行裁剪了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">cd</span> /usr/src/linux
-make -j9 menuconfig <span style="color:#6272a4"># 此时会进入一个字符图形界面</span>
-<span style="color:#6272a4">#  回车 -&gt; 进入子菜单</span>
-<span style="color:#6272a4">#  Y -&gt; 包含选项</span>
-<span style="color:#6272a4">#  M -&gt; 作为模块</span>
-<span style="color:#6272a4">#  N -&gt; 排除选项</span>
-<span style="color:#6272a4">#  ? -&gt; 帮助信息</span>
-<span style="color:#6272a4">#  / -&gt; 搜索，输入配置名称，然后回车搜索，然后输入结果序号即可跳转到相应的配置位置</span>
-<span style="color:#6272a4"># 如果嫌上面那种操作麻烦, 你也可以直接编辑.config文件, 用编辑器进行搜索直接修改</span>
-</code></pre></div><p>系统启动的必要内核设置<br>
-<code>CONFIG_DEVTMPFS，CONFIG_DEVTMPFS_MOUNT，CONFIG_BLK_DEV_SD</code><br>
-文件系统<br>
-<code>CONFIG_EXT4_FS</code><br>
+make -j9 menuconfig <span style="color:#6272a4"># 此时会进入一个字符图形界面
+</span><span style="color:#6272a4">#  回车 -&gt; 进入子菜单
+</span><span style="color:#6272a4">#  Y -&gt; 包含选项
+</span><span style="color:#6272a4">#  M -&gt; 作为模块
+</span><span style="color:#6272a4">#  N -&gt; 排除选项
+</span><span style="color:#6272a4">#  ? -&gt; 帮助信息
+</span><span style="color:#6272a4">#  / -&gt; 搜索，输入配置名称，然后回车搜索，然后输入结果序号即可跳转到相应的配置位置
+</span><span style="color:#6272a4"></span># 如果嫌上面那种操作麻烦, 你也可以直接编辑.config文件, 用编辑器进行搜索直接修改</code></pre></div>
+<p>系统启动的必要内核设置<br />
+<code>CONFIG_DEVTMPFS，CONFIG_DEVTMPFS_MOUNT，CONFIG_BLK_DEV_SD</code><br />
+文件系统<br />
+<code>CONFIG_EXT4_FS</code><br />
 EFI支持</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">CONFIG_PARTITION_ADVANCED
 CONFIG_EFI_PARTITION
 CONFIG_EFI
 CONFIG_EFI_STUB
 CONFIG_EFI_MIXED
-CONFIG_EFI_VARS
-</code></pre></div><p>然后就是刚刚让你记住的lspci命令结果了, 将这些模块进一步搜索并设置<br>
-如wifi模块, 有线网卡模块, nvme固态硬盘支持等等, 因每个电脑会有些许不一样, 这里就不详细描述了<br>
+CONFIG_EFI_VARS</code></pre></div>
+<p>然后就是刚刚让你记住的lspci命令结果了, 将这些模块进一步搜索并设置<br />
+如wifi模块, 有线网卡模块, nvme固态硬盘支持等等, 因每个电脑会有些许不一样, 这里就不详细描述了<br />
 当配置完成之后开始编译</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make -j9 <span style="color:#ff79c6">&amp;&amp;</span> make modules_install
-</code></pre></div><h4 id="自动构建内核">自动构建内核</h4>
-<p>当然, 这种方式是最简单的, 我也推荐那些从来没有裁剪过内核的朋友使用这种方式<br>
-避免耗费大量的时间精力去踏精简内核的坑, 但这种安装方式它会将所有的模块都编译到内核<br>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make -j9 <span style="color:#ff79c6">&amp;&amp;</span> make modules_install</code></pre></div>
+<h4 id="自动构建内核">自动构建内核</h4>
+
+<p>当然, 这种方式是最简单的, 我也推荐那些从来没有裁剪过内核的朋友使用这种方式<br />
+避免耗费大量的时间精力去踏精简内核的坑, 但这种安装方式它会将所有的模块都编译到内核<br />
 所以编译出来的内核难免会比精简过的内核臃肿很多, 先让它跑起来才是最重要的嘛, 你说是不是</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge -av genkernel <span style="color:#6272a4"># 安装自动构建工具</span>
-genkernel all <span style="color:#ff79c6">&amp;&amp;</span> genkernel --install initramfs <span style="color:#6272a4"># 这一步也非常耗时, 因为它不是全核心编译</span>
-<span style="color:#6272a4"># 完成之后安装固件</span>
-emerge --ask sys-kernel/linux-firmware
-</code></pre></div><h4 id="网络配置">网络配置</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">emerge -av genkernel <span style="color:#6272a4"># 安装自动构建工具
+</span><span style="color:#6272a4"></span>genkernel all <span style="color:#ff79c6">&amp;&amp;</span> genkernel --install initramfs <span style="color:#6272a4"># 这一步也非常耗时, 因为它不是全核心编译
+</span><span style="color:#6272a4"># 完成之后安装固件
+</span><span style="color:#6272a4"></span>emerge --ask sys-kernel/linux-firmware</code></pre></div>
+<h4 id="网络配置">网络配置</h4>
+
 <p>网络这里使用的软件是NetworkManager, 它功能比较强大</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 添加use flag, 如果没有此命令, 需要安装app-portage/gentoolkit, 也可以直接编辑/etc/portage/make.conf 并添加USE=&#34;networkmanager&#34;</span>
-euse -E networkmanager emerge --ask --changed-use --deep @world
-emerge --ask net-misc/networkmanager <span style="color:#6272a4"># 这一步很耗时</span>
-rc-update add NetworkManager default <span style="color:#6272a4"># 设置为开机自启动</span>
-</code></pre></div><h4 id="创建用户与必要工具安装">创建用户与必要工具安装</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 添加use flag, 如果没有此命令, 需要安装app-portage/gentoolkit, 也可以直接编辑/etc/portage/make.conf 并添加USE=&#34;networkmanager&#34;
+</span><span style="color:#6272a4"></span>euse -E networkmanager emerge --ask --changed-use --deep @world
+emerge --ask net-misc/networkmanager <span style="color:#6272a4"># 这一步很耗时
+</span><span style="color:#6272a4"></span>rc-update add NetworkManager default # 设置为开机自启动</code></pre></div>
+<h4 id="创建用户与必要工具安装">创建用户与必要工具安装</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">useradd -m -G users, wheel, audio, video, usb -s /bin/bash 用户名
 passwd 用户名
 passwd root
 
-<span style="color:#6272a4"># 系统日志</span>
-emerge --ask app-admin/sysklogd <span style="color:#6272a4"># 入门就用这个吧</span>
-rc-update add sysklogd default
+<span style="color:#6272a4"># 系统日志
+</span><span style="color:#6272a4"></span>emerge --ask app-admin/sysklogd <span style="color:#6272a4"># 入门就用这个吧
+</span><span style="color:#6272a4"></span>rc-update add sysklogd default
 
-<span style="color:#6272a4"># 守护进程</span>
-emerge --ask sys-process/cronie
+<span style="color:#6272a4"># 守护进程
+</span><span style="color:#6272a4"></span>emerge --ask sys-process/cronie
 rc-update add cronie default
 
-<span style="color:#6272a4"># 文件索引</span>
-emerge --ask sys-apps/mlocate
+<span style="color:#6272a4"># 文件索引
+</span><span style="color:#6272a4"></span>emerge --ask sys-apps/mlocate
 
-<span style="color:#6272a4"># vim (也可以以后安装)</span>
-emerge --ask vim
-</code></pre></div><h4 id="配置引导加载">配置引导加载</h4>
+<span style="color:#6272a4"># vim (也可以以后安装)
+</span><span style="color:#6272a4"></span>emerge --ask vim</code></pre></div>
+<h4 id="配置引导加载">配置引导加载</h4>
+
 <p>历经艰辛, 总算是要开始配置启动引导了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘设备的uuid</span>
-blkid | grep nvme0n1 <span style="color:#6272a4"># 这里是你系统安装的硬盘</span>
-</code></pre></div><p>将UUID号码copy下来, 放到/etc/fstab中 (务必校对准确)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 查看硬盘设备的uuid
+</span><span style="color:#6272a4"></span>blkid | grep nvme0n1 # 这里是你系统安装的硬盘</code></pre></div>
+<p>将UUID号码copy下来, 放到/etc/fstab中 (务必校对准确)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nano -w /etc/fstab
 
 <span style="color:#8be9fd;font-style:italic">UUID</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UUID&#34;</span>    /boot      vfat     defaults,noatime  <span style="color:#bd93f9">0</span> <span style="color:#bd93f9">2</span> 
 <span style="color:#8be9fd;font-style:italic">UUID</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UUID&#34;</span>    none       swap     sw                <span style="color:#bd93f9">0</span> <span style="color:#bd93f9">0</span> 
-<span style="color:#8be9fd;font-style:italic">UUID</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UUID&#34;</span>    /          ext4     noatime           <span style="color:#bd93f9">0</span> <span style="color:#bd93f9">1</span> 
-</code></pre></div><p>配置grub启动</p>
+<span style="color:#8be9fd;font-style:italic">UUID</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UUID&#34;</span>    /          ext4     noatime           <span style="color:#bd93f9">0</span> <span style="color:#bd93f9">1</span> </code></pre></div>
+<p>配置grub启动</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;GRUB_PLATFORMS=&#34;efi-64&#34;&#39;</span> &gt;&gt; /etc/portage/make.conf
 
-<span style="color:#6272a4"># 双系统需要安装os-prober</span>
-emerge --ask os-prober os-prober
+<span style="color:#6272a4"># 双系统需要安装os-prober
+</span><span style="color:#6272a4"></span>emerge --ask os-prober os-prober
 
-<span style="color:#6272a4"># 安装grub2</span>
-emerge --ask sys-boot/grub:2
+<span style="color:#6272a4"># 安装grub2
+</span><span style="color:#6272a4"></span>emerge --ask sys-boot/grub:2
 grub-install --target<span style="color:#ff79c6">=</span>x86_64-efi --efi-directory<span style="color:#ff79c6">=</span>/boot --removable --bootloader-id<span style="color:#ff79c6">=</span>grub
-grub-mkconfig -o /boot/grub/grub.cfg <span style="color:#6272a4"># 不出意外就可以启动到系统了</span>
-<span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#ff79c6">&amp;&amp;</span> umount -R /mnt/gentoo <span style="color:#ff79c6">&amp;&amp;</span> reboot
-</code></pre></div>
+grub-mkconfig -o /boot/grub/grub.cfg <span style="color:#6272a4"># 不出意外就可以启动到系统了
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#ff79c6">&amp;&amp;</span> umount -R /mnt/gentoo <span style="color:#ff79c6">&amp;&amp;</span> reboot</code></pre></div>
   </div>
 
 <br>

@@ -99,22 +99,31 @@
   
 <div class="blog-post">
   <h2>zabbix无法进入个人中心</h2>
-        <h3 id="zabbix-奇葩问题">zabbix 奇葩问题</h3>
+        
+
+<h3 id="zabbix-奇葩问题">zabbix 奇葩问题</h3>
+
 <p>其实这也不算一个奇葩的问题，就是掉进坑里长达一下午。</p>
+
 <p>在进入 zabbix 首页时，点击右上角的人像标志（也就是个人设置中心这种类似的标志），会出现一个错误：</p>
+
 <pre><code>Fatal error: Uncaught Error: Call to undefined function mime_content_type() in /usr/share/zabbix/include/sounds.inc.php:27 Stack trace: #0 /usr/share/zabbix/include/views/administration.users.edit.php(345): getSounds() #1 /usr/share/zabbix/include/classes/mvc/CView.php(199): include('/usr/share/zabb...') #2 /usr/share/zabbix/profile.php(189): CView-&gt;render() #3 {main} thrown in /usr/share/zabbix/include/sounds.inc.php on line 27
-</code></pre><p>这个错误是突然冒出来的，出现的原因我至今都不知道，因为已经解决了。</p>
+</code></pre>
+
+<p>这个错误是突然冒出来的，出现的原因我至今都不知道，因为已经解决了。</p>
+
 <h4 id="解决办法">解决办法</h4>
+
 <p>因为 zabbix 安装在 docker 当中，使用的镜像为 alphine 基础系统。</p>
+
 <ul>
-<li>
-<p>docker 19.03.4</p>
-</li>
-<li>
-<p>zabbix-web-server 4.2.6</p>
-</li>
+<li><p>docker 19.03.4</p></li>
+
+<li><p>zabbix-web-server 4.2.6</p></li>
 </ul>
+
 <p>这是因为该容器中缺少<code>php7-fileinfo</code>, alphine 镜像使用<code>apk add php7-fileinfo</code>.</p>
+
 <p>其他 ubuntu, centos 之类的基系统都使用其发行版自带的包管理安装这个东西。</p>
 
   </div>

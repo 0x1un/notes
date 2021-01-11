@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>奇技淫巧 on 0xNote</title>
@@ -6,7 +6,11 @@
     <description>Recent content in 奇技淫巧 on 0xNote</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>BrainFuck</title>
       <link>/2018/11/26/brainfuck_language/</link>
@@ -14,14 +18,13 @@
       
       <guid>/2018/11/26/brainfuck_language/</guid>
       <description>这是一篇没有技术含量的文章&amp;hellip;
- 起因 很无聊, 一时兴起到网上搜索了最难编程语言, 其中的brainfuck语言惊艳到了我, 我觉得它非常有趣. 实际上还有很多奇葩好玩的东西, 今天就折腾一下brainfuck吧.
-开始懵逼 &amp;gt;+++++++++[&amp;lt;++++++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.+++++++..+++.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++++++[&amp;lt;+++++&amp;gt;-]&amp;lt;.&amp;gt;++++++++[&amp;lt;+++&amp;gt;-]&amp;lt;.+++.------.--------.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.[-]++++++++++.这段玩意儿会输出Hello World!, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~ brainfuck它只有八个指令, 除去这八个之外的所有字符都将忽略.
+ 起因 很无聊, 一时兴起到网上搜索了最难编程语言, 其中的brainfuck语言惊艳到了我, 我觉得它非常有趣. 实际上还有很多奇葩好玩的东西, 今天就折腾一下brainfuck吧. 开始懵逼 &amp;gt;+++++++++[&amp;lt;++++++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.+++++++..+++.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;.&amp;gt;+++++++++++[&amp;lt;+++++&amp;gt;-]&amp;lt;.&amp;gt;++++++++[&amp;lt;+++&amp;gt;-]&amp;lt;.+++.------.--------.[-]&amp;gt;++++++++[&amp;lt;++++&amp;gt;-]&amp;lt;+.[-]++++++++++. 这段玩意儿会输出Hello World!, 是不是觉得很牛逼, 很高大上的语法, O(∩_∩)O哈哈~ brainfuck它只有八个指令, 除去这八个之外的所有字符都将忽略.
 Brainfuck的指令定义  + : 指针指向的单元的值加1 - : 指针指向的单元的值减1 &amp;gt; : 将指针移动到下一个单元(右边的元素) &amp;lt; : 将指针移动到上一个单元(左边的元素) . : 打印当前单元的内容的ASCII值 (比如 65 = &amp;lsquo;A&amp;rsquo;). , : 读取一个字符到当前的单元(英文逗号) [ : 如果当前单元的值是0，则向后调转到对应的]处 ] : 如果当前单元的值不是0，则向前跳转到对应的[处  它会定义一个30000长度的数组, 每次的指令操作都是对数组中的数字进行加减, 根据Ascii编码来进行输出字符, 例如当数字加到65就输出字母A, 它的实现其实并不难, 但非常的巧妙.
 根据上面的定义我们来用此实现一个复读机
-+[,[&amp;gt;+&amp;lt;-]&amp;gt;.&amp;lt;-]运行它, 它将会把你输入的字符再打印一份出来, 实际作用就等同于python版本的复读机
++[,[&amp;gt;+&amp;lt;-]&amp;gt;.&amp;lt;-] 运行它, 它将会把你输入的字符再打印一份出来, 实际作用就等同于python版本的复读机
 while True: print(input()) 下面是使用的C实现的Brainfuck的解释器, 说实在的以后无聊了可以使用Brainfuck自举自己的解释器:)&amp;gt;
 之后使用Python或Golang来实现一个, 实现它很简单
-#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;unistd.</description>
+#include &amp;lt;stdio.</description>
     </item>
     
   </channel>
